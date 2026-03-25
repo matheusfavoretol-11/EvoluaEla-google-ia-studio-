@@ -1,0 +1,279 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {userId}
+    // Fields:
+    //   - uid: string (required, immutable) - The user's ID
+    //   - email: string (required, immutable, email format) - The user's email
+    //   - displayName: string (optional, max 100 chars) - The user's name
+    //   - photoURL: string (optional, url format) - The user's profile photo
+    //   - level: string (optional, enum) - The user's level
+    //   - isPremium: boolean (optional) - Premium status
+    //   - subscriptionStatus: string (optional, enum) - Subscription status
+    //   - trialEndDate: timestamp (optional) - Trial end date
+    //   - createdAt: timestamp (required, immutable) - Creation time
+    //   - lastLoginAt: timestamp (optional) - Last login time
+    //   - coachMessagesCount: number (optional, >= 0) - Number of messages sent to coach
+    //
+    // Collection: users/{userId}/emotionalStats
+    // Document ID: current
+    // Fields:
+    //   - userId: string (required, immutable) - The user's ID
+    //   - confianca: number (required, 0-100) - Confidence level
+    //   - autoestima: number (required, 0-100) - Self-esteem level
+    //   - disciplina: number (required, 0-100) - Discipline level
+    //   - amorProprio: number (required, 0-100) - Self-love level
+    //   - updatedAt: timestamp (required) - Last update time
+    //
+    // Collection: users/{userId}/dailyMissions
+    // Document ID: {missionId}
+    // Fields:
+    //   - id: string (required, immutable) - Mission ID
+    //   - userId: string (required, immutable) - The user's ID
+    //   - title: string (required, max 200 chars) - Mission title
+    //   - completed: boolean (required) - Completion status
+    //   - date: string (required, YYYY-MM-DD) - Mission date
+    //   - createdAt: timestamp (required, immutable) - Creation time
+    //
+    // Collection: users/{userId}/journalEntries
+    // Document ID: {entryId}
+    // Fields:
+    //   - id: string (required, immutable) - Entry ID
+    //   - userId: string (required, immutable) - The user's ID
+    //   - date: timestamp (required, immutable) - Entry date
+    //   - content: string (required, max 5000 chars) - Entry content
+    //   - aiResponse: string (optional, max 5000 chars) - AI response
+    //   - promptUsed: string (optional, max 200 chars) - Prompt used
+    //
+    // Collection: users/{userId}/onboarding
+    // Document ID: answers
+    // Fields:
+    //   - userId: string (required, immutable) - The user's ID
+    //   - objective: string (optional, max 100 chars) - Primary objective
+    //   - feeling: string (optional, max 100 chars) - Current feeling
+    //   - challenge: string (optional, max 100 chars) - Biggest challenge
+    //   - updatedAt: timestamp (required) - Last update time
+    //
+    // Collection: users/{userId}/workouts
+    // Document ID: {workoutId}
+    // Fields:
+    //   - id: string (required, immutable) - Workout ID
+    //   - userId: string (required, immutable) - The user's ID
+    //   - title: string (required, max 100 chars) - Workout title
+    //   - duration: string (optional, max 50 chars) - Workout duration
+    //   - level: string (optional, max 50 chars) - Workout level
+    //   - calories: string (optional, max 50 chars) - Calories burned
+    //   - premium: boolean (optional) - Premium template flag
+    //   - exercises: list (required, max 50 items, serialized JSON strings) - List of exercises
+    //   - createdAt: timestamp (required, immutable) - Creation time
+    //   - updatedAt: timestamp (required) - Last update time
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.uid;
+    }
+
+    function uidUnchanged() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == request.auth.uid;
+    }
+
+    function uidNotModified() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == resource.data.uid;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function validStringLength(field, minLen, maxLen) {
+      return request.resource.data[field] is string &&
+        request.resource.data[field].size() >= minLen &&
+        request.resource.data[field].size() <= maxLen;
+    }
+
+    function isValidOptionalString(field, minLen, maxLen) {
+      return !(field in request.resource.data) ||
+             (request.resource.data[field] is string &&
+              request.resource.data[field].size() >= minLen &&
+              request.resource.data[field].size() <= maxLen);
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidUrl(url) {
+      return url is string && (url.matches("^https://.*") || url.matches("^http://.*"));
+    }
+
+    function areImmutableFieldsUnchanged(fields) {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(fields);
+    }
+
+    function isPositiveNumber(field) {
+      return request.resource.data[field] is number && request.resource.data[field] >= 0;
+    }
+
+    function isPercentage(field) {
+      return request.resource.data[field] is number && request.resource.data[field] >= 0 && request.resource.data[field] <= 100;
+    }
+
+    function isValidDateString(dateStr) {
+      return dateStr is string && dateStr.matches("^\\d{4}-\\d{2}-\\d{2}$");
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+
+    function isValidUser(data) {
+      let allowedFields = ['uid', 'email', 'displayName', 'photoURL', 'level', 'isPremium', 'subscriptionStatus', 'trialEndDate', 'createdAt', 'lastLoginAt', 'coachMessagesCount'];
+      let validLevel = !('level' in data) || data.level in ['Despertando', 'Em Evolução', 'Confiante', 'Inabalável'];
+      let validSubStatus = !('subscriptionStatus' in data) || data.subscriptionStatus in ['free', 'trial', 'active', 'canceled'];
+      
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['uid', 'email', 'createdAt']) &&
+             data.uid == request.auth.uid &&
+             isValidEmail(data.email) &&
+             data.createdAt is timestamp &&
+             isValidOptionalString('displayName', 1, 100) &&
+             (!('photoURL' in data) || isValidUrl(data.photoURL)) &&
+             validLevel &&
+             (!('isPremium' in data) || data.isPremium is bool) &&
+             validSubStatus &&
+             (!('trialEndDate' in data) || data.trialEndDate is timestamp) &&
+             (!('lastLoginAt' in data) || data.lastLoginAt is timestamp) &&
+             (!('coachMessagesCount' in data) || isPositiveNumber('coachMessagesCount'));
+    }
+
+    function isValidEmotionalStats(data, userId) {
+      let allowedFields = ['userId', 'confianca', 'autoestima', 'disciplina', 'amorProprio', 'updatedAt'];
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['userId', 'confianca', 'autoestima', 'disciplina', 'amorProprio', 'updatedAt']) &&
+             data.userId == userId &&
+             isPercentage('confianca') &&
+             isPercentage('autoestima') &&
+             isPercentage('disciplina') &&
+             isPercentage('amorProprio') &&
+             data.updatedAt is timestamp;
+    }
+
+    function isValidDailyMission(data, userId) {
+      let allowedFields = ['id', 'userId', 'title', 'completed', 'date', 'createdAt'];
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['id', 'userId', 'title', 'completed', 'date', 'createdAt']) &&
+             data.userId == userId &&
+             validStringLength('id', 1, 100) &&
+             validStringLength('title', 1, 200) &&
+             data.completed is bool &&
+             isValidDateString(data.date) &&
+             data.createdAt is timestamp;
+    }
+
+    function isValidJournalEntry(data, userId) {
+      let allowedFields = ['id', 'userId', 'date', 'content', 'aiResponse', 'promptUsed'];
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['id', 'userId', 'date', 'content']) &&
+             data.userId == userId &&
+             validStringLength('id', 1, 100) &&
+             data.date is timestamp &&
+             validStringLength('content', 1, 5000) &&
+             isValidOptionalString('aiResponse', 1, 5000) &&
+             isValidOptionalString('promptUsed', 1, 200);
+    }
+
+    function isValidOnboardingAnswers(data, userId) {
+      let allowedFields = ['userId', 'objective', 'feeling', 'challenge', 'updatedAt'];
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['userId', 'updatedAt']) &&
+             data.userId == userId &&
+             isValidOptionalString('objective', 1, 100) &&
+             isValidOptionalString('feeling', 1, 100) &&
+             isValidOptionalString('challenge', 1, 100) &&
+             data.updatedAt is timestamp;
+    }
+
+    function isValidWorkout(data, userId) {
+      let allowedFields = ['id', 'userId', 'title', 'duration', 'level', 'calories', 'premium', 'exercises', 'createdAt', 'updatedAt'];
+      return request.resource.data.keys().hasOnly(allowedFields) &&
+             hasRequiredFields(['id', 'userId', 'title', 'exercises', 'createdAt', 'updatedAt']) &&
+             data.userId == userId &&
+             validStringLength('id', 1, 100) &&
+             validStringLength('title', 1, 100) &&
+             isValidOptionalString('duration', 1, 50) &&
+             isValidOptionalString('level', 1, 50) &&
+             isValidOptionalString('calories', 1, 50) &&
+             (!('premium' in data) || data.premium is bool) &&
+             data.exercises is list &&
+             data.exercises.size() <= 50 &&
+             data.createdAt is timestamp &&
+             data.updatedAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(request.resource.data) && uidUnchanged();
+      allow update: if isOwner(userId) && isValidUser(request.resource.data) && areImmutableFieldsUnchanged(['uid', 'email', 'createdAt']);
+      allow delete: if isOwner(userId);
+
+      match /emotionalStats/current {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidEmotionalStats(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidEmotionalStats(request.resource.data, userId) && areImmutableFieldsUnchanged(['userId']);
+        allow delete: if isOwner(userId);
+      }
+
+      match /dailyMissions/{missionId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidDailyMission(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidDailyMission(request.resource.data, userId) && areImmutableFieldsUnchanged(['id', 'userId', 'createdAt']);
+        allow delete: if isOwner(userId);
+      }
+
+      match /journalEntries/{entryId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidJournalEntry(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidJournalEntry(request.resource.data, userId) && areImmutableFieldsUnchanged(['id', 'userId', 'date']);
+        allow delete: if isOwner(userId);
+      }
+
+      match /onboarding/answers {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOnboardingAnswers(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidOnboardingAnswers(request.resource.data, userId) && areImmutableFieldsUnchanged(['userId']);
+        allow delete: if isOwner(userId);
+      }
+
+      match /workouts/{workoutId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidWorkout(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidWorkout(request.resource.data, userId) && areImmutableFieldsUnchanged(['id', 'userId', 'createdAt']);
+        allow delete: if isOwner(userId);
+      }
+    }
+  }
+}

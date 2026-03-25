@@ -1,0 +1,284 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents a user of the EvoluaEla application.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "The unique identifier for the user, provided by Firebase Auth."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "photoURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to the user's profile photo."
+        },
+        "level": {
+          "type": "string",
+          "enum": ["Despertando", "Em Evolução", "Confiante", "Inabalável"],
+          "description": "The user's current progression level."
+        },
+        "isPremium": {
+          "type": "boolean",
+          "description": "Indicates whether the user has an active premium subscription."
+        },
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": ["free", "trial", "active", "canceled"],
+          "description": "The current status of the user's subscription."
+        },
+        "trialEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the user's free trial, if applicable."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the user account was created."
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the user last logged in."
+        },
+        "coachMessagesCount": {
+          "type": "number",
+          "description": "The number of messages the user has sent to the AI coach."
+        }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "EmotionalStats": {
+      "title": "EmotionalStats",
+      "description": "Tracks the user's emotional progress across different areas.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user these stats belong to."
+        },
+        "confianca": {
+          "type": "number",
+          "description": "The user's confidence level (0-100)."
+        },
+        "autoestima": {
+          "type": "number",
+          "description": "The user's self-esteem level (0-100)."
+        },
+        "disciplina": {
+          "type": "number",
+          "description": "The user's discipline level (0-100)."
+        },
+        "amorProprio": {
+          "type": "number",
+          "description": "The user's self-love level (0-100)."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the stats were last updated."
+        }
+      },
+      "required": ["userId", "confianca", "autoestima", "disciplina", "amorProprio", "updatedAt"]
+    },
+    "DailyMission": {
+      "title": "DailyMission",
+      "description": "A daily task or habit for the user to complete.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the mission."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user this mission belongs to."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or description of the mission."
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Indicates whether the mission has been completed."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "The date this mission is assigned for (YYYY-MM-DD)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the mission was created."
+        }
+      },
+      "required": ["id", "userId", "title", "completed", "date", "createdAt"]
+    },
+    "JournalEntry": {
+      "title": "JournalEntry",
+      "description": "An entry in the user's emotional journal.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the journal entry."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who created the entry."
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the entry was created."
+        },
+        "content": {
+          "type": "string",
+          "description": "The text content of the journal entry."
+        },
+        "aiResponse": {
+          "type": "string",
+          "description": "The AI's response to the journal entry, if any."
+        },
+        "promptUsed": {
+          "type": "string",
+          "description": "The prompt that inspired the entry, if any."
+        }
+      },
+      "required": ["id", "userId", "date", "content"]
+    },
+    "OnboardingAnswers": {
+      "title": "OnboardingAnswers",
+      "description": "The user's answers to the onboarding questionnaire.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user these answers belong to."
+        },
+        "objective": {
+          "type": "string",
+          "description": "The user's primary objective."
+        },
+        "feeling": {
+          "type": "string",
+          "description": "How the user currently feels about their body."
+        },
+        "challenge": {
+          "type": "string",
+          "description": "The user's biggest daily challenge."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the answers were last updated."
+        }
+      },
+      "required": ["userId", "updatedAt"]
+    },
+    "Workout": {
+      "title": "Workout",
+      "description": "A custom workout created or saved by the user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the workout."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns the workout."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the workout."
+        },
+        "duration": {
+          "type": "string",
+          "description": "The estimated duration of the workout."
+        },
+        "level": {
+          "type": "string",
+          "description": "The difficulty level of the workout."
+        },
+        "calories": {
+          "type": "string",
+          "description": "The estimated calories burned."
+        },
+        "premium": {
+          "type": "boolean",
+          "description": "Indicates if the workout is a premium template."
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A JSON stringified representation of the Exercise object."
+          },
+          "description": "The list of exercises in the workout. Serialized as JSON strings due to Firestore nested array limitations."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the workout was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the workout was last updated."
+        }
+      },
+      "required": ["id", "userId", "title", "exercises", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Stores user profiles and account settings."
+    },
+    "users/{userId}/emotionalStats/current": {
+      "schema": {
+        "$ref": "#/entities/EmotionalStats"
+      },
+      "description": "Stores the user's current emotional statistics."
+    },
+    "users/{userId}/dailyMissions/{missionId}": {
+      "schema": {
+        "$ref": "#/entities/DailyMission"
+      },
+      "description": "Stores the user's daily missions."
+    },
+    "users/{userId}/journalEntries/{entryId}": {
+      "schema": {
+        "$ref": "#/entities/JournalEntry"
+      },
+      "description": "Stores the user's emotional journal entries."
+    },
+    "users/{userId}/onboarding/answers": {
+      "schema": {
+        "$ref": "#/entities/OnboardingAnswers"
+      },
+      "description": "Stores the user's onboarding questionnaire answers."
+    },
+    "users/{userId}/workouts/{workoutId}": {
+      "schema": {
+        "$ref": "#/entities/Workout"
+      },
+      "description": "Stores the user's custom workouts."
+    }
+  }
+}
