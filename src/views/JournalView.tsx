@@ -18,10 +18,10 @@ export default function JournalView() {
   const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
 
   const prompts = [
-    "O que está te incomodando hoje?",
-    "O que você precisa ouvir nesse momento?",
-    "Pelo que você é grata hoje?",
-    "Como você se sentiu ao acordar?"
+    "O que está no seu coração hoje?",
+    "O que sua alma precisa ouvir agora?",
+    "Pelo que seu coração transborda gratidão hoje?",
+    "Como foi o seu primeiro pensamento ao acordar?"
   ];
 
   const handleSubmit = async () => {
@@ -63,7 +63,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
 
     } catch (error) {
       console.error("Error getting AI response or saving to Supabase:", error);
-      setAiResponse("Estou aqui com você, mas tive um probleminha de conexão. Respire fundo, você não está sozinha. 💖");
+      setAiResponse("Estou aqui segurando sua mão, mas meu sinal falhou. Respire fundo, sinta meu abraço. Você não está sozinha. 💖");
     } finally {
       setIsSubmitting(false);
     }
@@ -76,10 +76,10 @@ Seja concisa, use emojis e foque no acolhimento.`,
           <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-rose-500">
             <BookHeart size={20} />
           </div>
-          <h2 className="text-3xl font-serif text-stone-800">Meu Momento</h2>
+          <h2 className="text-3xl font-serif text-stone-800">Meu Cantinho de Reflexão</h2>
         </div>
         <p className="text-sm text-stone-500 font-medium">
-          Um espaço seguro só seu. Desabafe, reflita e se reconecte.
+          Este é o seu refúgio seguro. Pode soltar tudo o que sente, refletir e se reencontrar.
         </p>
       </header>
 
@@ -91,7 +91,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
         >
           {/* Prompts */}
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-stone-400">Sobre o que quer falar?</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-stone-400">Sobre o que seu coração quer falar?</span>
             <div className="flex flex-wrap gap-2">
               {prompts.map((prompt, idx) => (
                 <button
@@ -117,7 +117,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
             <textarea
               value={entry}
               onChange={(e) => setEntry(e.target.value)}
-              placeholder="Escreva o que está sentindo..."
+              placeholder="Pode soltar tudo aqui..."
               className="flex-1 w-full p-6 rounded-[2rem] bg-white border border-stone-100 soft-shadow-sm resize-none focus:ring-2 focus:ring-stone-100 outline-none text-stone-700 leading-relaxed"
             />
             
@@ -128,7 +128,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
               style={{ backgroundColor: theme.primary }}
             >
               <MessageCircleHeart size={18} />
-              Preciso conversar agora
+              Quero desabafar
             </button>
           </div>
         </motion.div>
@@ -148,7 +148,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                 </div>
                 <div>
                   <h3 className="font-serif font-bold text-lg text-stone-800">Sua Mentora</h3>
-                  <p className="text-xs text-stone-400 font-medium">Lendo seu desabafo...</p>
+                  <p className="text-xs text-stone-400 font-medium">Acolhendo suas palavras...</p>
                 </div>
               </div>
               
@@ -175,7 +175,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                   }}
                   className="mt-6 w-full py-4 rounded-2xl font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 transition-colors"
                 >
-                  Voltar para o Diário
+                  Voltar para minhas reflexões
                 </button>
               )}
             </div>

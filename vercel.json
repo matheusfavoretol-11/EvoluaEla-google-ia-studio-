@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "framework": "vite",
+  "functions": {
+    "server.ts": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server.ts"
+    },
+    {
+      "source": "/auth/(.*)",
+      "destination": "/server.ts"
+    },
+    {
+      "source": "/logo.png",
+      "destination": "/logo.png"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

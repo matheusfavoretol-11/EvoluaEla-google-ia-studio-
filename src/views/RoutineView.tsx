@@ -63,8 +63,8 @@ export default function RoutineView() {
   return (
     <div className="p-6 space-y-8">
       <header>
-        <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Sua Rotina</h2>
-        <p className="text-sm font-medium" style={{ color: theme.textMuted }}>A disciplina é a ponte entre metas e realizações.</p>
+        <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Minha Rotina Leve</h2>
+        <p className="text-sm font-medium" style={{ color: theme.textMuted }}>Pequenos passos, grandes transformações. Como está seu dia?</p>
       </header>
 
       {/* Tabs */}
@@ -75,7 +75,7 @@ export default function RoutineView() {
             activeTab === 'habits' ? 'bg-white shadow-sm text-stone-800' : 'text-stone-500 hover:text-stone-700'
           }`}
         >
-          Hábitos
+          Meus Hábitos
         </button>
         <button
           onClick={() => setActiveTab('meals')}
@@ -83,7 +83,7 @@ export default function RoutineView() {
             activeTab === 'meals' ? 'bg-white shadow-sm text-stone-800' : 'text-stone-500 hover:text-stone-700'
           }`}
         >
-          Refeições
+          Minhas Refeições
         </button>
       </div>
 
@@ -197,9 +197,9 @@ export default function RoutineView() {
               <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 gradient-bg-light" style={{ color: theme.primary }}>
                 <Camera size={36} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-serif font-bold text-stone-800 mb-2">Registro de Refeições</h3>
+              <h3 className="text-xl font-serif font-bold text-stone-800 mb-2">Nutrindo meu corpo com amor</h3>
               <p className="text-sm text-stone-500 mb-8 font-medium">
-                Fotografe suas refeições para aumentar sua consciência alimentar. Sem pressão, apenas registro.
+                Fotografe suas refeições para aumentar sua consciência alimentar. Sem pressão, apenas um registro carinhoso.
               </p>
               
               <input 
@@ -213,7 +213,7 @@ export default function RoutineView() {
                 onClick={() => fileInputRef.current?.click()}
                 className="w-full py-4 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 gradient-bg"
               >
-                <Plus size={20} /> Adicionar Refeição
+                <Plus size={20} /> Registrar Refeição
               </button>
             </div>
 

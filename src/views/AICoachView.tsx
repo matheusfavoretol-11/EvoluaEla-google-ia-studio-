@@ -17,7 +17,7 @@ export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const isBlocked = !hasUnlimitedCoach && messagesRemaining === 0;
 
   const [messages, setMessages] = useState<{ id: string; role: 'user' | 'model'; text: string }[]>([
-    { id: 'msg-init', role: 'model', text: `Oii, ${userName}! Sou sua Coach EvoluaEla. Estou aqui para te apoiar, motivar e ajudar a manter a constância. Como posso te ajudar hoje? 💕` }
+    { id: 'msg-init', role: 'model', text: `Oii, ${userName}! Sou sua Coach EvoluaEla. Estou aqui para te apoiar, motivar e ajudar a manter a constância. Como posso te apoiar e deixar seu dia mais leve hoje? 💕` }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +65,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
       setMessages(prev => [...prev, { id: `msg-${Date.now()}-model`, role: 'model', text: response.text }]);
     } catch (error) {
       console.error("Error sending message:", error);
-      setMessages(prev => [...prev, { id: `msg-${Date.now()}-error`, role: 'model', text: 'Desculpe, tive um probleminha de conexão. Podemos tentar de novo? 🥺' }]);
+      setMessages(prev => [...prev, { id: `msg-${Date.now()}-error`, role: 'model', text: 'Ops, parece que meu sinal falhou um pouquinho. Vamos tentar conversar de novo? 🥺' }]);
     } finally {
       setIsLoading(false);
     }
@@ -80,8 +80,8 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             <Bot size={28} className="relative z-10" />
           </div>
           <div>
-            <h2 className="text-2xl font-serif font-bold text-stone-800">Sua Coach</h2>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mt-0.5">Sempre aqui por você</p>
+            <h2 className="text-2xl font-serif font-bold text-stone-800">Sua Mentora</h2>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mt-0.5">Sempre aqui para te apoiar</p>
           </div>
         </div>
         
@@ -90,11 +90,11 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
           {hasUnlimitedCoach ? (
             <div className="flex items-center gap-2 p-3 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-bg-light shadow-sm" style={{ color: theme.primary }}>
               <Crown size={14} className="shrink-0" />
-              <span>Converse à vontade com seu Coach 💖</span>
+              <span>Pode falar comigo sempre que precisar, estou aqui! 💖</span>
             </div>
           ) : (
             <div className="flex items-center justify-between p-3 rounded-xl text-[10px] font-bold uppercase tracking-widest bg-stone-100 text-stone-600 shadow-sm">
-              <span>Mensagens restantes:</span>
+              <span>Mensagens para hoje:</span>
               <span className={`px-2 py-0.5 rounded-md ${messagesRemaining === 0 ? 'bg-rose-100 text-rose-600' : 'bg-stone-200 text-stone-700'}`}>
                 {messagesRemaining} / {MAX_FREE_MESSAGES}
               </span>
@@ -103,7 +103,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
           
           <div className="flex items-start gap-2 p-3 rounded-xl text-[10px] leading-relaxed bg-stone-50 border border-stone-100 text-stone-500 font-medium">
             <AlertTriangle size={14} className="shrink-0 mt-0.5 text-amber-500" />
-            <p>O Coach IA é uma ferramenta de apoio motivacional e não substitui profissionais de saúde.</p>
+            <p>Lembrete carinhoso: estou aqui para te motivar, mas não substituo o acompanhamento de médicos ou especialistas, tá?</p>
           </div>
         </div>
       </header>
@@ -145,14 +145,14 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center mx-auto mb-3">
               <Lock size={20} className="text-rose-500" />
             </div>
-            <h3 className="text-sm font-bold text-stone-800 mb-2">Você atingiu o limite semanal de mensagens com o Coach IA 💖</h3>
-            <p className="text-xs text-stone-500 mb-4 font-medium">Para continuar conversando sem limites, faça upgrade para o plano completo.</p>
+            <h3 className="text-sm font-bold text-stone-800 mb-2">Nossa conversa por aqui hoje chegou ao fim, mas amanhã tem mais! 💖</h3>
+            <p className="text-xs text-stone-500 mb-4 font-medium">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
             <button 
               onClick={onUpgrade}
               className="w-full py-3 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all gradient-bg flex items-center justify-center gap-2"
             >
               <Crown size={16} />
-              Desbloquear acesso ilimitado
+              Quero acesso ilimitado
             </button>
           </div>
         ) : (
@@ -162,7 +162,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Escreva para sua coach..."
+              placeholder="O que está no seu coração agora?"
               className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-sm outline-none text-stone-800 placeholder:text-stone-400 font-medium"
             />
             <button 

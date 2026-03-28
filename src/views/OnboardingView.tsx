@@ -94,8 +94,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Qual o seu principal objetivo?</h2>
-              <p className="text-stone-500 mb-8 font-medium">Isso nos ajuda a personalizar sua jornada de evolução.</p>
+              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Qual o seu grande sonho hoje?</h2>
+              <p className="text-stone-500 mb-8 font-medium">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
 
               <div className="space-y-4 flex-1">
                 {objectives.map((obj) => {
@@ -140,8 +140,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Como você se sente com seu corpo hoje?</h2>
-              <p className="text-stone-500 mb-8 font-medium">Este é um espaço seguro. Seja sincera com você mesma.</p>
+              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Como está sua relação com seu corpo hoje?</h2>
+              <p className="text-stone-500 mb-8 font-medium">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
 
               <div className="space-y-4 flex-1">
                 {feelings.map((feel) => {
@@ -186,8 +186,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Qual o seu maior desafio diário?</h2>
-              <p className="text-stone-500 mb-8 font-medium">Vamos trabalhar juntas para superar isso.</p>
+              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">O que mais te desafia no dia a dia?</h2>
+              <p className="text-stone-500 mb-8 font-medium">Vamos juntas encontrar o caminho para superar isso.</p>
 
               <div className="space-y-4 flex-1">
                 {challenges.map((chal) => {
@@ -234,11 +234,11 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
             {isSaving ? (
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>Guardando suas respostas...</span>
+                <span>Preparando tudo para você...</span>
               </div>
             ) : (
               <>
-                {step === 3 ? 'Vamos começar!' : 'Próximo passo'}
+                {step === 3 ? 'Quero começar minha evolução!' : 'Continuar'}
                 <ArrowRight size={20} />
               </>
             )}

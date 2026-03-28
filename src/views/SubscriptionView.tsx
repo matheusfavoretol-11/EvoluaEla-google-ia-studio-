@@ -64,9 +64,9 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         <div className="absolute bottom-6 left-6 right-6 text-white">
           <div className="flex items-center gap-2 mb-2">
             <Star className="text-amber-400" size={20} fill="currentColor" />
-            <span className="font-bold tracking-widest uppercase text-sm text-amber-400">Plano Premium</span>
+            <span className="font-bold tracking-widest uppercase text-sm text-amber-400">Círculo Premium</span>
           </div>
-          <h2 className="text-4xl font-serif font-bold leading-tight">Sua evolução guiada por especialistas.</h2>
+          <h2 className="text-4xl font-serif font-bold leading-tight">Sua jornada guiada por quem entende de você.</h2>
         </div>
       </div>
 
@@ -74,14 +74,14 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         <div className="space-y-6 flex-1">
           <div className="text-center">
             <div className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 font-bold text-xs rounded-full mb-3 uppercase tracking-widest">
-              7 Dias Grátis
+              Experimente por 7 Dias
             </div>
             <div className="text-5xl font-serif font-bold text-stone-800 mb-1">R$ 97,90<span className="text-xl text-stone-500 font-medium font-sans">/mês</span></div>
-            <p className="text-stone-500 text-sm font-medium">Após o período de teste. Cancele quando quiser.</p>
+            <p className="text-stone-500 text-sm font-medium">Sinta a transformação primeiro. Cancele quando quiser.</p>
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-serif font-bold text-stone-800 text-xl">O que está incluído:</h3>
+            <h3 className="font-serif font-bold text-stone-800 text-xl">O que preparamos para você:</h3>
             
             <ul className="space-y-3">
               {[
@@ -102,14 +102,14 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="bg-emerald-50 p-4 rounded-[1.5rem] border border-emerald-100 flex flex-col items-center text-center">
-            <p className="text-emerald-800 font-bold mb-1">Não é só sobre dieta ou treino</p>
-            <p className="text-emerald-600 text-sm font-medium">É sobre transformação completa. Agora você tem um time cuidando de você.</p>
+            <p className="text-emerald-800 font-bold mb-1">Muito além de um app</p>
+            <p className="text-emerald-600 text-sm font-medium">É sobre sua nova versão. Agora você tem um time segurando sua mão.</p>
           </div>
 
           <div className="bg-stone-50 p-4 rounded-[1.5rem] border border-stone-100 flex gap-3 items-start">
             <AlertCircle className="text-amber-500 shrink-0 mt-0.5" size={20} />
             <p className="text-[10px] text-stone-500 leading-relaxed font-medium">
-              <strong>Importante:</strong> O acompanhamento profissional é feito por especialistas parceiros. Em casos graves de saúde física ou mental, por favor, procure atendimento presencial de emergência.
+              <strong>Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
         </div>
@@ -124,10 +124,10 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             disabled={isProcessing}
             className="w-full py-4 rounded-[1.5rem] font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 gradient-bg hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
           >
-            {isProcessing ? 'Preparando tudo para você...' : 'Começar meu Teste Grátis'}
+            {isProcessing ? 'Preparando tudo para você...' : 'Quero começar meu teste grátis'}
           </button>
           <p className="text-center text-[10px] text-stone-400 mt-4 font-medium leading-relaxed">
-            Pode ficar tranquila, você não será cobrada hoje. Após os 7 dias de teste, a assinatura de R$ 97,90/mês será renovada automaticamente. E você pode cancelar quando quiser, direto nas configurações.
+            Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 97,90/mês será renovada automaticamente para manter sua evolução. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>
       </div>

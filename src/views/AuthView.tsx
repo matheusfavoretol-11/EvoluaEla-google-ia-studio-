@@ -192,7 +192,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             transition={{ delay: 0.2 }}
             className="text-stone-500 font-medium text-sm uppercase tracking-widest"
           >
-            Comece hoje a sua evolução
+            Sua jornada de evolução começa aqui
           </motion.p>
         </div>
 
@@ -206,7 +206,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             className="bg-white p-8 rounded-3xl soft-shadow w-full max-w-sm mx-auto"
           >
             <h2 className="text-2xl font-serif font-bold text-stone-800 mb-6 text-center">
-              {isLogin ? 'Bem-vinda de volta' : 'Criar Conta'}
+              {isLogin ? 'Que bom te ver de novo!' : 'Vamos começar sua jornada?'}
             </h2>
 
             {error && (
@@ -232,7 +232,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     </div>
                     <input
                       type="text"
-                      placeholder="Seu nome"
+                      placeholder="Como quer ser chamada?"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
@@ -249,7 +249,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   </div>
                   <input
                     type="email"
-                    placeholder="Seu e-mail"
+                    placeholder="Seu melhor e-mail"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
@@ -264,7 +264,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   </div>
                   <input
                     type="password"
-                    placeholder="Sua senha"
+                    placeholder="Sua senha secreta"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
@@ -280,7 +280,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     </div>
                     <input
                       type="password"
-                      placeholder="Confirmar senha"
+                      placeholder="Repita sua senha"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
@@ -305,7 +305,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     Manter conectado
                   </label>
                   <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>
-                    Esqueci a senha
+                    Esqueci minha senha
                   </button>
                 </div>
               ) : (
@@ -322,7 +322,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       {acceptTerms && <Check size={14} color="#fff" />}
                     </div>
                     <span className="text-xs text-stone-600 leading-relaxed">
-                      Li e aceito os <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>Termos de Uso</button> e confirmo que li o aviso legal.
+                      Aceito os <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>Termos de Uso</button> e confirmo que li o aviso legal.
                     </span>
                   </label>
                   
@@ -346,7 +346,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   </div>
                 ) : (
                   <>
-                    {isLogin ? 'Entrar' : 'Criar conta'}
+                    {isLogin ? 'Entrar agora' : 'Quero participar'}
                     <ArrowRight size={18} />
                   </>
                 )}

@@ -25,8 +25,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
     if (completedMissionsCount === dailyMissions.length && dailyMissions.length > 0) {
       notifications.push({
         id: 'all-missions',
-        title: 'Você é incrível! 🌟',
-        message: 'Todas as missões de hoje foram concluídas. Sinta orgulho de si mesma!',
+        title: 'Você está brilhando! ✨',
+        message: 'Olha só! Você completou tudo o que planejou para hoje. Que orgulho! 💖',
         time: 'Agora',
         read: false
       });
@@ -37,7 +37,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       notifications.push({
         id: 'obj-amor',
         title: 'Lembrete de Amor Próprio 💖',
-        message: `${userName}, você é suficiente exatamente como é hoje. Tire 5 minutos para você.`,
+        message: `${userName}, lembre-se: você já é maravilhosa do jeitinho que é. Que tal 5 minutinhos só seus agora? 🌸`,
         time: 'Há 2 horas',
         read: true
       });
@@ -45,7 +45,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       notifications.push({
         id: 'obj-disc',
         title: 'Foco e Constância 🎯',
-        message: 'A disciplina é a ponte entre seus objetivos e suas realizações. Continue firme!',
+        message: 'Cada pequeno passo hoje constrói a mulher que você quer ser amanhã. Estou com você! 🎯',
         time: 'Há 3 horas',
         read: true
       });
@@ -53,7 +53,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       notifications.push({
         id: 'obj-geral',
         title: 'Um passo de cada vez 🌸',
-        message: `${userName}, cada pequeno esforço conta para a sua evolução.`,
+        message: `${userName}, cada escolha positiva de hoje é um presente para o seu futuro. Vamos juntas? ✨`,
         time: 'Há 2 horas',
         read: true
       });
@@ -64,7 +64,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       notifications.push({
         id: 'stat-conf',
         title: 'Acredite no seu potencial ✨',
-        message: 'Notei que sua confiança está precisando de um abraço. Que tal ouvir um áudio de afirmação hoje?',
+        message: 'Senti que hoje seu coração precisa de um carinho extra. Que tal um áudio de afirmação para elevar essa energia? 💖',
         time: 'Ontem',
         read: true
       });
@@ -72,7 +72,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       notifications.push({
         id: 'stat-disc',
         title: 'Evolução Visível 🚀',
-        message: 'Sua disciplina está nas alturas! Veja o quanto você evoluiu essa semana.',
+        message: 'Uau! Sua dedicação está inspiradora. Olha só o quanto você já caminhou! 🚀',
         time: 'Ontem',
         read: true
       });
@@ -184,7 +184,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 border border-stone-200 shadow-sm">
           <Star size={14} className="text-amber-500" />
           <span className="text-xs font-bold uppercase tracking-widest text-stone-600">
-            Nível: <span style={{ color: theme.primary }}>{level}</span>
+            Sua Evolução: <span style={{ color: theme.primary }}>{level}</span>
           </span>
         </div>
       </div>
@@ -201,15 +201,15 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <Clock size={20} className="text-amber-400" />
             </div>
             <div>
-              <p className="text-sm font-bold">Período de teste gratuito</p>
-              <p className="text-xs text-stone-300">Faltam {getDaysRemaining()} dias</p>
+              <p className="text-sm font-bold">Seu período de descoberta</p>
+              <p className="text-xs text-stone-300">Aproveite cada segundo! Faltam {getDaysRemaining()} dias.</p>
             </div>
           </div>
           <button 
             onClick={onUpgrade}
             className="text-xs font-bold px-4 py-2 rounded-xl bg-white text-stone-800 hover:bg-stone-100 transition-colors"
           >
-            Gerenciar
+            Ver detalhes
           </button>
         </motion.div>
       )}
@@ -218,7 +218,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       <section className="space-y-3">
         <div className="flex justify-between items-start relative">
           <h2 className="text-3xl font-serif text-stone-800">
-            Bom dia, <br/><span className="font-bold gradient-text">{userName}</span> ✨
+            Bom dia, <br/><span className="font-bold gradient-text">{userName}</span> 🌸
           </h2>
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
@@ -242,10 +242,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 style={{ backgroundColor: theme.surface, border: '1px solid rgba(0,0,0,0.05)' }}
               >
                 <div className="p-4 border-b flex justify-between items-center" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
-                  <h3 className="font-bold text-sm">Notificações</h3>
+                  <h3 className="font-bold text-sm">Novidades para você</h3>
                   {unreadCount > 0 && (
                     <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: theme.primary }}>
-                      {unreadCount} novas
+                      {unreadCount} novidades
                     </span>
                   )}
                 </div>
@@ -262,7 +262,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     ))
                   ) : (
                     <div className="p-6 text-center text-stone-500 text-sm">
-                      Nenhuma notificação no momento.
+                      Tudo tranquilo por aqui no momento. ✨
                     </div>
                   )}
                 </div>
@@ -281,7 +281,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             <Sparkles size={80} style={{ color: theme.primary }} />
           </div>
           <p className="italic text-sm font-serif font-medium text-stone-700 relative z-10 leading-relaxed">
-            "Você está mais perto do que imagina. A constância é a sua maior força."
+            "Respire fundo e lembre-se: cada pequeno passo te leva para onde você deseja estar. Você consegue!"
           </p>
         </motion.div>
       </section>
@@ -301,13 +301,13 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-stone-800 mb-1 leading-tight">
-                Você está a 1 passo de ter acompanhamento profissional
+                Que tal ter um time de especialistas cuidando de cada detalhe para você?
               </h3>
               <p className="text-sm text-stone-500 mb-3 font-medium">
-                Imagina ter especialistas te guiando exatamente no que fazer todos os dias?
+                Imagine acordar todos os dias sabendo exatamente o que fazer para evoluir, com apoio total.
               </p>
               <button className="text-xs font-bold uppercase tracking-widest flex items-center gap-1" style={{ color: theme.primary }}>
-                Conhecer o Premium <ChevronRight size={14} />
+                Quero ver como funciona <ChevronRight size={14} />
               </button>
             </div>
           </div>
@@ -317,13 +317,13 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       {/* Emotional Progress */}
       <section className="space-y-4">
         <div className="flex justify-between items-end">
-          <h3 className="text-xl font-serif font-bold text-stone-800">Sua Evolução</h3>
-          <span className="text-xs font-bold uppercase tracking-widest text-stone-400">Esta Semana</span>
+          <h3 className="text-xl font-serif font-bold text-stone-800">Como você está evoluindo</h3>
+          <span className="text-xs font-bold uppercase tracking-widest text-stone-400">Esta semana</span>
         </div>
         
         <div className="bg-white p-6 rounded-[2rem] soft-shadow-sm border border-stone-100 space-y-5">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-bold text-stone-800">Evolução Geral</span>
+            <span className="text-sm font-bold text-stone-800">Sua energia atual</span>
             <div className="flex items-center gap-1 text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md">
               <TrendingUp size={14} />
               <span className="text-xs font-bold">+15%</span>
@@ -355,7 +355,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           
           <div className="pt-4 mt-2 border-t border-stone-100">
             <p className="text-xs text-stone-500 italic text-center">
-              "Percebo que você está mais focada em si mesma essa semana. Continue assim!"
+              "Estou vendo como você está se priorizando. É lindo acompanhar sua mudança!"
             </p>
           </div>
         </div>
@@ -364,9 +364,9 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       {/* Daily Missions (Micro-habits) */}
       <section className="space-y-4">
         <div className="flex justify-between items-end">
-          <h3 className="text-xl font-serif font-bold text-stone-800">Missões Diárias</h3>
+          <h3 className="text-xl font-serif font-bold text-stone-800">Metas de hoje</h3>
           <span className="text-xs font-bold uppercase tracking-widest text-stone-400">
-            {completedMissionsCount}/{dailyMissions.length}
+            {completedMissionsCount}/{dailyMissions.length} concluídas
           </span>
         </div>
         
@@ -406,7 +406,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 exit={{ opacity: 0, height: 0 }}
                 className="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-sm font-medium text-center border border-emerald-100"
               >
-                Incrível! Você completou todas as missões de hoje. 🎉
+                Incrível! Você brilhou e completou tudo o que planejou para hoje. Que orgulho! 🎉
               </motion.div>
             )}
           </AnimatePresence>
@@ -426,16 +426,16 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             <Users size={24} />
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-1" style={{ color: theme.text }}>Comunidade EvoluaEla</h3>
+            <h3 className="font-bold text-lg mb-1" style={{ color: theme.text }}>Nossa Comunidade</h3>
             <p className="text-sm mb-4 leading-relaxed" style={{ color: theme.textMuted }}>
-              Você não está sozinha. Aqui você evolui junto com outras mulheres.
+              Você nunca está sozinha. Vamos evoluir juntas com outras mulheres que buscam o mesmo que você?
             </p>
             <button 
               onClick={handleCommunityClick}
               className="w-full py-3 rounded-xl font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2"
               style={{ backgroundColor: isPremium ? '#25D366' : theme.primary }}
             >
-              {isPremium ? 'Acessar a Comunidade' : <><Lock size={18} /> Fazer parte da Comunidade</>}
+              {isPremium ? 'Acessar a Comunidade' : <><Lock size={18} /> Quero entrar na comunidade</>}
             </button>
           </div>
         </div>
@@ -466,11 +466,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 </div>
                 
                 <h2 className="text-2xl font-bold text-stone-800 mb-2 leading-tight">
-                  A comunidade é exclusiva para o plano completo 💖
+                  Esse cantinho especial é exclusivo para nossas alunas Premium 💖
                 </h2>
                 
                 <p className="text-sm text-stone-500 mb-8">
-                  Faça o upgrade para se juntar a centenas de mulheres focadas na mesma evolução que você.
+                  Venha fazer parte desse grupo de mulheres que, assim como você, buscam sua melhor versão todos os dias.
                 </p>
 
                 <div className="w-full space-y-4 mb-8 text-left">
@@ -478,19 +478,19 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: theme.accent, color: theme.primary }}>
                       <Heart size={16} />
                     </div>
-                    <span className="text-sm font-medium text-stone-700">Apoio de outras mulheres</span>
+                    <span className="text-sm font-medium text-stone-700">Troca e apoio entre mulheres</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: theme.accent, color: theme.primary }}>
                       <TrendingUp size={16} />
                     </div>
-                    <span className="text-sm font-medium text-stone-700">Compartilhamento de evolução</span>
+                    <span className="text-sm font-medium text-stone-700">Celebrar conquistas juntas</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: theme.accent, color: theme.primary }}>
                       <Sparkles size={16} />
                     </div>
-                    <span className="text-sm font-medium text-stone-700">Motivação diária em grupo</span>
+                    <span className="text-sm font-medium text-stone-700">Motivação que contagia</span>
                   </div>
                 </div>
 
@@ -502,7 +502,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   className="w-full py-4 rounded-2xl font-bold text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                   style={{ backgroundColor: theme.primary }}
                 >
-                  Quero fazer parte
+                  Sim, quero entrar!
                 </button>
               </div>
             </motion.div>

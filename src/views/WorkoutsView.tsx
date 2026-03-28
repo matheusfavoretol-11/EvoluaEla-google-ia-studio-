@@ -359,8 +359,8 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             className="flex flex-col h-full"
           >
             <div className="px-6 pt-6 pb-2">
-              <h2 className="text-3xl font-serif font-bold mb-2 text-stone-800">Treinos</h2>
-              <p className="text-sm font-medium text-stone-500 mb-6">O app não manda. Ele se adapta a você.</p>
+              <h2 className="text-3xl font-serif font-bold mb-2 text-stone-800">Meus Treinos</h2>
+              <p className="text-sm font-medium text-stone-500 mb-6">O app não manda em você. Ele se adapta ao seu ritmo.</p>
               
               {/* Tabs */}
               <div className="flex p-1 rounded-2xl bg-stone-100 mb-6">
@@ -390,7 +390,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     onClick={handleCreateNew}
                     className="w-full py-4 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mb-4 gradient-bg"
                   >
-                    <Plus size={20} /> Criar meu treino
+                    <Plus size={20} /> Criar meu treino personalizado
                   </button>
 
                   {!isPremium && (
@@ -401,9 +401,9 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     >
                       <div className="absolute top-0 right-0 w-48 h-48 bg-white/20 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse-soft"></div>
                       <Star className="w-12 h-12 text-amber-300 mx-auto mb-4 relative z-10" />
-                      <h3 className="text-2xl font-serif font-bold mb-3 relative z-10">Treinos com Especialistas</h3>
+                      <h3 className="text-2xl font-serif font-bold mb-3 relative z-10">Treinos feitos para você</h3>
                       <p className="text-white/90 text-sm mb-8 relative z-10 font-medium leading-relaxed">
-                        Desbloqueie treinos 100% personalizados feitos por um educador físico para o seu objetivo. Pare de tentar sozinha.
+                        Desbloqueie treinos 100% personalizados, pensados por especialistas para o seu objetivo real. Vamos juntas?
                       </p>
                       <button 
                         onClick={onUpgrade}
@@ -428,7 +428,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               {activeTab === 'sugestoes' && (
                 <>
                   <div className="bg-stone-100 p-4 rounded-2xl mb-4 text-sm text-stone-600 font-medium">
-                    Sugestões prontas para você começar agora. Você pode editá-las e salvá-las nos seus treinos.
+                    Sugestões preparadas com carinho para você começar agora. Sinta-se à vontade para editá-las!
                   </div>
                   {defaultSuggestions.map(renderWorkoutCard)}
                 </>
@@ -436,7 +436,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
               <div className="mt-6 p-4 bg-stone-100 rounded-2xl flex gap-3 items-start text-stone-500 text-xs">
                 <Info size={16} className="shrink-0 mt-0.5" />
-                <p>Os treinos são sugestões e não substituem acompanhamento profissional de um educador físico.</p>
+                <p>Lembrete: os treinos são sugestões para te apoiar, mas não substituem o olhar de um profissional de educação física, tá?</p>
               </div>
             </div>
           </motion.div>
@@ -686,8 +686,8 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-500">
                 <Flame size={40} />
               </div>
-              <h2 className="text-2xl font-bold text-stone-800 mb-2">Treino concluído!</h2>
-              <p className="text-stone-500 font-medium mb-6">Você está evoluindo. Continue assim! 💪</p>
+              <h2 className="text-2xl font-bold text-stone-800 mb-2">Treino concluído com sucesso!</h2>
+              <p className="text-stone-500 font-medium mb-6">Sinta esse orgulho! Você está evoluindo a cada movimento. Continue brilhando! 💪</p>
               
               <div className="bg-stone-50 rounded-2xl p-4 mb-6 grid grid-cols-3 gap-2 border border-stone-100">
                 <div className="flex flex-col items-center">

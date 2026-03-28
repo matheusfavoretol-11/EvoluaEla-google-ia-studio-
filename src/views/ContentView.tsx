@@ -56,9 +56,9 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
           <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: theme.accent, color: theme.primary }}>
             <Sparkles size={20} />
           </div>
-          <h1 className="text-3xl font-serif font-bold text-stone-800">Conteúdos</h1>
+          <h1 className="text-3xl font-serif font-bold text-stone-800">Conteúdos que Transformam</h1>
         </div>
-        <p className="text-stone-500 font-medium">Materiais exclusivos para sua evolução.</p>
+        <p className="text-stone-500 font-medium">Uma curadoria especial para nutrir sua mente e alma.</p>
       </div>
 
       <div className="px-6">
@@ -72,7 +72,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             style={{ backgroundColor: activeCategory === 'audios' ? theme.primary : undefined }}
           >
             <Headphones size={18} />
-            Áudios
+            Áudios que Inspiram
           </button>
           <button
             onClick={() => setActiveCategory('guides')}
@@ -82,7 +82,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             style={{ backgroundColor: activeCategory === 'guides' ? theme.primary : undefined }}
           >
             <FileText size={18} />
-            Guias
+            Guias para Evoluir
           </button>
         </div>
 
@@ -162,7 +162,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     {activeCategory === 'audios' ? <Headphones size={20} /> : <FileText size={20} />}
                   </div>
                   <h3 className="font-bold text-stone-800">
-                    {activeCategory === 'audios' ? 'Tocando Agora' : 'Lendo Guia'}
+                    {activeCategory === 'audios' ? 'Sua Jornada Sonora' : 'Sua Leitura de Hoje'}
                   </h3>
                 </div>
                 <button 
@@ -232,7 +232,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                       style={{ backgroundColor: theme.primary }}
                     >
                       <FileText size={20} />
-                      Ler Guia Completo
+                      Quero ler agora
                     </button>
                   </>
                 )}
