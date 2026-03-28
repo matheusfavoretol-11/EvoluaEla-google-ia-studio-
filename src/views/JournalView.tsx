@@ -3,10 +3,8 @@ import { Heart, Send, Sparkles, BookHeart, MessageCircleHeart } from 'lucide-rea
 import { motion } from 'motion/react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
-import { GoogleGenAI } from '@google/genai';
+import { getGeminiAI, hasGeminiKey } from '../lib/gemini';
 import { supabase } from '../lib/supabase';
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export default function JournalView() {
   const { theme } = useTheme();
@@ -32,6 +30,10 @@ export default function JournalView() {
     setAiResponse('');
 
     try {
+      if (!hasGeminiKey()) {
+        throw new Error("API Key missing");
+      }
+      const ai = getGeminiAI();
       const chat = ai.chats.create({
         model: 'gemini-3-flash-preview',
         config: {

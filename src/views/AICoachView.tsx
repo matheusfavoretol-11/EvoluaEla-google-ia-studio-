@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Send, Bot, AlertTriangle, Crown, Lock } from 'lucide-react';
 import { motion } from 'motion/react';
-import { GoogleGenAI } from '@google/genai';
+import { getGeminiAI, hasGeminiKey } from '../lib/gemini';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const { theme } = useTheme();
@@ -27,17 +25,20 @@ export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const chatRef = useRef<any>(null);
 
   useEffect(() => {
-    chatRef.current = ai.chats.create({
-      model: 'gemini-3-flash-preview',
-      config: {
-        systemInstruction: `Você é uma Coach virtual do app EvoluaEla, uma plataforma digital por assinatura mensal voltada exclusivamente para mulheres que desejam emagrecer, melhorar sua saúde, desenvolver disciplina e evoluir de forma estruturada e consistente.
+    if (hasGeminiKey()) {
+      const ai = getGeminiAI();
+      chatRef.current = ai.chats.create({
+        model: 'gemini-3-flash-preview',
+        config: {
+          systemInstruction: `Você é uma Coach virtual do app EvoluaEla, uma plataforma digital por assinatura mensal voltada exclusivamente para mulheres que desejam emagrecer, melhorar sua saúde, desenvolver disciplina e evoluir de forma estruturada e consistente.
 O nome da usuária com quem você está falando é ${userName}. Use o nome dela para criar uma conexão mais pessoal e próxima, por exemplo: "Você consegue, ${userName}. Vamos continuar hoje."
 Seu tom de voz é de uma amiga acolhedora e motivadora. Você usa linguagem simples, direta e emocional. Você incentiva a disciplina sem ser agressiva, dá conselhos práticos e ajuda em momentos de desânimo.
 IMPORTANTE: Você deve sempre deixar claro que não substitui profissionais de saúde (médicos, nutricionistas, educadores físicos, psicólogos), não oferece diagnóstico médico e é apenas uma ferramenta de apoio.
 Frase base do app: 'Evoluir não é sobre motivação. É sobre constância.'
 Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
-      }
-    });
+        }
+      });
+    }
   }, [userName]);
 
   const scrollToBottom = () => {
@@ -61,6 +62,9 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
     }
 
     try {
+      if (!hasGeminiKey()) {
+        throw new Error("API Key missing");
+      }
       const response = await chatRef.current.sendMessage({ message: userMsg });
       setMessages(prev => [...prev, { id: `msg-${Date.now()}-model`, role: 'model', text: response.text }]);
     } catch (error) {
