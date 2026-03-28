@@ -163,6 +163,16 @@ async function init() {
   }
 }
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    environment: process.env.NODE_ENV, 
+    vercel: !!process.env.VERCEL,
+    timestamp: new Date().toISOString()
+  });
+});
+
 init();
 
 export default app;

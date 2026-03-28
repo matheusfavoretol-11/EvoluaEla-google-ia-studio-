@@ -82,6 +82,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setUserId(null);
       }
       setIsAuthReady(true);
+    }).catch(err => {
+      console.error('Auth session error:', err);
+      setIsAuthReady(true); // Ensure we don't get stuck on loading screen
     });
 
     // Listen for auth changes
