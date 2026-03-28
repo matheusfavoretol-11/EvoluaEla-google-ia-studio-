@@ -1,22 +1,21 @@
 {
   "version": 2,
   "framework": "vite",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
+      "src": "/api/(.*)",
+      "dest": "/api/index.ts"
     },
     {
-      "source": "/auth/(.*)",
-      "destination": "/api/index.ts"
+      "src": "/auth/(.*)",
+      "dest": "/api/index.ts"
     },
     {
-      "source": "/logo.png",
-      "destination": "/logo.png"
+      "handle": "filesystem"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

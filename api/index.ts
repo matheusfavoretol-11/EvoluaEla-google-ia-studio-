@@ -4,7 +4,6 @@ import Stripe from 'stripe';
 import dotenv from 'dotenv';
 import path from 'path';
 import archiver from 'archiver';
-import { createServer as createViteServer } from 'vite';
 import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
@@ -142,12 +141,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
 // Vite middleware for development
 async function init() {
   if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);
-  } else if (process.env.NODE_ENV === 'production') {
+  } else if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
