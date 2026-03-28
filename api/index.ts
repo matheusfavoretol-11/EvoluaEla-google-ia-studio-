@@ -157,8 +157,9 @@ async function init() {
 
   // Start the server if we are not in a serverless environment like Vercel
   if (!process.env.VERCEL) {
+    console.log(`Tentando iniciar o servidor na porta ${PORT}...`);
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`Pronto! Servidor rodando lindamente na porta ${PORT} 🚀`);
     });
   }
 }
