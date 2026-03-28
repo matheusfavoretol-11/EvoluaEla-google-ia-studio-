@@ -53,14 +53,14 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
               
               <div className="p-4 bg-stone-50 rounded-[1.5rem] border border-stone-100 flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold text-stone-600 mb-1">Plano Atual</p>
+                  <p className="text-xs font-bold text-stone-600 mb-1">Seu Plano</p>
                   <div className="flex items-center gap-1.5">
                     {isPremium ? (
                       <span className="text-amber-500 font-bold flex items-center gap-1"><Crown size={16} /> Premium</span>
                     ) : subscriptionStatus === 'trial' ? (
                       <span className="text-emerald-500 font-bold flex items-center gap-1"><Crown size={16} /> Teste Grátis (7 dias)</span>
                     ) : (
-                      <span className="text-stone-800 font-bold">Essencial</span>
+                      <span className="text-stone-800 font-bold">Gratuito</span>
                     )}
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
             onClick={handleSave}
             className="w-full py-4 rounded-[1.5rem] font-bold text-white shadow-md transition-transform active:scale-95 gradient-bg hover:scale-[1.02] sticky bottom-0"
           >
-            Salvar e Fechar
+            Pronto, fechar
           </button>
         </div>
       </div>

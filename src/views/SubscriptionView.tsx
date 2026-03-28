@@ -64,7 +64,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         <div className="absolute bottom-6 left-6 right-6 text-white">
           <div className="flex items-center gap-2 mb-2">
             <Star className="text-amber-400" size={20} fill="currentColor" />
-            <span className="font-bold tracking-widest uppercase text-sm text-amber-400">Plano Completo</span>
+            <span className="font-bold tracking-widest uppercase text-sm text-amber-400">Plano Premium</span>
           </div>
           <h2 className="text-4xl font-serif font-bold leading-tight">Sua evolução guiada por especialistas.</h2>
         </div>
@@ -85,7 +85,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             
             <ul className="space-y-3">
               {[
-                'Plano Alimentar Personalizado com Nutricionista',
+                'Dieta Personalizada com Nutricionista',
                 'Equilíbrio Emocional com Terapeuta',
                 'Treinos 100% personalizados',
                 'Acesso ilimitado ao Coach IA',
@@ -109,7 +109,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           <div className="bg-stone-50 p-4 rounded-[1.5rem] border border-stone-100 flex gap-3 items-start">
             <AlertCircle className="text-amber-500 shrink-0 mt-0.5" size={20} />
             <p className="text-[10px] text-stone-500 leading-relaxed font-medium">
-              <strong>Aviso Legal:</strong> O acompanhamento profissional é realizado por especialistas parceiros. Em casos graves de saúde física ou mental, procure atendimento presencial de emergência.
+              <strong>Importante:</strong> O acompanhamento profissional é feito por especialistas parceiros. Em casos graves de saúde física ou mental, por favor, procure atendimento presencial de emergência.
             </p>
           </div>
         </div>
@@ -124,10 +124,10 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             disabled={isProcessing}
             className="w-full py-4 rounded-[1.5rem] font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 gradient-bg hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
           >
-            {isProcessing ? 'Processando...' : 'Começar Teste Grátis'}
+            {isProcessing ? 'Preparando tudo para você...' : 'Começar meu Teste Grátis'}
           </button>
           <p className="text-center text-[10px] text-stone-400 mt-4 font-medium leading-relaxed">
-            Você não será cobrada hoje. Após 7 dias, a assinatura de R$ 97,90/mês será renovada automaticamente. Cancele a qualquer momento nas configurações.
+            Pode ficar tranquila, você não será cobrada hoje. Após os 7 dias de teste, a assinatura de R$ 97,90/mês será renovada automaticamente. E você pode cancelar quando quiser, direto nas configurações.
           </p>
         </div>
       </div>

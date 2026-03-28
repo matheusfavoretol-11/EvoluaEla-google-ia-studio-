@@ -486,7 +486,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     onClick={handleSaveEdit}
                     className="flex items-center gap-1 text-sm font-bold px-4 py-2 rounded-xl text-white shadow-md gradient-bg"
                   >
-                    Salvar
+                    Concluir edição
                   </button>
                 </div>
               )}

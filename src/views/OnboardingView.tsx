@@ -234,11 +234,11 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
             {isSaving ? (
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>Salvando...</span>
+                <span>Guardando suas respostas...</span>
               </div>
             ) : (
               <>
-                {step === 3 ? 'Começar minha evolução' : 'Continuar'}
+                {step === 3 ? 'Vamos começar!' : 'Próximo passo'}
                 <ArrowRight size={20} />
               </>
             )}

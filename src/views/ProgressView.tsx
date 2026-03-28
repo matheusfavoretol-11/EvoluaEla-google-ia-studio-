@@ -97,7 +97,7 @@ export default function ProgressView() {
             disabled={!newWeight}
             className="px-6 py-3 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all disabled:opacity-50 gradient-bg"
           >
-            Salvar
+            Registrar
           </button>
         </div>
 

@@ -53,7 +53,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                     ) : subscriptionStatus === 'trial' ? (
                       <span className="text-emerald-500 flex items-center gap-1"><Crown size={12} /> Teste Grátis</span>
                     ) : (
-                      <span className="text-stone-500">Plano Essencial</span>
+                      <span className="text-stone-500">Plano Gratuito</span>
                     )}
                   </div>
                 </div>

@@ -33,11 +33,11 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
 
     if (isLogin) {
       if (!email || !password) {
-        setError('Por favor, preencha todos os campos.');
+        setError('Ops, parece que faltou preencher algum campo.');
         return;
       }
       if (!email.includes('@')) {
-        setError('Por favor, insira um e-mail válido.');
+        setError('Hmm, esse e-mail não parece válido. Dá uma olhadinha?');
         return;
       }
       
@@ -58,34 +58,34 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
       } catch (err: any) {
         console.error("Login error:", err);
         if (err.message?.includes('Invalid login credentials')) {
-          setError('E-mail ou senha incorretos.');
+          setError('E-mail ou senha incorretos. Dá uma conferida!');
         } else if (err.message?.includes('Email not confirmed')) {
-          setError('Por favor, confirme seu e-mail antes de entrar.');
+          setError('Você precisa confirmar seu e-mail antes de entrar. Dá uma olhada na sua caixa de entrada!');
         } else {
-          setError('Erro ao fazer login. Verifique suas credenciais.');
+          setError('Ops, deu um errinho ao fazer login. Tenta de novo?');
         }
       } finally {
         setIsLoading(false);
       }
     } else {
       if (!name || !email || !password || !confirmPassword) {
-        setError('Por favor, preencha todos os campos.');
+        setError('Ops, parece que faltou preencher algum campo.');
         return;
       }
       if (!email.includes('@')) {
-        setError('Por favor, insira um e-mail válido.');
+        setError('Hmm, esse e-mail não parece válido. Dá uma olhadinha?');
         return;
       }
       if (password.length < 6) {
-        setError('A senha deve ter pelo menos 6 caracteres.');
+        setError('A senha precisa ter pelo menos 6 caracteres, tá bom?');
         return;
       }
       if (password !== confirmPassword) {
-        setError('As senhas não coincidem.');
+        setError('As senhas não estão iguais. Dá uma conferida!');
         return;
       }
       if (!acceptTerms) {
-        setError('Você precisa aceitar os Termos de Uso para continuar.');
+        setError('Você precisa aceitar os Termos de Uso para a gente continuar.');
         return;
       }
       
@@ -126,7 +126,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
           }
 
           if (!data.session) {
-            setSuccessMsg('Conta criada! Verifique sua caixa de entrada para confirmar o e-mail antes de fazer login.');
+            setSuccessMsg('Eba, conta criada! Dá uma olhadinha no seu e-mail para confirmar antes de entrar.');
             setIsLogin(true);
           } else {
             onRegister(name);
@@ -135,11 +135,11 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
       } catch (err: any) {
         console.error("Registration error:", err);
         if (err.message?.includes('already registered')) {
-          setError('Este e-mail já está em uso.');
+          setError('Esse e-mail já está cadastrado com a gente!');
         } else if (err.message?.includes('security purposes') || err.message?.includes('rate limit')) {
-          setError('Muitas tentativas. Por favor, aguarde cerca de 1 minuto antes de tentar novamente.');
+          setError('Muitas tentativas! Dá um tempinho de 1 minuto e tenta de novo.');
         } else {
-          setError('Erro ao criar conta. Tente novamente.');
+          setError('Ops, deu um errinho ao criar sua conta. Tenta de novo?');
         }
       } finally {
         setIsLoading(false);
@@ -322,13 +322,13 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       {acceptTerms && <Check size={14} color="#fff" />}
                     </div>
                     <span className="text-xs text-stone-600 leading-relaxed">
-                      Li e aceito os <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>Termos de Uso</button> e confirmo que li o aviso legal abaixo.
+                      Li e aceito os <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>Termos de Uso</button> e confirmo que li o aviso legal.
                     </span>
                   </label>
                   
                   <div className="bg-stone-50 p-3 rounded-xl border border-stone-100">
                     <p className="text-[10px] text-stone-500 leading-relaxed">
-                      <strong>Aviso Importante:</strong> O EvoluaEla é uma ferramenta de apoio e não substitui acompanhamento profissional como médicos, nutricionistas ou educadores físicos.
+                      <strong>Importante:</strong> O EvoluaEla é uma ferramenta de apoio e não substitui o acompanhamento profissional presencial de médicos, nutricionistas ou educadores físicos.
                     </p>
                   </div>
                 </div>
@@ -342,7 +342,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>Processando...</span>
+                    <span>Só um segundo...</span>
                   </div>
                 ) : (
                   <>

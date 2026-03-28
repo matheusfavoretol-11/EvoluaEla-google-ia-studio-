@@ -3,6 +3,7 @@ import cors from 'cors';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
 import path from 'path';
+import archiver from 'archiver';
 import { createServer as createViteServer } from 'vite';
 import { createClient } from '@supabase/supabase-js';
 
@@ -68,6 +69,33 @@ async function startServer() {
   // Regular middleware for other routes
   app.use(express.json());
   app.use(cors());
+
+  // Download Source Code Endpoint
+  app.get('/api/download-source', (req, res) => {
+    res.attachment('evoluaela-source.zip');
+    const archive = archiver('zip', {
+      zlib: { level: 9 } // Sets the compression level.
+    });
+
+    archive.on('error', (err) => {
+      res.status(500).send({ error: err.message });
+    });
+
+    archive.pipe(res);
+
+    // Append files from the current directory, ignoring node_modules and .git
+    archive.glob('**/*', {
+      cwd: process.cwd(),
+      ignore: ['node_modules/**', '.git/**', 'dist/**', '.next/**']
+    });
+
+    archive.glob('.*', {
+      cwd: process.cwd(),
+      ignore: ['.git/**']
+    });
+
+    archive.finalize();
+  });
 
   // Create Checkout Session Endpoint
   app.post('/api/create-checkout-session', async (req, res) => {

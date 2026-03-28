@@ -435,7 +435,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               className="w-full py-3 rounded-xl font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2"
               style={{ backgroundColor: isPremium ? '#25D366' : theme.primary }}
             >
-              {isPremium ? 'Entrar na Comunidade' : <><Lock size={18} /> Desbloquear Comunidade</>}
+              {isPremium ? 'Acessar a Comunidade' : <><Lock size={18} /> Fazer parte da Comunidade</>}
             </button>
           </div>
         </div>

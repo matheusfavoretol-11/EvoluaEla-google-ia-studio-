@@ -11,7 +11,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
   const { theme } = useTheme();
 
   const features = [
-    { icon: Heart, title: 'Plano Alimentar', desc: 'Acompanhamento nutricional personalizado.' },
+    { icon: Heart, title: 'Dieta Personalizada', desc: 'Acompanhamento nutricional feito pra você.' },
     { icon: TrendingUp, title: 'Equilíbrio Emocional', desc: 'Sessões guiadas com terapeuta.' },
     { icon: Target, title: 'Treinos Personalizados', desc: 'Rotinas adaptadas ao seu objetivo.' },
     { icon: Bot, title: 'Coach IA', desc: 'Apoio motivacional 24h (exclusivo premium).' },
@@ -49,7 +49,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
           <div className="flex items-center gap-6">
             <button onClick={onStart} className="text-sm font-bold text-stone-500 hover:text-stone-900 transition-colors hidden md:block">Entrar</button>
             <button onClick={onStart} className="text-sm font-bold px-5 py-2 rounded-xl gradient-bg text-white shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
-              Começar Grátis
+              Começar minha jornada
             </button>
           </div>
         </div>
@@ -76,18 +76,18 @@ export default function LandingView({ onStart }: LandingViewProps) {
               Sua evolução <span className="text-transparent bg-clip-text gradient-bg">guiada por especialistas</span>.
             </h1>
             <p className="text-stone-500 text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Transformação completa: corpo, mente e emocional. Pare de tentar sozinha e tenha um time de profissionais acompanhando cada passo da sua jornada.
+              Corpo, mente e emoções em equilíbrio. Pare de tentar sozinha e tenha um time de profissionais de verdade cuidando de você em cada passo.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
               <button 
                 onClick={onStart}
                 className="w-full sm:w-auto px-10 py-5 rounded-[1.5rem] font-bold text-white shadow-xl hover:shadow-2xl transition-all gradient-bg flex items-center justify-center gap-3 text-lg hover:-translate-y-1"
               >
-                Começar agora <ArrowRight size={22} />
+                Quero evoluir agora <ArrowRight size={22} />
               </button>
               <div className="text-left hidden sm:block">
-                <p className="text-sm font-bold text-stone-700">7 dias grátis</p>
-                <p className="text-xs text-stone-500">Cancele quando quiser</p>
+                <p className="text-sm font-bold text-stone-700">7 dias grátis para testar</p>
+                <p className="text-xs text-stone-500">Cancele quando quiser, sem burocracia</p>
               </div>
             </div>
           </motion.div>
@@ -164,7 +164,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 text-stone-800 leading-tight">
               Você sente que poderia ser muito mais, mas não sabe por onde começar?
             </h2>
-            <p className="text-lg text-stone-500">Muitas mulheres enfrentam os mesmos obstáculos diariamente. Você não está sozinha.</p>
+            <p className="text-lg text-stone-500">Muitas mulheres enfrentam os mesmos obstáculos todos os dias. Fica tranquila, você não está sozinha nessa.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
@@ -199,13 +199,13 @@ export default function LandingView({ onStart }: LandingViewProps) {
             <span className="inline-block py-1 px-3 rounded-full bg-stone-200/50 text-xs font-bold uppercase tracking-widest text-stone-500 mb-4">
               A Solução
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 text-stone-800">Apresentamos o EvoluaEla</h2>
-            <p className="text-stone-500 text-lg">O método passo a passo para construir a disciplina que você sempre quis, sem extremismos.</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 text-stone-800">Conheça o EvoluaEla</h2>
+            <p className="text-stone-500 text-lg">O método passo a passo para você construir a disciplina que sempre quis, no seu ritmo e sem extremismos.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
-              { title: 'Nutricionista', icon: Heart, desc: 'Plano alimentar individual e ajustes semanais.' },
+              { title: 'Nutricionista', icon: Heart, desc: 'Dieta individual e ajustes semanais.' },
               { title: 'Terapeuta', icon: Target, desc: 'Sessões guiadas e exercícios emocionais.' },
               { title: 'Treinos', icon: TrendingUp, desc: 'Rotinas 100% personalizadas para você.' },
               { title: 'Acompanhamento', icon: Sparkles, desc: 'Um time de especialistas cuidando de você.' }
@@ -292,7 +292,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       <section className="py-24 md:py-32 px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 text-stone-800">Tudo que você precisa em um só lugar</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 text-stone-800">Tudo o que você precisa, em um só lugar</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {features.map((feat, i) => (
@@ -318,7 +318,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       {/* Social Proof */}
       <section className="py-24 md:py-32 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-center mb-16 md:mb-24 text-stone-800">Elas já estão evoluindo</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-center mb-16 md:mb-24 text-stone-800">Elas já estão evoluindo com a gente</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((test, i) => (
               <motion.div 
@@ -359,10 +359,10 @@ export default function LandingView({ onStart }: LandingViewProps) {
               Oferta Especial
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
-              Menos que um café por dia para mudar sua vida.
+              Menos que um café por dia para mudar a sua vida.
             </h2>
             <p className="text-lg text-white/70 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Invista em você mesma. O EvoluaEla fornece todas as ferramentas necessárias para você construir a disciplina e o corpo que sempre sonhou.
+              Invista em você mesma. O EvoluaEla te dá todas as ferramentas para você construir a disciplina e o corpo que sempre sonhou. Você merece isso.
             </p>
             <div className="hidden lg:flex items-center gap-4">
               <div className="flex -space-x-4">
@@ -381,7 +381,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl"
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-2xl font-bold">Plano Premium</h3>
+              <h3 className="text-2xl font-bold">Acesso Premium</h3>
               <span className="px-3 py-1.5 rounded-xl bg-white text-stone-900 text-xs font-bold uppercase tracking-widest">7 Dias Grátis</span>
             </div>
             <ul className="space-y-5 mb-10">
@@ -406,7 +406,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             >
               Começar meu teste grátis
             </button>
-            <p className="text-xs text-white/50 text-center mt-6">Plano Free limitado a 3 mensagens por semana no Coach IA.</p>
+            <p className="text-xs text-white/50 text-center mt-6">O Plano Gratuito tem um limite de 3 mensagens por semana no Coach IA.</p>
           </motion.div>
         </div>
       </section>
@@ -415,10 +415,10 @@ export default function LandingView({ onStart }: LandingViewProps) {
       <section className="py-24 md:py-40 px-6 bg-white text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-8 text-stone-800 leading-tight">
-            Criado especialmente para mulheres que querem evoluir de verdade
+            Criado com carinho para mulheres que querem evoluir de verdade
           </h2>
           <p className="text-lg md:text-xl text-stone-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Comece hoje e veja resultados já nos primeiros dias. Quanto mais você adia, mais distante fica da sua melhor versão.
+            Comece hoje e sinta a diferença já nos primeiros dias. Quanto mais você adia, mais distante fica da sua melhor versão. Vamos juntas?
           </p>
           
           <button 
@@ -428,7 +428,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             Começar minha transformação agora <ChevronRight size={24} />
           </button>
           <p className="text-base font-medium text-stone-400 flex items-center justify-center gap-2">
-            <Heart size={18} className="text-rose-400" /> Você não precisa fazer isso sozinha
+            <Heart size={18} className="text-rose-400" /> Fica tranquila, você não precisa fazer isso sozinha
           </p>
         </div>
       </section>

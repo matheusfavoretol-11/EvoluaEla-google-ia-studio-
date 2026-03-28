@@ -11,7 +11,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
     return (
       <div className="p-6 h-full flex flex-col">
         <div className="mb-6">
-          <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Plano Alimentar Personalizado</h2>
+          <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Sua Dieta Personalizada</h2>
           <p className="text-stone-500 font-medium">Você não está mais sozinha — agora tem uma profissional acompanhando cada passo</p>
         </div>
         <PremiumLock 
@@ -26,7 +26,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
   return (
     <div className="p-6 pb-32">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Plano Alimentar Personalizado</h2>
+        <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Sua Dieta Personalizada</h2>
         <p className="text-stone-500 font-medium">Você não está mais sozinha — agora tem uma profissional acompanhando cada passo</p>
       </div>
 
@@ -34,7 +34,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
         {/* Current Plan Summary */}
         <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-stone-100">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-serif font-bold text-xl text-stone-800">Seu Plano Atual</h3>
+            <h3 className="font-serif font-bold text-xl text-stone-800">Sua Dieta Atual</h3>
             <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-widest">Ativo</span>
           </div>
           <div className="flex items-center gap-4 mb-6">

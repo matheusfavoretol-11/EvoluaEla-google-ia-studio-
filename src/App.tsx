@@ -207,21 +207,21 @@ function AppContent() {
               >
                 <h2 className="text-2xl font-serif font-bold text-stone-800 mb-4">Aviso Importante</h2>
                 <div className="space-y-4 text-sm text-stone-600 mb-8 font-medium">
-                  <p>O <strong>EvoluaEla</strong> é uma plataforma de organização, motivação e apoio na rotina.</p>
-                  <p className="font-bold text-amber-600">Ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <p>O <strong>EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
+                  <p className="font-bold text-amber-600">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
                   <ul className="list-disc pl-5 space-y-2 text-stone-500">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-xs text-stone-400">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões.</p>
+                  <p className="text-xs text-stone-400">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
                   className="w-full py-4 rounded-[1.5rem] font-bold text-white gradient-bg shadow-lg hover:shadow-xl transition-all"
                 >
-                  Eu entendo e concordo
+                  Entendi, vamos lá!
                 </button>
               </motion.div>
             </div>

@@ -34,9 +34,9 @@ export default function CoachView() {
         <div className="absolute inset-0 bg-stone-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-20 p-6 text-center">
           <Lock className="text-amber-400 mb-4" size={32} />
           <h4 className="font-serif font-bold text-2xl mb-2">Acesso Exclusivo</h4>
-          <p className="text-sm text-stone-300 mb-6 font-medium">O chat direto com o coach está disponível no Plano Completo.</p>
+          <p className="text-sm text-stone-300 mb-6 font-medium">O chat direto com o coach está disponível no Plano Premium.</p>
           <button className="gradient-bg text-white font-bold py-3 px-8 rounded-[1.5rem] text-sm shadow-lg hover:shadow-xl transition-all">
-            Ver Planos
+            Conhecer os Planos
           </button>
         </div>
       </section>
