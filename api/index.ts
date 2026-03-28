@@ -68,6 +68,16 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 app.use(express.json());
 app.use(cors());
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    environment: process.env.NODE_ENV, 
+    vercel: !!process.env.VERCEL,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Download Source Code Endpoint
 app.get('/api/download-source', (req, res) => {
   res.attachment('evoluaela-source.zip');
@@ -163,16 +173,6 @@ async function init() {
     });
   }
 }
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    environment: process.env.NODE_ENV, 
-    vercel: !!process.env.VERCEL,
-    timestamp: new Date().toISOString()
-  });
-});
 
 init();
 

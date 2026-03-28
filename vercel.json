@@ -6,21 +6,18 @@
       "runtime": "nodejs18.x"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
     },
     {
-      "src": "/auth/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/auth/(.*)",
+      "destination": "/api/index.ts"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/((?!api|auth|logo.png|favicon.ico|assets).*)",
+      "destination": "/index.html"
     }
   ]
 }
