@@ -108,26 +108,6 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
 
         const user = data.user;
         if (user) {
-          // Initialize user document in Supabase
-          const { error: insertError } = await supabase
-            .from('users')
-            .insert([
-              {
-                id: user.id,
-                email: user.email,
-                display_name: name,
-                level: 'Despertando',
-                is_premium: false,
-                subscription_status: 'free',
-                coach_messages_count: 0
-              }
-            ]);
-            
-          if (insertError) {
-            console.error("Error creating user profile:", insertError);
-            // We don't throw here because auth succeeded, but we log it
-          }
-
           if (!data.session) {
             setSuccessMsg('Eba, conta criada! Dá uma olhadinha no seu e-mail para confirmar antes de entrar.');
             setIsLogin(true);
