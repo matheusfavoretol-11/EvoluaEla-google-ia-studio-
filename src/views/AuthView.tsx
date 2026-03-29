@@ -137,12 +137,15 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
         }
       } catch (err: any) {
         console.error("Registration error:", err);
-        if (err.message?.includes('already registered')) {
+        const errorMsg = err.message || '';
+        if (errorMsg.includes('already registered')) {
           setError('Esse e-mail já está cadastrado com a gente!');
-        } else if (err.message?.includes('security purposes') || err.message?.includes('rate limit')) {
+        } else if (errorMsg.includes('security purposes') || errorMsg.includes('rate limit')) {
           setError('Muitas tentativas! Dá um tempinho de 1 minuto e tenta de novo.');
+        } else if (errorMsg.includes('Connection error')) {
+          setError('Ops, parece que estamos com problemas de conexão. Tenta de novo em instantes?');
         } else {
-          setError('Ops, deu um errinho ao criar sua conta. Tenta de novo?');
+          setError(`Erro ao criar conta: ${errorMsg || 'Ops, deu um errinho. Tenta de novo?'}`);
         }
       } finally {
         setIsLoading(false);
