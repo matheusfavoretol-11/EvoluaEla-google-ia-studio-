@@ -40,98 +40,97 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
         />
       )}
       {isOpen && (
-        <motion.div
+          <motion.div
           key="sidebar"
           initial={{ x: '-100%' }}
           animate={{ x: 0 }}
           exit={{ x: '-100%' }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white z-50 shadow-2xl flex flex-col"
+          className="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-white z-50 shadow-2xl flex flex-col font-sans text-[#3F2A2F]"
         >
             {/* Header */}
-            <div className="p-6 border-b border-stone-100 flex items-center justify-between gradient-bg-light" style={{ color: theme.primary }}>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm text-stone-600">
-                  <User size={24} />
+            <div className="p-8 pt-16 border-b border-[#3F2A2F]/5 flex items-center justify-between bg-[#FAF7F5]">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-white border border-[#3F2A2F]/5 flex items-center justify-center shadow-sm text-[#3F2A2F]/20">
+                  <User size={28} />
                 </div>
                 <div>
-                  <h2 className="font-serif font-bold text-lg text-stone-800">{userName || 'Usuária'}</h2>
-                  <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest mt-0.5">
+                  <h2 className="font-poppins font-extrabold text-xl text-[#3F2A2F] leading-tight">{userName || 'Usuária'}</h2>
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mt-1.5">
                     {isPremium ? (
-                      <span className="text-amber-500 flex items-center gap-1"><Crown size={12} /> Premium</span>
+                      <span className="text-[#E8B4BC] flex items-center gap-1.5"><Crown size={14} fill="currentColor" /> Premium</span>
                     ) : subscriptionStatus === 'trial' ? (
-                      <span className="text-emerald-500 flex items-center gap-1"><Crown size={12} /> Teste Grátis</span>
+                      <span className="text-[#A8C4B8] flex items-center gap-1.5"><Crown size={14} fill="currentColor" /> Teste Grátis</span>
                     ) : (
-                      <span className="text-stone-500">Plano Gratuito</span>
+                      <span className="text-[#3F2A2F]/30">Plano Gratuito</span>
                     )}
                   </div>
                 </div>
               </div>
               <button 
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-stone-600 hover:bg-white transition-colors"
+                className="w-10 h-10 rounded-xl bg-white border border-[#3F2A2F]/5 flex items-center justify-center text-[#3F2A2F]/20 hover:text-[#3F2A2F] transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
 
             {/* Menu Items */}
-            <div className="flex-1 overflow-y-auto py-4">
-              <div className="px-4 space-y-2">
-                <button
-                  onClick={() => {
-                    onClose();
-                    onOpenHelp();
-                  }}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-500 group-hover:text-stone-800 transition-colors" style={{ color: theme.primary }}>
-                    <HelpCircle size={20} />
-                  </div>
-                  <div>
-                    <span className="block font-bold text-stone-800">Tirar dúvida</span>
-                    <span className="text-xs text-stone-500 font-medium">Pergunte à Coach IA</span>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => {
-                    onClose();
-                    onOpenSettings();
-                  }}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-500 group-hover:text-stone-800 transition-colors" style={{ color: theme.primary }}>
-                    <Settings size={20} />
-                  </div>
-                  <div>
-                    <span className="block font-bold text-stone-800">Configurações</span>
-                    <span className="text-xs text-stone-500 font-medium">Cores, perfil e plano</span>
-                  </div>
-                </button>
-
-                <button
-                  onClick={handleEmailSupport}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-500 group-hover:text-stone-800 transition-colors" style={{ color: theme.primary }}>
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <span className="block font-bold text-stone-800">Suporte</span>
-                    <span className="text-xs text-stone-500 font-medium">Fale com nossa equipe</span>
-                  </div>
-                </button>
+            <div className="flex-1 overflow-y-auto py-8">
+              <div className="px-6 space-y-4">
+                {[
+                  { 
+                    icon: HelpCircle, 
+                    title: 'Tirar dúvida', 
+                    subtitle: 'Pergunte à Coach IA', 
+                    onClick: onOpenHelp,
+                    color: '#E8B4BC'
+                  },
+                  { 
+                    icon: Settings, 
+                    title: 'Configurações', 
+                    subtitle: 'Cores, perfil e plano', 
+                    onClick: onOpenSettings,
+                    color: '#A8C4B8'
+                  },
+                  { 
+                    icon: Mail, 
+                    title: 'Suporte', 
+                    subtitle: 'Fale com nossa equipe', 
+                    onClick: handleEmailSupport,
+                    color: '#E8B4BC'
+                  }
+                ].map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      onClose();
+                      item.onClick();
+                    }}
+                    className="w-full flex items-center gap-5 p-5 rounded-3xl hover:bg-[#FAF7F5] transition-all text-left group border border-transparent hover:border-[#3F2A2F]/5"
+                  >
+                    <div 
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
+                      style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                    >
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <span className="block font-poppins font-bold text-[#3F2A2F] text-base">{item.title}</span>
+                      <span className="text-xs text-[#3F2A2F]/40 font-medium">{item.subtitle}</span>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-stone-100">
+            <div className="p-8 border-t border-[#3F2A2F]/5 bg-[#FAF7F5]/50">
               <button 
                 onClick={handleLogout}
-                className="flex items-center gap-2 text-stone-400 hover:text-red-500 transition-colors text-sm font-bold uppercase tracking-widest"
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl border border-[#3F2A2F]/5 text-[#3F2A2F]/30 hover:text-red-400 hover:border-red-400/20 hover:bg-red-400/5 transition-all text-xs font-bold uppercase tracking-widest"
               >
-                <LogOut size={16} />
+                <LogOut size={18} />
                 Sair da conta
               </button>
             </div>

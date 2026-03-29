@@ -12,6 +12,16 @@ type Theme = {
 };
 
 export const predefinedThemes: Record<string, Theme> = {
+  premium: {
+    id: 'premium',
+    name: 'Premium',
+    primary: '#E8B4BC',
+    bg: '#FAF7F5',
+    surface: '#FFFFFF',
+    text: '#3F2A2F',
+    textMuted: '#6B5E61',
+    accent: '#A8C4B8',
+  },
   delicado: {
     id: 'delicado',
     name: 'Delicado',
@@ -53,7 +63,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(predefinedThemes.delicado);
+  const [theme, setTheme] = useState<Theme>(predefinedThemes.premium);
 
   useEffect(() => {
     const root = document.documentElement;

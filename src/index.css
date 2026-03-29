@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-poppins: "Poppins", sans-serif;
   
   --color-primary: var(--color-primary);
@@ -15,61 +14,64 @@
 }
 
 :root {
-  --color-primary: #f43f5e;
-  --color-bg: #000000;
-  --color-surface: #1c1917;
-  --color-text: #ffffff;
-  --color-text-muted: #a8a29e;
-  --color-accent: #f43f5e;
+  --color-primary: #E8B4BC;
+  --color-bg: #FAF7F5;
+  --color-surface: #FFFFFF;
+  --color-text: #3F2A2F;
+  --color-text-muted: #6B5E61;
+  --color-accent: #A8C4B8;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, .font-serif {
-  font-family: var(--font-serif);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins);
+  font-weight: 800;
 }
 
 /* Soft UI Utilities */
 .soft-shadow {
-  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06);
+  box-shadow: 0 20px 50px -12px rgba(63, 42, 47, 0.08);
 }
 
 .soft-shadow-sm {
-  box-shadow: 0 4px 20px -5px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 30px rgba(63, 42, 47, 0.04);
 }
 
 .premium-shadow {
-  box-shadow: 0 20px 40px -10px rgba(var(--color-primary-rgb, 244, 63, 94), 0.15);
+  box-shadow: 0 25px 50px -12px rgba(232, 180, 188, 0.25);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(135deg, var(--color-primary), #d946ef);
+  background-image: linear-gradient(135deg, #3F2A2F, #E8B4BC);
 }
 
 .gradient-bg {
-  background-image: linear-gradient(135deg, var(--color-primary), #d946ef);
+  background-image: linear-gradient(135deg, #E8B4BC, #A8C4B8);
 }
 
 .gradient-bg-light {
-  background-image: linear-gradient(135deg, var(--color-accent), #fdf4ff);
+  background-image: linear-gradient(135deg, #FAF7F5, #FFFFFF);
 }
 
 .gradient-bg-premium {
-  background-image: linear-gradient(135deg, #1c1917, #44403c);
+  background-image: linear-gradient(135deg, #3F2A2F, #5D4047);
 }
 
 /* Animations */

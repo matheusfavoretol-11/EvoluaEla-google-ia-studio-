@@ -134,214 +134,200 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-stone-50">
-      {/* Background Gradient */}
+    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-white font-sans selection:bg-[#E8B4BC] selection:text-white">
+      {/* Background Gradient - More subtle and elegant */}
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         style={{ 
-          background: `radial-gradient(circle at top right, ${theme.primary}, transparent 60%), radial-gradient(circle at bottom left, ${theme.accent}, transparent 60%)` 
+          background: `radial-gradient(circle at 10% 10%, #E8B4BC, transparent 40%), radial-gradient(circle at 90% 90%, #A8C4B8, transparent 40%)` 
         }}
       />
 
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 relative z-10">
-        <div className="text-center mb-10">
+      <div className="flex-1 flex flex-col justify-center px-8 py-20 relative z-10 max-w-lg mx-auto w-full">
+        <div className="text-center mb-16">
           <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="w-20 h-20 mx-auto rounded-[2rem] flex items-center justify-center mb-6 premium-shadow gradient-bg-light overflow-hidden"
-            style={{ color: theme.primary }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-4"
           >
-            <img 
-              src="/logo.png" 
-              alt="EvoluaEla Logo" 
-              className="w-full h-full object-cover" 
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                if (e.currentTarget.nextElementSibling) {
-                  (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
-                }
-              }} 
-            />
-            <span className="text-4xl font-serif font-bold hidden">E</span>
+            <span className="font-poppins font-extrabold text-5xl tracking-tight text-[#3F2A2F]">EVOLUAELA</span>
           </motion.div>
-          <motion.h1 
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl font-serif font-bold tracking-tight mb-3 text-stone-800"
-          >
-            EvoluaEla
-          </motion.h1>
           <motion.p 
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-stone-500 font-medium text-sm uppercase tracking-widest"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-[#3F2A2F]/30 font-medium text-xs uppercase tracking-[0.3em]"
           >
-            Sua jornada de evolução começa aqui
+            Desperte a mulher poderosa que você nasceu para ser
           </motion.p>
         </div>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={isLogin ? 'login' : 'register'}
-            initial={{ opacity: 0, x: isLogin ? -20 : 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: isLogin ? 20 : -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white p-8 rounded-3xl soft-shadow w-full max-w-sm mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-white p-12 md:p-14 rounded-[3.5rem] soft-shadow w-full border border-[#3F2A2F]/5"
           >
-            <h2 className="text-2xl font-serif font-bold text-stone-800 mb-6 text-center">
-              {isLogin ? 'Que bom te ver de novo!' : 'Vamos começar sua jornada?'}
+            <h2 className="text-3xl font-poppins font-extrabold text-[#3F2A2F] mb-10 text-center leading-tight">
+              {isLogin ? 'Bem-vinda de volta' : 'Crie sua conta'}
             </h2>
 
             {error && (
-              <div className="mb-6 p-3 rounded-xl bg-red-50 text-red-600 text-sm flex items-start gap-2">
-                <AlertCircle size={16} className="shrink-0 mt-0.5" />
-                <p>{error}</p>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mb-10 p-5 rounded-2xl bg-red-50 text-red-600 text-sm flex items-start gap-4 border border-red-100"
+              >
+                <AlertCircle size={20} className="shrink-0 mt-0.5" />
+                <p className="font-medium leading-relaxed">{error}</p>
+              </motion.div>
             )}
             
             {successMsg && (
-              <div className="mb-6 p-3 rounded-xl bg-emerald-50 text-emerald-700 text-sm flex items-start gap-2">
-                <Check size={16} className="shrink-0 mt-0.5" />
-                <p>{successMsg}</p>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mb-10 p-5 rounded-2xl bg-emerald-50 text-emerald-700 text-sm flex items-start gap-4 border border-emerald-100"
+              >
+                <Check size={20} className="shrink-0 mt-0.5" />
+                <p className="font-medium leading-relaxed">{successMsg}</p>
+              </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {!isLogin && (
-                <div>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
-                      <User size={18} />
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Nome Completo</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
+                      <User size={22} />
                     </div>
                     <input
                       type="text"
                       placeholder="Como quer ser chamada?"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
-                      style={{ borderColor: name ? theme.primary : '#e5e7eb' }}
+                      className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
                     />
                   </div>
                 </div>
               )}
 
-              <div>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
-                    <Mail size={18} />
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">E-mail</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
+                    <Mail size={22} />
                   </div>
                   <input
                     type="email"
-                    placeholder="Seu melhor e-mail"
+                    placeholder="seu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
+                    className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
                   />
                 </div>
               </div>
 
-              <div>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
-                    <Lock size={18} />
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Senha</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
+                    <Lock size={22} />
                   </div>
                   <input
                     type="password"
-                    placeholder="Sua senha secreta"
+                    placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
+                    className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
                   />
                 </div>
               </div>
 
               {!isLogin && (
-                <div>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
-                      <Lock size={18} />
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Confirmar Senha</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
+                      <Lock size={22} />
                     </div>
                     <input
                       type="password"
-                      placeholder="Repita sua senha"
+                      placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
+                      className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
                     />
                   </div>
                 </div>
               )}
 
               {isLogin ? (
-                <div className="flex items-center justify-between text-sm">
-                  <label className="flex items-center gap-2 cursor-pointer text-stone-600">
+                <div className="flex items-center justify-between text-xs">
+                  <label className="flex items-center gap-3 cursor-pointer text-[#3F2A2F]/50 font-bold uppercase tracking-widest">
                     <div 
-                      className="w-5 h-5 rounded border flex items-center justify-center transition-colors"
+                      className="w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all"
                       style={{ 
-                        backgroundColor: keepConnected ? theme.primary : 'transparent',
-                        borderColor: keepConnected ? theme.primary : '#e5e7eb'
+                        backgroundColor: keepConnected ? '#E8B4BC' : 'transparent',
+                        borderColor: keepConnected ? '#E8B4BC' : '#3F2A2F10'
                       }}
                       onClick={() => setKeepConnected(!keepConnected)}
                     >
-                      {keepConnected && <Check size={14} color="#fff" />}
+                      {keepConnected && <Check size={14} color="#fff" strokeWidth={3} />}
                     </div>
-                    Manter conectado
+                    Manter
                   </label>
-                  <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>
-                    Esqueci minha senha
+                  <button type="button" className="font-bold text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors uppercase tracking-widest">
+                    Esqueci a senha
                   </button>
                 </div>
               ) : (
-                <div className="space-y-4 pt-2">
-                  <label className="flex items-start gap-3 cursor-pointer">
+                <div className="pt-2">
+                  <label className="flex items-start gap-4 cursor-pointer">
                     <div 
-                      className="w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 transition-colors"
+                      className="w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all"
                       style={{ 
-                        backgroundColor: acceptTerms ? theme.primary : 'transparent',
-                        borderColor: acceptTerms ? theme.primary : '#e5e7eb'
+                        backgroundColor: acceptTerms ? '#E8B4BC' : 'transparent',
+                        borderColor: acceptTerms ? '#E8B4BC' : '#3F2A2F10'
                       }}
                       onClick={() => setAcceptTerms(!acceptTerms)}
                     >
-                      {acceptTerms && <Check size={14} color="#fff" />}
+                      {acceptTerms && <Check size={16} color="#fff" strokeWidth={3} />}
                     </div>
-                    <span className="text-xs text-stone-600 leading-relaxed">
-                      Aceito os <button type="button" className="font-semibold hover:underline" style={{ color: theme.primary }}>Termos de Uso</button> e confirmo que li o aviso legal.
+                    <span className="text-xs text-[#3F2A2F]/40 leading-relaxed font-medium">
+                      Aceito os <button type="button" className="font-bold text-[#E8B4BC] hover:underline">Termos de Uso</button> e a política de privacidade.
                     </span>
                   </label>
-                  
-                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-100">
-                    <p className="text-[10px] text-stone-500 leading-relaxed">
-                      <strong>Importante:</strong> O EvoluaEla é uma ferramenta de apoio e não substitui o acompanhamento profissional presencial de médicos, nutricionistas ou educadores físicos.
-                    </p>
-                  </div>
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 rounded-[1.5rem] font-bold text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 mt-6 gradient-bg hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
+                className="w-full py-6 rounded-2xl font-poppins font-bold text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 mt-10 bg-[#E8B4BC] hover:bg-[#3F2A2F] disabled:opacity-70 hover:scale-[1.02] active:scale-95"
               >
                 {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>Só um segundo...</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Processando...</span>
                   </div>
                 ) : (
                   <>
-                    {isLogin ? 'Entrar agora' : 'Quero participar'}
-                    <ArrowRight size={18} />
+                    <span>{isLogin ? 'Entrar' : 'Criar Conta'}</span>
+                    <ArrowRight size={22} />
                   </>
                 )}
               </button>
             </form>
 
-            <div className="mt-8 text-center">
-              <p className="text-stone-500 text-sm">
-                {isLogin ? 'Ainda não tem uma conta?' : 'Já tem uma conta?'}
+            <div className="mt-12 text-center">
+              <p className="text-[#3F2A2F]/30 text-sm font-medium mb-3">
+                {isLogin ? 'Ainda não tem uma conta?' : 'Já possui uma conta?'}
               </p>
               <button
                 onClick={() => {
@@ -349,10 +335,9 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   setError('');
                   setSuccessMsg('');
                 }}
-                className="mt-2 font-bold text-lg hover:underline transition-all"
-                style={{ color: theme.primary }}
+                className="font-poppins font-bold text-xl text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors"
               >
-                {isLogin ? 'Criar conta' : 'Fazer login'}
+                {isLogin ? 'Cadastre-se agora' : 'Faça login'}
               </button>
             </div>
           </motion.div>
