@@ -80,6 +80,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
               <div className="px-6 space-y-4">
                 {[
                   { 
+                    id: 'help',
                     icon: HelpCircle, 
                     title: 'Tirar dúvida', 
                     subtitle: 'Pergunte à Coach IA', 
@@ -87,6 +88,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                     color: '#E8B4BC'
                   },
                   { 
+                    id: 'settings',
                     icon: Settings, 
                     title: 'Configurações', 
                     subtitle: 'Cores, perfil e plano', 
@@ -94,15 +96,16 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                     color: '#A8C4B8'
                   },
                   { 
+                    id: 'support',
                     icon: Mail, 
                     title: 'Suporte', 
                     subtitle: 'Fale com nossa equipe', 
                     onClick: handleEmailSupport,
                     color: '#E8B4BC'
                   }
-                ].map((item, idx) => (
+                ].map((item) => (
                   <button
-                    key={idx}
+                    key={item.id}
                     onClick={() => {
                       onClose();
                       item.onClick();

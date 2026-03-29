@@ -113,9 +113,9 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
       </header>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-4 hide-scrollbar bg-black">
-        {messages.map((msg, idx) => (
+        {messages.map((msg) => (
           <motion.div
-            key={`${msg.id}-${idx}`}
+            key={msg.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}

@@ -132,7 +132,7 @@ export default function RoutineView() {
                   <motion.button
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    key={`${habit.id}-${idx}`}
+                    key={habit.id}
                     onClick={() => toggleHabit(habit.id)}
                     className={`w-full flex items-center p-4 rounded-[1.5rem] transition-all border ${
                       habit.completed 
@@ -222,7 +222,7 @@ export default function RoutineView() {
               
               <div className="grid grid-cols-2 gap-4">
                 {meals.map((meal, idx) => (
-                  <div key={`${meal.id}-${idx}`} className="bg-white rounded-2xl overflow-hidden soft-shadow-sm border border-stone-100">
+                  <div key={meal.id} className="bg-white rounded-2xl overflow-hidden soft-shadow-sm border border-stone-100">
                     <div className="aspect-square relative bg-stone-100">
                       {meal.url ? (
                         <img src={meal.url} alt="Refeição" className="w-full h-full object-cover" referrerPolicy="no-referrer" />

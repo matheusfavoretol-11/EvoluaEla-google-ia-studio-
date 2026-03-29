@@ -240,8 +240,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 </div>
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
-                    notifications.map((notif, idx) => (
-                      <div key={`${notif.id}-${idx}`} className={`p-5 border-b border-[#3F2A2F]/5 hover:bg-[#FAF7F5] transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
+                    notifications.map((notif) => (
+                      <div key={notif.id} className={`p-5 border-b border-[#3F2A2F]/5 hover:bg-[#FAF7F5] transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC] mb-1">{notif.title}</p>
                         <p className="text-sm font-medium text-[#3F2A2F] mb-2 leading-relaxed">
                           {notif.message}
@@ -327,7 +327,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           <div className="space-y-4">
             {dailyMissions.map((mission, idx) => (
               <motion.div 
-                key={`${mission.id}-${idx}`}
+                key={mission.id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
@@ -450,8 +450,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Heart, text: 'Apoio mútuo entre mulheres' },
                     { icon: TrendingUp, text: 'Celebração de conquistas' },
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-5">
+                  ].map((item) => (
+                    <div key={item.text} className="flex items-center gap-5">
                       <div className="w-12 h-12 rounded-2xl bg-[#FAF7F5] flex items-center justify-center shrink-0 text-[#E8B4BC]">
                         <item.icon size={24} />
                       </div>

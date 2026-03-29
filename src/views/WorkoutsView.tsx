@@ -328,7 +328,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
         <div className="flex -space-x-2">
           {workout.exercises.slice(0, 3).map((ex, idx) => (
-            <div key={`${ex.id}-${idx}`} className="w-8 h-8 rounded-full bg-white/10 border-2 border-black flex items-center justify-center text-[10px] font-black text-white/60 shadow-sm">
+            <div key={ex.id} className="w-8 h-8 rounded-full bg-white/10 border-2 border-black flex items-center justify-center text-[10px] font-black text-white/60 shadow-sm">
               {idx + 1}
             </div>
           ))}
@@ -545,7 +545,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 
                 if (isEditing) {
                   return (
-                    <div key={`edit-${exercise.id}-${index}`} className="flex flex-col gap-3 p-4 bg-white/5 rounded-2xl border border-white/10 shadow-sm">
+                    <div key={`edit-${exercise.id}`} className="flex flex-col gap-3 p-4 bg-white/5 rounded-2xl border border-white/10 shadow-sm">
                       <div className="flex justify-between items-center gap-2">
                         <input 
                           className="font-bold text-lg text-white bg-white/5 p-2 rounded-xl outline-none w-full border border-white/5 focus:border-white/20 transition-colors" 
@@ -585,7 +585,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
                 return (
                   <motion.div 
-                    key={`view-${exercise.id}-${index}`}
+                    key={`view-${exercise.id}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ 
                       opacity: isCompleted ? 0.4 : 1, 

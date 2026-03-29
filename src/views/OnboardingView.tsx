@@ -102,7 +102,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                   const isSelected = objective === obj.id;
                   return (
                     <button
-                      key={`${obj.id}-${idx}`}
+                      key={obj.id}
                       onClick={() => setObjective(obj.id)}
                       className={`w-full p-6 rounded-[2rem] border-2 flex items-center gap-5 transition-all ${
                         isSelected 
@@ -144,7 +144,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                   const isSelected = feeling === feel.id;
                   return (
                     <button
-                      key={`${feel.id}-${idx}`}
+                      key={feel.id}
                       onClick={() => setFeeling(feel.id)}
                       className={`w-full p-6 rounded-[2rem] border-2 flex items-center gap-5 transition-all ${
                         isSelected 
@@ -186,7 +186,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                   const isSelected = challenge === chal.id;
                   return (
                     <button
-                      key={`${chal.id}-${idx}`}
+                      key={chal.id}
                       onClick={() => setChallenge(chal.id)}
                       className={`w-full p-6 rounded-[2rem] border-2 flex items-center gap-5 transition-all ${
                         isSelected 
