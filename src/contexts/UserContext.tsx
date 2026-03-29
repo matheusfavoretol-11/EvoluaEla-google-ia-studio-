@@ -40,8 +40,10 @@ interface UserContextType {
   setDailyMissions: (missions: DailyMission[]) => void;
   onboardingAnswers: Record<string, string>;
   setOnboardingAnswers: (answers: Record<string, string>) => void;
+  hasCompletedOnboarding: boolean;
   isAuthReady: boolean;
   userId: string | null;
+  logout: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -68,9 +70,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     { id: '3', title: 'Faça algo só por você', completed: false }
   ]);
   const [onboardingAnswers, setOnboardingAnswers] = useState<Record<string, string>>({});
+  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
 
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+
+  const logout = async () => {
+    await supabase.auth.signOut();
+    setUserId(null);
+    setUserName('');
+    setIsPremium(false);
+    setSubscriptionStatus('free');
+    setOnboardingAnswers({});
+    setHasCompletedOnboarding(false);
+  };
 
   useEffect(() => {
     // Get initial session
@@ -223,6 +236,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setLevel(newLevel);
   }, [emotionalStats]);
 
+  // Update hasCompletedOnboarding when onboardingAnswers changes
+  useEffect(() => {
+    setHasCompletedOnboarding(Object.keys(onboardingAnswers).length > 0);
+  }, [onboardingAnswers]);
+
   return (
     <UserContext.Provider value={{ 
       userName, setUserName, 
@@ -237,7 +255,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       updateEmotionalStats,
       dailyMissions, setDailyMissions,
       onboardingAnswers, setOnboardingAnswers,
-      isAuthReady, userId
+      hasCompletedOnboarding,
+      isAuthReady, userId,
+      logout
     }}>
       {children}
     </UserContext.Provider>

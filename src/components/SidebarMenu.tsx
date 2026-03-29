@@ -12,10 +12,19 @@ interface SidebarMenuProps {
 
 export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHelp }: SidebarMenuProps) {
   const { theme } = useTheme();
-  const { userName, isPremium, subscriptionStatus } = useUser();
+  const { userName, isPremium, subscriptionStatus, logout } = useUser();
 
   const handleEmailSupport = () => {
     window.location.href = 'mailto:evoluaela@gmail.com';
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      onClose();
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -118,7 +127,10 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
 
             {/* Footer */}
             <div className="p-6 border-t border-stone-100">
-              <button className="flex items-center gap-2 text-stone-400 hover:text-red-500 transition-colors text-sm font-bold uppercase tracking-widest">
+              <button 
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-stone-400 hover:text-red-500 transition-colors text-sm font-bold uppercase tracking-widest"
+              >
                 <LogOut size={16} />
                 Sair da conta
               </button>

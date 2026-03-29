@@ -72,15 +72,15 @@ Seja concisa, use emojis e foque no acolhimento.`,
   };
 
   return (
-    <div className="p-6 space-y-8 relative min-h-full flex flex-col">
+    <div className="p-6 space-y-8 relative min-h-full flex flex-col bg-black">
       <header className="space-y-2">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-rose-500">
-            <BookHeart size={20} />
+          <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-rose-400">
+            <BookHeart size={24} />
           </div>
-          <h2 className="text-3xl font-serif text-stone-800">Meu Cantinho de Reflexão</h2>
+          <h2 className="text-4xl branding-title text-white">Meu Cantinho de Reflexão</h2>
         </div>
-        <p className="text-sm text-stone-500 font-medium">
+        <p className="text-white/50 font-medium">
           Este é o seu refúgio seguro. Pode soltar tudo o que sente, refletir e se reencontrar.
         </p>
       </header>
@@ -93,7 +93,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
         >
           {/* Prompts */}
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-stone-400">Sobre o que seu coração quer falar?</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Sobre o que seu coração quer falar?</span>
             <div className="flex flex-wrap gap-2">
               {prompts.map((prompt, idx) => (
                 <button
@@ -102,10 +102,10 @@ Seja concisa, use emojis e foque no acolhimento.`,
                     setSelectedPrompt(prompt);
                     setEntry(prompt + "\n\n");
                   }}
-                  className={`text-xs font-medium px-4 py-2 rounded-full border transition-colors ${
+                  className={`text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full border transition-all ${
                     selectedPrompt === prompt 
-                      ? 'bg-stone-800 text-white border-stone-800' 
-                      : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300'
+                      ? 'bg-white text-black border-white' 
+                      : 'bg-white/5 text-white/40 border-white/5 hover:border-white/20 hover:text-white/60'
                   }`}
                 >
                   {prompt}
@@ -120,14 +120,13 @@ Seja concisa, use emojis e foque no acolhimento.`,
               value={entry}
               onChange={(e) => setEntry(e.target.value)}
               placeholder="Pode soltar tudo aqui..."
-              className="flex-1 w-full p-6 rounded-[2rem] bg-white border border-stone-100 soft-shadow-sm resize-none focus:ring-2 focus:ring-stone-100 outline-none text-stone-700 leading-relaxed"
+              className="flex-1 w-full p-8 rounded-[2rem] bg-stone-900 border border-white/5 resize-none focus:ring-2 focus:ring-white/10 outline-none text-white leading-relaxed font-medium text-lg placeholder:text-white/10"
             />
             
             <button
               onClick={handleSubmit}
               disabled={!entry.trim() || isSubmitting}
-              className="absolute bottom-4 right-4 px-6 py-3 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all disabled:opacity-50 flex items-center gap-2"
-              style={{ backgroundColor: theme.primary }}
+              className="absolute bottom-6 right-6 px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-xs text-white shadow-xl hover:shadow-2xl transition-all disabled:opacity-50 flex items-center gap-2 gradient-bg"
             >
               <MessageCircleHeart size={18} />
               Quero desabafar
@@ -140,30 +139,30 @@ Seja concisa, use emojis e foque no acolhimento.`,
           animate={{ opacity: 1, scale: 1 }}
           className="flex-1 flex flex-col"
         >
-          <div className="bg-white p-8 rounded-[2rem] soft-shadow-sm border border-stone-100 relative overflow-hidden flex-1">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-full blur-3xl -mr-10 -mt-10"></div>
+          <div className="bg-stone-900 p-8 rounded-[2rem] border border-white/10 relative overflow-hidden flex-1">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-rose-500/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
             
             <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white shadow-md">
-                  <Sparkles size={20} />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-white shadow-xl">
+                  <Sparkles size={24} />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg text-stone-800">Sua Mentora</h3>
-                  <p className="text-xs text-stone-400 font-medium">Acolhendo suas palavras...</p>
+                  <h3 className="font-black uppercase tracking-tight text-xl text-white">Sua Mentora</h3>
+                  <p className="text-[10px] text-white/30 font-black uppercase tracking-widest">Acolhendo suas palavras...</p>
                 </div>
               </div>
               
               <div className="flex-1 overflow-y-auto hide-scrollbar">
                 {isSubmitting ? (
-                  <div className="flex gap-1.5 items-center justify-center h-full opacity-50">
-                    <div className="w-2 h-2 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="flex gap-2 items-center justify-center h-full opacity-30">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2.5 h-2.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2.5 h-2.5 rounded-full bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 ) : (
-                  <p className="text-stone-700 leading-relaxed whitespace-pre-wrap font-medium text-lg">
-                    {aiResponse}
+                  <p className="text-white/90 leading-relaxed whitespace-pre-wrap font-medium text-xl italic">
+                    "{aiResponse}"
                   </p>
                 )}
               </div>
@@ -175,7 +174,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                     setEntry('');
                     setSelectedPrompt(null);
                   }}
-                  className="mt-6 w-full py-4 rounded-2xl font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 transition-colors"
+                  className="mt-8 w-full py-5 rounded-2xl font-black uppercase tracking-widest text-xs text-white/40 bg-white/5 hover:bg-white/10 hover:text-white/60 transition-all border border-white/5"
                 >
                   Voltar para minhas reflexões
                 </button>

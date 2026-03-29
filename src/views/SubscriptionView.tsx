@@ -90,8 +90,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                 'Treinos 100% personalizados',
                 'Acesso ilimitado ao Coach IA',
                 'Ajustes semanais e chat direto com especialistas'
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
+              ].map((item, idx) => (
+                <li key={`benefit-${idx}`} className="flex items-start gap-3">
                   <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 gradient-bg-light" style={{ color: theme.primary }}>
                     <Check size={12} strokeWidth={3} />
                   </div>

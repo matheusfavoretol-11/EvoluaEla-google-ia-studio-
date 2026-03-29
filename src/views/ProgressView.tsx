@@ -229,7 +229,7 @@ export default function ProgressView() {
         <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
           {photos.map((photo, index) => (
             <motion.div 
-              key={photo.id}
+              key={`${photo.id}-${index}`}
               whileHover={{ y: -4, scale: 1.02 }} 
               className="w-32 shrink-0 aspect-[3/4] rounded-[1.5rem] overflow-hidden relative group cursor-pointer border border-stone-100 shadow-sm transition-shadow hover:shadow-md" 
               style={{ backgroundColor: theme.bg }}

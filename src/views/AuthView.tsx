@@ -57,12 +57,15 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
         }
       } catch (err: any) {
         console.error("Login error:", err);
-        if (err.message?.includes('Invalid login credentials')) {
+        const errorMsg = err.message || '';
+        if (errorMsg.includes('Invalid login credentials')) {
           setError('E-mail ou senha incorretos. Dá uma conferida!');
-        } else if (err.message?.includes('Email not confirmed')) {
+        } else if (errorMsg.includes('Email not confirmed')) {
           setError('Você precisa confirmar seu e-mail antes de entrar. Dá uma olhada na sua caixa de entrada!');
+        } else if (errorMsg.includes('Connection error')) {
+          setError('Ops, parece que estamos com problemas de conexão. Tenta de novo em instantes?');
         } else {
-          setError('Ops, deu um errinho ao fazer login. Tenta de novo?');
+          setError(`Erro: ${errorMsg || 'Ops, deu um errinho ao fazer login. Tenta de novo?'}`);
         }
       } finally {
         setIsLoading(false);
@@ -236,7 +239,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-2xl focus:ring-2 focus:outline-none transition-all text-stone-800"
-                      style={{ focusRingColor: theme.primary }}
+                      style={{ borderColor: name ? theme.primary : '#e5e7eb' }}
                     />
                   </div>
                 </div>

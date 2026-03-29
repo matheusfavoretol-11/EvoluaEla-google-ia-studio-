@@ -26,11 +26,10 @@ import SidebarMenu from './components/SidebarMenu';
 
 function AppContent() {
   const { theme } = useTheme();
-  const { setUserName, isPremium, isAuthReady, userId } = useUser();
+  const { setUserName, isPremium, isAuthReady, userId, hasCompletedOnboarding } = useUser();
   
   // App State
   const [showLanding, setShowLanding] = useState(true);
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
   
   const [activeTab, setActiveTab] = useState('home');
   const [showThemeSettings, setShowThemeSettings] = useState(false);
@@ -48,16 +47,14 @@ function AppContent() {
 
   const handleLogin = (name: string) => {
     setUserName(name);
-    setHasCompletedOnboarding(true);
   };
 
   const handleRegister = (name: string) => {
     setUserName(name);
-    setHasCompletedOnboarding(false);
   };
 
   const handleOnboardingComplete = () => {
-    setHasCompletedOnboarding(true);
+    // No longer needed to set local state, UserContext handles it
   };
 
   if (!isAuthReady) {
@@ -73,7 +70,7 @@ function AppContent() {
   if (!userId) {
     if (showLanding) {
       return (
-        <div className="min-h-screen font-sans bg-white">
+        <div className="min-h-screen font-sans bg-black">
           <LandingView onStart={() => setShowLanding(false)} />
         </div>
       );
@@ -101,56 +98,47 @@ function AppContent() {
   return (
     <div className="min-h-screen flex justify-center items-center font-sans transition-colors duration-300" style={{ backgroundColor: '#e7e5e4' }}>
       <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[2.5rem] shadow-2xl relative flex flex-col overflow-hidden transition-colors duration-300" style={{ backgroundColor: theme.bg, color: theme.text }}>
-        
-        {/* Header */}
-        <header className="pt-12 pb-4 px-6 border-b border-stone-100 sticky top-0 z-10 bg-white/80 backdrop-blur-md">
+              {/* Header */}
+        <header className="pt-12 pb-6 px-6 border-b border-white/5 sticky top-0 z-10 bg-black/80 backdrop-blur-md">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="w-10 h-10 rounded-[1.25rem] flex items-center justify-center shadow-sm transition-all bg-white border border-stone-100 text-stone-600 hover:bg-stone-50"
+                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
               >
-                <Menu size={20} />
+                <Menu size={24} />
               </button>
-              <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm overflow-hidden">
-                <img 
-                  src="/logo.png" 
-                  alt="EvoluaEla Logo" 
-                  className="w-full h-full object-cover" 
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    if (e.currentTarget.nextElementSibling) {
-                      (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
-                    }
-                  }} 
-                />
-                <span className="hidden">E</span>
+              <div className="flex flex-col">
+                <h1 className="text-2xl branding-title tracking-tighter text-white leading-none">EvoluaEla</h1>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-500/80 mt-1">High Performance</span>
               </div>
-              <h1 className="text-2xl font-serif font-bold tracking-tight text-stone-800">EvoluaEla</h1>
             </div>
             <div className="flex items-center gap-3">
-              {!isPremium && (
+              {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm uppercase tracking-widest gradient-bg-light transition-transform hover:scale-105"
-                  style={{ color: theme.primary }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black shadow-xl uppercase tracking-widest bg-white text-black transition-transform hover:scale-105 active:scale-95"
                 >
-                  <Crown size={14} /> PRO
+                  <Crown size={14} fill="currentColor" /> UPGRADE
                 </button>
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-amber-500">
+                  <Crown size={20} fill="currentColor" />
+                </div>
               )}
             </div>
           </div>
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-24 hide-scrollbar">
+        <main className="flex-1 overflow-y-auto pb-24 hide-scrollbar bg-black">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="h-full"
             >
               {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
@@ -163,24 +151,31 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 w-full border-t border-stone-100 px-6 py-4 pb-8 z-20 bg-white/90 backdrop-blur-md">
+        <nav className="absolute bottom-0 w-full border-t border-white/5 px-6 py-4 pb-10 z-20 bg-black/95 backdrop-blur-xl">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
-                <li key={tab.id}>
+                <li key={tab.id} className="flex-1">
                   <button
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex flex-col items-center gap-1.5 p-2 rounded-2xl transition-all duration-300 ${
-                      isActive ? 'scale-110' : 'hover:opacity-80 hover:scale-105'
+                    className={`w-full flex flex-col items-center gap-2 transition-all duration-300 ${
+                      isActive ? 'text-white' : 'text-white/20 hover:text-white/40'
                     }`}
-                    style={{ color: isActive ? theme.primary : '#a8a29e' }}
                   >
-                    <div className={`relative ${isActive ? 'p-2 rounded-xl gradient-bg-light shadow-sm' : ''}`}>
-                      <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                    <div className={`relative transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
+                      <Icon size={24} strokeWidth={isActive ? 3 : 2} />
+                      {isActive && (
+                        <motion.div 
+                          layoutId="nav-indicator"
+                          className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-rose-500"
+                        />
+                      )}
                     </div>
-                    <span className="text-[9px] font-bold uppercase tracking-widest">{tab.label}</span>
+                    <span className={`text-[8px] font-black uppercase tracking-widest transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                      {tab.label}
+                    </span>
                   </button>
                 </li>
               );

@@ -98,12 +98,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <p className="text-stone-500 mb-8 font-medium">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
 
               <div className="space-y-4 flex-1">
-                {objectives.map((obj) => {
+                {objectives.map((obj, idx) => {
                   const Icon = obj.icon;
                   const isSelected = objective === obj.id;
                   return (
                     <button
-                      key={obj.id}
+                      key={`${obj.id}-${idx}`}
                       onClick={() => setObjective(obj.id)}
                       className={`w-full p-6 rounded-[1.5rem] border-2 flex items-center gap-4 transition-all ${
                         isSelected ? 'soft-shadow-sm' : 'hover:border-stone-200'
@@ -144,12 +144,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <p className="text-stone-500 mb-8 font-medium">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
 
               <div className="space-y-4 flex-1">
-                {feelings.map((feel) => {
+                {feelings.map((feel, idx) => {
                   const Icon = feel.icon;
                   const isSelected = feeling === feel.id;
                   return (
                     <button
-                      key={feel.id}
+                      key={`${feel.id}-${idx}`}
                       onClick={() => setFeeling(feel.id)}
                       className={`w-full p-6 rounded-[1.5rem] border-2 flex items-center gap-4 transition-all ${
                         isSelected ? 'soft-shadow-sm' : 'hover:border-stone-200'
@@ -190,12 +190,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <p className="text-stone-500 mb-8 font-medium">Vamos juntas encontrar o caminho para superar isso.</p>
 
               <div className="space-y-4 flex-1">
-                {challenges.map((chal) => {
+                {challenges.map((chal, idx) => {
                   const Icon = chal.icon;
                   const isSelected = challenge === chal.id;
                   return (
                     <button
-                      key={chal.id}
+                      key={`${chal.id}-${idx}`}
                       onClick={() => setChallenge(chal.id)}
                       className={`w-full p-6 rounded-[1.5rem] border-2 flex items-center gap-4 transition-all ${
                         isSelected ? 'soft-shadow-sm' : 'hover:border-stone-200'

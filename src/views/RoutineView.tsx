@@ -126,13 +126,13 @@ export default function RoutineView() {
             <div className="space-y-4">
               <h3 className="text-[10px] font-bold uppercase tracking-widest mb-4 text-stone-400">Checklist de Hábitos</h3>
               
-              {habits.map(habit => {
+              {habits.map((habit, idx) => {
                 const Icon = habit.icon;
                 return (
                   <motion.button
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    key={habit.id}
+                    key={`${habit.id}-${idx}`}
                     onClick={() => toggleHabit(habit.id)}
                     className={`w-full flex items-center p-4 rounded-[1.5rem] transition-all border ${
                       habit.completed 
@@ -221,8 +221,8 @@ export default function RoutineView() {
               <h3 className="text-sm font-semibold uppercase tracking-wider text-stone-500">Histórico Recente</h3>
               
               <div className="grid grid-cols-2 gap-4">
-                {meals.map((meal) => (
-                  <div key={meal.id} className="bg-white rounded-2xl overflow-hidden soft-shadow-sm border border-stone-100">
+                {meals.map((meal, idx) => (
+                  <div key={`${meal.id}-${idx}`} className="bg-white rounded-2xl overflow-hidden soft-shadow-sm border border-stone-100">
                     <div className="aspect-square relative bg-stone-100">
                       {meal.url ? (
                         <img src={meal.url} alt="Refeição" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
