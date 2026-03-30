@@ -97,7 +97,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
             <div className="flex flex-wrap gap-2">
               {prompts.map((prompt, idx) => (
                 <button
-                  key={idx}
+                  key={`${prompt}-${idx}`}
                   onClick={() => {
                     setSelectedPrompt(prompt);
                     setEntry(prompt + "\n\n");

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, Star, AlertCircle, X, CreditCard } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 
@@ -7,16 +8,18 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   const { theme } = useTheme();
   const { setSubscriptionStatus, setTrialEndDate } = useUser();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubscribe = async () => {
     setIsProcessing(true);
+    setError(null);
     
     try {
       const { supabase } = await import('../lib/supabase');
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        console.error('User not authenticated');
+        setError('Você precisa estar logada para assinar.');
         setIsProcessing(false);
         return;
       }
@@ -34,11 +37,12 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        console.error('Failed to create checkout session:', data.error);
+        setError(data.error || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
         setIsProcessing(false);
       }
-    } catch (error) {
-      console.error('Error initiating checkout:', error);
+    } catch (err: any) {
+      console.error('Error initiating checkout:', err);
+      setError('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
       setIsProcessing(false);
     }
   };
@@ -112,6 +116,17 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
               <strong>Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
+
+          {error && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 rounded-2xl bg-red-50 text-red-600 text-xs font-medium flex items-center gap-3 border border-red-100"
+            >
+              <AlertCircle size={16} />
+              {error}
+            </motion.div>
+          )}
         </div>
 
         <div className="mt-8 pt-4 border-t border-stone-100">

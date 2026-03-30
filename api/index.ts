@@ -114,6 +114,12 @@ app.post('/api/create-checkout-session', async (req, res) => {
       return res.status(400).json({ error: 'User ID is required' });
     }
 
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ 
+        error: 'A chave secreta da Stripe não foi configurada no painel de segredos do AI Studio.' 
+      });
+    }
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [

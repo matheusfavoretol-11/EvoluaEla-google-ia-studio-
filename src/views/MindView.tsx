@@ -77,8 +77,8 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
               { title: 'Lidando com a Ansiedade', duration: '15 min', icon: Brain, color: 'text-indigo-400', bg: 'bg-indigo-500/10' },
               { title: 'Construindo Autoestima', duration: '20 min', icon: HeartHandshake, color: 'text-rose-400', bg: 'bg-rose-500/10' },
               { title: 'Desbloqueios Emocionais', duration: '30 min', icon: Activity, color: 'text-amber-400', bg: 'bg-amber-500/10' },
-            ].map((session) => (
-              <div key={session.title} className="p-5 rounded-[1.5rem] bg-stone-900 border border-white/5 flex items-center gap-4 hover:bg-stone-800 transition-all cursor-pointer group">
+            ].map((session, idx) => (
+              <div key={`${session.title}-${idx}`} className="p-5 rounded-[1.5rem] bg-stone-900 border border-white/5 flex items-center gap-4 hover:bg-stone-800 transition-all cursor-pointer group">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${session.bg} ${session.color} group-hover:scale-110 transition-transform`}>
                   <session.icon size={24} />
                 </div>

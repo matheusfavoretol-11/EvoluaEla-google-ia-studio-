@@ -296,7 +296,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               { label: 'Disciplina', value: emotionalStats.disciplina, color: '#E8B4BC' },
               { label: 'Amor Próprio', value: emotionalStats.amorProprio, color: '#A8C4B8' },
             ].map((stat, idx) => (
-              <div key={stat.label} className="space-y-3">
+              <div key={`${stat.label}-${idx}`} className="space-y-3">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#3F2A2F]/40">
                   <span>{stat.label}</span>
                   <span>{stat.value}%</span>
@@ -450,8 +450,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Heart, text: 'Apoio mútuo entre mulheres' },
                     { icon: TrendingUp, text: 'Celebração de conquistas' },
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
-                  ].map((item) => (
-                    <div key={item.text} className="flex items-center gap-5">
+                  ].map((item, idx) => (
+                    <div key={`benefit-comm-${idx}`} className="flex items-center gap-5">
                       <div className="w-12 h-12 rounded-2xl bg-[#FAF7F5] flex items-center justify-center shrink-0 text-[#E8B4BC]">
                         <item.icon size={24} />
                       </div>

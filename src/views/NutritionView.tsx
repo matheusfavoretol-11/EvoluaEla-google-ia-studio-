@@ -84,8 +84,8 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
               { time: '12:30', name: 'Almoço', desc: 'Frango grelhado com batata doce', done: false },
               { time: '16:00', name: 'Lanche', desc: 'Iogurte com whey', done: false },
               { time: '20:00', name: 'Jantar', desc: 'Salada completa com atum', done: false },
-            ].map((meal) => (
-              <div key={meal.name} className={`p-5 rounded-[1.5rem] border transition-all ${meal.done ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-stone-900 border-white/5'} flex items-center gap-4`}>
+            ].map((meal, idx) => (
+              <div key={`${meal.name}-${idx}`} className={`p-5 rounded-[1.5rem] border transition-all ${meal.done ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-stone-900 border-white/5'} flex items-center gap-4`}>
                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: meal.done ? '#10b981' : 'rgba(255,255,255,0.05)', color: meal.done ? 'white' : 'rgba(255,255,255,0.3)' }}>
                   {meal.done ? <CheckCircle2 size={24} /> : <Apple size={24} />}
                 </div>
