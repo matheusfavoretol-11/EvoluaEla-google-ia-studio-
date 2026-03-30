@@ -67,25 +67,25 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
 
         <div className="absolute bottom-6 left-6 right-6 text-white">
           <div className="flex items-center gap-2 mb-2">
-            <Star className="text-amber-400" size={20} fill="currentColor" />
-            <span className="font-bold tracking-widest uppercase text-sm text-amber-400">Círculo Premium</span>
+            <Star className="text-[#D4B996]" size={20} fill="currentColor" />
+            <span className="font-medium tracking-[0.2em] uppercase text-[10px] text-[#D4B996]">Círculo Premium</span>
           </div>
-          <h2 className="text-4xl font-serif font-bold leading-tight">Sua jornada guiada por quem entende de você.</h2>
+          <h2 className="text-4xl font-serif font-light leading-tight italic">Sua jornada guiada por quem entende de você.</h2>
         </div>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col bg-[#FAF9F6]">
         <div className="space-y-6 flex-1">
           <div className="text-center">
-            <div className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 font-bold text-xs rounded-full mb-3 uppercase tracking-widest">
+            <div className="inline-block px-3 py-1 bg-[#E8B4BC]/10 text-[#E8B4BC] font-medium text-[9px] rounded-full mb-3 uppercase tracking-[0.2em]">
               Experimente por 7 Dias
             </div>
-            <div className="text-5xl font-serif font-bold text-stone-800 mb-1">R$ 97,90<span className="text-xl text-stone-500 font-medium font-sans">/mês</span></div>
-            <p className="text-stone-500 text-sm font-medium">Sinta a transformação primeiro. Cancele quando quiser.</p>
+            <div className="text-5xl font-serif font-light text-[#3F2A2F] mb-1">R$ 97,90<span className="text-xl text-[#3F2A2F]/40 font-light font-sans">/mês</span></div>
+            <p className="text-[#3F2A2F]/40 text-sm font-light">Sinta a transformação primeiro. Cancele quando quiser.</p>
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-serif font-bold text-stone-800 text-xl">O que preparamos para você:</h3>
+            <h3 className="font-serif font-light text-[#3F2A2F] text-xl italic">O que preparamos para você:</h3>
             
             <ul className="space-y-3">
               {[
@@ -96,24 +96,24 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                 'Ajustes semanais e chat direto com especialistas'
               ].map((item, idx) => (
                 <li key={`benefit-${idx}`} className="flex items-start gap-3">
-                  <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 gradient-bg-light" style={{ color: theme.primary }}>
-                    <Check size={12} strokeWidth={3} />
+                  <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 bg-[#E8B4BC]/10" style={{ color: '#E8B4BC' }}>
+                    <Check size={12} strokeWidth={2} />
                   </div>
-                  <span className="text-stone-700 font-medium">{item}</span>
+                  <span className="text-[#3F2A2F]/60 font-light">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-emerald-50 p-4 rounded-[1.5rem] border border-emerald-100 flex flex-col items-center text-center">
-            <p className="text-emerald-800 font-bold mb-1">Muito além de um app</p>
-            <p className="text-emerald-600 text-sm font-medium">É sobre sua nova versão. Agora você tem um time segurando sua mão.</p>
+          <div className="bg-white p-4 rounded-[1.5rem] border border-[#3F2A2F]/5 flex flex-col items-center text-center">
+            <p className="text-[#3F2A2F] font-serif font-light italic mb-1">Muito além de um app</p>
+            <p className="text-[#3F2A2F]/40 text-sm font-light">É sobre sua nova versão. Agora você tem um time segurando sua mão.</p>
           </div>
 
-          <div className="bg-stone-50 p-4 rounded-[1.5rem] border border-stone-100 flex gap-3 items-start">
-            <AlertCircle className="text-amber-500 shrink-0 mt-0.5" size={20} />
-            <p className="text-[10px] text-stone-500 leading-relaxed font-medium">
-              <strong>Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
+          <div className="bg-white p-4 rounded-[1.5rem] border border-[#3F2A2F]/5 flex gap-3 items-start">
+            <AlertCircle className="text-[#D4B996] shrink-0 mt-0.5" size={20} />
+            <p className="text-[10px] text-[#3F2A2F]/40 leading-relaxed font-light">
+              <strong className="font-medium">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
 
@@ -129,19 +129,19 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           )}
         </div>
 
-        <div className="mt-8 pt-4 border-t border-stone-100">
-          <div className="flex items-center justify-center gap-2 mb-4 text-stone-500 text-xs font-medium">
+        <div className="mt-8 pt-4 border-t border-[#3F2A2F]/5">
+          <div className="flex items-center justify-center gap-2 mb-4 text-[#3F2A2F]/40 text-[10px] font-medium uppercase tracking-[0.2em]">
             <CreditCard size={14} />
             <span>Cobrança apenas após 7 dias</span>
           </div>
           <button 
             onClick={handleSubscribe}
             disabled={isProcessing}
-            className="w-full py-4 rounded-[1.5rem] font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 gradient-bg hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
+            className="w-full py-4 rounded-full font-light uppercase tracking-[0.2em] text-[10px] text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 bg-[#3F2A2F] hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
           >
             {isProcessing ? 'Preparando tudo para você...' : 'Quero começar meu teste grátis'}
           </button>
-          <p className="text-center text-[10px] text-stone-400 mt-4 font-medium leading-relaxed">
+          <p className="text-center text-[9px] text-[#3F2A2F]/20 mt-4 font-light leading-relaxed uppercase tracking-widest">
             Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 97,90/mês será renovada automaticamente para manter sua evolução. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>

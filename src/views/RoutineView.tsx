@@ -61,26 +61,26 @@ export default function RoutineView() {
   }
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 bg-[#FAF9F6] min-h-full">
       <header>
-        <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Minha Rotina Leve</h2>
-        <p className="text-sm font-medium" style={{ color: theme.textMuted }}>Pequenos passos, grandes transformações. Como está seu dia?</p>
+        <h2 className="text-3xl font-serif font-light text-[#3F2A2F] mb-2 italic">Minha Rotina Leve</h2>
+        <p className="text-sm font-light text-[#3F2A2F]/40">Pequenos passos, grandes transformações. Como está seu dia?</p>
       </header>
 
       {/* Tabs */}
-      <div className="flex p-1 rounded-2xl bg-stone-100">
+      <div className="flex p-1 rounded-full bg-[#3F2A2F]/5">
         <button
           onClick={() => setActiveTab('habits')}
-          className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all ${
-            activeTab === 'habits' ? 'bg-white shadow-sm text-stone-800' : 'text-stone-500 hover:text-stone-700'
+          className={`flex-1 py-3 text-[10px] font-medium uppercase tracking-[0.2em] rounded-full transition-all ${
+            activeTab === 'habits' ? 'bg-white shadow-sm text-[#3F2A2F]' : 'text-[#3F2A2F]/40 hover:text-[#3F2A2F]'
           }`}
         >
           Meus Hábitos
         </button>
         <button
           onClick={() => setActiveTab('meals')}
-          className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all ${
-            activeTab === 'meals' ? 'bg-white shadow-sm text-stone-800' : 'text-stone-500 hover:text-stone-700'
+          className={`flex-1 py-3 text-[10px] font-medium uppercase tracking-[0.2em] rounded-full transition-all ${
+            activeTab === 'meals' ? 'bg-white shadow-sm text-[#3F2A2F]' : 'text-[#3F2A2F]/40 hover:text-[#3F2A2F]'
           }`}
         >
           Minhas Refeições
@@ -97,34 +97,34 @@ export default function RoutineView() {
             className="space-y-8"
           >
             {/* Progress Card */}
-            <div className="p-8 rounded-[2rem] premium-shadow gradient-bg text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-white/20 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse-soft"></div>
+            <div className="p-8 rounded-[2rem] bg-[#3F2A2F] text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse-soft"></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-2xl -ml-10 -mb-10"></div>
               
               <div className="flex justify-between items-end mb-6 relative z-10">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest block mb-2 opacity-80">Progresso Diário</span>
-                  <span className="text-5xl font-serif font-bold">{completedCount}<span className="text-2xl font-medium opacity-80">/{habits.length}</span></span>
+                  <span className="text-[9px] font-medium uppercase tracking-[0.2em] block mb-2 opacity-60">Progresso Diário</span>
+                  <span className="text-5xl font-serif font-light">{completedCount}<span className="text-2xl font-light opacity-60">/{habits.length}</span></span>
                 </div>
                 <div className="text-right">
-                  <span className="font-bold text-2xl block">{Math.round(progress)}%</span>
-                  <span className="text-[10px] uppercase tracking-widest opacity-80">Concluído</span>
+                  <span className="font-light text-2xl block">{Math.round(progress)}%</span>
+                  <span className="text-[9px] font-medium uppercase tracking-[0.2em] opacity-60">Concluído</span>
                 </div>
               </div>
               
-              <div className="h-3 w-full rounded-full overflow-hidden bg-black/20 relative z-10 backdrop-blur-sm">
+              <div className="h-1.5 w-full rounded-full overflow-hidden bg-white/10 relative z-10 backdrop-blur-sm">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className="h-full rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+                  className="h-full rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                 />
               </div>
             </div>
 
             {/* Habits List */}
             <div className="space-y-4">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest mb-4 text-stone-400">Checklist de Hábitos</h3>
+              <h3 className="text-[9px] font-medium uppercase tracking-[0.2em] mb-4 text-[#3F2A2F]/20">Checklist de Hábitos</h3>
               
               {habits.map((habit, idx) => {
                 const Icon = habit.icon;
@@ -136,30 +136,30 @@ export default function RoutineView() {
                     onClick={() => toggleHabit(habit.id)}
                     className={`w-full flex items-center p-4 rounded-[1.5rem] transition-all border ${
                       habit.completed 
-                        ? 'bg-stone-50 border-stone-100 opacity-70' 
-                        : 'bg-white border-stone-100 soft-shadow-sm hover:shadow-md'
+                        ? 'bg-[#3F2A2F]/5 border-transparent opacity-60' 
+                        : 'bg-white border-[#3F2A2F]/5 shadow-sm hover:shadow-md'
                     }`}
                   >
                     <div 
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-colors"
+                      className="w-12 h-12 rounded-full flex items-center justify-center mr-4 transition-colors"
                       style={{ 
-                        backgroundColor: habit.completed ? theme.bg : theme.accent, 
-                        color: habit.completed ? theme.textMuted : theme.primary 
+                        backgroundColor: habit.completed ? '#3F2A2F' : '#E8B4BC10', 
+                        color: habit.completed ? '#fff' : '#E8B4BC' 
                       }}
                     >
-                      <Icon size={22} />
+                      <Icon size={20} strokeWidth={1.5} />
                     </div>
                     
                     <div className="flex-1 text-left">
                       <span 
-                        className={`font-serif font-bold text-lg transition-all block ${habit.completed ? 'line-through text-stone-400' : 'text-stone-800'}`}
+                        className={`font-serif font-light italic text-lg transition-all block ${habit.completed ? 'line-through text-[#3F2A2F]/40' : 'text-[#3F2A2F]'}`}
                       >
                         {habit.title}
                       </span>
                       {habit.streak > 0 && (
                         <div className="flex items-center gap-1 mt-1">
-                          <Flame size={12} className={habit.completed ? "text-orange-300" : "text-orange-500"} />
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                          <Flame size={12} className={habit.completed ? "text-[#D4B996]/40" : "text-[#D4B996]"} />
+                          <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">
                             {habit.streak} {habit.streak === 1 ? 'dia' : 'dias'} seguidos
                           </span>
                         </div>
@@ -171,14 +171,14 @@ export default function RoutineView() {
                         scale: habit.completed ? [1, 1.2, 1] : 1,
                         rotate: habit.completed ? [0, 10, -10, 0] : 0
                       }}
-                      className="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors"
+                      className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors"
                       style={{ 
-                        backgroundColor: habit.completed ? theme.primary : 'transparent',
-                        borderColor: habit.completed ? theme.primary : theme.bg,
+                        backgroundColor: habit.completed ? '#E8B4BC' : 'transparent',
+                        borderColor: habit.completed ? '#E8B4BC' : '#3F2A2F10',
                         color: habit.completed ? '#fff' : 'transparent'
                       }}
                     >
-                      <Check size={16} strokeWidth={3} />
+                      <Check size={14} strokeWidth={2} />
                     </motion.div>
                   </motion.button>
                 );
@@ -193,12 +193,12 @@ export default function RoutineView() {
             exit={{ opacity: 0, x: -20 }}
             className="space-y-6"
           >
-            <div className="bg-white p-8 rounded-[2rem] soft-shadow-sm text-center border border-stone-100">
-              <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 gradient-bg-light" style={{ color: theme.primary }}>
-                <Camera size={36} strokeWidth={1.5} />
+            <div className="bg-white p-8 rounded-[2rem] border border-[#3F2A2F]/5 text-center">
+              <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 bg-[#E8B4BC]/10" style={{ color: '#E8B4BC' }}>
+                <Camera size={36} strokeWidth={1} />
               </div>
-              <h3 className="text-xl font-serif font-bold text-stone-800 mb-2">Nutrindo meu corpo com amor</h3>
-              <p className="text-sm text-stone-500 mb-8 font-medium">
+              <h3 className="text-xl font-serif font-light text-[#3F2A2F] mb-2 italic">Nutrindo meu corpo com amor</h3>
+              <p className="text-sm text-[#3F2A2F]/40 mb-8 font-light">
                 Fotografe suas refeições para aumentar sua consciência alimentar. Sem pressão, apenas um registro carinhoso.
               </p>
               
@@ -211,30 +211,30 @@ export default function RoutineView() {
               />
               <button 
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full py-4 rounded-2xl font-bold text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 gradient-bg"
+                className="w-full py-4 rounded-full font-light uppercase tracking-[0.2em] text-[10px] text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 bg-[#3F2A2F]"
               >
                 <Plus size={20} /> Registrar Refeição
               </button>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-stone-500">Histórico Recente</h3>
+              <h3 className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">Histórico Recente</h3>
               
               <div className="grid grid-cols-2 gap-4">
                 {meals.map((meal, idx) => (
-                  <div key={meal.id} className="bg-white rounded-2xl overflow-hidden soft-shadow-sm border border-stone-100">
-                    <div className="aspect-square relative bg-stone-100">
+                  <div key={meal.id} className="bg-white rounded-[1.5rem] overflow-hidden border border-[#3F2A2F]/5">
+                    <div className="aspect-square relative bg-[#FAF9F6]">
                       {meal.url ? (
                         <img src={meal.url} alt="Refeição" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-stone-300">
+                        <div className="w-full h-full flex items-center justify-center text-[#3F2A2F]/10">
                           <ImageIcon size={32} />
                         </div>
                       )}
                     </div>
                     <div className="p-3">
-                      <p className="text-xs font-bold text-stone-800">{meal.type}</p>
-                      <p className="text-[10px] text-stone-500">{meal.date}</p>
+                      <p className="text-xs font-serif font-light italic text-[#3F2A2F]">{meal.type}</p>
+                      <p className="text-[10px] font-light text-[#3F2A2F]/40">{meal.date}</p>
                     </div>
                   </div>
                 ))}

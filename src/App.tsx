@@ -59,9 +59,9 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF7F5]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
         <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white items-center justify-center border border-[#3F2A2F]/5">
-           <div className="w-12 h-12 border-4 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
+           <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -70,14 +70,14 @@ function AppContent() {
   if (!userId) {
     if (showLanding) {
       return (
-        <div className="min-h-screen font-sans bg-[#FAF7F5]">
+        <div className="min-h-screen font-sans bg-[#FAF9F6]">
           <LandingView onStart={() => setShowLanding(false)} />
         </div>
       );
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF7F5]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
         <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
@@ -87,7 +87,7 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF7F5]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
         <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
@@ -96,7 +96,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF7F5]">
+    <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
       <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-white border border-[#3F2A2F]/5">
         
         {/* Header */}
@@ -105,22 +105,22 @@ function AppContent() {
             <div className="flex items-center gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[#FAF7F5] border border-[#3F2A2F]/5 text-[#3F2A2F]/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[#FAF9F6] border border-[#3F2A2F]/5 text-[#3F2A2F]/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
               >
                 <Menu size={24} />
               </button>
               <div className="flex flex-col">
-                <h1 className="text-2xl font-poppins font-extrabold tracking-tight text-[#3F2A2F] leading-none">EvoluaEla</h1>
-                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#E8B4BC] mt-1.5">High Performance</span>
+                <h1 className="text-2xl font-serif font-light tracking-[0.1em] text-[#3F2A2F] leading-none">EvoluaEla</h1>
+                <span className="text-[8px] font-medium uppercase tracking-[0.3em] text-[#E8B4BC] mt-1.5">High Performance</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[10px] font-bold shadow-lg uppercase tracking-widest bg-[#E8B4BC] text-white transition-all hover:bg-[#3F2A2F] hover:scale-105 active:scale-95"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[9px] font-medium shadow-lg uppercase tracking-[0.15em] bg-[#E8B4BC] text-white transition-all hover:bg-[#3F2A2F] hover:scale-105 active:scale-95"
                 >
-                  <Crown size={14} fill="currentColor" /> UPGRADE
+                  <Crown size={12} fill="currentColor" /> UPGRADE
                 </button>
               ) : (
                 <div className="w-12 h-12 rounded-2xl bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
@@ -132,7 +132,7 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-28 hide-scrollbar bg-[#FAF7F5]">
+        <main className="flex-1 overflow-y-auto pb-28 hide-scrollbar bg-[#FAF9F6]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -174,7 +174,7 @@ function AppContent() {
                         />
                       )}
                     </div>
-                    <span className={`text-[9px] font-bold uppercase tracking-widest transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                    <span className={`text-[9px] font-medium uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
                       {tab.label}
                     </span>
                   </button>
@@ -201,21 +201,21 @@ function AppContent() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="bg-white rounded-[2rem] p-8 max-w-sm w-full shadow-2xl"
               >
-                <h2 className="text-2xl font-serif font-bold text-stone-800 mb-4">Aviso Importante</h2>
-                <div className="space-y-4 text-sm text-stone-600 mb-8 font-medium">
-                  <p>O <strong>EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
-                  <p className="font-bold text-amber-600">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
-                  <ul className="list-disc pl-5 space-y-2 text-stone-500">
+                <h2 className="text-2xl font-serif font-light text-[#3F2A2F] mb-4">Aviso Importante</h2>
+                <div className="space-y-4 text-sm text-[#3F2A2F]/60 mb-8 font-light">
+                  <p>O <strong className="font-medium">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
+                  <p className="font-medium text-[#E8B4BC]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <ul className="list-disc pl-5 space-y-2 text-[#3F2A2F]/40">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-xs text-stone-400">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
+                  <p className="text-[10px] text-[#3F2A2F]/30 leading-relaxed">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
-                  className="w-full py-4 rounded-[1.5rem] font-bold text-white gradient-bg shadow-lg hover:shadow-xl transition-all"
+                  className="w-full py-4 rounded-full font-light text-white bg-[#E8B4BC] hover:bg-[#3F2A2F] shadow-lg hover:shadow-xl transition-all uppercase tracking-[0.2em] text-xs"
                 >
                   Entendi, vamos lá!
                 </button>

@@ -184,7 +184,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
   const allMissionsCompleted = completedMissionsCount === dailyMissions.length;
 
   return (
-    <div className="p-8 space-y-10 relative bg-[#FAF7F5] min-h-full font-sans text-[#3F2A2F]">
+    <div className="p-8 space-y-10 relative bg-[#FAF9F6] min-h-full font-sans text-[#3F2A2F]">
       
       {/* Header & Greeting */}
       <header className="flex justify-between items-start pt-4">
@@ -193,18 +193,18 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <h2 className="text-4xl md:text-5xl font-poppins font-extrabold text-[#3F2A2F] leading-tight">
-              Bem-vinda de volta, <br/><span className="text-[#E8B4BC]">{userName}</span> 🌸
+            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3F2A2F] leading-tight">
+              Bem-vinda de volta, <br/><span className="text-[#E8B4BC] italic">{userName}</span> 🌸
             </h2>
             <div className="flex items-center gap-3 mt-4">
               <div className="px-4 py-1.5 rounded-full bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center gap-2">
-                <Star size={14} className="text-[#E8B4BC]" />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC]">Nível {level}</span>
+                <Star size={12} className="text-[#E8B4BC]" />
+                <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#E8B4BC]">Nível {level}</span>
               </div>
               {subscriptionStatus === 'trial' && (
                 <div className="px-4 py-1.5 rounded-full bg-[#A8C4B8]/10 border border-[#A8C4B8]/20 flex items-center gap-2">
-                  <Clock size={14} className="text-[#A8C4B8]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#A8C4B8]">{getDaysRemaining()} dias restantes</span>
+                  <Clock size={12} className="text-[#A8C4B8]" />
+                  <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#A8C4B8]">{getDaysRemaining()} dias restantes</span>
                 </div>
               )}
             </div>
@@ -231,9 +231,9 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 className="absolute top-16 right-0 w-80 rounded-3xl shadow-2xl z-50 overflow-hidden bg-white border border-[#3F2A2F]/5"
               >
                 <div className="p-5 border-b border-[#3F2A2F]/5 flex justify-between items-center">
-                  <h3 className="font-poppins font-bold text-sm text-[#3F2A2F]">Notificações</h3>
+                  <h3 className="font-serif font-light text-base text-[#3F2A2F]">Notificações</h3>
                   {unreadCount > 0 && (
-                    <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[#E8B4BC] text-white">
+                    <span className="text-[9px] font-medium px-2 py-1 rounded-full bg-[#E8B4BC] text-white uppercase tracking-wider">
                       {unreadCount} novas
                     </span>
                   )}
@@ -241,12 +241,12 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.map((notif) => (
-                      <div key={notif.id} className={`p-5 border-b border-[#3F2A2F]/5 hover:bg-[#FAF7F5] transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC] mb-1">{notif.title}</p>
-                        <p className="text-sm font-medium text-[#3F2A2F] mb-2 leading-relaxed">
+                      <div key={notif.id} className={`p-5 border-b border-[#3F2A2F]/5 hover:bg-[#FAF9F6] transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
+                        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#E8B4BC] mb-1">{notif.title}</p>
+                        <p className="text-sm font-light text-[#3F2A2F] mb-2 leading-relaxed">
                           {notif.message}
                         </p>
-                        <p className="text-[10px] font-bold text-[#3F2A2F]/30">{notif.time}</p>
+                        <p className="text-[9px] font-medium text-[#3F2A2F]/30 uppercase tracking-widest">{notif.time}</p>
                       </div>
                     ))
                   ) : (
@@ -274,7 +274,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           <div className="w-12 h-12 rounded-2xl bg-[#E8B4BC]/10 flex items-center justify-center shrink-0">
             <Sparkles size={24} className="text-[#E8B4BC]" />
           </div>
-          <p className="text-xl font-poppins font-medium text-[#3F2A2F]/80 leading-relaxed italic">
+          <p className="text-xl font-serif font-light text-[#3F2A2F]/80 leading-relaxed italic">
             "Sua evolução é um processo contínuo de florescimento. Cada escolha consciente hoje é uma semente para o seu amanhã radiante."
           </p>
         </div>
@@ -285,8 +285,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         {/* Progress & Stats */}
         <section className="space-y-6">
           <div className="flex justify-between items-end px-2">
-            <h3 className="text-2xl font-poppins font-bold text-[#3F2A2F]">Seu Equilíbrio</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#3F2A2F]/30">Status Atual</span>
+            <h3 className="text-2xl font-serif font-light text-[#3F2A2F]">Seu Equilíbrio</h3>
+            <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/30">Status Atual</span>
           </div>
           
           <div className="bg-white p-8 rounded-[2.5rem] border border-[#3F2A2F]/5 soft-shadow space-y-8">
@@ -297,11 +297,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               { label: 'Amor Próprio', value: emotionalStats.amorProprio, color: '#A8C4B8' },
             ].map((stat, idx) => (
               <div key={`${stat.label}-${idx}`} className="space-y-3">
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#3F2A2F]/40">
+                <div className="flex justify-between text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/40">
                   <span>{stat.label}</span>
                   <span>{stat.value}%</span>
                 </div>
-                <div className="h-2.5 bg-[#FAF7F5] rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[#FAF9F6] rounded-full overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${stat.value}%` }}
@@ -318,8 +318,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         {/* Daily Missions */}
         <section className="space-y-6">
           <div className="flex justify-between items-end px-2">
-            <h3 className="text-2xl font-poppins font-bold text-[#3F2A2F]">Metas do Dia</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#3F2A2F]/30">
+            <h3 className="text-2xl font-serif font-light text-[#3F2A2F]">Metas do Dia</h3>
+            <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/30">
               {completedMissionsCount}/{dailyMissions.length} concluídas
             </span>
           </div>
@@ -340,17 +340,17 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               >
                 <div className="flex items-center gap-5">
                   <div 
-                    className={`w-8 h-8 rounded-xl border-2 flex items-center justify-center transition-all ${
+                    className={`w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${
                       mission.completed ? 'bg-[#A8C4B8] border-[#A8C4B8]' : 'border-[#3F2A2F]/10 group-hover:border-[#E8B4BC]'
                     }`}
                   >
-                    {mission.completed && <CheckCircle2 size={18} className="text-white" />}
+                    {mission.completed && <CheckCircle2 size={14} className="text-white" />}
                   </div>
-                  <span className={`text-lg font-medium transition-all ${mission.completed ? 'text-[#3F2A2F]/30 line-through' : 'text-[#3F2A2F]'}`}>
+                  <span className={`text-lg font-light transition-all ${mission.completed ? 'text-[#3F2A2F]/30 line-through' : 'text-[#3F2A2F]'}`}>
                     {mission.title}
                   </span>
                 </div>
-                <ChevronRight size={20} className={`transition-all ${mission.completed ? 'text-[#3F2A2F]/10' : 'text-[#3F2A2F]/20 group-hover:text-[#E8B4BC]'}`} />
+                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[#3F2A2F]/10' : 'text-[#3F2A2F]/20 group-hover:text-[#E8B4BC]'}`} />
               </motion.div>
             ))}
           </div>
@@ -362,7 +362,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         
         {/* Next Lesson */}
         <div className="lg:col-span-2 space-y-6">
-          <h3 className="text-2xl font-poppins font-bold text-[#3F2A2F] px-2">Próxima Lição</h3>
+          <h3 className="text-2xl font-serif font-light text-[#3F2A2F] px-2">Próxima Lição</h3>
           <motion.div 
             whileHover={{ y: -5 }}
             onClick={() => onNavigate('content')}
@@ -372,10 +372,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <Play size={32} className="text-[#E8B4BC]" />
             </div>
             <div className="flex-1">
-              <h4 className="text-2xl font-poppins font-bold text-[#3F2A2F] mb-2">O poder do "não"</h4>
-              <p className="text-sm font-medium text-[#3F2A2F]/40">Áudio • 5 minutos • Especial para você</p>
+              <h4 className="text-2xl font-serif font-light text-[#3F2A2F] mb-2">O poder do "não"</h4>
+              <p className="text-sm font-light text-[#3F2A2F]/40">Áudio • 5 minutos • Especial para você</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-[#FAF7F5] flex items-center justify-center text-[#3F2A2F]/20 group-hover:text-[#E8B4BC] transition-all">
+            <div className="w-12 h-12 rounded-full bg-[#FAF9F6] flex items-center justify-center text-[#3F2A2F]/20 group-hover:text-[#E8B4BC] transition-all">
               <ChevronRight size={24} />
             </div>
           </motion.div>
@@ -383,7 +383,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
 
         {/* Community Card */}
         <div className="space-y-6">
-          <h3 className="text-2xl font-poppins font-bold text-[#3F2A2F] px-2">Comunidade</h3>
+          <h3 className="text-2xl font-serif font-light text-[#3F2A2F] px-2">Comunidade</h3>
           <motion.div 
             whileHover={{ y: -5 }}
             onClick={() => setShowCommunityUpsell(true)}
@@ -395,20 +395,20 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             <div className="relative z-10">
               <div className="flex -space-x-3 mb-6">
                 {[1, 2, 3, 4].map(i => (
-                  <div key={`user-${i}`} className="w-12 h-12 rounded-full border-4 border-[#3F2A2F] overflow-hidden bg-[#FAF7F5]">
+                  <div key={`user-${i}`} className="w-12 h-12 rounded-full border-4 border-[#3F2A2F] overflow-hidden bg-[#FAF9F6]">
                     <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="User" />
                   </div>
                 ))}
-                <div className="w-12 h-12 rounded-full border-4 border-[#3F2A2F] bg-[#E8B4BC] flex items-center justify-center text-xs font-bold text-white">
+                <div className="w-12 h-12 rounded-full border-4 border-[#3F2A2F] bg-[#E8B4BC] flex items-center justify-center text-[9px] font-medium text-white uppercase tracking-widest">
                   +2k
                 </div>
               </div>
-              <h4 className="text-xl font-poppins font-bold text-white mb-2">Grupo Exclusivo</h4>
-              <p className="text-sm text-white/50 font-medium leading-relaxed">
+              <h4 className="text-xl font-serif font-light text-white mb-2">Grupo Exclusivo</h4>
+              <p className="text-sm text-white/50 font-light leading-relaxed">
                 Conecte-se com mulheres que buscam a mesma evolução.
               </p>
             </div>
-            <div className="mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC]">
+            <div className="mt-8 flex items-center gap-2 text-[9px] font-medium uppercase tracking-[0.2em] text-[#E8B4BC]">
               Ver Comunidade <ArrowRight size={14} />
             </div>
           </motion.div>
@@ -437,11 +437,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   <Users size={48} />
                 </div>
                 
-                <h2 className="text-4xl font-poppins font-extrabold text-[#3F2A2F] mb-6 leading-tight">
-                  Espaço Exclusivo 💖
+                <h2 className="text-4xl font-serif font-light text-[#3F2A2F] mb-6 leading-tight">
+                  Espaço Exclusivo <span className="italic">Premium</span> 🌸
                 </h2>
                 
-                <p className="text-lg text-[#3F2A2F]/50 mb-10 font-medium leading-relaxed">
+                <p className="text-lg text-[#3F2A2F]/50 mb-10 font-light leading-relaxed">
                   A nossa comunidade é um jardim secreto reservado para alunas Premium. Um lugar de troca real, apoio e crescimento mútuo.
                 </p>
 
@@ -455,7 +455,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                       <div className="w-12 h-12 rounded-2xl bg-[#FAF7F5] flex items-center justify-center shrink-0 text-[#E8B4BC]">
                         <item.icon size={24} />
                       </div>
-                      <span className="text-sm font-bold uppercase tracking-widest text-[#3F2A2F]/60">{item.text}</span>
+                      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/60">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -465,7 +465,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     setShowCommunityUpsell(false);
                     onUpgrade();
                   }}
-                  className="w-full py-6 rounded-2xl font-poppins font-bold text-white bg-[#E8B4BC] hover:bg-[#3F2A2F] shadow-xl transition-all flex items-center justify-center gap-3"
+                  className="w-full py-6 rounded-full font-sans font-light text-white bg-[#E8B4BC] hover:bg-[#3F2A2F] shadow-xl transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-sm"
                 >
                   Quero ser Premium
                   <ArrowRight size={20} />

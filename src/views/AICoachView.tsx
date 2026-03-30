@@ -76,43 +76,43 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
   };
 
   return (
-    <div className="flex flex-col h-full relative bg-black">
-      <header className="px-6 pt-6 pb-4 flex flex-col gap-2 shrink-0 bg-black border-b border-white/5 sticky top-0 z-10">
+    <div className="flex flex-col h-full relative bg-[#FAF9F6]">
+      <header className="px-6 pt-6 pb-4 flex flex-col gap-2 shrink-0 bg-[#FAF9F6] border-b border-[#3F2A2F]/5 sticky top-0 z-10">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-[1.5rem] flex items-center justify-center shadow-md gradient-bg text-white relative overflow-hidden">
+          <div className="w-14 h-14 rounded-[1.5rem] flex items-center justify-center shadow-md bg-[#E8B4BC] text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-10 h-10 bg-white/20 rounded-full blur-xl -mr-4 -mt-4 animate-pulse-soft"></div>
             <Bot size={28} className="relative z-10" />
           </div>
           <div>
-            <h2 className="branding-title text-2xl text-white">Sua Mentora</h2>
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-0.5">Sempre aqui para te apoiar</p>
+            <h2 className="font-serif font-light text-2xl text-[#3F2A2F] italic">Sua Mentora</h2>
+            <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/30 mt-0.5">Sempre aqui para te apoiar</p>
           </div>
         </div>
         
         {/* Disclaimer and Status */}
         <div className="mt-4 space-y-2">
           {hasUnlimitedCoach ? (
-            <div className="flex items-center gap-2 p-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-white/5 text-rose-400 shadow-sm">
-              <Crown size={14} className="shrink-0" />
+            <div className="flex items-center gap-2 p-3 rounded-xl text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#E8B4BC] shadow-sm">
+              <Crown size={12} className="shrink-0" fill="currentColor" />
               <span>Pode falar comigo sempre que precisar, estou aqui! 💖</span>
             </div>
           ) : (
-            <div className="flex items-center justify-between p-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-white/5 text-white/40 shadow-sm">
+            <div className="flex items-center justify-between p-3 rounded-xl text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/40 shadow-sm">
               <span>Mensagens para hoje:</span>
-              <span className={`px-2 py-0.5 rounded-md ${messagesRemaining === 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-white/10 text-white/60'}`}>
+              <span className={`px-2 py-0.5 rounded-md ${messagesRemaining === 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-[#FAF9F6] text-[#3F2A2F]/60'}`}>
                 {messagesRemaining} / {MAX_FREE_MESSAGES}
               </span>
             </div>
           )}
           
-          <div className="flex items-start gap-2 p-3 rounded-xl text-[10px] leading-relaxed bg-white/5 border border-white/5 text-white/30 font-bold uppercase tracking-widest">
-            <AlertTriangle size={14} className="shrink-0 mt-0.5 text-amber-500" />
+          <div className="flex items-start gap-2 p-3 rounded-xl text-[9px] leading-relaxed bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/30 font-medium uppercase tracking-widest">
+            <AlertTriangle size={12} className="shrink-0 mt-0.5 text-[#D4B996]" />
             <p>Lembrete carinhoso: estou aqui para te motivar, mas não substituo o acompanhamento de médicos ou especialistas, tá?</p>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 hide-scrollbar bg-black">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 hide-scrollbar bg-[#FAF9F6]">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
@@ -123,56 +123,56 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             <div 
               className={`max-w-[85%] p-5 rounded-2xl ${
                 msg.role === 'user' 
-                  ? 'rounded-tr-sm text-white shadow-md gradient-bg' 
-                  : 'bg-stone-900 border border-white/5 rounded-tl-sm text-white shadow-sm'
+                  ? 'rounded-tr-sm text-white shadow-md bg-[#3F2A2F]' 
+                  : 'bg-white border border-[#3F2A2F]/5 rounded-tl-sm text-[#3F2A2F] shadow-sm'
               }`}
             >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap font-medium">{msg.text}</p>
+              <p className="text-sm leading-relaxed whitespace-pre-wrap font-light">{msg.text}</p>
             </div>
           </motion.div>
         ))}
         {isLoading && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-            <div className="max-w-[85%] p-4 rounded-2xl rounded-tl-sm shadow-sm flex gap-1.5 items-center bg-stone-900 border border-white/5">
-              <div className="w-2 h-2 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="max-w-[85%] p-4 rounded-2xl rounded-tl-sm shadow-sm flex gap-1.5 items-center bg-white border border-[#3F2A2F]/5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#3F2A2F]/20 animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#3F2A2F]/20 animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#3F2A2F]/20 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           </motion.div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 shrink-0 bg-black border-t border-white/5">
+      <div className="p-4 shrink-0 bg-[#FAF9F6] border-t border-[#3F2A2F]/5">
         {isBlocked ? (
-          <div className="bg-stone-900 border border-white/5 rounded-[1.5rem] p-6 text-center shadow-sm">
+          <div className="bg-white border border-[#3F2A2F]/5 rounded-[1.5rem] p-6 text-center shadow-sm">
             <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center mx-auto mb-3">
               <Lock size={20} className="text-rose-500" />
             </div>
-            <h3 className="text-sm font-black text-white mb-2 uppercase tracking-tight">Nossa conversa por aqui hoje chegou ao fim, mas amanhã tem mais! 💖</h3>
-            <p className="text-xs text-white/40 mb-4 font-medium">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
+            <h3 className="text-sm font-serif font-light text-[#3F2A2F] mb-2 uppercase tracking-tight">Nossa conversa por aqui hoje chegou ao fim, mas amanhã tem mais! 💖</h3>
+            <p className="text-xs text-[#3F2A2F]/40 mb-4 font-light">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
             <button 
               onClick={onUpgrade}
-              className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-white shadow-md hover:shadow-lg transition-all gradient-bg flex items-center justify-center gap-2"
+              className="w-full py-5 rounded-full font-light uppercase tracking-[0.2em] text-white shadow-md hover:shadow-lg transition-all bg-[#E8B4BC] hover:bg-[#3F2A2F] flex items-center justify-center gap-2 text-xs"
             >
-              <Crown size={16} />
+              <Crown size={14} fill="currentColor" />
               Quero acesso ilimitado
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-2 bg-stone-900 border border-white/5 rounded-[1.5rem] p-1.5 pr-2 focus-within:ring-2 focus-within:ring-white/10 focus-within:bg-stone-800 transition-all shadow-sm">
+          <div className="flex items-center gap-2 bg-white border border-[#3F2A2F]/5 rounded-full p-1.5 pr-2 focus-within:ring-1 focus-within:ring-[#E8B4BC]/30 transition-all shadow-sm">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="O que está no seu coração agora?"
-              className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-sm outline-none text-white placeholder:text-white/20 font-medium"
+              className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-sm outline-none text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
             />
             <button 
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              className="w-12 h-12 rounded-[1.25rem] flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 text-white shadow-md gradient-bg"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 text-white shadow-md bg-[#3F2A2F]"
             >
               <Send size={18} className="ml-1" />
             </button>

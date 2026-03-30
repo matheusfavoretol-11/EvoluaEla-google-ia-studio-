@@ -38,18 +38,18 @@ export default function LandingView({ onStart }: LandingViewProps) {
       <header className="fixed top-0 left-0 right-0 z-50 px-10 py-12 bg-white/80 backdrop-blur-xl border-b border-[#3F2A2F]/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <span className="font-poppins font-extrabold text-3xl tracking-tight text-[#3F2A2F]">EVOLUAELA</span>
+            <span className="font-serif font-light text-3xl tracking-[0.15em] text-[#3F2A2F]">EVOLUAELA</span>
           </div>
           <div className="flex items-center gap-12">
             <button 
               onClick={onStart} 
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/40 hover:text-[#3F2A2F] transition-all hidden md:block"
+              className="text-[10px] font-normal uppercase tracking-[0.3em] text-[#3F2A2F]/40 hover:text-[#3F2A2F] transition-all hidden md:block"
             >
               Entrar
             </button>
             <button 
               onClick={onStart} 
-              className="text-xs font-bold uppercase tracking-[0.2em] px-10 py-5 rounded-2xl bg-[#3F2A2F] text-white hover:bg-[#E8B4BC] transition-all duration-500 soft-shadow hover:scale-[1.05] active:scale-95"
+              className="text-[10px] font-medium uppercase tracking-[0.25em] px-10 py-5 rounded-full bg-[#3F2A2F] text-white hover:bg-[#E8B4BC] transition-all duration-500 soft-shadow hover:scale-[1.02] active:scale-95"
             >
               Começar Agora
             </button>
@@ -70,19 +70,19 @@ export default function LandingView({ onStart }: LandingViewProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-[10rem] md:text-[14rem] lg:text-[18rem] font-poppins font-extrabold mb-10 leading-[0.8] tracking-[-0.06em] text-[#3F2A2F]">
+              <h1 className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-serif font-light mb-12 leading-[0.9] tracking-[-0.02em] text-[#3F2A2F]">
                 EVOLUA<br />ELA
               </h1>
-              <p className="text-2xl md:text-4xl font-medium mb-16 text-[#3F2A2F]/40 max-w-3xl leading-relaxed">
+              <p className="text-xl md:text-2xl font-light mb-16 text-[#3F2A2F]/60 max-w-2xl leading-relaxed">
                 Desperte a mulher poderosa que você nasceu para ser através de uma jornada de transformação pessoal e alta performance.
               </p>
               
               <div className="flex flex-col sm:flex-row items-start gap-8">
                 <button 
                   onClick={onStart}
-                  className="group relative px-16 py-8 bg-[#E8B4BC] text-white font-poppins font-bold text-2xl rounded-[2.5rem] hover:bg-[#3F2A2F] transition-all duration-700 soft-shadow flex items-center gap-6 hover:scale-[1.02] active:scale-95"
+                  className="group relative px-16 py-8 bg-[#E8B4BC] text-white font-sans font-light text-xl rounded-full hover:bg-[#3F2A2F] transition-all duration-700 soft-shadow flex items-center gap-6 hover:scale-[1.02] active:scale-95"
                 >
-                  Quero começar minha evolução <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
+                  Quero começar minha evolução <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
                 </button>
               </div>
             </motion.div>
@@ -109,8 +109,8 @@ export default function LandingView({ onStart }: LandingViewProps) {
                 >
                   <benefit.icon size={36} />
                 </div>
-                <h3 className="text-3xl font-poppins font-extrabold mb-6 text-[#3F2A2F]">{benefit.title}</h3>
-                <p className="text-xl text-[#3F2A2F]/40 leading-relaxed font-medium">
+                <h3 className="text-2xl font-serif font-light mb-6 text-[#3F2A2F]">{benefit.title}</h3>
+                <p className="text-lg text-[#3F2A2F]/60 leading-relaxed font-light">
                   {benefit.desc}
                 </p>
               </motion.div>
@@ -129,7 +129,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             transition={{ duration: 1 }}
           >
             <Sparkles className="mx-auto mb-12 text-[#E8B4BC]" size={64} />
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-poppins font-extrabold text-[#3F2A2F] leading-[1.1] mb-16 tracking-tight">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-[#3F2A2F] italic leading-[1.2] mb-16 tracking-tight">
               "A evolução não é sobre ser perfeita, é sobre ser fiel a quem você realmente é."
             </h2>
             <div className="w-32 h-1.5 bg-[#E8B4BC] mx-auto rounded-full" />
@@ -140,13 +140,13 @@ export default function LandingView({ onStart }: LandingViewProps) {
       {/* Final CTA Section */}
       <section className="py-48 px-10 bg-white text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-6xl md:text-8xl font-poppins font-extrabold mb-12 text-[#3F2A2F] leading-tight">Pronta para o próximo nível?</h2>
-          <p className="text-2xl text-[#3F2A2F]/40 mb-16 leading-relaxed font-medium max-w-2xl mx-auto">
+          <h2 className="text-5xl md:text-7xl font-serif font-light mb-12 text-[#3F2A2F] leading-tight">Pronta para o próximo nível?</h2>
+          <p className="text-xl text-[#3F2A2F]/60 mb-16 leading-relaxed font-light max-w-2xl mx-auto">
             Junte-se a milhares de mulheres que escolheram priorizar sua evolução e bem-estar todos os dias.
           </p>
           <button 
             onClick={onStart}
-            className="px-20 py-8 bg-[#3F2A2F] text-white font-poppins font-bold text-2xl rounded-[2.5rem] hover:bg-[#E8B4BC] transition-all duration-700 premium-shadow hover:scale-[1.05] active:scale-95"
+            className="px-20 py-8 bg-[#3F2A2F] text-white font-sans font-light text-xl rounded-full hover:bg-[#E8B4BC] transition-all duration-700 premium-shadow hover:scale-[1.05] active:scale-95"
           >
             Começar Agora
           </button>
@@ -156,13 +156,13 @@ export default function LandingView({ onStart }: LandingViewProps) {
       {/* Footer */}
       <footer className="py-24 px-10 bg-white border-t border-[#3F2A2F]/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-          <span className="font-poppins font-extrabold text-2xl text-[#3F2A2F]">EVOLUAELA</span>
-          <div className="flex gap-12 text-xs font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30">
+          <span className="font-serif font-light text-2xl tracking-[0.1em] text-[#3F2A2F]">EVOLUAELA</span>
+          <div className="flex gap-12 text-[10px] font-medium uppercase tracking-[0.3em] text-[#3F2A2F]/30">
             <a href="#" className="hover:text-[#E8B4BC] transition-all">Termos</a>
             <a href="#" className="hover:text-[#E8B4BC] transition-all">Privacidade</a>
             <a href="#" className="hover:text-[#E8B4BC] transition-all">Suporte</a>
           </div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/20">© 2026 EvoluaEla. Todos os direitos reservados.</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">© 2026 EvoluaEla. Todos os direitos reservados.</p>
         </div>
       </footer>
 

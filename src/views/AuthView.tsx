@@ -151,7 +151,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-4"
           >
-            <span className="font-poppins font-extrabold text-5xl tracking-tight text-[#3F2A2F]">EVOLUAELA</span>
+            <span className="font-serif font-light text-5xl tracking-[0.15em] text-[#3F2A2F]">EVOLUAELA</span>
           </motion.div>
           <motion.p 
             initial={{ y: 10, opacity: 0 }}
@@ -172,7 +172,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="bg-white p-12 md:p-14 rounded-[3.5rem] soft-shadow w-full border border-[#3F2A2F]/5"
           >
-            <h2 className="text-3xl font-poppins font-extrabold text-[#3F2A2F] mb-10 text-center leading-tight">
+            <h2 className="text-3xl font-serif font-light text-[#3F2A2F] mb-10 text-center leading-tight">
               {isLogin ? 'Bem-vinda de volta' : 'Crie sua conta'}
             </h2>
 
@@ -201,88 +201,88 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             <form onSubmit={handleSubmit} className="space-y-8">
               {!isLogin && (
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Nome Completo</label>
+                  <label className="text-[9px] font-medium uppercase tracking-[0.25em] text-[#3F2A2F]/40 ml-5">Nome Completo</label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
-                      <User size={22} />
+                      <User size={20} />
                     </div>
                     <input
                       type="text"
                       placeholder="Como quer ser chamada?"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
+                      className="w-full pl-16 pr-8 py-5 bg-[#FAF9F6] border border-transparent rounded-2xl focus:border-[#E8B4BC]/30 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
                     />
                   </div>
                 </div>
               )}
 
               <div className="space-y-3">
-                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">E-mail</label>
+                <label className="text-[9px] font-medium uppercase tracking-[0.25em] text-[#3F2A2F]/40 ml-5">E-mail</label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
-                    <Mail size={22} />
+                    <Mail size={20} />
                   </div>
                   <input
                     type="email"
                     placeholder="seu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
+                    className="w-full pl-16 pr-8 py-5 bg-[#FAF9F6] border border-transparent rounded-2xl focus:border-[#E8B4BC]/30 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
                   />
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Senha</label>
+                <label className="text-[9px] font-medium uppercase tracking-[0.25em] text-[#3F2A2F]/40 ml-5">Senha</label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
-                    <Lock size={22} />
+                    <Lock size={20} />
                   </div>
                   <input
                     type="password"
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
+                    className="w-full pl-16 pr-8 py-5 bg-[#FAF9F6] border border-transparent rounded-2xl focus:border-[#E8B4BC]/30 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
                   />
                 </div>
               </div>
 
               {!isLogin && (
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F2A2F]/30 ml-5">Confirmar Senha</label>
+                  <label className="text-[9px] font-medium uppercase tracking-[0.25em] text-[#3F2A2F]/40 ml-5">Confirmar Senha</label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-[#3F2A2F]/10 group-focus-within:text-[#E8B4BC] transition-colors">
-                      <Lock size={22} />
+                      <Lock size={20} />
                     </div>
                     <input
                       type="password"
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-16 pr-8 py-5 bg-[#FAF7F5] border-2 border-transparent rounded-2xl focus:border-[#E8B4BC]/20 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-medium"
+                      className="w-full pl-16 pr-8 py-5 bg-[#FAF9F6] border border-transparent rounded-2xl focus:border-[#E8B4BC]/30 focus:bg-white focus:outline-none transition-all text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
                     />
                   </div>
                 </div>
               )}
 
               {isLogin ? (
-                <div className="flex items-center justify-between text-xs">
-                  <label className="flex items-center gap-3 cursor-pointer text-[#3F2A2F]/50 font-bold uppercase tracking-widest">
+                <div className="flex items-center justify-between text-[10px]">
+                  <label className="flex items-center gap-3 cursor-pointer text-[#3F2A2F]/40 font-medium uppercase tracking-widest">
                     <div 
-                      className="w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all"
+                      className="w-4 h-4 rounded border flex items-center justify-center transition-all"
                       style={{ 
                         backgroundColor: keepConnected ? '#E8B4BC' : 'transparent',
                         borderColor: keepConnected ? '#E8B4BC' : '#3F2A2F10'
                       }}
                       onClick={() => setKeepConnected(!keepConnected)}
                     >
-                      {keepConnected && <Check size={14} color="#fff" strokeWidth={3} />}
+                      {keepConnected && <Check size={12} color="#fff" strokeWidth={3} />}
                     </div>
                     Manter
                   </label>
-                  <button type="button" className="font-bold text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors uppercase tracking-widest">
+                  <button type="button" className="font-medium text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors uppercase tracking-widest">
                     Esqueci a senha
                   </button>
                 </div>
@@ -290,17 +290,17 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                 <div className="pt-2">
                   <label className="flex items-start gap-4 cursor-pointer">
                     <div 
-                      className="w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all"
+                      className="w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 transition-all"
                       style={{ 
                         backgroundColor: acceptTerms ? '#E8B4BC' : 'transparent',
                         borderColor: acceptTerms ? '#E8B4BC' : '#3F2A2F10'
                       }}
                       onClick={() => setAcceptTerms(!acceptTerms)}
                     >
-                      {acceptTerms && <Check size={16} color="#fff" strokeWidth={3} />}
+                      {acceptTerms && <Check size={14} color="#fff" strokeWidth={3} />}
                     </div>
-                    <span className="text-xs text-[#3F2A2F]/40 leading-relaxed font-medium">
-                      Aceito os <button type="button" className="font-bold text-[#E8B4BC] hover:underline">Termos de Uso</button> e a política de privacidade.
+                    <span className="text-[10px] text-[#3F2A2F]/40 leading-relaxed font-light">
+                      Aceito os <button type="button" className="font-medium text-[#E8B4BC] hover:underline">Termos de Uso</button> e a política de privacidade.
                     </span>
                   </label>
                 </div>
@@ -309,24 +309,24 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-6 rounded-2xl font-poppins font-bold text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 mt-10 bg-[#E8B4BC] hover:bg-[#3F2A2F] disabled:opacity-70 hover:scale-[1.02] active:scale-95"
+                className="w-full py-6 rounded-full font-sans font-light text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 mt-10 bg-[#E8B4BC] hover:bg-[#3F2A2F] disabled:opacity-70 hover:scale-[1.02] active:scale-95"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     <span>Processando...</span>
                   </div>
                 ) : (
                   <>
-                    <span>{isLogin ? 'Entrar' : 'Criar Conta'}</span>
-                    <ArrowRight size={22} />
+                    <span className="uppercase tracking-[0.2em] text-sm">{isLogin ? 'Entrar' : 'Criar Conta'}</span>
+                    <ArrowRight size={20} />
                   </>
                 )}
               </button>
             </form>
 
             <div className="mt-12 text-center">
-              <p className="text-[#3F2A2F]/30 text-sm font-medium mb-3">
+              <p className="text-[#3F2A2F]/30 text-xs font-light mb-3 uppercase tracking-widest">
                 {isLogin ? 'Ainda não tem uma conta?' : 'Já possui uma conta?'}
               </p>
               <button
@@ -335,7 +335,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   setError('');
                   setSuccessMsg('');
                 }}
-                className="font-poppins font-bold text-xl text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors"
+                className="font-serif font-light text-2xl text-[#E8B4BC] hover:text-[#3F2A2F] transition-colors italic"
               >
                 {isLogin ? 'Cadastre-se agora' : 'Faça login'}
               </button>
