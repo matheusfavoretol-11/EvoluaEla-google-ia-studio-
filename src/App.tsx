@@ -57,9 +57,19 @@ function AppContent() {
     // No longer needed to set local state, UserContext handles it
   };
 
+  const isSupabaseConfigured = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+        {!isSupabaseConfigured && (
+          <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl max-w-md text-center">
+            <h3 className="text-red-800 font-medium mb-2">Configuração Necessária</h3>
+            <p className="text-red-600 text-sm">
+              As credenciais do Supabase não foram encontradas. Por favor, configure as variáveis de ambiente no menu de configurações.
+            </p>
+          </div>
+        )}
         <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white items-center justify-center border border-[#3F2A2F]/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
