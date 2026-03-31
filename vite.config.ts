@@ -5,13 +5,19 @@ import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, process.cwd(), '');
+  
+  // Extremely robust lookup for Supabase variables
+  const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL || env.SUPABASE_URL || process.env.SUPABASE_URL || '';
+  const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '';
+  const appUrl = env.APP_URL || process.env.APP_URL || '';
+
   return {
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || process.env.GEMINI_API_KEY),
-      'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL),
-      'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY),
-      'import.meta.env.APP_URL': JSON.stringify(env.APP_URL || process.env.APP_URL),
+      '__SUPABASE_URL__': JSON.stringify(supabaseUrl),
+      '__SUPABASE_ANON_KEY__': JSON.stringify(supabaseAnonKey),
+      '__APP_URL__': JSON.stringify(appUrl),
     },
     resolve: {
       alias: {

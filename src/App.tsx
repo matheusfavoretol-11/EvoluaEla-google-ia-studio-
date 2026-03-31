@@ -57,8 +57,8 @@ function AppContent() {
     // No longer needed to set local state, UserContext handles it
   };
 
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-  const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseUrl = (window as any).__SUPABASE_URL__ || import.meta.env.VITE_SUPABASE_URL;
+  const supabaseAnonKey = (window as any).__SUPABASE_ANON_KEY__ || import.meta.env.VITE_SUPABASE_ANON_KEY;
   
   const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
@@ -88,9 +88,18 @@ function AppContent() {
               </span>
             </div>
           </div>
-          <p className="mt-8 text-[10px] text-white/20 font-medium leading-relaxed">
-            Dica: Após salvar os segredos, pode ser necessário atualizar a página ou clicar no botão de "Restart" no menu de configurações.
-          </p>
+          
+          <div className="mt-8 space-y-4">
+            <button 
+              onClick={() => window.location.reload()}
+              className="w-full py-4 rounded-2xl font-bold text-black bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
+            >
+              Tentar Novamente
+            </button>
+            <p className="text-[10px] text-white/20 font-medium leading-relaxed">
+              Dica: Após salvar os segredos, clique no botão acima. Se persistir, verifique se os nomes nos Secrets estão corretos.
+            </p>
+          </div>
         </div>
       </div>
     );
