@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { Home, Dumbbell, Heart, TrendingUp, Bot, Settings, Crown, Menu, Apple, Brain } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+declare global {
+  var __VITE_SUPABASE_URL__: string;
+  var __VITE_SUPABASE_ANON_KEY__: string;
+}
+
 // Contexts
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { UserProvider, useUser } from './contexts/UserContext';
@@ -57,8 +62,8 @@ function AppContent() {
     // No longer needed to set local state, UserContext handles it
   };
 
-  const supabaseUrl = (window as any).__SUPABASE_URL__ || import.meta.env.VITE_SUPABASE_URL;
-  const supabaseAnonKey = (window as any).__SUPABASE_ANON_KEY__ || import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseUrl = (typeof __VITE_SUPABASE_URL__ !== 'undefined' ? __VITE_SUPABASE_URL__ : '') || import.meta.env.VITE_SUPABASE_URL;
+  const supabaseAnonKey = (typeof __VITE_SUPABASE_ANON_KEY__ !== 'undefined' ? __VITE_SUPABASE_ANON_KEY__ : '') || import.meta.env.VITE_SUPABASE_ANON_KEY;
   
   const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
