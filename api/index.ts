@@ -86,8 +86,12 @@ app.use(cors());
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
-    environment: process.env.NODE_ENV, 
-    vercel: !!process.env.VERCEL,
+    environment: process.env.NODE_ENV,
+    supabaseUrl: !!process.env.VITE_SUPABASE_URL,
+    supabaseAnonKey: !!process.env.VITE_SUPABASE_ANON_KEY,
+    supabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+    stripeKey: !!process.env.STRIPE_SECRET_KEY,
+    appUrl: process.env.APP_URL,
     timestamp: new Date().toISOString()
   });
 });
