@@ -61,16 +61,16 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
         {!isSupabaseConfigured && (
-          <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl max-w-md text-center">
-            <h3 className="text-red-800 font-medium mb-2">Configuração Necessária</h3>
-            <p className="text-red-600 text-sm">
+          <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-3xl max-w-md text-center">
+            <h3 className="text-red-500 font-bold mb-2 uppercase tracking-widest text-xs">Configuração Necessária</h3>
+            <p className="text-red-500/60 text-sm font-medium">
               As credenciais do Supabase não foram encontradas. Por favor, configure as variáveis de ambiente no menu de configurações.
             </p>
           </div>
         )}
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white items-center justify-center border border-[#3F2A2F]/5">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] items-center justify-center border border-white/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
       </div>
@@ -80,15 +80,15 @@ function AppContent() {
   if (!userId) {
     if (showLanding) {
       return (
-        <div className="min-h-screen font-sans bg-[#FAF9F6]">
+        <div className="min-h-screen font-sans bg-[#0A0A0A]">
           <LandingView onStart={() => setShowLanding(false)} />
         </div>
       );
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] border border-white/5">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -97,8 +97,8 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] border border-white/5">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -106,29 +106,29 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
-      <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-white border border-[#3F2A2F]/5">
+    <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
+      <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-[#141414] border border-white/5">
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 pb-4 sm:pb-6 px-6 sm:px-8 border-b border-[#3F2A2F]/5 sticky top-0 z-10 bg-white/80 backdrop-blur-xl">
+        <header className="pt-10 sm:pt-14 pb-4 sm:pb-6 px-6 sm:px-8 border-b border-white/5 sticky top-0 z-10 bg-[#141414]/80 backdrop-blur-xl">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[#FAF9F6] border border-[#3F2A2F]/5 text-[#3F2A2F]/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-white/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
               <div className="flex flex-col">
-                <h1 className="text-xl sm:text-2xl font-serif font-light tracking-[0.1em] text-[#3F2A2F] leading-none">EvoluaEla</h1>
-                <span className="text-[7px] sm:text-[8px] font-medium uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">High Performance</span>
+                <h1 className="text-xl sm:text-2xl font-bold tracking-tighter text-white leading-none">EvoluaEla</h1>
+                <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">High Performance</span>
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[8px] sm:text-[9px] font-medium shadow-lg uppercase tracking-[0.15em] bg-[#E8B4BC] text-white transition-all hover:bg-[#3F2A2F] hover:scale-105 active:scale-95"
+                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[8px] sm:text-[9px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black transition-all hover:scale-105 active:scale-95"
                 >
                   <Crown size={10} className="sm:w-3 sm:h-3" fill="currentColor" /> UPGRADE
                 </button>
@@ -142,7 +142,7 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-28 hide-scrollbar bg-[#FAF9F6]">
+        <main className="flex-1 overflow-y-auto pb-28 hide-scrollbar bg-[#0A0A0A]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -162,7 +162,7 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 w-full border-t border-[#3F2A2F]/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-white/95 backdrop-blur-2xl">
+        <nav className="absolute bottom-0 w-full border-t border-white/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-[#141414]/95 backdrop-blur-2xl">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -172,7 +172,7 @@ function AppContent() {
                   <button
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
-                      isActive ? 'text-[#E8B4BC]' : 'text-[#3F2A2F]/20 hover:text-[#3F2A2F]/40'
+                      isActive ? 'text-[#E8B4BC]' : 'text-white/20 hover:text-white/40'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
@@ -184,7 +184,7 @@ function AppContent() {
                         />
                       )}
                     </div>
-                    <span className={`text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                    <span className={`text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
                       {tab.label}
                     </span>
                   </button>
@@ -205,27 +205,27 @@ function AppContent() {
             onOpenHelp={() => setActiveTab('coach')}
           />
           {showDisclaimer && (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6">
+            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-white rounded-[2rem] p-8 max-w-sm w-full shadow-2xl"
+                className="bg-[#141414] rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border border-white/10"
               >
-                <h2 className="text-2xl font-serif font-light text-[#3F2A2F] mb-4">Aviso Importante</h2>
-                <div className="space-y-4 text-sm text-[#3F2A2F]/60 mb-8 font-light">
-                  <p>O <strong className="font-medium">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
-                  <p className="font-medium text-[#E8B4BC]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
-                  <ul className="list-disc pl-5 space-y-2 text-[#3F2A2F]/40">
+                <h2 className="text-2xl font-bold text-white mb-4 tracking-tighter">Aviso Importante</h2>
+                <div className="space-y-4 text-sm text-white/40 mb-8 font-medium">
+                  <p>O <strong className="font-bold text-white/60">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
+                  <p className="font-bold text-[#E8B4BC] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <ul className="list-disc pl-5 space-y-2 text-white/30">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-[10px] text-[#3F2A2F]/30 leading-relaxed">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
+                  <p className="text-[10px] text-white/20 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
-                  className="w-full py-4 rounded-full font-light text-white bg-[#E8B4BC] hover:bg-[#3F2A2F] shadow-lg hover:shadow-xl transition-all uppercase tracking-[0.2em] text-xs"
+                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
                 >
                   Entendi, vamos lá!
                 </button>

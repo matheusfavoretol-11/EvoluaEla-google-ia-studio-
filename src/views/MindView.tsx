@@ -9,10 +9,10 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
 
   if (!isPremium) {
     return (
-      <div className="p-6 h-full flex flex-col bg-[#FAF9F6]">
-        <div className="mb-6">
-          <h2 className="text-3xl font-serif font-light text-[#3F2A2F] mb-2 italic">Equilíbrio Emocional</h2>
-          <p className="text-[#3F2A2F]/40 font-light">Trate a ansiedade, autoestima, disciplina e bloqueios emocionais com especialistas.</p>
+      <div className="p-6 h-full flex flex-col bg-[#0A0A0A] text-white">
+        <div className="mb-10">
+          <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Equilíbrio <span className="gradient-text">Emocional</span></h2>
+          <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Trate a ansiedade, autoestima, disciplina e bloqueios emocionais com especialistas.</p>
         </div>
         <PremiumLock 
           title="Sua Terapeuta Particular"

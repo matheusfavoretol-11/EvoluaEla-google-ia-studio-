@@ -457,7 +457,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: TrendingUp, text: 'Celebração de conquistas' },
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
                   ].map((item, idx) => (
-                    <div key={`benefit-comm-${idx}`} className="flex items-center gap-5">
+                    <div key={`benefit-comm-${item.text}`} className="flex items-center gap-5">
                       <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center shrink-0 text-[#E8B4BC]">
                         <item.icon size={24} />
                       </div>

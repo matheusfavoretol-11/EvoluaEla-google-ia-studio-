@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Star, Sparkles, Target, Heart, Shield, Zap, Bot, CalendarCheck, TrendingUp, AlertTriangle, ChevronRight, Flame, Play, Users, Trophy, Activity } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, Sparkles, Target, Heart, Shield, Zap, Bot, CalendarCheck, TrendingUp, AlertTriangle, ChevronRight, Flame, Play, Users, Trophy, Activity, HeartHandshake } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface LandingViewProps {
@@ -12,7 +12,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
 
   const features = [
     { 
-      icon: Activity, 
+      icon: HeartHandshake, 
       title: 'Nutrição & Psicologia', 
       desc: 'Acompanhamento direto com nutricionistas e terapeutas para sua saúde física e mental.',
       tag: 'Diferencial'
@@ -53,7 +53,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             <div className="w-7 h-7 bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] rounded-lg flex items-center justify-center">
               <Zap size={16} className="text-black" />
             </div>
-            <span className="font-bold text-base tracking-tight">EVOLUAELA</span>
+            <span className="font-bold text-sm tracking-tight">EVOLUAELA</span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/60">
             <a href="#features" className="hover:text-white transition-colors">Funcionalidades</a>
@@ -176,7 +176,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, i) => (
               <motion.div
-                key={i}
+                key={`feature-${feature.title}-${i}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -211,7 +211,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
           <div className="space-y-4">
             {episodes.map((ep, i) => (
               <motion.div
-                key={i}
+                key={ep.id}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -273,7 +273,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
                     'Treinos 100% Personalizados',
                     'Coach IA 24/7 Ilimitado'
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-black font-bold text-sm">
+                    <li key={`benefit-primary-${i}`} className="flex items-center gap-3 text-black font-bold text-sm">
                       <CheckCircle2 size={18} className="text-black" />
                       {item}
                     </li>
@@ -286,7 +286,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
                     'Biohacking & Mindset',
                     'Acesso a todos os Programas'
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-black/80 text-sm font-medium">
+                    <li key={`benefit-secondary-${i}`} className="flex items-center gap-3 text-black/80 text-sm font-medium">
                       <CheckCircle2 size={18} className="text-black/40" />
                       {item}
                     </li>

@@ -111,14 +111,23 @@ app.post('/api/create-checkout-session', async (req, res) => {
     const { userId } = req.body;
 
     if (!userId) {
+      console.error('Checkout error: User ID is missing in request body');
       return res.status(400).json({ error: 'User ID is required' });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('Checkout error: STRIPE_SECRET_KEY is missing in environment variables');
       return res.status(500).json({ 
-        error: 'A chave secreta da Stripe não foi configurada no painel de segredos do AI Studio.' 
+        error: 'A chave secreta da Stripe (STRIPE_SECRET_KEY) não foi configurada no painel de segredos do AI Studio.' 
       });
     }
+
+    if (!process.env.APP_URL && !req.headers.origin) {
+      console.error('Checkout error: APP_URL and origin header are missing');
+      return res.status(500).json({ error: 'Erro de configuração: URL do app não encontrada.' });
+    }
+
+    console.log(`Creating checkout session for user: ${userId}`);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -130,7 +139,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
               name: 'EvoluaEla Premium',
               description: 'Acesso total a treinos personalizados, nutrição, mente e comunidade.',
             },
-            unit_amount: 9790, // R$ 97,90
+            unit_amount: 10990, // R$ 109,90
             recurring: {
               interval: 'month',
             },
@@ -147,10 +156,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
       client_reference_id: userId,
     });
 
+    console.log(`Checkout session created successfully: ${session.id}`);
     res.json({ url: session.url });
   } catch (error: any) {
     console.error('Error creating checkout session:', error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      error: `Erro na Stripe: ${error.message}. Verifique se sua chave secreta está correta e se você criou o produto/preço (ou se está usando o modo de teste corretamente).` 
+    });
   }
 });
 

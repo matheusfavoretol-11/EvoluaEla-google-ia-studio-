@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Star, AlertCircle, X, CreditCard } from 'lucide-react';
+import { Check, Star, AlertCircle, X, CreditCard, HeartHandshake } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
@@ -90,6 +90,28 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           <div className="space-y-6">
             <h3 className="font-bold text-white text-xl uppercase tracking-widest flex items-center gap-3">
               <div className="w-8 h-1 bg-[#E8B4BC] rounded-full"></div>
+              O Nosso Diferencial
+            </h3>
+            
+            <div className="grid grid-cols-1 gap-4">
+              <div className="p-6 rounded-[2.5rem] bg-gradient-to-br from-[#E8B4BC]/20 to-[#D4B996]/20 border border-[#E8B4BC]/30 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#E8B4BC]/10 rounded-full blur-[60px] -mr-10 -mt-10"></div>
+                <div className="flex items-start gap-5 relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-[#E8B4BC] text-black flex items-center justify-center shrink-0 shadow-2xl">
+                    <HeartHandshake size={28} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-2 tracking-tight">Acompanhamento Profissional Real</h4>
+                    <p className="text-sm text-white/60 leading-relaxed font-medium">
+                      Diferente de outros apps, aqui você tem <span className="text-[#E8B4BC] font-bold">Nutricionistas e Psicólogas</span> de verdade cuidando de você. Não é apenas um plano, é um time focado na sua evolução.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3 className="font-bold text-white text-xl uppercase tracking-widest flex items-center gap-3 pt-4">
+              <div className="w-8 h-1 bg-white/20 rounded-full"></div>
               O que preparamos para você
             </h3>
             

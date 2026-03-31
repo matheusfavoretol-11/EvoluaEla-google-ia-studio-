@@ -89,7 +89,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
               { time: '16:00', name: 'Lanche', desc: 'Iogurte com whey', done: false },
               { time: '20:00', name: 'Jantar', desc: 'Salada completa com atum', done: false },
             ].map((meal, idx) => (
-              <div key={`${meal.name}-${idx}`} className={`p-6 rounded-[2rem] border transition-all shadow-2xl flex items-center gap-5 ${meal.done ? 'bg-[#E8B4BC]/5 border-[#E8B4BC]/20' : 'bg-white/5 border-white/5 hover:border-white/10'}`}>
+              <div key={`meal-${meal.name}-${idx}`} className={`p-6 rounded-[2rem] border transition-all shadow-2xl flex items-center gap-5 ${meal.done ? 'bg-[#E8B4BC]/5 border-[#E8B4BC]/20' : 'bg-white/5 border-white/5 hover:border-white/10'}`}>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border ${meal.done ? 'bg-[#E8B4BC] text-black border-[#E8B4BC]' : 'bg-white/5 text-white/10 border-white/5'}`}>
                   {meal.done ? <CheckCircle2 size={28} /> : <Apple size={28} />}
                 </div>
