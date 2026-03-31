@@ -77,27 +77,27 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
 
   return (
     <div className="flex flex-col h-full relative bg-[#FAF9F6]">
-      <header className="px-6 pt-6 pb-4 flex flex-col gap-2 shrink-0 bg-[#FAF9F6] border-b border-[#3F2A2F]/5 sticky top-0 z-10">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-[1.5rem] flex items-center justify-center shadow-md bg-[#E8B4BC] text-white relative overflow-hidden">
+      <header className="px-5 sm:px-6 pt-5 sm:pt-6 pb-3 sm:pb-4 flex flex-col gap-2 shrink-0 bg-[#FAF9F6] border-b border-[#3F2A2F]/5 sticky top-0 z-10">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-[1.5rem] flex items-center justify-center shadow-md bg-[#E8B4BC] text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-10 h-10 bg-white/20 rounded-full blur-xl -mr-4 -mt-4 animate-pulse-soft"></div>
-            <Bot size={28} className="relative z-10" />
+            <Bot size={24} className="sm:w-7 sm:h-7 relative z-10" />
           </div>
           <div>
-            <h2 className="font-serif font-light text-2xl text-[#3F2A2F] italic">Sua Mentora</h2>
-            <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/30 mt-0.5">Sempre aqui para te apoiar</p>
+            <h2 className="font-serif font-light text-xl sm:text-2xl text-[#3F2A2F] italic">Sua Mentora</h2>
+            <p className="text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/30 mt-0.5">Sempre aqui para te apoiar</p>
           </div>
         </div>
         
         {/* Disclaimer and Status */}
-        <div className="mt-4 space-y-2">
+        <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
           {hasUnlimitedCoach ? (
-            <div className="flex items-center gap-2 p-3 rounded-xl text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#E8B4BC] shadow-sm">
-              <Crown size={12} className="shrink-0" fill="currentColor" />
+            <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#E8B4BC] shadow-sm">
+              <Crown size={10} className="sm:w-3 sm:h-3 shrink-0" fill="currentColor" />
               <span>Pode falar comigo sempre que precisar, estou aqui! 💖</span>
             </div>
           ) : (
-            <div className="flex items-center justify-between p-3 rounded-xl text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/40 shadow-sm">
+            <div className="flex items-center justify-between p-2.5 sm:p-3 rounded-xl text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.2em] bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/40 shadow-sm">
               <span>Mensagens para hoje:</span>
               <span className={`px-2 py-0.5 rounded-md ${messagesRemaining === 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-[#FAF9F6] text-[#3F2A2F]/60'}`}>
                 {messagesRemaining} / {MAX_FREE_MESSAGES}
@@ -105,14 +105,14 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             </div>
           )}
           
-          <div className="flex items-start gap-2 p-3 rounded-xl text-[9px] leading-relaxed bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/30 font-medium uppercase tracking-widest">
-            <AlertTriangle size={12} className="shrink-0 mt-0.5 text-[#D4B996]" />
+          <div className="flex items-start gap-2 p-2.5 sm:p-3 rounded-xl text-[8px] sm:text-[9px] leading-relaxed bg-white border border-[#3F2A2F]/5 text-[#3F2A2F]/30 font-medium uppercase tracking-widest">
+            <AlertTriangle size={10} className="sm:w-3 sm:h-3 shrink-0 mt-0.5 text-[#D4B996]" />
             <p>Lembrete carinhoso: estou aqui para te motivar, mas não substituo o acompanhamento de médicos ou especialistas, tá?</p>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 hide-scrollbar bg-[#FAF9F6]">
+      <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3 sm:space-y-4 hide-scrollbar bg-[#FAF9F6]">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
@@ -121,13 +121,13 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div 
-              className={`max-w-[85%] p-5 rounded-2xl ${
+              className={`max-w-[88%] sm:max-w-[85%] p-4 sm:p-5 rounded-2xl ${
                 msg.role === 'user' 
                   ? 'rounded-tr-sm text-white shadow-md bg-[#3F2A2F]' 
                   : 'bg-white border border-[#3F2A2F]/5 rounded-tl-sm text-[#3F2A2F] shadow-sm'
               }`}
             >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap font-light">{msg.text}</p>
+              <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-light">{msg.text}</p>
             </div>
           </motion.div>
         ))}
@@ -143,38 +143,38 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 shrink-0 bg-[#FAF9F6] border-t border-[#3F2A2F]/5">
+      <div className="p-3 sm:p-4 shrink-0 bg-[#FAF9F6] border-t border-[#3F2A2F]/5">
         {isBlocked ? (
-          <div className="bg-white border border-[#3F2A2F]/5 rounded-[1.5rem] p-6 text-center shadow-sm">
-            <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center mx-auto mb-3">
-              <Lock size={20} className="text-rose-500" />
+          <div className="bg-white border border-[#3F2A2F]/5 rounded-[1.25rem] sm:rounded-[1.5rem] p-5 sm:p-6 text-center shadow-sm">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-rose-500/10 flex items-center justify-center mx-auto mb-2 sm:mb-3">
+              <Lock size={18} className="sm:w-5 sm:h-5 text-rose-500" />
             </div>
-            <h3 className="text-sm font-serif font-light text-[#3F2A2F] mb-2 uppercase tracking-tight">Nossa conversa por aqui hoje chegou ao fim, mas amanhã tem mais! 💖</h3>
-            <p className="text-xs text-[#3F2A2F]/40 mb-4 font-light">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
+            <h3 className="text-xs sm:text-sm font-serif font-light text-[#3F2A2F] mb-1.5 sm:mb-2 uppercase tracking-tight">Nossa conversa por aqui hoje chegou ao fim, mas amanhã tem mais! 💖</h3>
+            <p className="text-[10px] sm:text-xs text-[#3F2A2F]/40 mb-3 sm:mb-4 font-light">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
             <button 
               onClick={onUpgrade}
-              className="w-full py-5 rounded-full font-light uppercase tracking-[0.2em] text-white shadow-md hover:shadow-lg transition-all bg-[#E8B4BC] hover:bg-[#3F2A2F] flex items-center justify-center gap-2 text-xs"
+              className="w-full py-4 sm:py-5 rounded-full font-light uppercase tracking-[0.2em] text-white shadow-md hover:shadow-lg transition-all bg-[#E8B4BC] hover:bg-[#3F2A2F] flex items-center justify-center gap-2 text-[10px] sm:text-xs"
             >
-              <Crown size={14} fill="currentColor" />
+              <Crown size={12} className="sm:w-3.5 sm:h-3.5" fill="currentColor" />
               Quero acesso ilimitado
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-2 bg-white border border-[#3F2A2F]/5 rounded-full p-1.5 pr-2 focus-within:ring-1 focus-within:ring-[#E8B4BC]/30 transition-all shadow-sm">
+          <div className="flex items-center gap-2 bg-white border border-[#3F2A2F]/5 rounded-full p-1 sm:p-1.5 pr-2 focus-within:ring-1 focus-within:ring-[#E8B4BC]/30 transition-all shadow-sm">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="O que está no seu coração agora?"
-              className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-sm outline-none text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
+              className="flex-1 bg-transparent border-none focus:ring-0 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm outline-none text-[#3F2A2F] placeholder:text-[#3F2A2F]/20 font-light"
             />
             <button 
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 text-white shadow-md bg-[#3F2A2F]"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 text-white shadow-md bg-[#3F2A2F]"
             >
-              <Send size={18} className="ml-1" />
+              <Send size={16} className="sm:w-4.5 sm:h-4.5 ml-1" />
             </button>
           </div>
         )}

@@ -59,8 +59,8 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
-        <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white items-center justify-center border border-[#3F2A2F]/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white items-center justify-center border border-[#3F2A2F]/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
       </div>
@@ -77,8 +77,8 @@ function AppContent() {
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
-        <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -87,8 +87,8 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
-        <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-white border border-[#3F2A2F]/5">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -96,35 +96,35 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6]">
-      <div className="w-full max-w-md min-h-[100dvh] md:min-h-[800px] md:h-auto md:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-white border border-[#3F2A2F]/5">
+    <div className="min-h-screen flex justify-center items-center font-sans bg-[#FAF9F6] p-0 sm:p-4">
+      <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-white border border-[#3F2A2F]/5">
         
         {/* Header */}
-        <header className="pt-14 pb-6 px-8 border-b border-[#3F2A2F]/5 sticky top-0 z-10 bg-white/80 backdrop-blur-xl">
+        <header className="pt-10 sm:pt-14 pb-4 sm:pb-6 px-6 sm:px-8 border-b border-[#3F2A2F]/5 sticky top-0 z-10 bg-white/80 backdrop-blur-xl">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[#FAF9F6] border border-[#3F2A2F]/5 text-[#3F2A2F]/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[#FAF9F6] border border-[#3F2A2F]/5 text-[#3F2A2F]/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
               >
-                <Menu size={24} />
+                <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
               <div className="flex flex-col">
-                <h1 className="text-2xl font-serif font-light tracking-[0.1em] text-[#3F2A2F] leading-none">EvoluaEla</h1>
-                <span className="text-[8px] font-medium uppercase tracking-[0.3em] text-[#E8B4BC] mt-1.5">High Performance</span>
+                <h1 className="text-xl sm:text-2xl font-serif font-light tracking-[0.1em] text-[#3F2A2F] leading-none">EvoluaEla</h1>
+                <span className="text-[7px] sm:text-[8px] font-medium uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">High Performance</span>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[9px] font-medium shadow-lg uppercase tracking-[0.15em] bg-[#E8B4BC] text-white transition-all hover:bg-[#3F2A2F] hover:scale-105 active:scale-95"
+                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[8px] sm:text-[9px] font-medium shadow-lg uppercase tracking-[0.15em] bg-[#E8B4BC] text-white transition-all hover:bg-[#3F2A2F] hover:scale-105 active:scale-95"
                 >
-                  <Crown size={12} fill="currentColor" /> UPGRADE
+                  <Crown size={10} className="sm:w-3 sm:h-3" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-12 h-12 rounded-2xl bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
-                  <Crown size={24} fill="currentColor" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
+                  <Crown size={20} className="sm:w-6 sm:h-6" fill="currentColor" />
                 </div>
               )}
             </div>
@@ -152,7 +152,7 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 w-full border-t border-[#3F2A2F]/5 px-8 py-5 pb-12 z-20 bg-white/95 backdrop-blur-2xl">
+        <nav className="absolute bottom-0 w-full border-t border-[#3F2A2F]/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-white/95 backdrop-blur-2xl">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -161,20 +161,20 @@ function AppContent() {
                 <li key={tab.id} className="flex-1">
                   <button
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex flex-col items-center gap-2.5 transition-all duration-500 ${
+                    className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
                       isActive ? 'text-[#E8B4BC]' : 'text-[#3F2A2F]/20 hover:text-[#3F2A2F]/40'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
-                      <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                      <Icon size={isActive ? 22 : 20} className="sm:w-6 sm:h-6" strokeWidth={isActive ? 2.5 : 2} />
                       {isActive && (
                         <motion.div 
                           layoutId="nav-indicator"
-                          className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#E8B4BC]"
+                          className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-1 sm:h-1.5 sm:w-1.5 h-1 rounded-full bg-[#E8B4BC]"
                         />
                       )}
                     </div>
-                    <span className={`text-[9px] font-medium uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                    <span className={`text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
                       {tab.label}
                     </span>
                   </button>

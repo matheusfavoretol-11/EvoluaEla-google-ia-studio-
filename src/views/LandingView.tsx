@@ -58,10 +58,10 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-64 pb-40 px-10 min-h-screen flex items-center overflow-hidden bg-[#FAF7F5]">
+      <section className="relative pt-40 sm:pt-64 pb-24 sm:pb-40 px-6 sm:px-10 min-h-screen flex items-center overflow-hidden bg-[#FAF7F5]">
         {/* Decorative Elements - More subtle and artistic */}
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#E8B4BC]/10 rounded-full blur-[150px] pointer-events-none animate-pulse" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#A8C4B8]/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+        <div className="absolute top-[-20%] right-[-10%] w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-[#E8B4BC]/10 rounded-full blur-[80px] sm:blur-[150px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#A8C4B8]/10 rounded-full blur-[60px] sm:blur-[120px] pointer-events-none animate-pulse" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full">
           <div className="max-w-5xl">
@@ -70,19 +70,19 @@ export default function LandingView({ onStart }: LandingViewProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-serif font-light mb-12 leading-[0.9] tracking-[-0.02em] text-[#3F2A2F]">
+              <h1 className="text-[clamp(3.5rem,15vw,12rem)] leading-[0.95] sm:leading-[0.9] font-serif font-light mb-8 sm:mb-12 tracking-[-0.02em] text-[#3F2A2F]">
                 EVOLUA<br />ELA
               </h1>
-              <p className="text-xl md:text-2xl font-light mb-16 text-[#3F2A2F]/60 max-w-2xl leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl font-light mb-12 sm:mb-16 text-[#3F2A2F]/60 max-w-2xl leading-relaxed">
                 Desperte a mulher poderosa que você nasceu para ser através de uma jornada de transformação pessoal e alta performance.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-start gap-8">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 sm:gap-8">
                 <button 
                   onClick={onStart}
-                  className="group relative px-16 py-8 bg-[#E8B4BC] text-white font-sans font-light text-xl rounded-full hover:bg-[#3F2A2F] transition-all duration-700 soft-shadow flex items-center gap-6 hover:scale-[1.02] active:scale-95"
+                  className="group relative px-10 sm:px-16 py-6 sm:py-8 bg-[#E8B4BC] text-white font-sans font-light text-base sm:text-xl rounded-full hover:bg-[#3F2A2F] transition-all duration-700 soft-shadow flex items-center justify-center sm:justify-start gap-4 sm:gap-6 hover:scale-[1.02] active:scale-95"
                 >
-                  Quero começar minha evolução <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
+                  Quero começar minha evolução <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                 </button>
               </div>
             </motion.div>
@@ -91,9 +91,9 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-48 px-10 bg-white">
+      <section className="py-24 sm:py-48 px-6 sm:px-10 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 sm:gap-24">
             {benefits.map((benefit, i) => (
               <motion.div
                 key={`benefit-${i}`}
@@ -101,16 +101,16 @@ export default function LandingView({ onStart }: LandingViewProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2, duration: 0.8 }}
-                className="flex flex-col items-start group"
+                className="flex flex-col items-center sm:items-start text-center sm:text-left group"
               >
                 <div 
-                  className="w-20 h-20 rounded-[2rem] flex items-center justify-center mb-10 soft-shadow-sm transition-all group-hover:scale-110 group-hover:rotate-3"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center mb-8 sm:mb-10 soft-shadow-sm transition-all group-hover:scale-110 group-hover:rotate-3"
                   style={{ backgroundColor: `${benefit.color}15`, color: benefit.color }}
                 >
-                  <benefit.icon size={36} />
+                  <benefit.icon size={28} className="sm:w-9 sm:h-9" />
                 </div>
-                <h3 className="text-2xl font-serif font-light mb-6 text-[#3F2A2F]">{benefit.title}</h3>
-                <p className="text-lg text-[#3F2A2F]/60 leading-relaxed font-light">
+                <h3 className="text-xl sm:text-2xl font-serif font-light mb-4 sm:mb-6 text-[#3F2A2F]">{benefit.title}</h3>
+                <p className="text-base sm:text-lg text-[#3F2A2F]/60 leading-relaxed font-light">
                   {benefit.desc}
                 </p>
               </motion.div>
@@ -120,7 +120,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Minimalist Quote Section */}
-      <section className="py-56 px-10 bg-[#FAF7F5]">
+      <section className="py-32 sm:py-56 px-6 sm:px-10 bg-[#FAF7F5]">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -128,25 +128,25 @@ export default function LandingView({ onStart }: LandingViewProps) {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <Sparkles className="mx-auto mb-12 text-[#E8B4BC]" size={64} />
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-[#3F2A2F] italic leading-[1.2] mb-16 tracking-tight">
+            <Sparkles className="mx-auto mb-8 sm:mb-12 text-[#E8B4BC] w-12 h-12 sm:w-16 sm:h-16" />
+            <h2 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-light text-[#3F2A2F] italic leading-[1.2] mb-12 sm:mb-16 tracking-tight">
               "A evolução não é sobre ser perfeita, é sobre ser fiel a quem você realmente é."
             </h2>
-            <div className="w-32 h-1.5 bg-[#E8B4BC] mx-auto rounded-full" />
+            <div className="w-24 sm:w-32 h-1 sm:h-1.5 bg-[#E8B4BC] mx-auto rounded-full" />
           </motion.div>
         </div>
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-48 px-10 bg-white text-center">
+      <section className="py-24 sm:py-48 px-6 sm:px-10 bg-white text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-serif font-light mb-12 text-[#3F2A2F] leading-tight">Pronta para o próximo nível?</h2>
-          <p className="text-xl text-[#3F2A2F]/60 mb-16 leading-relaxed font-light max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-serif font-light mb-8 sm:mb-12 text-[#3F2A2F] leading-tight">Pronta para o próximo nível?</h2>
+          <p className="text-lg sm:text-xl text-[#3F2A2F]/60 mb-12 sm:mb-16 leading-relaxed font-light max-w-2xl mx-auto">
             Junte-se a milhares de mulheres que escolheram priorizar sua evolução e bem-estar todos os dias.
           </p>
           <button 
             onClick={onStart}
-            className="px-20 py-8 bg-[#3F2A2F] text-white font-sans font-light text-xl rounded-full hover:bg-[#E8B4BC] transition-all duration-700 premium-shadow hover:scale-[1.05] active:scale-95"
+            className="w-full sm:w-auto px-12 sm:px-20 py-6 sm:py-8 bg-[#3F2A2F] text-white font-sans font-light text-lg sm:text-xl rounded-full hover:bg-[#E8B4BC] transition-all duration-700 premium-shadow hover:scale-[1.05] active:scale-95"
           >
             Começar Agora
           </button>

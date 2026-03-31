@@ -72,10 +72,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-white font-sans text-[#3F2A2F]">
-      <div className="flex-1 flex flex-col px-8 py-16 max-w-md mx-auto w-full">
+      <div className="flex-1 flex flex-col px-6 sm:px-8 py-10 sm:py-16 max-w-md mx-auto w-full">
         
         {/* Progress Bar */}
-        <div className="w-full h-1 bg-[#FAF9F6] rounded-full mb-16 overflow-hidden">
+        <div className="w-full h-1 bg-[#FAF9F6] rounded-full mb-10 sm:mb-16 overflow-hidden">
           <motion.div 
             className="h-full rounded-full bg-[#E8B4BC]"
             initial={{ width: '0%' }}
@@ -93,10 +93,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-4 leading-tight">Qual o seu grande sonho hoje?</h2>
-              <p className="text-[#3F2A2F]/40 mb-10 font-light leading-relaxed">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">Qual o seu grande sonho hoje?</h2>
+              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
 
-              <div className="space-y-4 flex-1">
+              <div className="space-y-3 sm:space-y-4 flex-1">
                 {objectives.map((obj, idx) => {
                   const Icon = obj.icon;
                   const isSelected = objective === obj.id;
@@ -104,20 +104,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={obj.id}
                       onClick={() => setObjective(obj.id)}
-                      className={`w-full p-5 rounded-[2rem] border flex items-center gap-5 transition-all ${
+                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
                         isSelected 
                           ? 'border-[#E8B4BC] bg-[#E8B4BC]/5 soft-shadow' 
                           : 'border-[#3F2A2F]/5 hover:border-[#E8B4BC]/20 bg-white'
                       }`}
                     >
                       <div 
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
                           isSelected ? 'bg-[#E8B4BC] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
                         }`}
                       >
-                        <Icon size={24} />
+                        <Icon size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <span className={`text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
                         {obj.label}
                       </span>
                     </button>
@@ -135,10 +135,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-4 leading-tight">Como está sua relação com seu corpo?</h2>
-              <p className="text-[#3F2A2F]/40 mb-10 font-light leading-relaxed">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">Como está sua relação com seu corpo?</h2>
+              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
 
-              <div className="space-y-4 flex-1">
+              <div className="space-y-3 sm:space-y-4 flex-1">
                 {feelings.map((feel, idx) => {
                   const Icon = feel.icon;
                   const isSelected = feeling === feel.id;
@@ -146,20 +146,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={feel.id}
                       onClick={() => setFeeling(feel.id)}
-                      className={`w-full p-5 rounded-[2rem] border flex items-center gap-5 transition-all ${
+                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
                         isSelected 
                           ? 'border-[#A8C4B8] bg-[#A8C4B8]/5 soft-shadow' 
                           : 'border-[#3F2A2F]/5 hover:border-[#A8C4B8]/20 bg-white'
                       }`}
                     >
                       <div 
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
                           isSelected ? 'bg-[#A8C4B8] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
                         }`}
                       >
-                        <Icon size={24} />
+                        <Icon size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <span className={`text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
                         {feel.label}
                       </span>
                     </button>
@@ -177,10 +177,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-4 leading-tight">O que mais te desafia no dia a dia?</h2>
-              <p className="text-[#3F2A2F]/40 mb-10 font-light leading-relaxed">Vamos juntas encontrar o caminho para superar isso.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">O que mais te desafia no dia a dia?</h2>
+              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Vamos juntas encontrar o caminho para superar isso.</p>
 
-              <div className="space-y-4 flex-1">
+              <div className="space-y-3 sm:space-y-4 flex-1">
                 {challenges.map((chal, idx) => {
                   const Icon = chal.icon;
                   const isSelected = challenge === chal.id;
@@ -188,20 +188,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={chal.id}
                       onClick={() => setChallenge(chal.id)}
-                      className={`w-full p-5 rounded-[2rem] border flex items-center gap-5 transition-all ${
+                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
                         isSelected 
                           ? 'border-[#E8B4BC] bg-[#E8B4BC]/5 soft-shadow' 
                           : 'border-[#3F2A2F]/5 hover:border-[#E8B4BC]/20 bg-white'
                       }`}
                     >
                       <div 
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
                           isSelected ? 'bg-[#E8B4BC] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
                         }`}
                       >
-                        <Icon size={24} />
+                        <Icon size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <span className={`text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
                         {chal.label}
                       </span>
                     </button>
@@ -212,11 +212,11 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           )}
         </AnimatePresence>
 
-        <div className="pt-12 mt-auto">
+        <div className="pt-8 sm:pt-12 mt-auto">
           <button
             onClick={handleNext}
             disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge)}
-            className="w-full py-5 rounded-full font-light text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:shadow-xl bg-[#E8B4BC] hover:bg-[#3F2A2F] hover:scale-[1.02] active:scale-95 uppercase tracking-[0.2em] text-xs"
+            className="w-full py-4 sm:py-5 rounded-full font-light text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:shadow-xl bg-[#E8B4BC] hover:bg-[#3F2A2F] hover:scale-[1.02] active:scale-95 uppercase tracking-[0.2em] text-[10px] sm:text-xs"
           >
             {isSaving ? (
               <div className="flex items-center gap-3">
