@@ -17,9 +17,15 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
         if (prop === 'auth') {
           return new Proxy({}, {
             get: (_, authProp) => {
+              if (authProp === 'onAuthStateChange') {
+                return () => {
+                  console.error('Supabase not configured. Cannot call auth.onAuthStateChange');
+                  return { data: { subscription: { unsubscribe: () => {} } } };
+                };
+              }
               return async () => {
                 console.error(`Supabase not configured. Cannot call auth.${String(authProp)}`);
-                return { data: { user: null, session: null, subscription: { unsubscribe: () => {} } }, error: new Error('Supabase not configured') };
+                return { data: { user: null, session: null }, error: new Error('Supabase not configured') };
               };
             }
           });
@@ -31,7 +37,14 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
               return () => new Proxy({}, {
                 get: (_, queryProp) => {
                   if (queryProp === 'single') return async () => ({ data: null, error: new Error('Supabase not configured') });
-                  return () => ({ data: null, error: new Error('Supabase not configured') });
+                  const queryFunc = () => ({ data: null, error: new Error('Supabase not configured') });
+                  // Handle chaining for methods like .select().eq().single()
+                  return new Proxy(queryFunc, {
+                    get: (t, p) => {
+                      if (p === 'then') return undefined; // Not a promise unless it's a terminator
+                      return queryFunc;
+                    }
+                  });
                 }
               });
             }
@@ -39,13 +52,14 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
         }
 
         if (prop === 'channel') {
-          return () => new Proxy({}, {
-            get: (_, channelProp) => {
-              if (channelProp === 'on') return () => new Proxy({}, { get: (_, onProp) => { if (onProp === 'subscribe') return () => ({ unsubscribe: () => {} }); return () => {}; } });
-              if (channelProp === 'subscribe') return () => ({ unsubscribe: () => {} });
-              return () => {};
+          const channelProxy: any = new Proxy({}, {
+            get: (_, p) => {
+              if (p === 'on' || p === 'subscribe') return () => channelProxy;
+              if (p === 'unsubscribe') return () => {};
+              return () => channelProxy;
             }
           });
+          return () => channelProxy;
         }
 
         if (prop === 'removeChannel') return () => {};
