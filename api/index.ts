@@ -28,7 +28,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 
 // Initialize Supabase Admin Client (Service Role) to bypass RLS
 const supabaseAdmin = createClient(
-  process.env.VITE_SUPABASE_URL || '',
+  'https://bbjfbnxymgumuzeqjohv.supabase.co',
   process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 );
 

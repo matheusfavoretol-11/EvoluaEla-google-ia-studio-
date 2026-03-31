@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Settings, Crown, Menu, Apple, Brain } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
-declare global {
-  var __VITE_SUPABASE_URL__: string;
-  var __VITE_SUPABASE_ANON_KEY__: string;
-}
 
 // Contexts
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
@@ -61,54 +56,6 @@ function AppContent() {
   const handleOnboardingComplete = () => {
     // No longer needed to set local state, UserContext handles it
   };
-
-  const supabaseUrl = (typeof __VITE_SUPABASE_URL__ !== 'undefined' ? __VITE_SUPABASE_URL__ : '') || import.meta.env.VITE_SUPABASE_URL;
-  const supabaseAnonKey = (typeof __VITE_SUPABASE_ANON_KEY__ !== 'undefined' ? __VITE_SUPABASE_ANON_KEY__ : '') || import.meta.env.VITE_SUPABASE_ANON_KEY;
-  
-  const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
-
-  if (!isSupabaseConfigured) {
-    return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-4">
-        <div className="mb-8 p-8 bg-red-500/10 border border-red-500/20 rounded-[2.5rem] max-w-md text-center shadow-2xl backdrop-blur-xl">
-          <div className="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Settings size={32} className="text-red-500" />
-          </div>
-          <h3 className="text-red-500 font-bold mb-4 uppercase tracking-widest text-sm">Configuração Necessária</h3>
-          <p className="text-white/60 text-base font-medium leading-relaxed mb-8">
-            As credenciais do Supabase não foram encontradas ou estão vazias. Verifique o menu de <strong>Configurações (ícone de engrenagem) &gt; Secrets</strong> do AI Studio.
-          </p>
-          <div className="space-y-3 text-left bg-black/20 p-6 rounded-2xl border border-white/5">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">Status das variáveis:</p>
-            <div className="flex items-center justify-between">
-              <code className="text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_URL</code>
-              <span className={`text-[10px] font-bold uppercase ${supabaseUrl ? 'text-emerald-500' : 'text-red-500'}`}>
-                {supabaseUrl ? 'OK' : 'FALTANDO'}
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <code className="text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_ANON_KEY</code>
-              <span className={`text-[10px] font-bold uppercase ${supabaseAnonKey ? 'text-emerald-500' : 'text-red-500'}`}>
-                {supabaseAnonKey ? 'OK' : 'FALTANDO'}
-              </span>
-            </div>
-          </div>
-          
-          <div className="mt-8 space-y-4">
-            <button 
-              onClick={() => window.location.reload()}
-              className="w-full py-4 rounded-2xl font-bold text-black bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
-            >
-              Tentar Novamente
-            </button>
-            <p className="text-[10px] text-white/20 font-medium leading-relaxed">
-              Dica: Após salvar os segredos, clique no botão acima. Se persistir, verifique se os nomes nos Secrets estão corretos.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (!isAuthReady) {
     return (
