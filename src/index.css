@@ -16,10 +16,10 @@
 
 :root {
   --color-primary: #E8B4BC;
-  --color-bg: #FAF9F6;
-  --color-surface: #FFFFFF;
-  --color-text: #3F2A2F;
-  --color-text-muted: #7A7575;
+  --color-bg: #0A0A0A;
+  --color-surface: #141414;
+  --color-text: #FFFFFF;
+  --color-text-muted: #888888;
   --color-accent: #D4B996;
 }
 
@@ -33,36 +33,64 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans); /* Switching to Sans for Castify look */
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-/* Soft UI Utilities */
+/* Castify UI Utilities */
+.bento-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.bento-card:hover {
+  border-color: rgba(232, 180, 188, 0.2);
+  transform: translateY(-4px);
+}
+
+.glass-nav {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 9999px;
+  background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+              linear-gradient(135deg, var(--color-primary), var(--color-accent)) border-box;
+  border: 1px solid transparent;
+}
+
 .soft-shadow {
-  box-shadow: 0 20px 50px -12px rgba(63, 42, 47, 0.05);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .soft-shadow-sm {
-  box-shadow: 0 8px 30px rgba(63, 42, 47, 0.03);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .premium-shadow {
-  box-shadow: 0 25px 50px -12px rgba(232, 180, 188, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(232, 180, 188, 0.1);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(135deg, #3F2A2F, #D4B996);
+  background-image: linear-gradient(135deg, #FFFFFF, #E8B4BC);
 }
 
 .gradient-bg {

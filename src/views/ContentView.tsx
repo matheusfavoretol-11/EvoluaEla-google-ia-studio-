@@ -50,42 +50,45 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto pb-24 bg-[#FAF9F6] relative min-h-full">
-      <div className="px-6 pt-12 pb-8 bg-[#FAF9F6] border-b border-[#3F2A2F]/5 mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white border border-[#3F2A2F]/5 text-[#E8B4BC]">
-            <Sparkles size={24} />
+    <div className="flex-1 overflow-y-auto pb-24 bg-[#0A0A0A] relative min-h-full text-white font-sans">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="px-6 pt-12 pb-10 relative z-10">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E8B4BC] shadow-2xl backdrop-blur-xl">
+            <Sparkles size={32} />
           </div>
-          <h1 className="text-3xl font-serif font-light text-[#3F2A2F] italic">Conteúdos que Transformam</h1>
+          <h1 className="text-5xl font-bold text-white tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
         </div>
-        <p className="text-[#3F2A2F]/40 font-light">Uma curadoria especial para nutrir sua mente e alma.</p>
+        <p className="text-sm font-bold text-white/30 uppercase tracking-widest max-w-md">Uma curadoria especial para nutrir sua mente e alma.</p>
       </div>
 
-      <div className="px-6">
+      <div className="px-6 relative z-10">
         {/* Tabs */}
-        <div className="flex p-1 rounded-full bg-white border border-[#3F2A2F]/5 mb-8">
+        <div className="flex p-1.5 rounded-2xl bg-white/5 border border-white/5 mb-10 backdrop-blur-md">
           <button
             onClick={() => setActiveCategory('audios')}
-            className={`flex-1 py-3 rounded-full font-medium uppercase tracking-[0.2em] text-[10px] transition-all flex items-center justify-center gap-2 ${
-              activeCategory === 'audios' ? 'bg-[#3F2A2F] text-white shadow-md' : 'text-[#3F2A2F]/30 hover:text-[#3F2A2F]/50'
+            className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
+              activeCategory === 'audios' ? 'bg-white text-black shadow-2xl scale-[1.02]' : 'text-white/30 hover:text-white/60'
             }`}
           >
-            <Headphones size={16} />
+            <Headphones size={18} />
             Áudios
           </button>
           <button
             onClick={() => setActiveCategory('guides')}
-            className={`flex-1 py-3 rounded-full font-medium uppercase tracking-[0.2em] text-[10px] transition-all flex items-center justify-center gap-2 ${
-              activeCategory === 'guides' ? 'bg-[#3F2A2F] text-white shadow-md' : 'text-[#3F2A2F]/30 hover:text-[#3F2A2F]/50'
+            className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
+              activeCategory === 'guides' ? 'bg-white text-black shadow-2xl scale-[1.02]' : 'text-white/30 hover:text-white/60'
             }`}
           >
-            <FileText size={16} />
+            <FileText size={18} />
             Guias
           </button>
         </div>
 
         {/* Content List */}
-        <div className="space-y-4">
+        <div className="space-y-5">
           {content.map((item, index) => {
             const isLockedByPremium = item.premium && !isPremium;
             const isLockedByLevel = getLevelIndex(item.levelRequired) > currentLevelIndex;
@@ -97,36 +100,35 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`bg-white p-5 rounded-[1.5rem] border transition-all flex items-center gap-4 group ${
-                  isLocked ? 'opacity-50 border-[#3F2A2F]/5' : 'border-[#3F2A2F]/5 hover:border-[#3F2A2F]/10 hover:bg-[#FAF9F6] cursor-pointer'
+                className={`glass-card p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
+                  isLocked ? 'opacity-40 border-white/5' : 'border-white/5 hover:border-[#E8B4BC]/30 cursor-pointer'
                 }`}
                 onClick={() => handleContentClick(item, isLockedByPremium, isLockedByLevel)}
               >
                 <div 
-                  className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all border border-white/5 bg-white/5 group-hover:bg-white group-hover:text-black"
                   style={{ 
-                    backgroundColor: isLocked ? 'rgba(63,42,47,0.05)' : 'rgba(63,42,47,0.05)',
-                    color: isLocked ? 'rgba(63,42,47,0.2)' : '#3F2A2F'
+                    color: isLocked ? 'rgba(255,255,255,0.2)' : 'white'
                   }}
                 >
-                  {isLocked ? <Lock size={18} /> : (activeCategory === 'audios' ? <Play size={18} className="ml-0.5" /> : <FileText size={18} />)}
+                  {isLocked ? <Lock size={24} /> : (activeCategory === 'audios' ? <Play size={24} className="ml-1" /> : <FileText size={24} />)}
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className={`font-serif font-light text-lg transition-all ${isLocked ? 'text-[#3F2A2F]/30' : 'text-[#3F2A2F] group-hover:text-[#E8B4BC]'}`}>
+                  <h3 className={`font-bold text-xl tracking-tight transition-all ${isLocked ? 'text-white/20' : 'text-white group-hover:text-[#E8B4BC]'}`}>
                     {item.title}
                   </h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/20">
                       {activeCategory === 'audios' ? (item as any).duration : (item as any).pages}
                     </span>
                     {item.premium && (
-                      <span className="text-[9px] uppercase tracking-[0.2em] font-medium px-2 py-0.5 rounded-full bg-[#E8B4BC]/10 text-[#E8B4BC]">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[#E8B4BC]/10 text-[#E8B4BC] border border-[#E8B4BC]/20">
                         Premium
                       </span>
                     )}
                     {isLockedByLevel && !isLockedByPremium && (
-                      <span className="text-[9px] uppercase tracking-[0.2em] font-medium px-2 py-0.5 rounded-full bg-[#3F2A2F]/5 text-[#3F2A2F]/30">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-white/5 text-white/20 border border-white/10">
                         Nível: {item.levelRequired}
                       </span>
                     )}
@@ -145,89 +147,96 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 backdrop-blur-sm sm:items-center p-4"
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/90 backdrop-blur-xl sm:items-center p-4"
           >
             <motion.div
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="w-full max-w-md bg-white rounded-t-[2rem] sm:rounded-[2rem] overflow-hidden flex flex-col max-h-[90vh] border border-[#3F2A2F]/5"
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="w-full max-w-md bg-[#141414] rounded-t-[3rem] sm:rounded-[3rem] overflow-hidden flex flex-col max-h-[90vh] border border-white/10 shadow-2xl"
             >
-              <div className="p-6 border-b border-[#3F2A2F]/5 flex justify-between items-center bg-[#FAF9F6]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white border border-[#3F2A2F]/5 text-[#E8B4BC]">
-                    {activeCategory === 'audios' ? <Headphones size={18} /> : <FileText size={18} />}
+              <div className="p-8 border-b border-white/5 flex justify-between items-center bg-[#1A1A1A]">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-[#E8B4BC]">
+                    {activeCategory === 'audios' ? <Headphones size={24} /> : <FileText size={24} />}
                   </div>
-                  <h3 className="font-medium uppercase tracking-[0.2em] text-[10px] text-[#3F2A2F]/40">
+                  <h3 className="font-bold uppercase tracking-widest text-[10px] text-white/30">
                     {activeCategory === 'audios' ? 'Sua Jornada Sonora' : 'Sua Leitura de Hoje'}
                   </h3>
                 </div>
                 <button 
                   onClick={() => setSelectedContent(null)}
-                  className="w-8 h-8 rounded-full bg-white border border-[#3F2A2F]/5 flex items-center justify-center text-[#3F2A2F]/20 hover:text-[#3F2A2F] transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white transition-colors"
                 >
-                  <X size={18} />
+                  <X size={20} />
                 </button>
               </div>
 
-              <div className="p-8 flex-1 overflow-y-auto flex flex-col items-center text-center">
+              <div className="p-10 flex-1 overflow-y-auto flex flex-col items-center text-center relative">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] pointer-events-none"></div>
+                
                 {activeCategory === 'audios' ? (
                   <>
-                    <div className="w-48 h-48 rounded-full mb-8 relative flex items-center justify-center shadow-inner bg-[#FAF9F6]">
-                      <div className={`absolute inset-0 rounded-full border-2 opacity-20 ${isPlaying ? 'animate-ping' : ''}`} style={{ borderColor: '#E8B4BC', animationDuration: '3s' }}></div>
-                      <div className="w-32 h-32 rounded-full flex items-center justify-center shadow-lg bg-[#3F2A2F]">
-                        <Headphones size={40} className="text-white" />
+                    <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-white/5 border border-white/10 overflow-hidden">
+                      <div className={`absolute inset-0 bg-gradient-to-br from-[#E8B4BC]/20 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
+                      <div className={`absolute inset-0 border-4 border-[#E8B4BC]/30 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
+                      <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-white text-black relative z-10">
+                        <Headphones size={56} />
                       </div>
                     </div>
                     
-                    <h2 className="text-2xl font-serif font-light text-[#3F2A2F] mb-2 italic">{selectedContent.title}</h2>
-                    <p className="text-[#3F2A2F]/40 text-sm mb-8 font-light">{selectedContent.desc}</p>
+                    <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">{selectedContent.title}</h2>
+                    <p className="text-white/40 text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
                     {/* Audio Controls */}
-                    <div className="w-full space-y-6">
-                      <div className="w-full bg-[#FAF9F6] h-1 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#E8B4BC] w-1/3 rounded-full"></div>
+                    <div className="w-full space-y-8">
+                      <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/5">
+                        <motion.div 
+                          initial={{ width: '0%' }}
+                          animate={{ width: isPlaying ? '33%' : '33%' }}
+                          className="h-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] rounded-full"
+                        ></motion.div>
                       </div>
-                      <div className="flex justify-between text-[9px] text-[#3F2A2F]/20 font-medium uppercase tracking-[0.2em]">
+                      <div className="flex justify-between text-[10px] text-white/20 font-bold uppercase tracking-widest">
                         <span>03:14</span>
                         <span>{selectedContent.duration}</span>
                       </div>
                       
-                      <div className="flex items-center justify-center gap-8">
-                        <button className="p-3 text-[#3F2A2F]/20 hover:text-[#3F2A2F]/60 transition-colors">
-                          <SkipBack size={24} />
+                      <div className="flex items-center justify-center gap-10">
+                        <button className="p-4 text-white/20 hover:text-white transition-colors">
+                          <SkipBack size={32} />
                         </button>
                         <button 
                           onClick={() => setIsPlaying(!isPlaying)}
-                          className="w-16 h-16 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-105 transition-transform bg-[#3F2A2F]"
+                          className="w-20 h-20 rounded-3xl flex items-center justify-center text-black shadow-2xl hover:scale-105 transition-all bg-white"
                         >
-                          {isPlaying ? <Pause size={28} /> : <Play size={28} className="ml-1" />}
+                          {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" className="ml-1" />}
                         </button>
-                        <button className="p-3 text-[#3F2A2F]/20 hover:text-[#3F2A2F]/60 transition-colors">
-                          <SkipForward size={24} />
+                        <button className="p-4 text-white/20 hover:text-white transition-colors">
+                          <SkipForward size={32} />
                         </button>
                       </div>
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="w-full aspect-[3/4] bg-[#FAF9F6] rounded-2xl mb-6 border border-[#3F2A2F]/5 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #3F2A2F 1px, transparent 0)', backgroundSize: '20px 20px' }}></div>
-                      <FileText size={64} className="text-[#3F2A2F]/10" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#FAF9F6] to-transparent text-[#3F2A2F] text-left">
-                        <p className="font-serif font-light italic text-xl">{selectedContent.title}</p>
-                        <p className="text-[9px] font-medium uppercase tracking-[0.2em] opacity-40">{selectedContent.pages}</p>
+                    <div className="w-full aspect-[3/4] bg-white/5 rounded-[2.5rem] mb-8 border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+                      <FileText size={80} className="text-white/10 group-hover:scale-110 transition-transform duration-500" />
+                      <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white text-left backdrop-blur-sm">
+                        <p className="font-bold text-2xl tracking-tight mb-1">{selectedContent.title}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">{selectedContent.pages}</p>
                       </div>
                     </div>
                     
-                    <h2 className="text-2xl font-serif font-light text-[#3F2A2F] mb-3 italic">{selectedContent.title}</h2>
-                    <p className="text-[#3F2A2F]/40 text-sm mb-8 font-light">{selectedContent.desc}</p>
+                    <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">{selectedContent.title}</h2>
+                    <p className="text-white/40 text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
                     <button 
-                      className="w-full py-5 rounded-full font-light uppercase tracking-[0.2em] text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 bg-[#E8B4BC] hover:bg-[#3F2A2F] text-xs"
+                      className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-xs"
                     >
-                      <FileText size={18} />
+                      <FileText size={20} />
                       Quero ler agora
                     </button>
                   </>

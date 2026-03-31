@@ -8,55 +8,66 @@ export default function CoachView() {
   ];
 
   return (
-    <div className="p-6 space-y-8 bg-[#FAF9F6] min-h-full">
-      <header>
-        <h2 className="text-3xl font-serif font-light text-[#3F2A2F] mb-2">Mentalidade & Coach</h2>
-        <p className="text-[#3F2A2F]/40 text-[10px] font-medium uppercase tracking-[0.2em]">O corpo alcança o que a mente acredita.</p>
+    <div className="p-6 space-y-10 bg-[#0A0A0A] min-h-full text-white font-sans relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <header className="relative z-10">
+        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Mentalidade & <span className="gradient-text">Coach</span></h2>
+        <p className="text-sm font-bold text-white/30 uppercase tracking-widest">O corpo alcança o que a mente acredita.</p>
       </header>
 
       {/* Direct Support / Coach */}
-      <section className="bg-[#3F2A2F] rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl">
+      <section className="bg-gradient-to-br from-[#141414] to-[#0A0A0A] rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl border border-white/5">
         <div className="relative z-10">
-          <h3 className="text-2xl font-serif font-light mb-3 italic">Fale com seu Coach</h3>
-          <p className="text-white/60 text-sm mb-8 leading-relaxed font-light">
-            Precisa de ajustes no plano ou está sem motivação? Estamos aqui para te ajudar.
+          <h3 className="text-3xl font-bold mb-4 tracking-tight">Fale com seu <span className="text-[#D4B996]">Coach</span></h3>
+          <p className="text-white/40 text-base mb-10 leading-relaxed font-bold max-w-md">
+            Precisa de ajustes no plano ou está sem motivação? Estamos aqui para te ajudar em cada passo.
           </p>
-          <button className="bg-white text-[#3F2A2F] font-light py-4 px-8 rounded-full flex items-center gap-2 hover:bg-[#FAF9F6] transition-colors shadow-md text-sm uppercase tracking-widest">
-            <MessageCircle size={18} />
+          <button className="bg-white text-black font-bold py-5 px-10 rounded-2xl flex items-center gap-3 hover:scale-105 transition-all shadow-2xl text-xs uppercase tracking-widest">
+            <MessageCircle size={20} />
             Iniciar Chat
           </button>
         </div>
-        <div className="absolute -right-6 -bottom-6 text-white/5">
-          <MessageCircle size={140} />
+        <div className="absolute -right-10 -bottom-10 text-white/5 rotate-12">
+          <MessageCircle size={200} />
         </div>
         
         {/* Premium Overlay for Essential Plan */}
-        <div className="absolute inset-0 bg-[#3F2A2F]/90 backdrop-blur-sm flex flex-col items-center justify-center z-20 p-6 text-center">
-          <Lock className="text-[#D4B996] mb-4" size={28} />
-          <h4 className="font-serif font-light text-2xl mb-2 italic">Acesso Exclusivo</h4>
-          <p className="text-sm text-white/60 mb-6 font-light">O chat direto com o coach está disponível no Plano Premium.</p>
-          <button className="bg-[#E8B4BC] text-white font-light py-3 px-8 rounded-full text-[10px] shadow-lg hover:shadow-xl transition-all uppercase tracking-[0.2em]">
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-xl flex flex-col items-center justify-center z-20 p-8 text-center border border-white/10 rounded-[2.5rem]">
+          <div className="w-20 h-20 rounded-3xl bg-[#D4B996]/10 flex items-center justify-center mb-6 border border-[#D4B996]/20">
+            <Lock className="text-[#D4B996]" size={32} />
+          </div>
+          <h4 className="font-bold text-3xl mb-3 tracking-tight">Acesso <span className="text-[#D4B996]">Exclusivo</span></h4>
+          <p className="text-sm text-white/40 mb-8 font-bold max-w-xs leading-relaxed">O chat direto com o coach está disponível apenas no Plano Premium.</p>
+          <button className="bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black font-bold py-4 px-10 rounded-2xl text-[10px] shadow-2xl hover:scale-105 transition-all uppercase tracking-widest">
             Conhecer os Planos
           </button>
         </div>
       </section>
 
       {/* Mindset Content */}
-      <section>
-        <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="text-[#D4B996]" size={18} />
-          <h3 className="text-xl font-serif font-light text-[#3F2A2F]">Doses de Motivação</h3>
+      <section className="relative z-10">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-10 h-10 rounded-xl bg-[#D4B996]/10 flex items-center justify-center border border-[#D4B996]/20">
+            <Sparkles className="text-[#D4B996]" size={20} />
+          </div>
+          <h3 className="text-2xl font-bold text-white tracking-tight">Doses de Motivação</h3>
         </div>
         
-        <div className="space-y-4">
+        <div className="grid gap-5">
           {articles.map(article => (
-            <div key={article.id} className="bg-white p-5 rounded-[1.5rem] border border-[#3F2A2F]/5 flex justify-between items-center cursor-pointer hover:border-[#3F2A2F]/10 transition-colors">
-              <div>
-                <h4 className="font-light text-[#3F2A2F] mb-1 text-lg">{article.title}</h4>
-                <span className="text-[9px] text-[#3F2A2F]/30 font-medium uppercase tracking-[0.2em] block">Leitura: {article.readTime}</span>
+            <div key={article.id} className="glass-card p-6 rounded-[2rem] border border-white/5 flex justify-between items-center cursor-pointer hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
+              <div className="flex-1">
+                <h4 className="font-bold text-white mb-2 text-lg group-hover:text-[#E8B4BC] transition-colors tracking-tight">{article.title}</h4>
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] text-white/20 font-bold uppercase tracking-widest block">Leitura: {article.readTime}</span>
+                  <div className="w-1 h-1 rounded-full bg-white/10"></div>
+                  <span className="text-[10px] text-[#D4B996] font-bold uppercase tracking-widest block">Mindset</span>
+                </div>
               </div>
-              <div className="w-10 h-10 rounded-full bg-[#FAF9F6] flex items-center justify-center text-[#3F2A2F]/20 shrink-0">
-                <ChevronRight size={18} />
+              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/20 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all shrink-0 border border-white/5">
+                <ChevronRight size={24} />
               </div>
             </div>
           ))}

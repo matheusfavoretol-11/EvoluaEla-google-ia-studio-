@@ -11,62 +11,54 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
   const { theme } = useTheme();
 
   return (
-    <div className="relative w-full h-full min-h-[400px] flex flex-col items-center justify-center p-6 text-center overflow-hidden rounded-[2rem] bg-stone-50 border border-stone-100">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+    <div className="relative w-full h-full min-h-[450px] flex flex-col items-center justify-center p-8 text-center overflow-hidden rounded-[3rem] bg-[#141414] border border-white/5 shadow-2xl">
+      {/* Background Glows */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#D4B996]/5 rounded-full blur-[100px] pointer-events-none"></div>
       
       <div className="relative z-10 flex flex-col items-center max-w-sm mx-auto">
         <div 
-          className="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-lg relative"
-          style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.accent})` }}
+          className="w-24 h-24 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl relative border border-white/10 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl"
         >
-          <div className="absolute inset-1 bg-white rounded-full flex items-center justify-center">
-            <Lock size={32} style={{ color: theme.primary }} />
-          </div>
-          <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center shadow-md border-2 border-white">
-            <Star size={14} className="text-white" fill="currentColor" />
+          <Lock size={40} className="text-[#D4B996]" />
+          <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
+            <Star size={18} className="text-black" fill="currentColor" />
           </div>
         </div>
 
-        <h3 className="text-2xl font-serif font-bold text-stone-800 mb-3">
+        <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">
           {title}
         </h3>
         
-        <p className="text-stone-500 font-medium mb-8 leading-relaxed">
+        <p className="text-white/40 font-bold mb-10 leading-relaxed text-sm">
           {description}
         </p>
 
-        <div className="bg-white p-4 rounded-2xl shadow-sm border border-stone-100 w-full mb-8 text-left space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-              <span className="text-emerald-600 font-bold text-xs">1</span>
+        <div className="bg-white/5 p-6 rounded-[2rem] border border-white/5 w-full mb-10 text-left space-y-4 backdrop-blur-md">
+          {[
+            "Resultados 3x mais rápidos com acompanhamento profissional",
+            "Pare de tentar sozinha — tenha especialistas ao seu lado",
+            "Seu corpo e sua mente evoluindo juntos"
+          ].map((benefit, idx) => (
+            <div key={idx} className="flex items-center gap-4">
+              <div className="w-8 h-8 rounded-xl bg-[#E8B4BC]/10 flex items-center justify-center shrink-0 border border-[#E8B4BC]/20">
+                <span className="text-[#E8B4BC] font-bold text-xs">{idx + 1}</span>
+              </div>
+              <p className="text-xs text-white/60 font-bold leading-tight">{benefit}</p>
             </div>
-            <p className="text-sm text-stone-600 font-medium">Resultados 3x mais rápidos com acompanhamento profissional</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-              <span className="text-emerald-600 font-bold text-xs">2</span>
-            </div>
-            <p className="text-sm text-stone-600 font-medium">Pare de tentar sozinha — tenha especialistas ao seu lado</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-              <span className="text-emerald-600 font-bold text-xs">3</span>
-            </div>
-            <p className="text-sm text-stone-600 font-medium">Seu corpo e sua mente evoluindo juntos</p>
-          </div>
+          ))}
         </div>
 
         <button
           onClick={onUpgrade}
-          className="w-full py-4 rounded-[1.5rem] font-bold text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 gradient-bg hover:scale-[1.02]"
+          className="w-full py-5 rounded-2xl font-bold text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-xs uppercase tracking-widest"
         >
           Desbloquear Premium
-          <ArrowRight size={18} />
+          <ArrowRight size={20} />
         </button>
         
-        <p className="text-[10px] text-stone-400 mt-4 font-medium uppercase tracking-widest">
-          Disponível apenas no Premium com acompanhamento profissional
+        <p className="text-[10px] text-white/10 mt-6 font-bold uppercase tracking-widest">
+          Disponível apenas no Plano Premium
         </p>
       </div>
     </div>

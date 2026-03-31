@@ -58,83 +58,88 @@ export default function ProgressView() {
   }
 
   return (
-    <div className="p-6 space-y-8 bg-[#FAF9F6] min-h-full">
-      <header>
-        <h2 className="text-3xl font-serif font-light text-[#3F2A2F] mb-2 italic">Sua Evolução</h2>
-        <p className="text-sm font-light text-[#3F2A2F]/40">Acompanhe seus resultados e celebre cada vitória.</p>
+    <div className="p-6 space-y-10 bg-[#0A0A0A] min-h-full text-white font-sans relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <header className="relative z-10">
+        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Sua <span className="gradient-text">Evolução</span></h2>
+        <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Acompanhe seus resultados e celebre cada vitória.</p>
       </header>
 
       {/* Weight Tracker */}
-      <section className="p-6 rounded-[2rem] border border-[#3F2A2F]/5 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#FAF9F6] rounded-full blur-2xl -mr-10 -mt-10"></div>
-        <div className="flex justify-between items-start mb-6 relative z-10">
+      <section className="p-8 rounded-[2.5rem] border border-white/5 glass-card relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4B996]/5 rounded-full blur-[80px] -mr-10 -mt-10"></div>
+        <div className="flex justify-between items-start mb-10 relative z-10">
           <div>
-            <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20 block mb-1">Peso Atual</span>
-            <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-serif font-light text-[#3F2A2F]">{currentWeight.toFixed(1)}</span>
-              <span className="font-light text-[#3F2A2F]/40">kg</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white/20 block mb-3">Peso Atual</span>
+            <div className="flex items-baseline gap-3">
+              <span className="text-6xl font-bold text-white tracking-tighter">{currentWeight.toFixed(1)}</span>
+              <span className="font-bold text-white/20 text-xl tracking-widest uppercase">kg</span>
             </div>
           </div>
-          <div className={`px-3 py-1.5 rounded-full flex items-center gap-1 text-[10px] font-medium uppercase tracking-[0.2em] shadow-sm ${isLoss ? 'bg-[#E8B4BC]/10 text-[#E8B4BC]' : 'bg-[#D4B996]/10 text-[#D4B996]'}`}>
-            {isLoss ? <TrendingDown size={14} /> : <TrendingUp size={14} />}
+          <div className={`px-5 py-2.5 rounded-2xl flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest shadow-2xl border ${isLoss ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border-rose-500/20'}`}>
+            {isLoss ? <TrendingDown size={18} /> : <TrendingUp size={18} />}
             <span>{weightDiff} kg</span>
           </div>
         </div>
 
         {/* Add Weight Input */}
-        <div className="flex items-center gap-3 mb-6 relative z-10">
-          <input
-            type="number"
-            step="0.1"
-            value={newWeight}
-            onChange={(e) => setNewWeight(e.target.value)}
-            placeholder="Novo peso (kg)"
-            className="flex-1 bg-[#FAF9F6] border border-[#3F2A2F]/5 rounded-full px-6 py-3 text-sm font-light focus:ring-1 focus:ring-[#E8B4BC]/20 focus:outline-none transition-all text-[#3F2A2F]"
-          />
+        <div className="flex items-center gap-4 mb-10 relative z-10">
+          <div className="flex-1 relative group">
+            <input
+              type="number"
+              step="0.1"
+              value={newWeight}
+              onChange={(e) => setNewWeight(e.target.value)}
+              placeholder="Novo peso (kg)"
+              className="w-full bg-white/5 border border-white/5 rounded-2xl px-8 py-5 text-sm font-bold text-white outline-none focus:border-[#E8B4BC]/30 transition-all placeholder:text-white/10"
+            />
+          </div>
           <button 
             onClick={handleAddWeight}
             disabled={!newWeight}
-            className="px-8 py-3 rounded-full font-light uppercase tracking-[0.2em] text-[10px] text-white shadow-md hover:shadow-lg transition-all disabled:opacity-50 bg-[#3F2A2F]"
+            className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-30 disabled:hover:scale-100 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
           >
             Registrar
           </button>
         </div>
 
         {/* Recharts Area */}
-        <div className="h-48 w-full mt-4 relative z-10" style={{ marginLeft: '-10px' }}>
+        <div className="h-64 w-full mt-6 relative z-10" style={{ marginLeft: '-15px' }}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={weightData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorWeight" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={theme.primary} stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor={theme.primary} stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#E8B4BC" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#E8B4BC" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f4" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.03)" />
               <XAxis 
                 dataKey="date" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 9, fill: '#3F2A2F', opacity: 0.4, fontWeight: 400 }} 
-                dy={10}
+                tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.2)', fontWeight: 700 }} 
+                dy={15}
               />
               <YAxis 
                 domain={['dataMin - 1', 'dataMax + 1']} 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 9, fill: '#3F2A2F', opacity: 0.4, fontWeight: 400 }}
-                dx={-10}
+                tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.2)', fontWeight: 700 }}
+                dx={-15}
               />
               <Tooltip 
-                contentStyle={{ borderRadius: '1rem', border: 'none', backgroundColor: 'white', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)' }}
-                itemStyle={{ color: '#E8B4BC', fontWeight: 400, fontSize: '12px' }}
-                labelStyle={{ color: '#3F2A2F', fontWeight: 400, fontSize: '12px', marginBottom: '4px' }}
+                contentStyle={{ borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', backgroundColor: '#141414', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
+                itemStyle={{ color: '#E8B4BC', fontWeight: 700, fontSize: '12px' }}
+                labelStyle={{ color: 'white', fontWeight: 700, fontSize: '12px', marginBottom: '6px' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="weight" 
-                stroke={theme.primary} 
-                strokeWidth={3}
+                stroke="#E8B4BC" 
+                strokeWidth={4}
                 fillOpacity={1} 
                 fill="url(#colorWeight)" 
               />
@@ -144,61 +149,61 @@ export default function ProgressView() {
       </section>
 
       {/* Before/After Comparison */}
-      <section className="space-y-4">
+      <section className="space-y-6">
         <div className="flex justify-between items-center">
-          <h3 className="text-xl font-serif font-light text-[#3F2A2F] italic">Comparação</h3>
+          <h3 className="text-2xl font-bold text-white tracking-tight">Comparação Visual</h3>
         </div>
         
-        <div className="bg-white p-5 rounded-[2rem] border border-[#3F2A2F]/5">
-          <div className="flex items-center justify-center gap-2 mb-5 text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">
-            <Lock size={12} /> Ambiente seguro e privado
+        <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+          <div className="flex items-center justify-center gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-white/20">
+            <Lock size={14} className="text-[#D4B996]" /> Ambiente seguro e privado
           </div>
           
-          <div className="grid grid-cols-2 gap-3">
-            <div className="relative aspect-[3/4] rounded-[1.5rem] overflow-hidden bg-[#FAF9F6] border border-[#3F2A2F]/5">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/5 shadow-2xl group">
               {photos.length > 0 ? (
                 <>
-                  <img src={photos[0].url} alt="Antes" className="w-full h-full object-cover grayscale opacity-80" referrerPolicy="no-referrer" />
-                  <div className="absolute top-3 left-3 bg-white/80 backdrop-blur-md text-[#3F2A2F] text-[9px] font-medium px-2.5 py-1 rounded-full uppercase tracking-[0.2em] border border-[#3F2A2F]/5">Antes</div>
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent p-4">
-                    <p className="text-[#3F2A2F] font-serif font-light italic text-sm mb-0.5">{photos[0].date}</p>
-                    <p className="text-[#3F2A2F]/60 text-xs font-light">{photos[0].weight}</p>
+                  <img src={photos[0].url} alt="Antes" className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 transition-opacity" referrerPolicy="no-referrer" />
+                  <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-xl text-white text-[10px] font-bold px-4 py-2 rounded-2xl uppercase tracking-widest border border-white/10">Antes</div>
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
+                    <p className="text-white font-bold text-lg mb-1 tracking-tight">{photos[0].date}</p>
+                    <p className="text-white/40 text-xs font-bold uppercase tracking-widest">{photos[0].weight}</p>
                   </div>
                 </>
               ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-[#3F2A2F]/20">
-                  <ImageIcon size={24} className="mb-2 opacity-50" />
-                  <span className="text-[9px] font-medium uppercase tracking-[0.2em]">Sem foto</span>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white/10">
+                  <ImageIcon size={32} className="mb-3 opacity-20" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Sem foto</span>
                 </div>
               )}
             </div>
             
-            <div className="relative aspect-[3/4] rounded-[1.5rem] overflow-hidden bg-[#FAF9F6] border border-[#3F2A2F]/5">
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/5 shadow-2xl group">
               {photos.length > 1 ? (
                 <>
-                  <img src={photos[photos.length - 1].url} alt="Depois" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                  <div className="absolute top-3 right-3 bg-[#3F2A2F] text-white text-[9px] font-medium px-2.5 py-1 rounded-full uppercase tracking-[0.2em] shadow-sm">Depois</div>
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent p-4">
-                    <p className="text-[#3F2A2F] font-serif font-light italic text-sm mb-0.5">{photos[photos.length - 1].date}</p>
-                    <p className="text-[#3F2A2F]/60 text-xs font-light">{photos[photos.length - 1].weight}</p>
+                  <img src={photos[photos.length - 1].url} alt="Depois" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black text-[10px] font-bold px-4 py-2 rounded-2xl uppercase tracking-widest shadow-2xl">Depois</div>
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
+                    <p className="text-white font-bold text-lg mb-1 tracking-tight">{photos[photos.length - 1].date}</p>
+                    <p className="text-white/40 text-xs font-bold uppercase tracking-widest">{photos[photos.length - 1].weight}</p>
                   </div>
                 </>
               ) : (
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="absolute inset-0 flex flex-col items-center justify-center text-[#3F2A2F]/20 hover:bg-white transition-colors border-2 border-dashed border-[#3F2A2F]/5 rounded-[1.5rem] m-1"
+                  className="absolute inset-0 flex flex-col items-center justify-center text-white/20 hover:bg-white/5 transition-all border-2 border-dashed border-white/10 rounded-3xl m-2 group"
                 >
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-2 bg-[#E8B4BC]/10" style={{ color: '#E8B4BC' }}>
-                    <Camera size={20} />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
+                    <Camera size={28} />
                   </div>
-                  <span className="text-[9px] font-medium uppercase tracking-[0.2em]" style={{ color: '#E8B4BC' }}>Adicionar Foto</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC]">Adicionar Foto</span>
                 </button>
               )}
             </div>
           </div>
           
-          <div className="mt-6 text-center">
-            <p className="text-sm font-serif font-light italic text-[#3F2A2F]/40">
+          <div className="mt-10 text-center">
+            <p className="text-sm font-bold uppercase tracking-widest text-white/10 italic">
               "Celebre o progresso, não a perfeição."
             </p>
           </div>
@@ -206,9 +211,9 @@ export default function ProgressView() {
       </section>
 
       {/* Photos Timeline */}
-      <section>
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#3F2A2F]/20">Linha do Tempo</h3>
+      <section className="pb-10">
+        <div className="flex justify-between items-center mb-8">
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-white/20">Linha do Tempo</h3>
           <input 
             type="file" 
             accept="image/*" 
@@ -218,18 +223,18 @@ export default function ProgressView() {
           />
           <button 
             onClick={() => fileInputRef.current?.click()}
-            className="text-[10px] font-medium uppercase tracking-[0.2em] flex items-center gap-1 hover:opacity-80 transition-opacity text-[#E8B4BC]" 
+            className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors text-[#E8B4BC]" 
           >
-            <Plus size={14} /> Nova Foto
+            <Plus size={18} /> Nova Foto
           </button>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
+        <div className="flex gap-6 overflow-x-auto pb-6 hide-scrollbar">
           {photos.map((photo, index) => (
             <motion.div 
               key={`${photo.id}-${index}`}
-              whileHover={{ y: -4, scale: 1.02 }} 
-              className="w-32 shrink-0 aspect-[3/4] rounded-[1.5rem] overflow-hidden relative group cursor-pointer border border-[#3F2A2F]/5 shadow-sm transition-shadow hover:shadow-md bg-white" 
+              whileHover={{ y: -8, scale: 1.02 }} 
+              className="w-40 shrink-0 aspect-[3/4] rounded-3xl overflow-hidden relative group cursor-pointer border border-white/5 shadow-2xl transition-all hover:border-[#E8B4BC]/30 bg-white/5" 
             >
               <img 
                 src={photo.url} 
@@ -237,22 +242,22 @@ export default function ProgressView() {
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3F2A2F]/80 via-[#3F2A2F]/20 to-transparent flex flex-col justify-end p-3 opacity-90 group-hover:opacity-100 transition-opacity">
-                <span className="text-white font-serif font-light italic text-sm mb-0.5">{photo.date}</span>
-                <span className="text-white/80 text-xs font-light">{photo.weight}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-5 opacity-90 group-hover:opacity-100 transition-opacity">
+                <span className="text-white font-bold text-base mb-1 tracking-tight">{photo.date}</span>
+                <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{photo.weight}</span>
               </div>
             </motion.div>
           ))}
           
           <motion.button 
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{ y: -8, scale: 1.02 }}
             onClick={() => fileInputRef.current?.click()}
-            className="w-32 shrink-0 aspect-[3/4] rounded-[1.5rem] border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer bg-white hover:bg-[#FAF9F6] border-[#3F2A2F]/5 text-[#3F2A2F]/20"
+            className="w-40 shrink-0 aspect-[3/4] rounded-3xl border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer bg-white/5 hover:bg-white/10 border-white/10 text-white/20 group"
           >
-            <div className="w-10 h-10 rounded-full flex items-center justify-center mb-2 bg-[#FAF9F6] transition-colors group-hover:bg-[#3F2A2F]/5">
-              <Camera size={20} />
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-white/5 transition-all group-hover:bg-[#E8B4BC] group-hover:text-black">
+              <Camera size={28} />
             </div>
-            <span className="text-[9px] font-medium uppercase tracking-[0.2em]">Nova Foto</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">Nova Foto</span>
           </motion.button>
         </div>
       </section>

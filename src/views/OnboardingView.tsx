@@ -71,13 +71,19 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-white font-sans text-[#3F2A2F]">
-      <div className="flex-1 flex flex-col px-6 sm:px-8 py-10 sm:py-16 max-w-md mx-auto w-full">
+    <div className="min-h-screen w-full flex flex-col bg-[#0A0A0A] font-sans text-white relative overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#E8B4BC]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#D4B996]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      <div className="flex-1 flex flex-col px-6 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
         
         {/* Progress Bar */}
-        <div className="w-full h-1 bg-[#FAF9F6] rounded-full mb-10 sm:mb-16 overflow-hidden">
+        <div className="w-full h-1.5 bg-white/5 rounded-full mb-12 sm:mb-20 overflow-hidden border border-white/5">
           <motion.div 
-            className="h-full rounded-full bg-[#E8B4BC]"
+            className="h-full rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
             initial={{ width: '0%' }}
             animate={{ width: `${(step / 3) * 100}%` }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -93,10 +99,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">Qual o seu grande sonho hoje?</h2>
-              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">Qual o seu <span className="gradient-text">grande sonho</span> hoje?</h2>
+              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
 
-              <div className="space-y-3 sm:space-y-4 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {objectives.map((obj, idx) => {
                   const Icon = obj.icon;
                   const isSelected = objective === obj.id;
@@ -104,20 +110,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={obj.id}
                       onClick={() => setObjective(obj.id)}
-                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
+                      className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-[#E8B4BC]/5 soft-shadow' 
-                          : 'border-[#3F2A2F]/5 hover:border-[#E8B4BC]/20 bg-white'
+                          ? 'border-[#E8B4BC] bg-white/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-white/20 bg-white/5'
                       }`}
                     >
                       <div 
-                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
+                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
                         }`}
                       >
-                        <Icon size={20} className="sm:w-6 sm:h-6" />
+                        <Icon size={28} />
                       </div>
-                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
                         {obj.label}
                       </span>
                     </button>
@@ -135,10 +141,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">Como está sua relação com seu corpo?</h2>
-              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">Como está sua <span className="gradient-text">relação</span> com seu corpo?</h2>
+              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
 
-              <div className="space-y-3 sm:space-y-4 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {feelings.map((feel, idx) => {
                   const Icon = feel.icon;
                   const isSelected = feeling === feel.id;
@@ -146,20 +152,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={feel.id}
                       onClick={() => setFeeling(feel.id)}
-                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
+                      className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#A8C4B8] bg-[#A8C4B8]/5 soft-shadow' 
-                          : 'border-[#3F2A2F]/5 hover:border-[#A8C4B8]/20 bg-white'
+                          ? 'border-[#D4B996] bg-white/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-white/20 bg-white/5'
                       }`}
                     >
                       <div 
-                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#A8C4B8] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
+                          isSelected ? 'bg-[#D4B996] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
                         }`}
                       >
-                        <Icon size={20} className="sm:w-6 sm:h-6" />
+                        <Icon size={28} />
                       </div>
-                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
                         {feel.label}
                       </span>
                     </button>
@@ -177,10 +183,10 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-[#3F2A2F] mb-3 sm:mb-4 leading-tight">O que mais te desafia no dia a dia?</h2>
-              <p className="text-sm sm:text-base text-[#3F2A2F]/40 mb-8 sm:mb-10 font-light leading-relaxed">Vamos juntas encontrar o caminho para superar isso.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">O que mais te <span className="gradient-text">desafia</span> no dia a dia?</h2>
+              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Vamos juntas encontrar o caminho para superar isso.</p>
 
-              <div className="space-y-3 sm:space-y-4 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {challenges.map((chal, idx) => {
                   const Icon = chal.icon;
                   const isSelected = challenge === chal.id;
@@ -188,20 +194,20 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     <button
                       key={chal.id}
                       onClick={() => setChallenge(chal.id)}
-                      className={`w-full p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] border flex items-center gap-4 sm:gap-5 transition-all ${
+                      className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-[#E8B4BC]/5 soft-shadow' 
-                          : 'border-[#3F2A2F]/5 hover:border-[#E8B4BC]/20 bg-white'
+                          ? 'border-[#E8B4BC] bg-white/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-white/20 bg-white/5'
                       }`}
                     >
                       <div 
-                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-white' : 'bg-[#FAF9F6] text-[#3F2A2F]/20'
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
+                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
                         }`}
                       >
-                        <Icon size={20} className="sm:w-6 sm:h-6" />
+                        <Icon size={28} />
                       </div>
-                      <span className={`text-sm sm:text-base font-light ${isSelected ? 'text-[#3F2A2F]' : 'text-[#3F2A2F]/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
                         {chal.label}
                       </span>
                     </button>
@@ -212,21 +218,21 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           )}
         </AnimatePresence>
 
-        <div className="pt-8 sm:pt-12 mt-auto">
+        <div className="pt-12 sm:pt-16 mt-auto">
           <button
             onClick={handleNext}
             disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge)}
-            className="w-full py-4 sm:py-5 rounded-full font-light text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:shadow-xl bg-[#E8B4BC] hover:bg-[#3F2A2F] hover:scale-[1.02] active:scale-95 uppercase tracking-[0.2em] text-[10px] sm:text-xs"
+            className="w-full py-6 sm:py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:hover:shadow-2xl bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
           >
             {isSaving ? (
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="flex items-center gap-4">
+                <div className="w-6 h-6 border-3 border-black/30 border-t-black rounded-full animate-spin" />
                 <span>Preparando sua jornada...</span>
               </div>
             ) : (
               <>
                 {step === 3 ? 'Quero começar minha evolução!' : 'Continuar'}
-                <ArrowRight size={18} />
+                <ArrowRight size={22} />
               </>
             )}
           </button>

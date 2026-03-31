@@ -52,6 +52,16 @@ export const predefinedThemes: Record<string, Theme> = {
     textMuted: '#a8a29e', // stone-400
     accent: '#4c1d95', // violet-900
   },
+  castify: {
+    id: 'castify',
+    name: 'Castify',
+    primary: '#E8B4BC', // Rose Premium
+    bg: '#0A0A0A', // Deep Dark
+    surface: '#141414', // Card Dark
+    text: '#FFFFFF',
+    textMuted: '#888888',
+    accent: '#D4B996', // Gold
+  },
 };
 
 interface ThemeContextType {
@@ -63,7 +73,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(predefinedThemes.premium);
+  const [theme, setTheme] = useState<Theme>(predefinedThemes.castify);
 
   useEffect(() => {
     const root = document.documentElement;

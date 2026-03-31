@@ -48,72 +48,80 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-white overflow-y-auto">
-      <div className="relative h-56 sm:h-64 shrink-0">
+    <div className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0A] overflow-y-auto font-sans text-white">
+      <div className="relative h-72 sm:h-80 shrink-0">
         <img 
-          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800&h=600" 
+          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200&h=800" 
           alt="EvoluaEla Premium" 
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
         
         <button 
           onClick={onClose}
-          className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-black/40 transition-colors"
+          className="absolute top-6 right-6 w-12 h-12 bg-black/40 backdrop-blur-xl rounded-2xl flex items-center justify-center text-white hover:bg-black/60 transition-all border border-white/10"
         >
-          <X size={18} className="sm:w-5 sm:h-5" />
+          <X size={24} />
         </button>
 
-        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 text-white">
-          <div className="flex items-center gap-2 mb-1 sm:mb-2">
-            <Star className="text-[#D4B996] sm:w-5 sm:h-5" size={16} fill="currentColor" />
-            <span className="font-medium tracking-[0.2em] uppercase text-[8px] sm:text-[10px] text-[#D4B996]">Círculo Premium</span>
+        <div className="absolute bottom-8 left-8 right-8 text-white">
+          <div className="flex items-center gap-3 mb-3">
+            <Star className="text-[#D4B996] w-6 h-6" fill="currentColor" />
+            <span className="font-bold tracking-widest uppercase text-xs text-[#D4B996]">Círculo Premium</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light leading-tight italic">Sua jornada guiada por quem entende de você.</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tighter">Sua jornada guiada por quem <span className="gradient-text">entende de você</span>.</h2>
         </div>
       </div>
 
-      <div className="p-5 sm:p-6 flex-1 flex flex-col bg-[#FAF9F6]">
-        <div className="space-y-5 sm:space-y-6 flex-1">
+      <div className="p-8 sm:p-10 flex-1 flex flex-col bg-[#0A0A0A] relative">
+        {/* Background Glow */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="space-y-8 flex-1 relative z-10">
           <div className="text-center">
-            <div className="inline-block px-3 py-1 bg-[#E8B4BC]/10 text-[#E8B4BC] font-medium text-[8px] sm:text-[9px] rounded-full mb-2 sm:mb-3 uppercase tracking-[0.2em]">
-              Experimente por 7 Dias
+            <div className="inline-block px-5 py-2 bg-[#E8B4BC]/10 text-[#E8B4BC] font-bold text-[10px] rounded-full mb-4 uppercase tracking-widest border border-[#E8B4BC]/20">
+              Experimente por 7 Dias Grátis
             </div>
-            <div className="text-4xl sm:text-5xl font-serif font-light text-[#3F2A2F] mb-1">R$ 97,90<span className="text-lg sm:text-xl text-[#3F2A2F]/40 font-light font-sans">/mês</span></div>
-            <p className="text-[#3F2A2F]/40 text-xs sm:text-sm font-light">Sinta a transformação primeiro. Cancele quando quiser.</p>
+            <div className="text-6xl sm:text-7xl font-bold text-white mb-2 tracking-tighter">R$ 109,90<span className="text-xl text-white/20 font-bold tracking-normal">/mês</span></div>
+            <p className="text-white/40 text-sm font-medium tracking-wide">Acompanhamento profissional completo. Cancele quando quiser.</p>
           </div>
 
-          <div className="space-y-3 sm:space-y-4">
-            <h3 className="font-serif font-light text-[#3F2A2F] text-lg sm:text-xl italic">O que preparamos para você:</h3>
+          <div className="space-y-6">
+            <h3 className="font-bold text-white text-xl uppercase tracking-widest flex items-center gap-3">
+              <div className="w-8 h-1 bg-[#E8B4BC] rounded-full"></div>
+              O que preparamos para você
+            </h3>
             
-            <ul className="space-y-2 sm:space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 'Dieta Personalizada com Nutricionista',
                 'Equilíbrio Emocional com Terapeuta',
                 'Treinos 100% personalizados',
                 'Acesso ilimitado ao Coach IA',
-                'Ajustes semanais e chat direto com especialistas'
+                'Ajustes semanais e chat direto',
+                'Comunidade exclusiva de mulheres'
               ].map((item, idx) => (
-                <li key={`benefit-${idx}`} className="flex items-start gap-3">
-                  <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 bg-[#E8B4BC]/10" style={{ color: '#E8B4BC' }}>
-                    <Check size={12} strokeWidth={2} />
+                <div key={`benefit-${idx}`} className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 border border-white/5 group hover:bg-white/10 transition-all">
+                  <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
+                    <Check size={20} strokeWidth={3} />
                   </div>
-                  <span className="text-sm sm:text-base text-[#3F2A2F]/60 font-light">{item}</span>
-                </li>
+                  <span className="text-sm font-bold text-white/60 group-hover:text-white transition-colors">{item}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div className="bg-white p-4 rounded-[1.25rem] sm:rounded-[1.5rem] border border-[#3F2A2F]/5 flex flex-col items-center text-center">
-            <p className="text-[#3F2A2F] font-serif font-light italic mb-1 text-sm sm:text-base">Muito além de um app</p>
-            <p className="text-[#3F2A2F]/40 text-xs sm:text-sm font-light">É sobre sua nova versão. Agora você tem um time segurando sua mão.</p>
+          <div className="glass-card p-8 border border-white/10 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"></div>
+            <p className="text-white font-bold mb-2 text-lg tracking-tight">Muito além de um app</p>
+            <p className="text-white/40 text-sm font-medium leading-relaxed">É sobre sua nova versão. Agora você tem um time segurando sua mão em cada passo do caminho.</p>
           </div>
 
-          <div className="bg-white p-4 rounded-[1.25rem] sm:rounded-[1.5rem] border border-[#3F2A2F]/5 flex gap-3 items-start">
-            <AlertCircle className="text-[#D4B996] shrink-0 mt-0.5 sm:w-5 sm:h-5" size={18} />
-            <p className="text-[9px] sm:text-[10px] text-[#3F2A2F]/40 leading-relaxed font-light">
-              <strong className="font-medium">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
+          <div className="bg-white/5 p-6 rounded-3xl border border-white/5 flex gap-4 items-start">
+            <AlertCircle className="text-[#D4B996] shrink-0 mt-0.5" size={24} />
+            <p className="text-[11px] text-white/30 leading-relaxed font-bold uppercase tracking-widest">
+              <strong className="text-white/60">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
 
@@ -121,28 +129,33 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-4 rounded-2xl bg-red-50 text-red-600 text-xs font-medium flex items-center gap-3 border border-red-100"
+              className="p-6 rounded-3xl bg-rose-500/10 text-rose-500 text-sm font-bold flex items-center gap-4 border border-rose-500/20 shadow-2xl"
             >
-              <AlertCircle size={16} />
+              <AlertCircle size={20} />
               {error}
             </motion.div>
           )}
         </div>
 
-        <div className="mt-6 sm:mt-8 pt-4 border-t border-[#3F2A2F]/5">
-          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4 text-[#3F2A2F]/40 text-[8px] sm:text-[10px] font-medium uppercase tracking-[0.2em]">
-            <CreditCard size={12} className="sm:w-3.5 sm:h-3.5" />
-            <span>Cobrança apenas após 7 dias</span>
+        <div className="mt-12 pt-8 border-t border-white/5 relative z-10">
+          <div className="flex items-center justify-center gap-3 mb-6 text-white/20 text-[10px] font-bold uppercase tracking-widest">
+            <CreditCard size={16} />
+            <span>Cobrança segura apenas após 7 dias</span>
           </div>
           <button 
             onClick={handleSubscribe}
             disabled={isProcessing}
-            className="w-full py-3.5 sm:py-4 rounded-full font-light uppercase tracking-[0.2em] text-[9px] sm:text-[10px] text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 bg-[#3F2A2F] hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
+            className="w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-black shadow-3xl hover:shadow-white/10 transition-all transform hover:-translate-y-1 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
           >
-            {isProcessing ? 'Preparando tudo para você...' : 'Quero começar meu teste grátis'}
+            {isProcessing ? (
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                <span>Processando...</span>
+              </div>
+            ) : 'Quero começar meu teste grátis'}
           </button>
-          <p className="text-center text-[8px] sm:text-[9px] text-[#3F2A2F]/20 mt-3 sm:mt-4 font-light leading-relaxed uppercase tracking-widest">
-            Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 97,90/mês será renovada automaticamente para manter sua evolução. Você tem total liberdade para cancelar quando quiser.
+          <p className="text-center text-[9px] text-white/10 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
+            Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 109,90/mês será renovada automaticamente. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>
       </div>
