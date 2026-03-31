@@ -57,7 +57,10 @@ function AppContent() {
     // No longer needed to set local state, UserContext handles it
   };
 
-  const isSupabaseConfigured = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+  const isSupabaseConfigured = Boolean(
+    (import.meta.env.VITE_SUPABASE_URL || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_URL : undefined)) && 
+    (import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_ANON_KEY : undefined))
+  );
 
   if (!isSupabaseConfigured) {
     return (

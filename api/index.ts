@@ -8,6 +8,20 @@ import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
 
+// Validate environment variables
+const requiredEnvVars = [
+  'VITE_SUPABASE_URL',
+  'SUPABASE_SERVICE_ROLE_KEY',
+  'STRIPE_SECRET_KEY',
+  'APP_URL'
+];
+
+requiredEnvVars.forEach(v => {
+  if (!process.env[v]) {
+    console.warn(`AVISO: Variável de ambiente ${v} está faltando!`);
+  }
+});
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2023-10-16' as any,
 });
