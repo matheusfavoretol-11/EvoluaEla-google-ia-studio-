@@ -12,7 +12,7 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
   ? createClient(supabaseUrl, supabaseAnonKey)
   : new Proxy({} as any, {
       get: (target, prop) => {
-        const warning = () => console.error(`Supabase not configured. Cannot call ${String(prop)}`);
+        const warning = () => console.error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.');
         
         if (prop === 'auth') {
           return new Proxy({}, {
@@ -25,7 +25,7 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
               }
               return async () => {
                 console.error(`Supabase not configured. Cannot call auth.${String(authProp)}`);
-                return { data: { user: null, session: null }, error: new Error('Supabase not configured') };
+                return { data: { user: null, session: null }, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') };
               };
             }
           });
@@ -36,8 +36,8 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
             get: (_, fromProp) => {
               return () => new Proxy({}, {
                 get: (_, queryProp) => {
-                  if (queryProp === 'single') return async () => ({ data: null, error: new Error('Supabase not configured') });
-                  const queryFunc = () => ({ data: null, error: new Error('Supabase not configured') });
+                  if (queryProp === 'single') return async () => ({ data: null, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') });
+                  const queryFunc = () => ({ data: null, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') });
                   // Handle chaining for methods like .select().eq().single()
                   return new Proxy(queryFunc, {
                     get: (t, p) => {

@@ -64,6 +64,8 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
           setError('Você precisa confirmar seu e-mail antes de entrar. Dá uma olhada na sua caixa de entrada!');
         } else if (errorMsg.includes('Connection error')) {
           setError('Ops, parece que estamos com problemas de conexão. Tenta de novo em instantes?');
+        } else if (errorMsg.includes('Supabase not configured')) {
+          setError('O Supabase não foi configurado. Adicione as chaves VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY nas configurações do AI Studio.');
         } else {
           setError(`Erro: ${errorMsg || 'Ops, deu um errinho ao fazer login. Tenta de novo?'}`);
         }
@@ -124,6 +126,8 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
           setError('Muitas tentativas! Dá um tempinho de 1 minuto e tenta de novo.');
         } else if (errorMsg.includes('Connection error')) {
           setError('Ops, parece que estamos com problemas de conexão. Tenta de novo em instantes?');
+        } else if (errorMsg.includes('Supabase not configured')) {
+          setError('O Supabase não foi configurado. Adicione as chaves VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY nas configurações do AI Studio.');
         } else {
           setError(`Erro ao criar conta: ${errorMsg || 'Ops, deu um errinho. Tenta de novo?'}`);
         }

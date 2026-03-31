@@ -59,17 +59,30 @@ function AppContent() {
 
   const isSupabaseConfigured = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 
+  if (!isSupabaseConfigured) {
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-4">
+        <div className="mb-8 p-8 bg-red-500/10 border border-red-500/20 rounded-[2.5rem] max-w-md text-center shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Settings size={32} className="text-red-500" />
+          </div>
+          <h3 className="text-red-500 font-bold mb-4 uppercase tracking-widest text-sm">Configuração Necessária</h3>
+          <p className="text-white/60 text-base font-medium leading-relaxed mb-8">
+            As credenciais do Supabase não foram encontradas. Para o app funcionar, você precisa configurar as variáveis de ambiente no menu de <strong>Configurações (ícone de engrenagem)</strong> do AI Studio.
+          </p>
+          <div className="space-y-3 text-left bg-black/20 p-6 rounded-2xl border border-white/5">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">Variáveis faltantes:</p>
+            <code className="block text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_URL</code>
+            <code className="block text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_ANON_KEY</code>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!isAuthReady) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-        {!isSupabaseConfigured && (
-          <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-3xl max-w-md text-center">
-            <h3 className="text-red-500 font-bold mb-2 uppercase tracking-widest text-xs">Configuração Necessária</h3>
-            <p className="text-red-500/60 text-sm font-medium">
-              As credenciais do Supabase não foram encontradas. Por favor, configure as variáveis de ambiente no menu de configurações.
-            </p>
-          </div>
-        )}
         <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] items-center justify-center border border-white/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
