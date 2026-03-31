@@ -57,10 +57,10 @@ function AppContent() {
     // No longer needed to set local state, UserContext handles it
   };
 
-  const isSupabaseConfigured = Boolean(
-    (import.meta.env.VITE_SUPABASE_URL || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_URL : undefined)) && 
-    (import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_ANON_KEY : undefined))
-  );
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_URL : undefined);
+  const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.VITE_SUPABASE_ANON_KEY : undefined);
+  
+  const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
   if (!isSupabaseConfigured) {
     return (
@@ -71,13 +71,26 @@ function AppContent() {
           </div>
           <h3 className="text-red-500 font-bold mb-4 uppercase tracking-widest text-sm">Configuração Necessária</h3>
           <p className="text-white/60 text-base font-medium leading-relaxed mb-8">
-            As credenciais do Supabase não foram encontradas. Para o app funcionar, você precisa configurar as variáveis de ambiente no menu de <strong>Configurações (ícone de engrenagem)</strong> do AI Studio.
+            As credenciais do Supabase não foram encontradas ou estão vazias. Verifique o menu de <strong>Configurações (ícone de engrenagem) &gt; Secrets</strong> do AI Studio.
           </p>
           <div className="space-y-3 text-left bg-black/20 p-6 rounded-2xl border border-white/5">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">Variáveis faltantes:</p>
-            <code className="block text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_URL</code>
-            <code className="block text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_ANON_KEY</code>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">Status das variáveis:</p>
+            <div className="flex items-center justify-between">
+              <code className="text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_URL</code>
+              <span className={`text-[10px] font-bold uppercase ${supabaseUrl ? 'text-emerald-500' : 'text-red-500'}`}>
+                {supabaseUrl ? 'OK' : 'FALTANDO'}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <code className="text-xs text-[#E8B4BC] font-mono">VITE_SUPABASE_ANON_KEY</code>
+              <span className={`text-[10px] font-bold uppercase ${supabaseAnonKey ? 'text-emerald-500' : 'text-red-500'}`}>
+                {supabaseAnonKey ? 'OK' : 'FALTANDO'}
+              </span>
+            </div>
           </div>
+          <p className="mt-8 text-[10px] text-white/20 font-medium leading-relaxed">
+            Dica: Após salvar os segredos, pode ser necessário atualizar a página ou clicar no botão de "Restart" no menu de configurações.
+          </p>
         </div>
       </div>
     );
