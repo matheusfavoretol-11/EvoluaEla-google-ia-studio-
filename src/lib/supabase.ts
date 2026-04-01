@@ -1,71 +1,126 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase credentials missing. Please check your .env file.');
+let client: SupabaseClient | null = null;
+let initPromise: Promise<SupabaseClient | null> | null = null;
+
+async function getClient(): Promise<SupabaseClient | null> {
+  if (client) return client;
+  if (initPromise) return initPromise;
+
+  initPromise = (async () => {
+    try {
+      const response = await fetch('/api/config');
+      if (!response.ok) throw new Error('Failed to fetch config');
+      
+      const config = await response.json();
+      if (config.supabaseUrl && config.supabaseAnonKey) {
+        client = createClient(config.supabaseUrl, config.supabaseAnonKey);
+        return client;
+      }
+      return null;
+    } catch (err) {
+      console.error('Supabase initialization error:', err);
+      return null;
+    }
+  })();
+
+  return initPromise;
 }
 
-// Create a client only if credentials are present, otherwise export a proxy that warns
-export const supabase = (supabaseUrl && supabaseAnonKey)
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : new Proxy({} as any, {
-      get: (target, prop) => {
-        const warning = () => console.error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.');
-        
-        if (prop === 'auth') {
-          return new Proxy({}, {
-            get: (_, authProp) => {
-              if (authProp === 'onAuthStateChange') {
-                return () => {
-                  console.error('Supabase not configured. Cannot call auth.onAuthStateChange');
-                  return { data: { subscription: { unsubscribe: () => {} } } };
-                };
-              }
-              return async () => {
-                console.error(`Supabase not configured. Cannot call auth.${String(authProp)}`);
-                return { data: { user: null, session: null }, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') };
-              };
-            }
-          });
-        }
+// Start fetching immediately
+getClient();
 
-        if (prop === 'from') {
-          return () => new Proxy({}, {
-            get: (_, fromProp) => {
-              return () => new Proxy({}, {
-                get: (_, queryProp) => {
-                  if (queryProp === 'single') return async () => ({ data: null, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') });
-                  const queryFunc = () => ({ data: null, error: new Error('Supabase not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.') });
-                  // Handle chaining for methods like .select().eq().single()
-                  return new Proxy(queryFunc, {
-                    get: (t, p) => {
-                      if (p === 'then') return undefined; // Not a promise unless it's a terminator
-                      return queryFunc;
-                    }
-                  });
+/**
+ * Creates a lazy proxy that records method calls and replays them once the client is ready.
+ */
+function createLazyProxy(basePath: string[], initialCalls: { name: string, args: any[] }[] = []) {
+  const calls = [...initialCalls];
+  let executed = false;
+  let resultPromise: Promise<any> | null = null;
+
+  const execute = () => {
+    if (executed && resultPromise) return resultPromise;
+    executed = true;
+    resultPromise = getClient().then(c => {
+      if (!c) throw new Error('Supabase not configured');
+      let current: any = c;
+      for (const segment of basePath) {
+        current = current[segment];
+      }
+      for (const call of calls) {
+        if (typeof current[call.name] !== 'function') {
+          throw new Error(`Method ${call.name} not found on Supabase object`);
+        }
+        current = current[call.name](...call.args);
+      }
+      return current;
+    });
+    return resultPromise;
+  };
+
+  const proxy: any = (...args: any[]) => {
+    const lastCall = calls[calls.length - 1];
+    if (lastCall) {
+      lastCall.args = args;
+    }
+    // Trigger execution for methods that might not be awaited (like subscribe or on)
+    if (lastCall && (lastCall.name === 'subscribe' || lastCall.name === 'on')) {
+      execute();
+    }
+    return proxy;
+  };
+
+  proxy.then = (onFulfilled: any, onRejected: any) => {
+    return execute().then(onFulfilled, onRejected);
+  };
+
+  return new Proxy(proxy, {
+    get: (target, prop) => {
+      if (prop === 'then') return target.then;
+      if (typeof prop === 'symbol') return (target as any)[prop];
+      
+      // Add a new method to the chain
+      calls.push({ name: prop as string, args: [] });
+      return proxy;
+    }
+  });
+}
+
+/**
+ * A proxy for the Supabase client that waits for the configuration to be fetched
+ * from the backend before executing any commands.
+ */
+export const supabase = new Proxy({} as any, {
+  get: (target, prop) => {
+    if (typeof prop === 'symbol') return target[prop];
+    
+    if (client) {
+      const val = (client as any)[prop];
+      return typeof val === 'function' ? val.bind(client) : val;
+    }
+
+    // Special handling for auth.onAuthStateChange
+    if (prop === 'auth') {
+      return new Proxy({}, {
+        get: (_, authProp) => {
+          if (authProp === 'onAuthStateChange') {
+            return (callback: any) => {
+              let unsubscribe: () => void = () => {};
+              getClient().then(c => {
+                if (c) {
+                  const { data } = c.auth.onAuthStateChange(callback);
+                  unsubscribe = data.subscription.unsubscribe;
                 }
               });
-            }
-          });
+              return { data: { subscription: { unsubscribe: () => unsubscribe() } } };
+            };
+          }
+          return (...args: any[]) => createLazyProxy(['auth'], [{ name: authProp as string, args }]);
         }
+      });
+    }
 
-        if (prop === 'channel') {
-          const channelProxy: any = new Proxy({}, {
-            get: (_, p) => {
-              if (p === 'on' || p === 'subscribe') return () => channelProxy;
-              if (p === 'unsubscribe') return () => {};
-              return () => channelProxy;
-            }
-          });
-          return () => channelProxy;
-        }
-
-        if (prop === 'removeChannel') return () => {};
-
-        return () => {
-          warning();
-          return { data: null, error: new Error('Supabase not configured') };
-        };
-      }
-    });
+    // For everything else, return a lazy proxy
+    return (...args: any[]) => createLazyProxy([], [{ name: prop as string, args }]);
+  }
+});

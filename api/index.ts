@@ -96,6 +96,14 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Config endpoint for frontend
+app.get('/api/config', (req, res) => {
+  res.json({
+    supabaseUrl: process.env.VITE_SUPABASE_URL,
+    supabaseAnonKey: process.env.VITE_SUPABASE_ANON_KEY,
+  });
+});
+
 // Download Source Code Endpoint
 app.get('/api/download-source', (req, res) => {
   res.attachment('evoluaela-source.zip');
@@ -157,8 +165,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
       subscription_data: {
         trial_period_days: 7,
       },
-      success_url: `https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?success=true`,
-      cancel_url: `https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?canceled=true`,
+      success_url: `${process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app'}/?success=true`,
+      cancel_url: `${process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app'}/?canceled=true`,
       client_reference_id: userId,
     });
 
