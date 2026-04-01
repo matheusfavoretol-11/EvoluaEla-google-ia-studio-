@@ -328,7 +328,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       <div className="flex items-center gap-4 mt-6 pt-6 border-t border-white/5">
         <div className="flex -space-x-3">
           {workout.exercises.slice(0, 3).map((ex, idx) => (
-            <div key={ex.id} className="w-10 h-10 rounded-full bg-neutral-900 border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/40 shadow-xl">
+            <div key={`${ex.id}-${idx}`} className="w-10 h-10 rounded-full bg-neutral-900 border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/40 shadow-xl">
               {idx + 1}
             </div>
           ))}

@@ -13,7 +13,7 @@ const requiredEnvVars = [
   'VITE_SUPABASE_URL',
   'SUPABASE_SERVICE_ROLE_KEY',
   'STRIPE_SECRET_KEY',
-  'APP_URL'
+  'STRIPE_WEBHOOK_SECRET'
 ];
 
 requiredEnvVars.forEach(v => {
@@ -28,7 +28,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 
 // Initialize Supabase Admin Client (Service Role) to bypass RLS
 const supabaseAdmin = createClient(
-  'https://bbjfbnxymgumuzeqjohv.supabase.co',
+  process.env.VITE_SUPABASE_URL || 'https://bbjfbnxymgumuzeqjohv.supabase.co',
   process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 );
 
@@ -91,7 +91,7 @@ app.get('/api/health', (req, res) => {
     supabaseAnonKey: !!process.env.VITE_SUPABASE_ANON_KEY,
     supabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
     stripeKey: !!process.env.STRIPE_SECRET_KEY,
-    appUrl: process.env.APP_URL,
+    appUrl: process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app',
     timestamp: new Date().toISOString()
   });
 });
@@ -133,18 +133,6 @@ app.post('/api/create-checkout-session', async (req, res) => {
       return res.status(400).json({ error: 'User ID is required' });
     }
 
-    if (!process.env.STRIPE_SECRET_KEY) {
-      console.error('Checkout error: STRIPE_SECRET_KEY is missing in environment variables');
-      return res.status(500).json({ 
-        error: 'A chave secreta da Stripe (STRIPE_SECRET_KEY) não foi configurada no painel de segredos do AI Studio.' 
-      });
-    }
-
-    if (!process.env.APP_URL && !req.headers.origin) {
-      console.error('Checkout error: APP_URL and origin header are missing');
-      return res.status(500).json({ error: 'Erro de configuração: URL do app não encontrada.' });
-    }
-
     console.log(`Creating checkout session for user: ${userId}`);
 
     const session = await stripe.checkout.sessions.create({
@@ -169,8 +157,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
       subscription_data: {
         trial_period_days: 7,
       },
-      success_url: `${process.env.APP_URL || req.headers.origin}/?success=true`,
-      cancel_url: `${process.env.APP_URL || req.headers.origin}/?canceled=true`,
+      success_url: `https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?success=true`,
+      cancel_url: `https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?canceled=true`,
       client_reference_id: userId,
     });
 
