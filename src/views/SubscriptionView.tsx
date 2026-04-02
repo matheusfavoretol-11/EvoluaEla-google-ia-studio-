@@ -35,7 +35,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
       const data = await response.json();
 
       if (data.url) {
-        window.location.href = data.url;
+        window.top!.location.href = data.url;
       } else {
         setError(data.error || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
         setIsProcessing(false);
