@@ -37,7 +37,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
       if (data.url) {
         window.top!.location.href = data.url;
       } else {
-        setError(data.error || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
+        const detailedError = data.details ? `${data.error} (${data.details})` : data.error;
+        setError(detailedError || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
         setIsProcessing(false);
       }
     } catch (err: any) {

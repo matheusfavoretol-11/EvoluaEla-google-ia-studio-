@@ -173,9 +173,23 @@ app.post('/api/create-checkout-session', async (req, res) => {
     console.log(`Checkout session created successfully: ${session.id}`);
     res.json({ url: session.url });
   } catch (error: any) {
-    console.error('Error creating checkout session:', error);
+    console.error('DETAILED STRIPE ERROR:', {
+      message: error.message,
+      stack: error.stack,
+      type: error.type,
+      raw: error.raw,
+      requestId: error.requestId,
+      statusCode: error.statusCode
+    });
+    const missingVars = requiredEnvVars.filter(v => !process.env[v]);
+    if (missingVars.length > 0) {
+      console.error('MISSING ENVIRONMENT VARIABLES:', missingVars);
+    }
     res.status(500).json({ 
-      error: `Erro na Stripe: ${error.message}. Verifique se sua chave secreta está correta e se você criou o produto/preço (ou se está usando o modo de teste corretamente).` 
+      error: `Erro na Stripe: ${error.message}. Verifique se sua chave secreta está correta e se você criou o produto/preço (ou se está usando o modo de teste corretamente).`,
+      details: error.message,
+      missingEnvVars: missingVars,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 });
