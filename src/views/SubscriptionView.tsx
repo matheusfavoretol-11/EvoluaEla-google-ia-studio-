@@ -3,10 +3,6 @@ import { Check, Star, AlertCircle, X, CreditCard, HeartHandshake } from 'lucide-
 import { motion } from 'motion/react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
-import { loadStripe } from '@stripe/stripe-js';
-
-// Initialize Stripe outside the component
-const stripePromise = loadStripe('pk_live_51RtEJJK9aOlGcXzGg2Q72C9K87YonPPvPc3aLJSd5YhvBzEpT4h1K68rkFAEmQR3ZRhkXT67wQIsOwCfUdFoTh3y00dO4uFAI6');
 
 export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   const { theme } = useTheme();
@@ -28,39 +24,26 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         return;
       }
 
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error('Stripe não pôde ser carregado.');
-      }
-
-      // IMPORTANTE: O Stripe não permite usar 'price_data' diretamente no frontend por segurança.
-      // É necessário usar um 'priceId' pré-criado no painel da Stripe para integrações puramente client-side.
-      // Como você solicitou a substituição completa da API, usaremos o método redirectToCheckout.
-      // Se você ainda não criou o produto na Stripe, precisará fazer isso e substituir o ID abaixo.
-      
-      const { error: stripeError } = await (stripe as any).redirectToCheckout({
-        lineItems: [
-          {
-            // Substitua pelo ID do preço real criado no seu painel da Stripe (ex: price_123...)
-            // Se usar price_data no frontend, a Stripe rejeitará a requisição.
-            price: 'price_1TGFnzK9aOlGcXzGPD1oqUMX',
-            quantity: 1,
-          },
-        ],
-        mode: 'subscription',
-        successUrl: 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?success=true',
-        cancelUrl: 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app/?canceled=true',
-        clientReferenceId: user.id,
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: user.id }),
       });
 
-      if (stripeError) {
-        console.error('Stripe redirect error:', stripeError);
-        setError(stripeError.message || 'Erro ao redirecionar para o checkout.');
+      const data = await response.json();
+
+      if (data.url) {
+        window.top!.location.href = data.url;
+      } else {
+        const detailedError = data.details ? `${data.error} (${data.details})` : data.error;
+        setError(detailedError || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
         setIsProcessing(false);
       }
     } catch (err: any) {
       console.error('Error initiating checkout:', err);
-      setError('Ocorreu um erro ao processar sua solicitação. Verifique se você criou o produto na Stripe e se o ID do preço está correto.');
+      setError('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
       setIsProcessing(false);
     }
   };

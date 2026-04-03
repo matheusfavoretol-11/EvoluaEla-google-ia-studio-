@@ -147,17 +147,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'brl',
-            product_data: {
-              name: 'EvoluaEla Premium',
-              description: 'Acesso total a treinos personalizados, nutrição, mente e comunidade.',
-            },
-            unit_amount: 10990, // R$ 109,90
-            recurring: {
-              interval: 'month',
-            },
-          },
+          price: 'price_1TGFnzK9aOlGcXzGPD1oqUMX',
           quantity: 1,
         },
       ],
