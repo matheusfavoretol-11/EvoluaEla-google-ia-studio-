@@ -211,8 +211,18 @@ async function init() {
     });
   }
 
-  // Start the server if we are not in a serverless environment like Vercel
-  if (!process.env.VERCEL) {
+// Global error handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('GLOBAL ERROR:', err);
+  res.status(500).json({
+    error: 'Erro interno do servidor',
+    message: err.message,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
+
+// Start the server if we are not in a serverless environment like Vercel
+if (!process.env.VERCEL) {
     console.log(`Tentando iniciar o servidor na porta ${PORT}...`);
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Pronto! Servidor rodando lindamente na porta ${PORT} 🚀`);
