@@ -32,18 +32,35 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         body: JSON.stringify({ userId: user.id }),
       });
 
+      if (!response.ok) {
+        const text = await response.text();
+        try {
+          const data = JSON.parse(text);
+          const detailedError = data.details ? `${data.error} (${data.details})` : data.error;
+          setError(detailedError || 'Erro ao criar sessão de checkout.');
+        } catch (e) {
+          setError(`Erro no servidor (${response.status}): ${text.substring(0, 100)}...`);
+        }
+        setIsProcessing(false);
+        return;
+      }
+
       const data = await response.json();
 
       if (data.url) {
-        window.top!.location.href = data.url;
+        // Use window.open with _top as a fallback if location.href is blocked
+        try {
+          window.top!.location.href = data.url;
+        } catch (e) {
+          window.location.assign(data.url);
+        }
       } else {
-        const detailedError = data.details ? `${data.error} (${data.details})` : data.error;
-        setError(detailedError || 'Não foi possível iniciar o checkout. Verifique se as chaves da Stripe estão configuradas.');
+        setError('URL de checkout não recebida do servidor.');
         setIsProcessing(false);
       }
     } catch (err: any) {
       console.error('Error initiating checkout:', err);
-      setError('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
+      setError(`Erro de conexão: ${err.message || 'Tente novamente.'}`);
       setIsProcessing(false);
     }
   };

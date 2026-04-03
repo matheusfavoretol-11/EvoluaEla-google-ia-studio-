@@ -82,19 +82,20 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 app.use(express.json());
 app.use(cors());
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    environment: process.env.NODE_ENV,
-    supabaseUrl: !!process.env.VITE_SUPABASE_URL,
-    supabaseAnonKey: !!process.env.VITE_SUPABASE_ANON_KEY,
-    supabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-    stripeKey: !!process.env.STRIPE_SECRET_KEY,
-    appUrl: process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app',
-    timestamp: new Date().toISOString()
-  });
-});
+    // Health check endpoint
+    app.get('/api/health', (req, res) => {
+      res.json({ 
+        status: 'ok', 
+        environment: process.env.NODE_ENV,
+        supabaseUrl: !!process.env.VITE_SUPABASE_URL,
+        supabaseAnonKey: !!process.env.VITE_SUPABASE_ANON_KEY,
+        supabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+        stripeKey: !!process.env.STRIPE_SECRET_KEY,
+        appUrl: process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app',
+        lastStripeError,
+        timestamp: new Date().toISOString()
+      });
+    });
 
 // Config endpoint for frontend
 app.get('/api/config', (req, res) => {
@@ -131,6 +132,8 @@ app.get('/api/download-source', (req, res) => {
   archive.finalize();
 });
 
+let lastStripeError: any = null;
+
 // Create Checkout Session Endpoint
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
@@ -163,6 +166,12 @@ app.post('/api/create-checkout-session', async (req, res) => {
     console.log(`Checkout session created successfully: ${session.id}`);
     res.json({ url: session.url });
   } catch (error: any) {
+    lastStripeError = {
+      message: error.message,
+      type: error.type,
+      statusCode: error.statusCode,
+      timestamp: new Date().toISOString()
+    };
     console.error('DETAILED STRIPE ERROR:', {
       message: error.message,
       stack: error.stack,
@@ -176,8 +185,9 @@ app.post('/api/create-checkout-session', async (req, res) => {
       console.error('MISSING ENVIRONMENT VARIABLES:', missingVars);
     }
     res.status(500).json({ 
-      error: `Erro na Stripe: ${error.message}. Verifique se sua chave secreta está correta e se você criou o produto/preço (ou se está usando o modo de teste corretamente).`,
+      error: `Erro na Stripe: ${error.message}`,
       details: error.message,
+      type: error.type,
       missingEnvVars: missingVars,
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
