@@ -420,7 +420,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                       <p className="font-bold uppercase tracking-widest text-[10px]">Você ainda não criou nenhum treino.</p>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                       {myWorkouts.map(renderWorkoutCard)}
                     </div>
                   )}
@@ -428,8 +428,8 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               )}
 
               {activeTab === 'sugestoes' && (
-                <div className="grid grid-cols-1 gap-6">
-                  <div className="glass-card p-5 text-[10px] text-white/40 font-bold uppercase tracking-widest border border-white/5 text-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  <div className="md:col-span-2 xl:col-span-3 glass-card p-5 text-[10px] text-white/40 font-bold uppercase tracking-widest border border-white/5 text-center">
                     Sugestões preparadas com carinho para você começar agora.
                   </div>
                   {defaultSuggestions.map(renderWorkoutCard)}

@@ -33,55 +33,57 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
         <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Você não está mais sozinha — agora tem uma profissional acompanhando cada passo</p>
       </div>
 
-      <div className="space-y-8 relative z-10">
-        {/* Current Plan Summary */}
-        <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4B996]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="font-bold text-2xl text-white tracking-tight">Sua Dieta Atual</h3>
-            <span className="px-4 py-1.5 bg-[#E8B4BC]/10 text-[#E8B4BC] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[#E8B4BC]/20">Ativo</span>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
+        <div className="space-y-8">
+          {/* Current Plan Summary */}
+          <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4B996]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="font-bold text-2xl text-white tracking-tight">Sua Dieta Atual</h3>
+              <span className="px-4 py-1.5 bg-[#E8B4BC]/10 text-[#E8B4BC] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[#E8B4BC]/20">Ativo</span>
+            </div>
+            <div className="flex items-center gap-5 mb-8">
+              <div className="w-20 h-20 rounded-3xl bg-white/5 overflow-hidden border border-white/10 shadow-2xl p-1">
+                <img src="https://images.unsplash.com/photo-1594824436951-7f12bc3ac92e?auto=format&fit=crop&q=80&w=200&h=200" alt="Nutricionista" className="w-full h-full object-cover rounded-2xl" referrerPolicy="no-referrer" />
+              </div>
+              <div>
+                <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-1">Sua Nutricionista</p>
+                <p className="font-bold text-white text-xl tracking-tight">Dra. Marina Silva</p>
+                <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#E8B4BC] hover:text-white transition-colors">Ver Perfil</button>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5">
+              <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-md">
+                <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-2">Objetivo</p>
+                <p className="font-bold text-white text-lg tracking-tight">Emagrecimento</p>
+              </div>
+              <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-md">
+                <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-2">Calorias</p>
+                <p className="font-bold text-white text-lg tracking-tight">1.850 kcal</p>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-5 mb-8">
-            <div className="w-20 h-20 rounded-3xl bg-white/5 overflow-hidden border border-white/10 shadow-2xl p-1">
-              <img src="https://images.unsplash.com/photo-1594824436951-7f12bc3ac92e?auto=format&fit=crop&q=80&w=200&h=200" alt="Nutricionista" className="w-full h-full object-cover rounded-2xl" referrerPolicy="no-referrer" />
-            </div>
-            <div>
-              <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-1">Sua Nutricionista</p>
-              <p className="font-bold text-white text-xl tracking-tight">Dra. Marina Silva</p>
-              <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#E8B4BC] hover:text-white transition-colors">Ver Perfil</button>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-5">
-            <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-md">
-              <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-2">Objetivo</p>
-              <p className="font-bold text-white text-lg tracking-tight">Emagrecimento</p>
-            </div>
-            <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-md">
-              <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-2">Calorias</p>
-              <p className="font-bold text-white text-lg tracking-tight">1.850 kcal</p>
-            </div>
-          </div>
-        </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-5">
-          <button className="glass-card p-8 rounded-[2.5rem] border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/5 text-white/20 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all border border-white/5">
-              <MessageCircle size={28} />
-            </div>
-            <span className="font-bold text-white/20 text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">Chat com a Nutri</span>
-          </button>
-          <button className="glass-card p-8 rounded-[2.5rem] border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/5 text-white/20 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all border border-white/5">
-              <Camera size={28} />
-            </div>
-            <span className="font-bold text-white/20 text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">Upload de Refeição</span>
-          </button>
+          {/* Quick Actions */}
+          <div className="grid grid-cols-2 gap-5">
+            <button className="glass-card p-8 rounded-[2.5rem] border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/5 text-white/20 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all border border-white/5">
+                <MessageCircle size={28} />
+              </div>
+              <span className="font-bold text-white/20 text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">Chat com a Nutri</span>
+            </button>
+            <button className="glass-card p-8 rounded-[2.5rem] border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/5 text-white/20 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all border border-white/5">
+                <Camera size={28} />
+              </div>
+              <span className="font-bold text-white/20 text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">Upload de Refeição</span>
+            </button>
+          </div>
         </div>
 
         {/* Today's Meals */}
-        <div>
-          <h3 className="font-bold text-2xl text-white mb-6 tracking-tight">Refeições de Hoje</h3>
+        <div className="space-y-6">
+          <h3 className="font-bold text-2xl text-white mb-6 tracking-tight px-2">Refeições de Hoje</h3>
           <div className="space-y-5">
             {[
               { time: '08:00', name: 'Café da Manhã', desc: 'Ovos mexidos com mamão', done: true },

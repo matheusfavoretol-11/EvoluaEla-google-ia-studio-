@@ -287,10 +287,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
         
         {/* Progress & Stats */}
-        <section className="space-y-6">
+        <section className="space-y-6 lg:col-span-1 xl:col-span-1">
           <div className="flex justify-between items-end px-2">
             <h3 className="text-2xl font-bold text-white tracking-tight">Seu Equilíbrio</h3>
             <span className="text-[10px] font-bold uppercase tracking-widest text-white/20">Status Atual</span>
@@ -364,10 +364,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       </div>
 
       {/* Content & Community Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-10 pb-12">
         
         {/* Next Lesson */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 xl:col-span-3 space-y-6">
           <h3 className="text-2xl font-bold text-white tracking-tight px-2">Próxima Lição</h3>
           <motion.div 
             whileHover={{ y: -5 }}

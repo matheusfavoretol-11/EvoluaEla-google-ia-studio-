@@ -23,6 +23,7 @@ import MindView from './views/MindView';
 // Components
 import ThemeSettingsModal from './components/ThemeSettingsModal';
 import SidebarMenu from './components/SidebarMenu';
+import DesktopSidebar from './components/DesktopSidebar';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -60,7 +61,7 @@ function AppContent() {
   if (!isAuthReady) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] items-center justify-center border border-white/5">
+        <div className="w-full max-w-md lg:max-w-none lg:w-full lg:h-screen min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] lg:rounded-none shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] items-center justify-center border border-white/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
       </div>
@@ -96,35 +97,48 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-      <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-[#141414] border border-white/5">
+    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4 lg:p-0 overflow-hidden">
+      
+      {/* Desktop Sidebar */}
+      <DesktopSidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        onOpenSettings={() => setShowThemeSettings(true)}
+        onUpgrade={() => setShowSubscription(true)}
+      />
+
+      <div className="w-full max-w-md lg:max-w-none lg:flex-1 h-screen min-h-[100dvh] sm:min-h-[800px] lg:min-h-0 sm:h-auto lg:h-screen sm:rounded-[3rem] lg:rounded-none shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-[#141414] border border-white/5 lg:border-none">
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 pb-4 sm:pb-6 px-6 sm:px-8 border-b border-white/5 sticky top-0 z-10 bg-[#141414]/80 backdrop-blur-xl">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-6 sm:px-8 lg:px-12 border-b border-white/5 sticky top-0 z-10 bg-[#141414]/80 backdrop-blur-xl shrink-0">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-white/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-white/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
               <div className="flex flex-col">
-                <h1 className="text-xl sm:text-2xl font-bold tracking-tighter text-white leading-none">EvoluaEla</h1>
-                <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">High Performance</span>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter text-white leading-none">
+                  {tabs.find(t => t.id === activeTab)?.label || 'EvoluaEla'}
+                </h1>
+                <span className="text-[7px] sm:text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">
+                  {activeTab === 'home' ? 'High Performance' : 'Sua Jornada'}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[8px] sm:text-[9px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black transition-all hover:scale-105 active:scale-95"
+                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2 sm:py-2.5 lg:py-4 rounded-full text-[8px] sm:text-[9px] lg:text-[11px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black transition-all hover:scale-105 active:scale-95"
                 >
-                  <Crown size={10} className="sm:w-3 sm:h-3" fill="currentColor" /> UPGRADE
+                  <Crown size={10} className="sm:w-3 sm:h-3 lg:w-4 lg:h-4" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
-                  <Crown size={20} className="sm:w-6 sm:h-6" fill="currentColor" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
+                  <Crown size={20} className="sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" />
                 </div>
               )}
             </div>
@@ -132,27 +146,29 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-28 hide-scrollbar bg-[#0A0A0A]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="h-full"
-            >
-              {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
-              {activeTab === 'workouts' && <WorkoutsView onUpgrade={() => setShowSubscription(true)} />}
-              {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
-              {activeTab === 'mind' && <MindView onUpgrade={() => setShowSubscription(true)} />}
-              {activeTab === 'coach' && <AICoachView />}
-            </motion.div>
-          </AnimatePresence>
+        <main className="flex-1 overflow-y-auto pb-28 lg:pb-12 hide-scrollbar bg-[#0A0A0A] bg-grid-pattern relative">
+          <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 lg:py-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full"
+              >
+                {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'workouts' && <WorkoutsView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'mind' && <MindView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'coach' && <AICoachView />}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 w-full border-t border-white/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-[#141414]/95 backdrop-blur-2xl">
+        <nav className="lg:hidden absolute bottom-0 w-full border-t border-white/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-[#141414]/95 backdrop-blur-2xl">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
