@@ -19,6 +19,8 @@ import LandingView from './views/LandingView';
 
 import NutritionView from './views/NutritionView';
 import MindView from './views/MindView';
+import GroupTherapyView from './views/GroupTherapyView';
+import TherapistDashboardView from './views/TherapistDashboardView';
 
 // Components
 import ThemeSettingsModal from './components/ThemeSettingsModal';
@@ -27,7 +29,7 @@ import DesktopSidebar from './components/DesktopSidebar';
 
 function AppContent() {
   const { theme } = useTheme();
-  const { setUserName, isPremium, isAuthReady, userId, hasCompletedOnboarding } = useUser();
+  const { setUserName, isPremium, isAuthReady, userId, hasCompletedOnboarding, role } = useUser();
   
   // App State
   const [showLanding, setShowLanding] = useState(true);
@@ -43,6 +45,7 @@ function AppContent() {
     { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
     { id: 'nutrition', icon: Apple, label: 'Nutrição' },
     { id: 'mind', icon: Brain, label: 'Mente' },
+    { id: 'therapy', icon: Heart, label: 'Terapia' },
     { id: 'coach', icon: Bot, label: 'Coach IA' },
   ];
 
@@ -161,6 +164,11 @@ function AppContent() {
                 {activeTab === 'workouts' && <WorkoutsView onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'mind' && <MindView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'therapy' && (
+                  role === 'therapist' || role === 'admin' 
+                    ? <TherapistDashboardView /> 
+                    : <GroupTherapyView onUpgrade={() => setShowSubscription(true)} />
+                )}
                 {activeTab === 'coach' && <AICoachView />}
               </motion.div>
             </AnimatePresence>

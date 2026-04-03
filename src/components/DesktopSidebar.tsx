@@ -1,4 +1,4 @@
-import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle } from 'lucide-react';
+import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useUser } from '../contexts/UserContext';
 
@@ -17,6 +17,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
     { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
     { id: 'nutrition', icon: Apple, label: 'Nutrição' },
     { id: 'mind', icon: Brain, label: 'Mente' },
+    { id: 'therapy', icon: Heart, label: 'Terapia' },
     { id: 'coach', icon: Bot, label: 'Coach IA' },
   ];
 

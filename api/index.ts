@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import archiver from 'archiver';
 import { createClient } from '@supabase/supabase-js';
+import cron from 'node-cron';
+import { createZoomMeeting } from './zoom';
+import { addDays, format, startOfMonth, addMonths, setHours, setMinutes, isAfter, isBefore, addMinutes } from 'date-fns';
 
 dotenv.config();
 
@@ -63,7 +66,8 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         .from('users')
         .update({ 
           is_premium: true,
-          subscription_status: 'premium'
+          subscription_status: 'premium',
+          acesso_terapia_grupo: true
         })
         .eq('id', userId);
 
@@ -77,6 +81,122 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 
   res.json({ received: true });
 });
+
+// --- Therapy Sessions Logic ---
+
+async function sendTherapyNotifications() {
+  console.log('Checking for sessions to notify...');
+  try {
+    const now = new Date();
+    const fortyEightHoursFromNow = addDays(now, 2);
+    const thirtyMinutesFromNow = addMinutes(now, 30);
+
+    // 48h Notification
+    const { data: sessions48h } = await supabaseAdmin
+      .from('therapy_sessions')
+      .select('*')
+      .gte('date', fortyEightHoursFromNow.toISOString())
+      .lte('date', addMinutes(fortyEightHoursFromNow, 60).toISOString());
+
+    if (sessions48h?.length) {
+      console.log('Sending 48h reminders for sessions:', sessions48h.map(s => s.id));
+      // In a real app, you'd call FCM here
+      // sendPushNotificationToAllPremiumUsers("Sua terapia em grupo é depois de amanhã!");
+    }
+
+    // 30min Notification
+    const { data: sessions30min } = await supabaseAdmin
+      .from('therapy_sessions')
+      .select('*')
+      .gte('date', thirtyMinutesFromNow.toISOString())
+      .lte('date', addMinutes(thirtyMinutesFromNow, 10).toISOString());
+
+    if (sessions30min?.length) {
+      console.log('Sending 30min reminders for sessions:', sessions30min.map(s => s.id));
+      // sendPushNotificationToAllPremiumUsers("Sua terapia em grupo começa em 30 minutos! Prepare seu espaço.");
+    }
+  } catch (err) {
+    console.error('Error in sendTherapyNotifications:', err);
+  }
+}
+
+async function scheduleNextTherapySessions() {
+  console.log('Checking for upcoming therapy sessions...');
+  try {
+    const now = new Date();
+    const { data: existingSessions, error } = await supabaseAdmin
+      .from('therapy_sessions')
+      .select('date')
+      .gte('date', now.toISOString());
+
+    if (error) throw error;
+
+    // We want sessions on the 1st and 15th of each month at 20:00
+    const datesToSchedule = [];
+    
+    // Current month
+    const firstOfMonth = setMinutes(setHours(startOfMonth(now), 20), 0);
+    const fifteenthOfMonth = setMinutes(setHours(addDays(startOfMonth(now), 14), 20), 0);
+    
+    // Next month
+    const nextMonthFirst = setMinutes(setHours(startOfMonth(addMonths(now, 1)), 20), 0);
+    const nextMonthFifteenth = setMinutes(setHours(addDays(startOfMonth(addMonths(now, 1)), 14), 20), 0);
+
+    [firstOfMonth, fifteenthOfMonth, nextMonthFirst, nextMonthFifteenth].forEach(date => {
+      if (isAfter(date, now)) {
+        const alreadyScheduled = existingSessions?.some(s => 
+          new Date(s.date).getTime() === date.getTime()
+        );
+        if (!alreadyScheduled) {
+          datesToSchedule.push(date);
+        }
+      }
+    });
+
+    for (const date of datesToSchedule) {
+      console.log(`Scheduling session for ${format(date, 'yyyy-MM-dd HH:mm')}`);
+      const zoomMeeting = await createZoomMeeting(
+        'Terapia em Grupo - EvoluaEla',
+        date.toISOString(),
+        60
+      );
+
+      const { error: insertError } = await supabaseAdmin
+        .from('therapy_sessions')
+        .insert({
+          date: date.toISOString(),
+          zoom_link: zoomMeeting.join_url,
+          zoom_meeting_id: zoomMeeting.id.toString(),
+          password: zoomMeeting.password,
+          status: 'scheduled'
+        });
+
+      if (insertError) {
+        console.error('Error saving session to Supabase:', insertError);
+      } else {
+        console.log(`Session for ${format(date, 'yyyy-MM-dd HH:mm')} scheduled successfully.`);
+      }
+    }
+  } catch (err) {
+    console.error('Error in scheduleNextTherapySessions:', err);
+  }
+}
+
+// Run every day at 01:00
+cron.schedule('0 1 * * *', () => {
+  scheduleNextTherapySessions();
+});
+
+// Run every hour to check for notifications
+cron.schedule('0 * * * *', () => {
+  sendTherapyNotifications();
+});
+
+// Initial run
+scheduleNextTherapySessions();
+sendTherapyNotifications();
+
+// --- End Therapy Sessions Logic ---
 
 // Regular middleware for other routes
 app.use(express.json());

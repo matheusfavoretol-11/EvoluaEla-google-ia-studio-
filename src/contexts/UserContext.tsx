@@ -41,6 +41,8 @@ interface UserContextType {
   onboardingAnswers: Record<string, string>;
   setOnboardingAnswers: (answers: Record<string, string>) => void;
   hasCompletedOnboarding: boolean;
+  acessoTerapiaGrupo: boolean;
+  role: 'user' | 'therapist' | 'admin';
   isAuthReady: boolean;
   userId: string | null;
   logout: () => Promise<void>;
@@ -71,6 +73,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   ]);
   const [onboardingAnswers, setOnboardingAnswers] = useState<Record<string, string>>({});
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
+  const [acessoTerapiaGrupo, setAcessoTerapiaGrupo] = useState<boolean>(false);
+  const [role, setRole] = useState<'user' | 'therapist' | 'admin'>('user');
 
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
@@ -80,6 +84,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setUserId(null);
     setUserName('');
     setIsPremium(false);
+    setAcessoTerapiaGrupo(false);
+    setRole('user');
     setSubscriptionStatus('free');
     setOnboardingAnswers({});
     setHasCompletedOnboarding(false);
@@ -159,6 +165,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         
       if (data && !error) {
         setIsPremium(data.is_premium || false);
+        setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
+        setRole(data.role || 'user');
         setSubscriptionStatus(data.subscription_status || 'free');
         setCoachMessagesCount(data.coach_messages_count || 0);
       }
@@ -175,6 +183,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const data = payload.new as any;
         if (data) {
           setIsPremium(data.is_premium || false);
+          setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
+          setRole(data.role || 'user');
           setSubscriptionStatus(data.subscription_status || 'free');
           setCoachMessagesCount(data.coach_messages_count || 0);
         }
@@ -256,6 +266,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       dailyMissions, setDailyMissions,
       onboardingAnswers, setOnboardingAnswers,
       hasCompletedOnboarding,
+      acessoTerapiaGrupo,
+      role,
       isAuthReady, userId,
       logout
     }}>
