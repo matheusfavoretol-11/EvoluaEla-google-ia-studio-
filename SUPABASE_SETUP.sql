@@ -7,6 +7,10 @@ CREATE TABLE IF NOT EXISTS public.users (
   is_premium BOOLEAN DEFAULT FALSE,
   subscription_status TEXT DEFAULT 'free',
   coach_messages_count INTEGER DEFAULT 0,
+  acesso_terapia_grupo BOOLEAN DEFAULT FALSE,
+  stripe_customer_id TEXT,
+  stripe_subscription_id TEXT,
+  role TEXT DEFAULT 'user',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 

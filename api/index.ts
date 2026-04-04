@@ -55,6 +55,8 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
   }
 
   // Handle the event
+  console.log(`🔔 Webhook received: ${event.type}`);
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     const userId = session.client_reference_id;
@@ -68,7 +70,9 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         .update({ 
           is_premium: true,
           subscription_status: 'premium',
-          acesso_terapia_grupo: true
+          acesso_terapia_grupo: true,
+          stripe_customer_id: session.customer as string,
+          stripe_subscription_id: session.subscription as string
         })
         .eq('id', userId);
 
@@ -77,6 +81,49 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
       } else {
         console.log('User successfully upgraded to premium in Supabase.');
       }
+    }
+  } else if (event.type === 'customer.subscription.updated') {
+    const subscription = event.data.object as Stripe.Subscription;
+    const status = subscription.status;
+    
+    // Find user by stripe_subscription_id
+    const { data: userData, error: fetchError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('stripe_subscription_id', subscription.id)
+      .single();
+
+    if (userData && !fetchError) {
+      const isPremium = ['active', 'trialing'].includes(status);
+      await supabaseAdmin
+        .from('users')
+        .update({ 
+          is_premium: isPremium,
+          subscription_status: status
+        })
+        .eq('id', userData.id);
+      console.log(`Subscription updated for user ${userData.id}: ${status}`);
+    }
+  } else if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object as Stripe.Subscription;
+    
+    // Find user by stripe_subscription_id
+    const { data: userData, error: fetchError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('stripe_subscription_id', subscription.id)
+      .single();
+
+    if (userData && !fetchError) {
+      await supabaseAdmin
+        .from('users')
+        .update({ 
+          is_premium: false,
+          subscription_status: 'canceled',
+          acesso_terapia_grupo: false
+        })
+        .eq('id', userData.id);
+      console.log(`Subscription deleted for user ${userData.id}`);
     }
   }
 
