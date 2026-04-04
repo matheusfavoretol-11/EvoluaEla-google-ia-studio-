@@ -6,7 +6,6 @@ import path from 'path';
 import archiver from 'archiver';
 import { createClient } from '@supabase/supabase-js';
 import cron from 'node-cron';
-import { createZoomMeeting } from './zoom.ts';
 import { addDays, format, startOfMonth, addMonths, setHours, setMinutes, isAfter, isBefore, addMinutes } from 'date-fns';
 
 dotenv.config();
@@ -122,79 +121,9 @@ async function sendTherapyNotifications() {
   }
 }
 
-async function scheduleNextTherapySessions() {
-  console.log('Checking for upcoming therapy sessions...');
-  try {
-    const now = new Date();
-    const { data: existingSessions, error } = await supabaseAdmin
-      .from('therapy_sessions')
-      .select('date')
-      .gte('date', now.toISOString());
-
-    if (error) throw error;
-
-    // We want sessions on the 1st and 15th of each month at 20:00
-    const datesToSchedule = [];
-    
-    // Current month
-    const firstOfMonth = setMinutes(setHours(startOfMonth(now), 20), 0);
-    const fifteenthOfMonth = setMinutes(setHours(addDays(startOfMonth(now), 14), 20), 0);
-    
-    // Next month
-    const nextMonthFirst = setMinutes(setHours(startOfMonth(addMonths(now, 1)), 20), 0);
-    const nextMonthFifteenth = setMinutes(setHours(addDays(startOfMonth(addMonths(now, 1)), 14), 20), 0);
-
-    [firstOfMonth, fifteenthOfMonth, nextMonthFirst, nextMonthFifteenth].forEach(date => {
-      if (isAfter(date, now)) {
-        const alreadyScheduled = existingSessions?.some(s => 
-          new Date(s.date).getTime() === date.getTime()
-        );
-        if (!alreadyScheduled) {
-          datesToSchedule.push(date);
-        }
-      }
-    });
-
-    for (const date of datesToSchedule) {
-      console.log(`Scheduling session for ${format(date, 'yyyy-MM-dd HH:mm')}`);
-      
-      // Zoom expects yyyy-MM-ddTHH:mm:ssZ (no milliseconds)
-      const zoomStartTime = format(date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
-      
-      const zoomMeeting = await createZoomMeeting(
-        'Terapia em Grupo - EvoluaEla',
-        zoomStartTime,
-        60
-      );
-
-      const { error: insertError } = await supabaseAdmin
-        .from('therapy_sessions')
-        .insert({
-          date: date.toISOString(),
-          zoom_link: zoomMeeting.join_url,
-          zoom_meeting_id: zoomMeeting.id.toString(),
-          password: zoomMeeting.password,
-          status: 'scheduled'
-        });
-
-      if (insertError) {
-        console.error('Error saving session to Supabase:', insertError);
-      } else {
-        console.log(`Session for ${format(date, 'yyyy-MM-dd HH:mm')} scheduled successfully.`);
-      }
-    }
-  } catch (err: any) {
-    console.error('Error in scheduleNextTherapySessions:', {
-      message: err.message,
-      data: err.response?.data,
-      status: err.response?.status
-    });
-  }
-}
-
 // Run every day at 01:00
 cron.schedule('0 1 * * *', () => {
-  scheduleNextTherapySessions();
+  console.log('Daily maintenance task running...');
 });
 
 // Run every hour to check for notifications
@@ -203,7 +132,6 @@ cron.schedule('0 * * * *', () => {
 });
 
 // Initial run
-scheduleNextTherapySessions();
 sendTherapyNotifications();
 
 // --- End Therapy Sessions Logic ---
@@ -223,11 +151,6 @@ app.use(cors());
         stripeKey: !!process.env.STRIPE_SECRET_KEY,
         appUrl: process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app',
         lastStripeError,
-        zoomConfig: {
-          clientId: !!process.env.ZOOM_CLIENT_ID,
-          clientSecret: !!process.env.ZOOM_CLIENT_SECRET,
-          accountId: !!process.env.ZOOM_ACCOUNT_ID
-        },
         timestamp: new Date().toISOString()
       });
     });
