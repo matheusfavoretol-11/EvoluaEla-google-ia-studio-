@@ -6,7 +6,7 @@ import path from 'path';
 import archiver from 'archiver';
 import { createClient } from '@supabase/supabase-js';
 import cron from 'node-cron';
-import { createZoomMeeting } from './zoom';
+import { createZoomMeeting } from './zoom.ts';
 import { addDays, format, startOfMonth, addMonths, setHours, setMinutes, isAfter, isBefore, addMinutes } from 'date-fns';
 
 dotenv.config();
@@ -213,6 +213,11 @@ app.use(cors());
         stripeKey: !!process.env.STRIPE_SECRET_KEY,
         appUrl: process.env.APP_URL || 'https://ais-pre-l36vjwcu5ypvyxdbggdsnn-258060382701.us-west2.run.app',
         lastStripeError,
+        zoomConfig: {
+          clientId: !!process.env.ZOOM_CLIENT_ID,
+          clientSecret: !!process.env.ZOOM_CLIENT_SECRET,
+          accountId: !!process.env.ZOOM_ACCOUNT_ID
+        },
         timestamp: new Date().toISOString()
       });
     });
