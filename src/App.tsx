@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Contexts
@@ -12,6 +12,7 @@ import WorkoutsView from './views/WorkoutsView';
 import JournalView from './views/JournalView';
 import ContentView from './views/ContentView';
 import AICoachView from './views/AICoachView';
+import SupportView from './views/SupportView';
 import SubscriptionView from './views/SubscriptionView';
 import AuthView from './views/AuthView';
 import OnboardingView from './views/OnboardingView';
@@ -38,6 +39,10 @@ function AppContent() {
     if (!userId && isAuthReady) {
       setShowLanding(true);
     }
+    
+    const handleOpenCoach = () => setActiveTab('coach');
+    window.addEventListener('open-coach', handleOpenCoach);
+    return () => window.removeEventListener('open-coach', handleOpenCoach);
   }, [userId, isAuthReady]);
   
   const [activeTab, setActiveTab] = useState('home');
@@ -53,6 +58,7 @@ function AppContent() {
     { id: 'mind', icon: Brain, label: 'Mente' },
     { id: 'therapy', icon: Heart, label: 'Terapia' },
     { id: 'coach', icon: Bot, label: 'Coach IA' },
+    { id: 'support', icon: Headphones, label: 'Suporte' },
   ];
 
   const handleLogin = (name: string) => {
@@ -179,6 +185,7 @@ function AppContent() {
                     : <GroupTherapyView onUpgrade={() => setShowSubscription(true)} />
                 )}
                 {activeTab === 'coach' && <AICoachView />}
+                {activeTab === 'support' && <SupportView />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -226,6 +233,7 @@ function AppContent() {
             onClose={() => setIsSidebarOpen(false)} 
             onOpenSettings={() => setShowThemeSettings(true)}
             onOpenHelp={() => setActiveTab('coach')}
+            onOpenSupport={() => setActiveTab('support')}
           />
           {showDisclaimer && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">

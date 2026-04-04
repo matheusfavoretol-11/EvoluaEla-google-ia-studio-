@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { X, HelpCircle, Settings, Mail, User, Crown, LogOut } from 'lucide-react';
+import { X, HelpCircle, Settings, Mail, User, Crown, LogOut, Headphones } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 
@@ -8,9 +8,10 @@ interface SidebarMenuProps {
   onClose: () => void;
   onOpenSettings: () => void;
   onOpenHelp: () => void;
+  onOpenSupport: () => void;
 }
 
-export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHelp }: SidebarMenuProps) {
+export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHelp, onOpenSupport }: SidebarMenuProps) {
   const { theme } = useTheme();
   const { userName, isPremium, subscriptionStatus, logout } = useUser();
 
@@ -97,10 +98,10 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                   },
                   { 
                     id: 'support',
-                    icon: Mail, 
+                    icon: Headphones, 
                     title: 'Suporte', 
                     subtitle: 'Fale com nossa equipe', 
-                    onClick: handleEmailSupport,
+                    onClick: onOpenSupport,
                     color: '#E8B4BC'
                   }
                 ].map((item) => (

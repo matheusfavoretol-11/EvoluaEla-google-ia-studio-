@@ -1,4 +1,4 @@
-import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard } from 'lucide-react';
+import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard, Headphones } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useUser } from '../contexts/UserContext';
 
@@ -111,10 +111,14 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
           </button>
 
           <button
-            onClick={() => setActiveTab('coach')}
-            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
+            onClick={() => setActiveTab('support')}
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group border border-transparent ${
+              activeTab === 'support' 
+                ? 'bg-[#E8B4BC]/10 text-[#E8B4BC] border-[#E8B4BC]/10' 
+                : 'text-white/40 hover:bg-white/5 hover:text-white/60'
+            }`}
           >
-            <HelpCircle size={20} />
+            <Headphones size={20} className={activeTab === 'support' ? 'scale-110' : 'group-hover:scale-110 transition-transform duration-300'} />
             <span className="text-sm font-semibold tracking-tight">Suporte</span>
           </button>
         </nav>
