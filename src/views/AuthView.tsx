@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Logo } from '../components/Logo';
 import { Mail, Lock, User, ArrowRight, AlertCircle, Check, Zap } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { supabase } from '../lib/supabase';
@@ -145,10 +146,9 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center justify-center gap-3 mb-4"
+            className="flex items-center justify-center mb-4"
           >
-            <img src="/logo.png?v=4" alt="EvoluaEla Logo" className="w-10 h-10 object-contain" />
-            <span className="font-bold text-3xl tracking-tighter text-white">EVOLUAELA</span>
+            <Logo size="lg" />
           </motion.div>
           <motion.p 
             initial={{ y: 10, opacity: 0 }}

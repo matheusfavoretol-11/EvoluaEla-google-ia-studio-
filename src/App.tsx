@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Logo } from './components/Logo';
 import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -135,15 +136,7 @@ function AppContent() {
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
               <div className="flex items-center gap-3">
-                <img src="/logo.png?v=4" alt="EvoluaEla Logo" className="w-10 h-10 object-contain lg:hidden" />
-                <div className="flex flex-col">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter text-white leading-none">
-                    {tabs.find(t => t.id === activeTab)?.label || 'EvoluaEla'}
-                  </h1>
-                  <span className="text-[7px] sm:text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">
-                    {activeTab === 'home' ? 'High Performance' : 'Sua Jornada'}
-                  </span>
-                </div>
+                <Logo size="sm" className="lg:hidden" />
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">

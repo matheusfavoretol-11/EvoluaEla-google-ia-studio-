@@ -11,7 +11,7 @@
       "destination": "/api/index.ts"
     },
     {
-      "source": "/((?!api|auth|logo.png|favicon.ico|assets).*)",
+      "source": "/((?!api|auth|favicon.ico|assets).*)",
       "destination": "/index.html"
     }
   ]
