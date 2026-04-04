@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 interface LogoProps {
   className?: string;
@@ -35,7 +35,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', showText = true, siz
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <div className={`${containerSizes[size]} rounded-full bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] flex items-center justify-center shadow-lg shadow-[#E8B4BC]/20`}>
-        <Zap size={iconSizes[size]} className="text-black" fill="black" />
+        <Heart size={iconSizes[size]} className="text-black" fill="black" />
       </div>
       {showText && (
         <div className="flex flex-col">
