@@ -44,7 +44,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
       {/* Logo Section */}
       <div className="p-8 pb-10">
         <div className="flex items-center gap-3 mb-4">
-          <img src="/logo.png?v=3" alt="EvoluaEla Logo" className="w-[120px] h-auto object-contain" />
+          <img src="/logo.png?v=4" alt="EvoluaEla Logo" className="w-10 h-10 object-contain" />
           <div className="flex flex-col">
             <h1 className="text-xl font-bold tracking-tighter text-white leading-none">EvoluaEla</h1>
             <span className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1">High Performance</span>

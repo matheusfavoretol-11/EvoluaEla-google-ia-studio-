@@ -135,7 +135,7 @@ function AppContent() {
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
               <div className="flex items-center gap-3">
-                <img src="/logo.png?v=3" alt="EvoluaEla Logo" className="w-[120px] h-auto object-contain lg:hidden" />
+                <img src="/logo.png?v=4" alt="EvoluaEla Logo" className="w-10 h-10 object-contain lg:hidden" />
                 <div className="flex flex-col">
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter text-white leading-none">
                     {tabs.find(t => t.id === activeTab)?.label || 'EvoluaEla'}

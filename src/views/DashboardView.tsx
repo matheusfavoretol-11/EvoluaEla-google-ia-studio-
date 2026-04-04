@@ -195,7 +195,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             animate={{ opacity: 1, x: 0 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <img src="/logo.png?v=3" alt="EvoluaEla Logo" className="w-[120px] h-auto object-contain" />
+              <img src="/logo.png?v=4" alt="EvoluaEla Logo" className="w-10 h-10 object-contain" />
               <span className="font-bold text-xl tracking-tighter">EVOLUAELA</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tighter">
