@@ -19,6 +19,8 @@ const requiredEnvVars = [
   'STRIPE_WEBHOOK_SECRET'
 ];
 
+const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID || 'price_1TGfnzK9aOlGcXzGPDloqUMX';
+
 requiredEnvVars.forEach(v => {
   if (!process.env[v]) {
     console.warn(`AVISO: Variável de ambiente ${v} está faltando!`);
@@ -269,13 +271,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
       return res.status(400).json({ error: 'User ID is required' });
     }
 
-    console.log(`Creating checkout session for user: ${userId}`);
+    console.log(`Creating checkout session for user: ${userId} with price: ${STRIPE_PRICE_ID}`);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1TGfnzK9aOlGcXzGPDloqUMX',
+          price: STRIPE_PRICE_ID,
           quantity: 1,
         },
       ],
@@ -319,15 +321,21 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
-// Vite middleware for development
-async function init() {
+// Start the server
+async function startServer() {
+  // Vite middleware for development
   if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
+    try {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: 'spa',
+      });
+      app.use(vite.middlewares);
+      console.log('Vite middleware loaded successfully.');
+    } catch (err) {
+      console.error('Error loading Vite middleware:', err);
+    }
   } else if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
@@ -336,25 +344,24 @@ async function init() {
     });
   }
 
-// Global error handler
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('GLOBAL ERROR:', err);
-  res.status(500).json({
-    error: 'Erro interno do servidor',
-    message: err.message,
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  // Global error handler (MUST be last)
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error('GLOBAL ERROR:', err);
+    res.status(500).json({
+      error: 'Erro interno do servidor',
+      message: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
   });
-});
 
-// Start the server if we are not in a serverless environment like Vercel
-if (!process.env.VERCEL) {
-    console.log(`Tentando iniciar o servidor na porta ${PORT}...`);
+  // Start the server if we are not in a serverless environment like Vercel
+  if (!process.env.VERCEL) {
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Pronto! Servidor rodando lindamente na porta ${PORT} 🚀`);
     });
   }
 }
 
-init();
+startServer();
 
 export default app;
