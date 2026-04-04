@@ -49,88 +49,91 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
         </div>
       </div>
 
-      {/* Navigation Section */}
-      <nav className="flex-1 px-4 space-y-2">
-        <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] px-4 mb-4">Navegação</div>
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeTab === item.id;
-          return (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group ${
-                isActive 
-                  ? 'bg-[#E8B4BC]/10 text-[#E8B4BC] border border-[#E8B4BC]/10' 
-                  : 'text-white/40 hover:bg-white/5 hover:text-white/60 border border-transparent'
-              }`}
-            >
-              <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
-              <span className="text-sm font-semibold tracking-tight">{item.label}</span>
-              {isActive && (
-                <motion.div 
-                  layoutId="sidebar-indicator"
-                  className="ml-auto w-1.5 h-1.5 rounded-full bg-[#E8B4BC]"
-                />
-              )}
-            </button>
-          );
-        })}
+      {/* Scrollable Content Section */}
+      <div className="flex-1 overflow-y-auto hide-scrollbar py-4">
+        {/* Navigation Section */}
+        <nav className="px-4 space-y-2">
+          <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] px-4 mb-4">Navegação</div>
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group ${
+                  isActive 
+                    ? 'bg-[#E8B4BC]/10 text-[#E8B4BC] border border-[#E8B4BC]/10' 
+                    : 'text-white/40 hover:bg-white/5 hover:text-white/60 border border-transparent'
+                }`}
+              >
+                <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
+                <span className="text-sm font-semibold tracking-tight">{item.label}</span>
+                {isActive && (
+                  <motion.div 
+                    layoutId="sidebar-indicator"
+                    className="ml-auto w-1.5 h-1.5 rounded-full bg-[#E8B4BC]"
+                  />
+                )}
+              </button>
+            );
+          })}
 
-        <div className="pt-8 text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] px-4 mb-4">Preferências</div>
-        
-        {isPremium && (
+          <div className="pt-8 text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] px-4 mb-4">Preferências</div>
+          
+          {isPremium && (
+            <button
+              onClick={handleManageSubscription}
+              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
+            >
+              <CreditCard size={20} />
+              <span className="text-sm font-semibold tracking-tight">Gerenciar Assinatura</span>
+            </button>
+          )}
+
           <button
-            onClick={handleManageSubscription}
+            onClick={onOpenSettings}
             className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
           >
-            <CreditCard size={20} />
-            <span className="text-sm font-semibold tracking-tight">Gerenciar Assinatura</span>
+            <Settings size={20} className="group-hover:rotate-45 transition-transform duration-500" />
+            <span className="text-sm font-semibold tracking-tight">Configurações</span>
           </button>
-        )}
 
-        <button
-          onClick={onOpenSettings}
-          className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
-        >
-          <Settings size={20} className="group-hover:rotate-45 transition-transform duration-500" />
-          <span className="text-sm font-semibold tracking-tight">Configurações</span>
-        </button>
+          <button
+            onClick={() => logout()}
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-rose-500/10 hover:text-rose-500 transition-all duration-300 group border border-transparent"
+          >
+            <LogOut size={20} />
+            <span className="text-sm font-semibold tracking-tight">Sair</span>
+          </button>
 
-        <button
-          onClick={() => logout()}
-          className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-rose-500/10 hover:text-rose-500 transition-all duration-300 group border border-transparent"
-        >
-          <LogOut size={20} />
-          <span className="text-sm font-semibold tracking-tight">Sair</span>
-        </button>
+          <button
+            onClick={() => setActiveTab('coach')}
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
+          >
+            <HelpCircle size={20} />
+            <span className="text-sm font-semibold tracking-tight">Suporte</span>
+          </button>
+        </nav>
 
-        <button
-          onClick={() => setActiveTab('coach')}
-          className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
-        >
-          <HelpCircle size={20} />
-          <span className="text-sm font-semibold tracking-tight">Suporte</span>
-        </button>
-      </nav>
-
-      {/* Upgrade Section */}
-      {!isPremium && (
-        <div className="px-4 mb-6">
-          <div className="bg-gradient-to-br from-[#E8B4BC]/20 to-[#D4B996]/20 p-6 rounded-[2rem] border border-white/5 relative overflow-hidden group">
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/5 rounded-full blur-2xl group-hover:bg-[#E8B4BC]/10 transition-colors duration-500" />
-            <Crown className="text-[#E8B4BC] mb-3" size={24} fill="currentColor" />
-            <h3 className="text-white font-bold text-sm mb-1 tracking-tight">Seja Premium</h3>
-            <p className="text-white/40 text-[10px] leading-relaxed mb-4 font-medium uppercase tracking-wider">Acesso total a treinos e nutrição personalizada.</p>
-            <button 
-              onClick={onUpgrade}
-              className="w-full py-3 rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform active:scale-95 shadow-lg"
-            >
-              Upgrade Agora
-            </button>
+        {/* Upgrade Section */}
+        {!isPremium && (
+          <div className="px-4 mt-8 mb-6">
+            <div className="bg-gradient-to-br from-[#E8B4BC]/20 to-[#D4B996]/20 p-6 rounded-[2rem] border border-white/5 relative overflow-hidden group">
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/5 rounded-full blur-2xl group-hover:bg-[#E8B4BC]/10 transition-colors duration-500" />
+              <Crown className="text-[#E8B4BC] mb-3" size={24} fill="currentColor" />
+              <h3 className="text-white font-bold text-sm mb-1 tracking-tight">Seja Premium</h3>
+              <p className="text-white/40 text-[10px] leading-relaxed mb-4 font-medium uppercase tracking-wider">Acesso total a treinos e nutrição personalizada.</p>
+              <button 
+                onClick={onUpgrade}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform active:scale-95 shadow-lg"
+              >
+                Upgrade Agora
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Profile Section */}
       <div className="p-4 border-t border-white/5 bg-[#0A0A0A]/50">

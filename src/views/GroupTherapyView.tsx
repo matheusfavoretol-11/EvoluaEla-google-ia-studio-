@@ -31,8 +31,8 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
   const [isJoinActive, setIsJoinActive] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
-  // Mock Therapist Name - Could be dynamic
-  const therapistName = "Dra. Helena";
+  // Generic Title
+  const therapyTitle = "Círculos de Terapia em Grupo";
 
   useEffect(() => {
     fetchSessions();
@@ -108,7 +108,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
     return (
       <div className="flex flex-col h-full bg-[#0A0A0A] text-white p-6">
         <div className="mb-10">
-          <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Círculos com <span className="gradient-text">{therapistName}</span></h2>
+          <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
           <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Terapia em grupo quinzenal para mulheres que buscam evolução real.</p>
         </div>
 
@@ -122,7 +122,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
           <h3 className="text-3xl font-bold mb-4 relative z-10 tracking-tight">Acesso Exclusivo Premium</h3>
           <p className="text-white/40 text-base mb-10 relative z-10 font-medium leading-relaxed">
             Nossas sessões de terapia em grupo são um espaço seguro e acolhedor. 
-            Participe de encontros quinzenais ao vivo com a {therapistName} e outras mulheres da nossa comunidade.
+            Participe de encontros quinzenais ao vivo com especialistas e outras mulheres da nossa comunidade.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
@@ -158,7 +158,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
   return (
     <div className="flex flex-col h-full bg-[#0A0A0A] text-white p-6 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
-        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Círculos com <span className="gradient-text">{therapistName}</span></h2>
+        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
         <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Seu espaço seguro de acolhimento e troca.</p>
       </div>
 
