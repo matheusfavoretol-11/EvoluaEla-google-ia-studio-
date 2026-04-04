@@ -299,6 +299,39 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
+// Create Billing Portal Session Endpoint
+app.post('/api/create-portal-session', async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    // Get stripe_customer_id from Supabase
+    const { data: userData, error: fetchError } = await supabaseAdmin
+      .from('users')
+      .select('stripe_customer_id')
+      .eq('id', userId)
+      .single();
+
+    if (fetchError || !userData?.stripe_customer_id) {
+      console.error('Portal error: Customer ID not found for user', userId);
+      return res.status(404).json({ error: 'Você ainda não possui uma assinatura ativa na Stripe.' });
+    }
+
+    const session = await stripe.billingPortal.sessions.create({
+      customer: userData.stripe_customer_id,
+      return_url: 'https://www.evoluaela.online',
+    });
+
+    res.json({ url: session.url });
+  } catch (error: any) {
+    console.error('PORTAL ERROR:', error);
+    res.status(500).json({ error: `Erro ao abrir portal: ${error.message}` });
+  }
+});
+
 // Start the server
 async function startServer() {
   // Vite middleware for development

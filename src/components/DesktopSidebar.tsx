@@ -1,4 +1,4 @@
-import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart } from 'lucide-react';
+import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useUser } from '../contexts/UserContext';
 
@@ -10,7 +10,25 @@ interface DesktopSidebarProps {
 }
 
 export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings, onUpgrade }: DesktopSidebarProps) {
-  const { userName, isPremium, logout } = useUser();
+  const { userName, isPremium, logout, userId } = useUser();
+
+  const handleManageSubscription = async () => {
+    try {
+      const response = await fetch('/api/create-portal-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error('Portal error:', data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const menuItems = [
     { id: 'home', icon: Home, label: 'Início' },
@@ -60,6 +78,17 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
         })}
 
         <div className="pt-8 text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] px-4 mb-4">Preferências</div>
+        
+        {isPremium && (
+          <button
+            onClick={handleManageSubscription}
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
+          >
+            <CreditCard size={20} />
+            <span className="text-sm font-semibold tracking-tight">Gerenciar Assinatura</span>
+          </button>
+        )}
+
         <button
           onClick={onOpenSettings}
           className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
@@ -67,6 +96,15 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
           <Settings size={20} className="group-hover:rotate-45 transition-transform duration-500" />
           <span className="text-sm font-semibold tracking-tight">Configurações</span>
         </button>
+
+        <button
+          onClick={() => logout()}
+          className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-rose-500/10 hover:text-rose-500 transition-all duration-300 group border border-transparent"
+        >
+          <LogOut size={20} />
+          <span className="text-sm font-semibold tracking-tight">Sair</span>
+        </button>
+
         <button
           onClick={() => setActiveTab('coach')}
           className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-white/40 hover:bg-white/5 hover:text-white/60 transition-all duration-300 group border border-transparent"
@@ -106,13 +144,6 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
               {isPremium ? 'Membro Premium' : 'Plano Free'}
             </p>
           </div>
-          <button 
-            onClick={() => logout()}
-            className="p-2 text-white/20 hover:text-rose-500 transition-colors"
-            title="Sair"
-          >
-            <LogOut size={18} />
-          </button>
         </div>
       </div>
     </aside>

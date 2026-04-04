@@ -33,6 +33,12 @@ function AppContent() {
   
   // App State
   const [showLanding, setShowLanding] = useState(true);
+
+  useEffect(() => {
+    if (!userId && isAuthReady) {
+      setShowLanding(true);
+    }
+  }, [userId, isAuthReady]);
   
   const [activeTab, setActiveTab] = useState('home');
   const [showThemeSettings, setShowThemeSettings] = useState(false);
