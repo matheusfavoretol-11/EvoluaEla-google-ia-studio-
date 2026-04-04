@@ -157,9 +157,13 @@ async function scheduleNextTherapySessions() {
 
     for (const date of datesToSchedule) {
       console.log(`Scheduling session for ${format(date, 'yyyy-MM-dd HH:mm')}`);
+      
+      // Zoom expects yyyy-MM-ddTHH:mm:ssZ (no milliseconds)
+      const zoomStartTime = format(date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
+      
       const zoomMeeting = await createZoomMeeting(
         'Terapia em Grupo - EvoluaEla',
-        date.toISOString(),
+        zoomStartTime,
         60
       );
 
@@ -179,8 +183,12 @@ async function scheduleNextTherapySessions() {
         console.log(`Session for ${format(date, 'yyyy-MM-dd HH:mm')} scheduled successfully.`);
       }
     }
-  } catch (err) {
-    console.error('Error in scheduleNextTherapySessions:', err);
+  } catch (err: any) {
+    console.error('Error in scheduleNextTherapySessions:', {
+      message: err.message,
+      data: err.response?.data,
+      status: err.response?.status
+    });
   }
 }
 

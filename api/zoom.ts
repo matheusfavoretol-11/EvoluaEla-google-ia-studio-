@@ -12,22 +12,36 @@ export async function getZoomAccessToken() {
     throw new Error('Zoom credentials missing in environment variables');
   }
 
-  const auth = Buffer.from(`${ZOOM_CLIENT_ID}:${ZOOM_CLIENT_SECRET}`).toString('base64');
+  const auth = Buffer.from(`${ZOOM_CLIENT_ID.trim()}:${ZOOM_CLIENT_SECRET.trim()}`).toString('base64');
   
   try {
+    const params = new URLSearchParams();
+    params.append('grant_type', 'account_credentials');
+    params.append('account_id', ZOOM_ACCOUNT_ID.trim());
+
     const response = await axios.post(
-      `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${ZOOM_ACCOUNT_ID}`,
-      {},
+      'https://zoom.us/oauth/token',
+      params,
       {
         headers: {
           Authorization: `Basic ${auth}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
 
     return response.data.access_token;
   } catch (error: any) {
-    console.error('Error getting Zoom access token:', error.response?.data || error.message);
+    const errorData = error.response?.data;
+    console.error('Error getting Zoom access token:', JSON.stringify(errorData || error.message, null, 2));
+    
+    if (errorData?.error === 'invalid_client') {
+      throw new Error('Zoom: Client ID ou Secret incorretos. Verifique suas credenciais no Zoom Marketplace.');
+    }
+    if (errorData?.error === 'invalid_grant') {
+      throw new Error('Zoom: Account ID incorreto ou o App não está ativado no Zoom Marketplace.');
+    }
+    
     throw error;
   }
 }
