@@ -66,7 +66,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[#0A0A0A] overflow-y-auto font-sans text-white">
+    <div className="fixed inset-0 z-50 flex flex-col bg-[var(--color-bg)] overflow-y-auto font-sans text-[var(--color-text)]">
       <div className="relative h-72 sm:h-80 shrink-0">
         <img 
           src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200&h=800" 
@@ -74,7 +74,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-transparent" />
         
         <button 
           onClick={onClose}
@@ -92,7 +92,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="p-8 sm:p-10 flex-1 flex flex-col bg-[#0A0A0A] relative">
+      <div className="p-4 sm:p-10 flex-1 flex flex-col bg-[var(--color-bg)] relative">
         {/* Background Glow */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -101,12 +101,12 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             <div className="inline-block px-5 py-2 bg-[#E8B4BC]/10 text-[#E8B4BC] font-bold text-[10px] rounded-full mb-4 uppercase tracking-widest border border-[#E8B4BC]/20">
               Experimente por 7 Dias Grátis
             </div>
-            <div className="text-6xl sm:text-7xl font-bold text-white mb-2 tracking-tighter">R$ 109,90<span className="text-xl text-white/20 font-bold tracking-normal">/mês</span></div>
-            <p className="text-white/40 text-sm font-medium tracking-wide">Acompanhamento profissional completo. Cancele quando quiser.</p>
+            <div className="text-6xl sm:text-7xl font-bold text-[var(--color-text)] mb-2 tracking-tighter">R$ 109,90<span className="text-xl text-[var(--color-text-muted)]/20 font-bold tracking-normal">/mês</span></div>
+            <p className="text-[var(--color-text-muted)] text-sm font-medium tracking-wide">Acompanhamento profissional completo. Cancele quando quiser.</p>
           </div>
 
           <div className="space-y-6">
-            <h3 className="font-bold text-white text-xl uppercase tracking-widest flex items-center gap-3">
+            <h3 className="font-bold text-[var(--color-text)] text-xl uppercase tracking-widest flex items-center gap-3">
               <div className="w-8 h-1 bg-[#E8B4BC] rounded-full"></div>
               O Nosso Diferencial
             </h3>
@@ -128,8 +128,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
               </div>
             </div>
 
-            <h3 className="font-bold text-white text-xl uppercase tracking-widest flex items-center gap-3 pt-4">
-              <div className="w-8 h-1 bg-white/20 rounded-full"></div>
+            <h3 className="font-bold text-[var(--color-text)] text-xl uppercase tracking-widest flex items-center gap-3 pt-4">
+              <div className="w-8 h-1 bg-[var(--color-text)]/20 rounded-full"></div>
               O que preparamos para você
             </h3>
             
@@ -142,26 +142,26 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                 'Ajustes semanais e chat direto',
                 'Comunidade exclusiva de mulheres'
               ].map((item, idx) => (
-                <div key={`benefit-${idx}`} className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 border border-white/5 group hover:bg-white/10 transition-all">
+                <div key={`benefit-${idx}`} className="flex items-center gap-4 p-5 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] group hover:bg-[var(--color-text)]/10 transition-all">
                   <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
                     <Check size={20} strokeWidth={3} />
                   </div>
-                  <span className="text-sm font-bold text-white/60 group-hover:text-white transition-colors">{item}</span>
+                  <span className="text-sm font-bold text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="glass-card p-8 border border-white/10 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+          <div className="glass-card p-8 border border-[var(--color-border)] shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"></div>
-            <p className="text-white font-bold mb-2 text-lg tracking-tight">Muito além de um app</p>
-            <p className="text-white/40 text-sm font-medium leading-relaxed">É sobre sua nova versão. Agora você tem um time segurando sua mão em cada passo do caminho.</p>
+            <p className="text-[var(--color-text)] font-bold mb-2 text-lg tracking-tight">Muito além de um app</p>
+            <p className="text-[var(--color-text-muted)] text-sm font-medium leading-relaxed">É sobre sua nova versão. Agora você tem um time segurando sua mão em cada passo do caminho.</p>
           </div>
 
-          <div className="bg-white/5 p-6 rounded-3xl border border-white/5 flex gap-4 items-start">
+          <div className="bg-[var(--color-text)]/5 p-6 rounded-3xl border border-[var(--color-border)] flex gap-4 items-start">
             <AlertCircle className="text-[#D4B996] shrink-0 mt-0.5" size={24} />
-            <p className="text-[11px] text-white/30 leading-relaxed font-bold uppercase tracking-widest">
-              <strong className="text-white/60">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
+            <p className="text-[11px] text-[var(--color-text-muted)]/30 leading-relaxed font-bold uppercase tracking-widest">
+              <strong className="text-[var(--color-text-muted)]/60">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
 
@@ -177,8 +177,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           )}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 relative z-10">
-          <div className="flex items-center justify-center gap-3 mb-6 text-white/20 text-[10px] font-bold uppercase tracking-widest">
+        <div className="mt-12 pt-8 border-t border-[var(--color-border)] relative z-10">
+          <div className="flex items-center justify-center gap-3 mb-6 text-[var(--color-text-muted)]/20 text-[10px] font-bold uppercase tracking-widest">
             <CreditCard size={16} />
             <span>Cobrança segura apenas após 7 dias</span>
           </div>
@@ -194,7 +194,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
               </div>
             ) : 'Quero começar meu teste grátis'}
           </button>
-          <p className="text-center text-[9px] text-white/10 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
+          <p className="text-center text-[9px] text-[var(--color-text-muted)]/10 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
             Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 109,90/mês será renovada automaticamente. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>

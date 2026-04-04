@@ -9,6 +9,7 @@ type Theme = {
   text: string;
   textMuted: string;
   accent: string;
+  border?: string;
 };
 
 export const predefinedThemes: Record<string, Theme> = {
@@ -62,18 +63,34 @@ export const predefinedThemes: Record<string, Theme> = {
     textMuted: '#888888',
     accent: '#D4B996', // Gold
   },
+  light: {
+    id: 'light',
+    name: 'Claro',
+    primary: '#E8B4BC',
+    bg: '#FAF8F5',
+    surface: '#FFFFFF',
+    text: '#1A1A1A',
+    textMuted: '#666666',
+    accent: '#D4B996',
+    border: '#E8E0D8'
+  },
 };
 
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   setCustomColor: (key: keyof Theme, value: string) => void;
+  toggleTheme: () => void;
+  isDark: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(predefinedThemes.castify);
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem('evoluaela-theme');
+    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.castify;
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -83,14 +100,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--color-text', theme.text);
     root.style.setProperty('--color-text-muted', theme.textMuted);
     root.style.setProperty('--color-accent', theme.accent);
+    if ('border' in theme) {
+      root.style.setProperty('--color-border', (theme as any).border);
+    } else {
+      root.style.setProperty('--color-border', 'rgba(255,255,255,0.05)');
+    }
+    
+    localStorage.setItem('evoluaela-theme', theme.id);
+    
+    if (theme.id === 'light') {
+      root.classList.add('light-mode');
+    } else {
+      root.classList.remove('light-mode');
+    }
   }, [theme]);
 
   const setCustomColor = (key: keyof Theme, value: string) => {
     setTheme((prev) => ({ ...prev, [key]: value, id: 'custom', name: 'Personalizado' }));
   };
 
+  const toggleTheme = () => {
+    setTheme(prev => prev.id === 'light' ? predefinedThemes.castify : predefinedThemes.light);
+  };
+
+  const isDark = theme.id !== 'light';
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, setCustomColor }}>
+    <ThemeContext.Provider value={{ theme, setTheme, setCustomColor, toggleTheme, isDark }}>
       {children}
     </ThemeContext.Provider>
   );

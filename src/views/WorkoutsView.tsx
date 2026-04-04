@@ -310,35 +310,35 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       whileHover={{ y: -4, scale: 1.01 }}
       key={workout.id} 
       onClick={() => setActiveWorkoutId(workout.id)}
-      className="glass-card p-6 cursor-pointer transition-all hover:bg-white/10 group border border-white/5"
+      className="glass-card p-6 cursor-pointer transition-all hover:bg-[var(--color-text)]/10 group border border-[var(--color-border)]"
     >
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h4 className="text-2xl font-bold text-white leading-tight mb-2 group-hover:text-[#E8B4BC] transition-colors tracking-tight">{workout.title}</h4>
-          <div className="flex items-center gap-4 text-[10px] font-bold text-white/20 uppercase tracking-widest">
+          <h4 className="text-2xl font-bold text-[var(--color-text)] leading-tight mb-2 group-hover:text-[#E8B4BC] transition-colors tracking-tight">{workout.title}</h4>
+          <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-muted)] uppercase tracking-widest">
             <span className="flex items-center gap-1.5"><Clock size={14} className="text-[#E8B4BC]" /> {workout.duration}</span>
             <span className="flex items-center gap-1.5"><Flame size={14} className="text-[#D4B996]" /> {workout.calories}</span>
           </div>
         </div>
-        <div className="bg-white/5 text-white/20 p-3 rounded-2xl group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
+        <div className="bg-[var(--color-text)]/5 text-[var(--color-text-muted)] p-3 rounded-2xl group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
           <ChevronRight size={20} />
         </div>
       </div>
       
-      <div className="flex items-center gap-4 mt-6 pt-6 border-t border-white/5">
+      <div className="flex items-center gap-4 mt-6 pt-6 border-t border-[var(--color-border)]">
         <div className="flex -space-x-3">
           {workout.exercises.slice(0, 3).map((ex, idx) => (
-            <div key={`${ex.id}-${idx}`} className="w-10 h-10 rounded-full bg-neutral-900 border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/40 shadow-xl">
+            <div key={`${ex.id}-${idx}`} className="w-10 h-10 rounded-full bg-[var(--color-bg)] border-4 border-[var(--color-bg)] flex items-center justify-center text-[10px] font-bold text-[var(--color-text-muted)] shadow-xl">
               {idx + 1}
             </div>
           ))}
           {workout.exercises.length > 3 && (
-            <div className="w-10 h-10 rounded-full bg-neutral-800 border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/20 shadow-xl">
+            <div className="w-10 h-10 rounded-full bg-[var(--color-bg)] border-4 border-[var(--color-bg)] flex items-center justify-center text-[10px] font-bold text-[var(--color-text-muted)] shadow-xl">
               +
             </div>
           )}
         </div>
-        <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest ml-1">{workout.exercises.length} exercícios</span>
+        <span className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase tracking-widest ml-1">{workout.exercises.length} exercícios</span>
       </div>
     </motion.div>
   );
@@ -348,7 +348,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#0A0A0A] text-white font-sans relative">
+    <div className="flex flex-col h-full bg-[var(--color-bg)] text-[var(--color-text)] font-sans relative">
       <AnimatePresence mode="wait">
         {!activeWorkoutId && !isEditing ? (
           <motion.div 
@@ -358,16 +358,16 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <div className="px-6 pt-8 pb-4">
-              <h2 className="text-5xl font-bold mb-3 text-white tracking-tighter">Seus <span className="gradient-text">Treinos</span></h2>
-              <p className="text-sm font-bold text-white/30 mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</p>
+            <div className="px-4 sm:px-6 pt-8 pb-4">
+              <h2 className="text-5xl font-bold mb-3 text-[var(--color-text)] tracking-tighter">Seus <span className="gradient-text">Treinos</span></h2>
+              <p className="text-sm font-bold text-[var(--color-text-muted)] mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</p>
               
               {/* Tabs */}
-              <div className="flex p-1.5 rounded-2xl bg-white/5 mb-8 border border-white/5">
+              <div className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 mb-8 border border-[var(--color-border)]">
                 <button
                   onClick={() => setActiveTab('meus')}
                   className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-                    activeTab === 'meus' ? 'bg-white text-black shadow-2xl' : 'text-white/40 hover:text-white/60'
+                    activeTab === 'meus' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
                   }`}
                 >
                   Meus Treinos
@@ -375,7 +375,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 <button
                   onClick={() => setActiveTab('sugestoes')}
                   className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-                    activeTab === 'sugestoes' ? 'bg-white text-black shadow-2xl' : 'text-white/40 hover:text-white/60'
+                    activeTab === 'sugestoes' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
                   }`}
                 >
                   Sugestões
@@ -383,7 +383,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-6 pb-10 space-y-6 hide-scrollbar">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-10 space-y-6 hide-scrollbar">
               {activeTab === 'meus' && (
                 <>
                   <button 
@@ -397,17 +397,17 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="rounded-[2.5rem] p-10 text-white text-center mb-8 relative overflow-hidden glass-card border border-white/10"
+                      className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-card border border-[var(--color-border)]"
                     >
                       <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/10 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
                       <Star className="w-16 h-16 text-[#D4B996] mx-auto mb-6 relative z-10" />
                       <h3 className="text-3xl font-bold mb-4 relative z-10 tracking-tight">Treinos feitos para você</h3>
-                      <p className="text-white/40 text-base mb-10 relative z-10 font-medium leading-relaxed">
+                      <p className="text-[var(--color-text-muted)] text-base mb-10 relative z-10 font-medium leading-relaxed">
                         Desbloqueie treinos 100% personalizados, pensados por especialistas para o seu objetivo real. Vamos juntas?
                       </p>
                       <button 
                         onClick={onUpgrade}
-                        className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-white text-black shadow-xl relative z-10"
+                        className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] shadow-xl relative z-10"
                       >
                         Fazer Upgrade Premium
                       </button>
@@ -415,7 +415,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   )}
 
                   {myWorkouts.length === 0 ? (
-                    <div className="text-center py-16 text-white/10">
+                    <div className="text-center py-16 text-[var(--color-text-muted)]/20">
                       <Dumbbell size={64} className="mx-auto mb-6 opacity-20" />
                       <p className="font-bold uppercase tracking-widest text-[10px]">Você ainda não criou nenhum treino.</p>
                     </div>
@@ -429,14 +429,14 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
               {activeTab === 'sugestoes' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  <div className="md:col-span-2 xl:col-span-3 glass-card p-5 text-[10px] text-white/40 font-bold uppercase tracking-widest border border-white/5 text-center">
+                  <div className="md:col-span-2 xl:col-span-3 glass-card p-5 text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest border border-[var(--color-border)] text-center">
                     Sugestões preparadas com carinho para você começar agora.
                   </div>
                   {defaultSuggestions.map(renderWorkoutCard)}
                 </div>
               )}
 
-              <div className="mt-8 p-6 glass-card border border-white/5 flex gap-4 items-start text-white/20 text-[10px] font-bold uppercase tracking-widest">
+              <div className="mt-8 p-6 glass-card border border-[var(--color-border)] flex gap-4 items-start text-[var(--color-text-muted)] text-[10px] font-bold uppercase tracking-widest">
                 <Info size={20} className="shrink-0 mt-0.5 text-[#D4B996]" />
                 <p className="leading-relaxed">Lembrete: os treinos são sugestões para te apoiar, mas não substituem o olhar de um profissional de educação física, tá?</p>
               </div>
@@ -448,20 +448,20 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="flex flex-col h-full bg-[#0A0A0A]"
+            className="flex flex-col h-full bg-[var(--color-bg)]"
           >
-            <div className="px-6 pt-8 pb-6 border-b border-white/5 flex items-center justify-between sticky top-0 glass-nav z-30">
+            <div className="px-4 sm:px-6 pt-8 pb-6 border-b border-[var(--color-border)] flex items-center justify-between sticky top-0 glass-nav z-30">
               <div className="flex items-center gap-4">
                 <button 
                   onClick={isEditing ? handleCancelEdit : () => setActiveWorkoutId(null)}
-                  className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 hover:bg-white/10 transition-all border border-white/10"
+                  className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/10 transition-all border border-[var(--color-border)]"
                 >
                   {isEditing ? <X size={24} /> : <ChevronRight size={24} className="rotate-180" />}
                 </button>
                 {!isEditing && (
                   <div>
-                    <h2 className="text-3xl font-bold text-white tracking-tight">{activeWorkout?.title}</h2>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">{activeWorkout?.duration} • {activeWorkout?.exercises.length} exercícios</p>
+                    <h2 className="text-3xl font-bold text-[var(--color-text)] tracking-tight">{activeWorkout?.title}</h2>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">{activeWorkout?.duration} • {activeWorkout?.exercises.length} exercícios</p>
                   </div>
                 )}
               </div>
@@ -469,7 +469,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               {!isEditing ? (
                 <button 
                   onClick={() => startEditing(activeWorkout!)}
-                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all"
+                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-[var(--color-text)]/5 text-[var(--color-text)] border border-[var(--color-border)] hover:bg-[var(--color-text)]/10 transition-all"
                 >
                   <Edit2 size={18} /> Editar
                 </button>
@@ -495,12 +495,12 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
             {/* Progress Bar (View Mode) */}
             {!isEditing && (
-              <div className="px-6 pt-6 bg-[#0A0A0A]">
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-white/20">
+              <div className="px-4 sm:px-6 pt-6 bg-[var(--color-bg)]">
+                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-[var(--color-text-muted)]">
                   <span>Progresso do Treino</span>
                   <span className="text-[#E8B4BC]">{Math.round(progressPercent)}%</span>
                 </div>
-                <div className="h-2 w-full rounded-full overflow-hidden bg-white/5">
+                <div className="h-2 w-full rounded-full overflow-hidden bg-[var(--color-text)]/5">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${progressPercent}%` }}
@@ -510,29 +510,29 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               </div>
             )}
 
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 hide-scrollbar">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 hide-scrollbar">
               {isEditing && (
                 <div className="mb-8 space-y-6">
                   <div>
-                    <label className="text-[10px] font-bold text-white/20 uppercase ml-2 mb-2 block tracking-widest">Nome do Treino</label>
+                    <label className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase ml-2 mb-2 block tracking-widest">Nome do Treino</label>
                     <input 
                       type="text"
                       value={editingWorkout?.title || ''}
                       onChange={(e) => setEditingWorkout(prev => prev ? {...prev, title: e.target.value} : null)}
-                      className="w-full text-2xl font-bold text-white bg-white/5 p-6 rounded-3xl border border-white/5 outline-none focus:border-[#E8B4BC]/30 transition-all"
+                      className="w-full text-2xl font-bold text-[var(--color-text)] bg-[var(--color-text)]/5 p-6 rounded-3xl border border-[var(--color-border)] outline-none focus:border-[#E8B4BC]/30 transition-all"
                     />
                   </div>
                   
                   {isPremium && (
-                    <div className="glass-card p-6 border border-white/10 shadow-2xl">
-                      <p className="text-[10px] font-bold text-white/40 uppercase mb-4 flex items-center gap-2 tracking-widest">
+                    <div className="glass-card p-6 border border-[var(--color-border)] shadow-2xl">
+                      <p className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase mb-4 flex items-center gap-2 tracking-widest">
                         <Star size={14} className="text-[#D4B996]" /> Sugestões Inteligentes
                       </p>
                       <div className="flex flex-wrap gap-3">
-                        <button onClick={() => addPremiumSuggestion('cardio')} className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10">
+                        <button onClick={() => addPremiumSuggestion('cardio')} className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 text-[var(--color-text)] transition-all border border-[var(--color-border)]">
                           + Cardio
                         </button>
-                        <button onClick={() => addPremiumSuggestion('core')} className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10">
+                        <button onClick={() => addPremiumSuggestion('core')} className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 text-[var(--color-text)] transition-all border border-[var(--color-border)]">
                           + Core
                         </button>
                       </div>
@@ -546,34 +546,34 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 
                 if (isEditing) {
                   return (
-                    <div key={`edit-${exercise.id}`} className="flex flex-col gap-4 p-6 glass-card border border-white/5 shadow-2xl">
+                    <div key={`edit-${exercise.id}`} className="flex flex-col gap-4 p-6 glass-card border border-[var(--color-border)] shadow-2xl">
                       <div className="flex justify-between items-center gap-4">
                         <input 
-                          className="font-bold text-xl text-white bg-white/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
+                          className="font-bold text-xl text-[var(--color-text)] bg-[var(--color-text)]/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
                           value={exercise.name} 
                           onChange={(e) => updateExercise(exercise.id, 'name', e.target.value)}
                           placeholder="Nome do exercício"
                         />
                         <div className="flex gap-2 shrink-0">
-                          <button onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-white/5 rounded-xl text-white/20 disabled:opacity-30 hover:bg-white/10"><ArrowUp size={18}/></button>
-                          <button onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-white/5 rounded-xl text-white/20 disabled:opacity-30 hover:bg-white/10"><ArrowDown size={18}/></button>
+                          <button onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-[var(--color-text)]/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-30 hover:bg-[var(--color-text)]/10"><ArrowUp size={18}/></button>
+                          <button onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-[var(--color-text)]/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-30 hover:bg-[var(--color-text)]/10"><ArrowDown size={18}/></button>
                           <button onClick={() => removeExercise(exercise.id)} className="p-3 bg-rose-500/10 rounded-xl text-rose-500 hover:bg-rose-500/20"><Trash2 size={18}/></button>
                         </div>
                       </div>
                       <div className="flex gap-4">
                         <div className="flex-1">
-                          <label className="text-[10px] text-white/20 uppercase font-bold ml-2 mb-1 block tracking-widest">Séries</label>
+                          <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Séries</label>
                           <input 
-                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-white outline-none border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
+                            className="w-full bg-[var(--color-text)]/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
                             value={exercise.sets}
                             onChange={(e) => updateExercise(exercise.id, 'sets', e.target.value)}
                             placeholder="Ex: 3"
                           />
                         </div>
                         <div className="flex-1">
-                          <label className="text-[10px] text-white/20 uppercase font-bold ml-2 mb-1 block tracking-widest">Reps/Tempo</label>
+                          <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Reps/Tempo</label>
                           <input 
-                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-white outline-none border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
+                            className="w-full bg-[var(--color-text)]/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[#E8B4BC]/30 transition-all" 
                             value={exercise.reps}
                             onChange={(e) => updateExercise(exercise.id, 'reps', e.target.value)}
                             placeholder="Ex: 15 reps"
@@ -602,16 +602,16 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     onClick={() => toggleExercise(exercise.id)}
                     className={`p-6 rounded-3xl border cursor-pointer transition-all ${
                       isCompleted 
-                        ? 'bg-white/5 border-transparent' 
-                        : 'glass-card border-white/5 shadow-xl hover:border-[#E8B4BC]/30'
+                        ? 'bg-[var(--color-text)]/5 border-transparent' 
+                        : 'glass-card border-[var(--color-border)] shadow-xl hover:border-[#E8B4BC]/30'
                     }`}
                   >
                     <div className="flex justify-between items-center">
                       <div>
-                        <h4 className={`font-bold text-xl transition-all tracking-tight ${isCompleted ? 'text-white/20 line-through' : 'text-white'}`}>
+                        <h4 className={`font-bold text-xl transition-all tracking-tight ${isCompleted ? 'text-[var(--color-text-muted)] line-through' : 'text-[var(--color-text)]'}`}>
                           {exercise.name}
                         </h4>
-                        <p className="text-[10px] font-bold uppercase tracking-widest mt-2 transition-colors" style={{ color: isCompleted ? 'rgba(255,255,255,0.2)' : '#E8B4BC' }}>
+                        <p className="text-[10px] font-bold uppercase tracking-widest mt-2 transition-colors" style={{ color: isCompleted ? 'rgba(232, 180, 188, 0.4)' : '#E8B4BC' }}>
                           {exercise.sets} séries x {exercise.reps}
                         </p>
                       </div>
@@ -623,7 +623,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                         transition={{ duration: 0.4 }}
                         className="p-3 transition-colors rounded-2xl"
                         style={{ 
-                          color: isCompleted ? '#E8B4BC' : 'rgba(255,255,255,0.1)',
+                          color: isCompleted ? '#E8B4BC' : 'rgba(var(--color-text-rgb), 0.1)',
                           backgroundColor: isCompleted ? 'rgba(232, 180, 188, 0.1)' : 'transparent'
                         }}
                       >
@@ -637,7 +637,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               {isEditing && (
                 <button 
                   onClick={addExercise}
-                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-white/40 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-3 mt-6 border border-white/5"
+                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 transition-all flex items-center justify-center gap-3 mt-6 border border-[var(--color-border)]"
                 >
                   <Plus size={24} /> Adicionar Exercício
                 </button>
@@ -645,7 +645,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             </div>
 
             {!isEditing && (
-              <div className="p-8 border-t border-white/5 glass-nav sticky bottom-0 z-20">
+              <div className="p-8 border-t border-[var(--color-border)] glass-nav sticky bottom-0 z-20">
                 <button 
                   onClick={handleFinishWorkout}
                   disabled={completedCount === 0}
@@ -667,7 +667,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="glass-card p-10 max-w-md w-full shadow-2xl text-center relative border border-white/10"
+              className="glass-card p-10 max-w-md w-full shadow-2xl text-center relative border border-[var(--color-border)]"
             >
               <button 
                 onClick={() => {
@@ -675,7 +675,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   setActiveWorkoutId(null);
                   setCompletedExercises({});
                 }}
-                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-white/20 hover:bg-white/10 transition-all"
+                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/10 transition-all"
               >
                 <X size={20} />
               </button>
@@ -683,25 +683,25 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <div className="w-24 h-24 mx-auto bg-[#E8B4BC]/10 rounded-3xl flex items-center justify-center mb-6 text-[#E8B4BC]">
                 <Flame size={48} />
               </div>
-              <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">Treino concluído!</h2>
-              <p className="text-white/40 font-medium mb-8">Sinta esse orgulho! Você está evoluindo a cada movimento. 💪</p>
+              <h2 className="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">Treino concluído!</h2>
+              <p className="text-[var(--color-text-muted)] font-medium mb-8">Sinta esse orgulho! Você está evoluindo a cada movimento. 💪</p>
               
-              <div className="bg-white/5 rounded-3xl p-6 mb-8 grid grid-cols-3 gap-4 border border-white/5">
+              <div className="bg-[var(--color-text)]/5 rounded-3xl p-6 mb-8 grid grid-cols-3 gap-4 border border-[var(--color-border)]">
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold text-white">{completedCount}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/20 text-center">Excs</span>
+                  <span className="text-2xl font-bold text-[var(--color-text)]">{completedCount}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Excs</span>
                 </div>
-                <div className="flex flex-col items-center border-x border-white/5">
-                  <span className="text-2xl font-bold text-white">{activeWorkout?.duration.replace(/[^0-9]/g, '') || '0'}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/20 text-center">Mins</span>
+                <div className="flex flex-col items-center border-x border-[var(--color-border)]">
+                  <span className="text-2xl font-bold text-[var(--color-text)]">{activeWorkout?.duration.replace(/[^0-9]/g, '') || '0'}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Mins</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold text-white">{activeWorkout?.calories.replace(/[^0-9]/g, '') || '0'}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/20 text-center">Kcal</span>
+                  <span className="text-2xl font-bold text-[var(--color-text)]">{activeWorkout?.calories.replace(/[^0-9]/g, '') || '0'}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Kcal</span>
                 </div>
               </div>
 
-              <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-[var(--color-text)]/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}

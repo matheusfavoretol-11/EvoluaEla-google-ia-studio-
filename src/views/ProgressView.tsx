@@ -58,24 +58,24 @@ export default function ProgressView() {
   }
 
   return (
-    <div className="p-6 space-y-10 bg-[#0A0A0A] min-h-full text-white font-sans relative overflow-hidden">
+    <div className="p-4 sm:p-6 space-y-10 bg-[var(--color-bg)] min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <header className="relative z-10">
-        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Sua <span className="gradient-text">Evolução</span></h2>
-        <p className="text-sm font-bold text-white/30 uppercase tracking-widest">Acompanhe seus resultados e celebre cada vitória.</p>
+        <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Sua <span className="gradient-text">Evolução</span></h2>
+        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Acompanhe seus resultados e celebre cada vitória.</p>
       </header>
 
       {/* Weight Tracker */}
-      <section className="p-8 rounded-[2.5rem] border border-white/5 glass-card relative overflow-hidden shadow-2xl">
+      <section className="p-8 rounded-[2.5rem] border border-[var(--color-border)] glass-card relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4B996]/5 rounded-full blur-[80px] -mr-10 -mt-10"></div>
         <div className="flex justify-between items-start mb-10 relative z-10">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/20 block mb-3">Peso Atual</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] block mb-3">Peso Atual</span>
             <div className="flex items-baseline gap-3">
-              <span className="text-6xl font-bold text-white tracking-tighter">{currentWeight.toFixed(1)}</span>
-              <span className="font-bold text-white/20 text-xl tracking-widest uppercase">kg</span>
+              <span className="text-6xl font-bold text-[var(--color-text)] tracking-tighter">{currentWeight.toFixed(1)}</span>
+              <span className="font-bold text-[var(--color-text-muted)] text-xl tracking-widest uppercase">kg</span>
             </div>
           </div>
           <div className={`px-5 py-2.5 rounded-2xl flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest shadow-2xl border ${isLoss ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border-rose-500/20'}`}>
@@ -93,7 +93,7 @@ export default function ProgressView() {
               value={newWeight}
               onChange={(e) => setNewWeight(e.target.value)}
               placeholder="Novo peso (kg)"
-              className="w-full bg-white/5 border border-white/5 rounded-2xl px-8 py-5 text-sm font-bold text-white outline-none focus:border-[#E8B4BC]/30 transition-all placeholder:text-white/10"
+              className="w-full bg-[var(--color-text)]/5 border border-[var(--color-border)] rounded-2xl px-8 py-5 text-sm font-bold text-[var(--color-text)] outline-none focus:border-[#E8B4BC]/30 transition-all placeholder:text-[var(--color-text-muted)]/30"
             />
           </div>
           <button 
@@ -115,25 +115,25 @@ export default function ProgressView() {
                   <stop offset="95%" stopColor="#E8B4BC" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.03)" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(var(--color-text-rgb), 0.03)" />
               <XAxis 
                 dataKey="date" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.2)', fontWeight: 700 }} 
+                tick={{ fontSize: 10, fill: 'rgba(var(--color-text-rgb), 0.2)', fontWeight: 700 }} 
                 dy={15}
               />
               <YAxis 
                 domain={['dataMin - 1', 'dataMax + 1']} 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.2)', fontWeight: 700 }}
+                tick={{ fontSize: 10, fill: 'rgba(var(--color-text-rgb), 0.2)', fontWeight: 700 }}
                 dx={-15}
               />
               <Tooltip 
-                contentStyle={{ borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', backgroundColor: '#141414', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
+                contentStyle={{ borderRadius: '24px', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
                 itemStyle={{ color: '#E8B4BC', fontWeight: 700, fontSize: '12px' }}
-                labelStyle={{ color: 'white', fontWeight: 700, fontSize: '12px', marginBottom: '6px' }}
+                labelStyle={{ color: 'var(--color-text)', fontWeight: 700, fontSize: '12px', marginBottom: '6px' }}
               />
               <Area 
                 type="monotone" 
@@ -151,16 +151,16 @@ export default function ProgressView() {
       {/* Before/After Comparison */}
       <section className="space-y-6">
         <div className="flex justify-between items-center">
-          <h3 className="text-2xl font-bold text-white tracking-tight">Comparação Visual</h3>
+          <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Comparação Visual</h3>
         </div>
         
-        <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-          <div className="flex items-center justify-center gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-white/20">
+        <div className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] shadow-2xl">
+          <div className="flex items-center justify-center gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
             <Lock size={14} className="text-[#D4B996]" /> Ambiente seguro e privado
           </div>
           
           <div className="grid grid-cols-2 gap-6">
-            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/5 shadow-2xl group">
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-[var(--color-text)]/5 border border-[var(--color-border)] shadow-2xl group">
               {photos.length > 0 ? (
                 <>
                   <img src={photos[0].url} alt="Antes" className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 transition-opacity" referrerPolicy="no-referrer" />
@@ -171,14 +171,14 @@ export default function ProgressView() {
                   </div>
                 </>
               ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white/10">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-[var(--color-text-muted)]/10">
                   <ImageIcon size={32} className="mb-3 opacity-20" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Sem foto</span>
                 </div>
               )}
             </div>
             
-            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/5 shadow-2xl group">
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-[var(--color-text)]/5 border border-[var(--color-border)] shadow-2xl group">
               {photos.length > 1 ? (
                 <>
                   <img src={photos[photos.length - 1].url} alt="Depois" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
@@ -191,7 +191,7 @@ export default function ProgressView() {
               ) : (
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="absolute inset-0 flex flex-col items-center justify-center text-white/20 hover:bg-white/5 transition-all border-2 border-dashed border-white/10 rounded-3xl m-2 group"
+                  className="absolute inset-0 flex flex-col items-center justify-center text-[var(--color-text-muted)]/20 hover:bg-[var(--color-text)]/5 transition-all border-2 border-dashed border-[var(--color-border)] rounded-3xl m-2 group"
                 >
                   <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
                     <Camera size={28} />
@@ -203,7 +203,7 @@ export default function ProgressView() {
           </div>
           
           <div className="mt-10 text-center">
-            <p className="text-sm font-bold uppercase tracking-widest text-white/10 italic">
+            <p className="text-sm font-bold uppercase tracking-widest text-[var(--color-text-muted)]/10 italic">
               "Celebre o progresso, não a perfeição."
             </p>
           </div>
@@ -213,7 +213,7 @@ export default function ProgressView() {
       {/* Photos Timeline */}
       <section className="pb-10">
         <div className="flex justify-between items-center mb-8">
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-white/20">Linha do Tempo</h3>
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Linha do Tempo</h3>
           <input 
             type="file" 
             accept="image/*" 
@@ -223,7 +223,7 @@ export default function ProgressView() {
           />
           <button 
             onClick={() => fileInputRef.current?.click()}
-            className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors text-[#E8B4BC]" 
+            className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:text-[var(--color-text)] transition-colors text-[#E8B4BC]" 
           >
             <Plus size={18} /> Nova Foto
           </button>
@@ -234,7 +234,7 @@ export default function ProgressView() {
             <motion.div 
               key={`${photo.id}-${index}`}
               whileHover={{ y: -8, scale: 1.02 }} 
-              className="w-40 shrink-0 aspect-[3/4] rounded-3xl overflow-hidden relative group cursor-pointer border border-white/5 shadow-2xl transition-all hover:border-[#E8B4BC]/30 bg-white/5" 
+              className="w-40 shrink-0 aspect-[3/4] rounded-3xl overflow-hidden relative group cursor-pointer border border-[var(--color-border)] shadow-2xl transition-all hover:border-[#E8B4BC]/30 bg-[var(--color-text)]/5" 
             >
               <img 
                 src={photo.url} 
@@ -252,9 +252,9 @@ export default function ProgressView() {
           <motion.button 
             whileHover={{ y: -8, scale: 1.02 }}
             onClick={() => fileInputRef.current?.click()}
-            className="w-40 shrink-0 aspect-[3/4] rounded-3xl border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer bg-white/5 hover:bg-white/10 border-white/10 text-white/20 group"
+            className="w-40 shrink-0 aspect-[3/4] rounded-3xl border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 border-[var(--color-border)] text-[var(--color-text-muted)]/20 group"
           >
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-white/5 transition-all group-hover:bg-[#E8B4BC] group-hover:text-black">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[var(--color-text)]/5 transition-all group-hover:bg-[#E8B4BC] group-hover:text-black">
               <Camera size={28} />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest">Nova Foto</span>

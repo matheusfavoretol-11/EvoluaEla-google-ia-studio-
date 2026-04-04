@@ -71,17 +71,17 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#0A0A0A] font-sans text-white relative overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col bg-[var(--color-bg)] font-sans text-[var(--color-text)] relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#E8B4BC]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#D4B996]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="flex-1 flex flex-col px-6 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
+      <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
         
         {/* Progress Bar */}
-        <div className="w-full h-1.5 bg-white/5 rounded-full mb-12 sm:mb-20 overflow-hidden border border-white/5">
+        <div className="w-full h-1.5 bg-[var(--color-text)]/5 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
           <motion.div 
             className="h-full rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
             initial={{ width: '0%' }}
@@ -99,8 +99,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">Qual o seu <span className="gradient-text">grande sonho</span> hoje?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-[var(--color-text)] mb-4 leading-tight tracking-tighter">Qual o seu <span className="gradient-text">grande sonho</span> hoje?</h2>
+              <p className="text-sm sm:text-base text-[var(--color-text-muted)] mb-10 sm:mb-12 font-bold leading-relaxed tracking-wide uppercase tracking-[0.2em]">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {objectives.map((obj, idx) => {
@@ -112,18 +112,18 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setObjective(obj.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-white/20 bg-white/5'
+                          ? 'border-[#E8B4BC] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[#E8B4BC]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
+                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#E8B4BC]'
                         }`}
                       >
                         <Icon size={28} />
                       </div>
-                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-[var(--color-text)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'}`}>
                         {obj.label}
                       </span>
                     </button>
@@ -141,8 +141,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">Como está sua <span className="gradient-text">relação</span> com seu corpo?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-[var(--color-text)] mb-4 leading-tight tracking-tighter">Como está sua <span className="gradient-text">relação</span> com seu corpo?</h2>
+              <p className="text-sm sm:text-base text-[var(--color-text-muted)] mb-10 sm:mb-12 font-bold leading-relaxed tracking-wide uppercase tracking-[0.2em]">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {feelings.map((feel, idx) => {
@@ -154,18 +154,18 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setFeeling(feel.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#D4B996] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-white/20 bg-white/5'
+                          ? 'border-[#D4B996] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[#D4B996]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#D4B996] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
+                          isSelected ? 'bg-[#D4B996] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#D4B996]'
                         }`}
                       >
                         <Icon size={28} />
                       </div>
-                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-[var(--color-text)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'}`}>
                         {feel.label}
                       </span>
                     </button>
@@ -183,8 +183,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight tracking-tighter">O que mais te <span className="gradient-text">desafia</span> no dia a dia?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-10 sm:mb-12 font-medium leading-relaxed tracking-wide">Vamos juntas encontrar o caminho para superar isso.</p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-[var(--color-text)] mb-4 leading-tight tracking-tighter">O que mais te <span className="gradient-text">desafia</span> no dia a dia?</h2>
+              <p className="text-sm sm:text-base text-[var(--color-text-muted)] mb-10 sm:mb-12 font-bold leading-relaxed tracking-wide uppercase tracking-[0.2em]">Vamos juntas encontrar o caminho para superar isso.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {challenges.map((chal, idx) => {
@@ -196,18 +196,18 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setChallenge(chal.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-white/20 bg-white/5'
+                          ? 'border-[#E8B4BC] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[#E8B4BC]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-white/5 text-white/20 group-hover:text-white/40'
+                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#E8B4BC]'
                         }`}
                       >
                         <Icon size={28} />
                       </div>
-                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white/60'}`}>
+                      <span className={`text-base font-bold uppercase tracking-widest ${isSelected ? 'text-[var(--color-text)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'}`}>
                         {chal.label}
                       </span>
                     </button>

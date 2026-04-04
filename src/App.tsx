@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Logo } from './components/Logo';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Contexts
@@ -76,8 +76,8 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-        <div className="w-full max-w-md lg:max-w-none lg:w-full lg:h-screen min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] lg:rounded-none shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] items-center justify-center border border-white/5">
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[var(--color-bg)]">
+        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center border-white/5">
            <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
         </div>
       </div>
@@ -87,15 +87,15 @@ function AppContent() {
   if (!userId) {
     if (showLanding) {
       return (
-        <div className="min-h-screen font-sans bg-[#0A0A0A]">
+        <div className="min-h-screen font-sans bg-[var(--color-bg)]">
           <LandingView onStart={() => setShowLanding(false)} />
         </div>
       );
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] border border-white/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
+        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/5">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -104,8 +104,8 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] shadow-2xl relative flex flex-col overflow-hidden bg-[#141414] border border-white/5">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
+        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/5">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -113,7 +113,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] p-0 sm:p-4 lg:p-0 overflow-hidden">
+    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[var(--color-bg)] overflow-hidden">
       
       {/* Desktop Sidebar */}
       <DesktopSidebar 
@@ -123,15 +123,15 @@ function AppContent() {
         onUpgrade={() => setShowSubscription(true)}
       />
 
-      <div className="w-full max-w-md lg:max-w-none lg:flex-1 h-screen min-h-[100dvh] sm:min-h-[800px] lg:min-h-0 sm:h-auto lg:h-screen sm:rounded-[3rem] lg:rounded-none shadow-2xl relative flex flex-col overflow-hidden transition-all duration-500 bg-[#141414] border border-white/5 lg:border-none">
+      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-[var(--color-surface)] lg:border-none">
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-6 sm:px-8 lg:px-12 border-b border-white/5 sticky top-0 z-10 bg-[#141414]/80 backdrop-blur-xl shrink-0">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-border)] sticky top-0 z-10 bg-[var(--color-surface)]/80 backdrop-blur-xl shrink-0">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-white/40 hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-[var(--color-text-muted)] hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -140,6 +140,15 @@ function AppContent() {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
+              <button 
+                onClick={() => {
+                  const { toggleTheme } = (window as any).themeContext;
+                  toggleTheme();
+                }}
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-[var(--color-text-muted)] hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC] mr-1"
+              >
+                {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
@@ -157,8 +166,8 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-28 lg:pb-12 hide-scrollbar bg-[#0A0A0A] bg-grid-pattern relative">
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 lg:py-12">
+        <main className="flex-1 overflow-y-auto pb-28 lg:pb-12 hide-scrollbar bg-[var(--color-bg)] bg-grid-pattern relative">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-8 lg:py-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -185,7 +194,7 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="lg:hidden absolute bottom-0 w-full border-t border-white/5 px-4 sm:px-8 py-4 sm:py-5 pb-8 sm:pb-12 z-20 bg-[#141414]/95 backdrop-blur-2xl">
+        <nav className="lg:hidden fixed bottom-0 w-full border-t border-[var(--color-border)] px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-20 bg-[var(--color-surface)]/95 backdrop-blur-2xl">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -195,7 +204,7 @@ function AppContent() {
                   <button
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
-                      isActive ? 'text-[#E8B4BC]' : 'text-white/20 hover:text-white/40'
+                      isActive ? 'text-[#E8B4BC]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
@@ -233,19 +242,19 @@ function AppContent() {
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#141414] rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border border-white/10"
+                className="bg-[var(--color-surface)] rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border border-[var(--color-border)]"
               >
-                <h2 className="text-2xl font-bold text-white mb-4 tracking-tighter">Aviso Importante</h2>
-                <div className="space-y-4 text-sm text-white/40 mb-8 font-medium">
-                  <p>O <strong className="font-bold text-white/60">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
+                <h2 className="text-2xl font-bold text-[var(--color-text)] mb-4 tracking-tighter">Aviso Importante</h2>
+                <div className="space-y-4 text-sm text-[var(--color-text-muted)] mb-8 font-bold uppercase tracking-widest text-[10px]">
+                  <p>O <strong className="font-bold text-[var(--color-text)]">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
                   <p className="font-bold text-[#E8B4BC] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
-                  <ul className="list-disc pl-5 space-y-2 text-white/30">
+                  <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-muted)]/60">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-[10px] text-white/20 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)]/40 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
@@ -266,8 +275,17 @@ export default function App() {
   return (
     <UserProvider>
       <ThemeProvider>
-        <AppContent />
+        <AppContentWrapper />
       </ThemeProvider>
     </UserProvider>
   );
+}
+
+function AppContentWrapper() {
+  const themeContext = useTheme();
+  useEffect(() => {
+    (window as any).themeContext = themeContext;
+  }, [themeContext]);
+
+  return <AppContent />;
 }

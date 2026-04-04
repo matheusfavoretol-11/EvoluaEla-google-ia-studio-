@@ -186,7 +186,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
   const allMissionsCompleted = completedMissionsCount === dailyMissions.length;
 
   return (
-    <div className="p-6 sm:p-10 space-y-10 relative bg-[#0A0A0A] min-h-full font-sans text-white overflow-y-auto hide-scrollbar">
+    <div className="p-4 sm:p-10 space-y-10 relative bg-[var(--color-bg)] min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar">
       
       {/* Header & Greeting */}
       <header className="flex justify-between items-start pt-4">
@@ -196,13 +196,13 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             animate={{ opacity: 1, x: 0 }}
           >
             <Logo className="mb-4" size="lg" />
-            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-bold text-[var(--color-text)] leading-tight tracking-tighter">
               Olá, <span className="gradient-text">{userName}</span>
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2">
+              <div className="px-4 py-1.5 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center gap-2">
                 <Star size={12} className="text-[#E8B4BC]" />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">Nível {level}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Nível {level}</span>
               </div>
               {subscriptionStatus === 'trial' && (
                 <div className="px-4 py-1.5 rounded-full bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center gap-2">
@@ -217,11 +217,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         <div className="relative">
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
-            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-white/5 border border-white/10 hover:bg-white/10 transition-all" 
+            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:bg-[var(--color-text)]/10 transition-all" 
           >
-            <Bell size={24} className="text-white/40" />
+            <Bell size={24} className="text-[var(--color-text-muted)]" />
             {unreadCount > 0 && (
-              <span className="absolute top-4 right-4 w-3 h-3 rounded-full border-2 border-[#0A0A0A] bg-[#E8B4BC]"></span>
+              <span className="absolute top-4 right-4 w-3 h-3 rounded-full border-2 border-[var(--color-bg)] bg-[#E8B4BC]"></span>
             )}
           </button>
 
@@ -231,10 +231,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute top-16 right-0 w-80 rounded-3xl shadow-2xl z-50 overflow-hidden glass-card border border-white/10"
+                className="absolute top-16 right-0 w-80 rounded-3xl shadow-2xl z-50 overflow-hidden glass-card border border-[var(--color-border)]"
               >
-                <div className="p-5 border-b border-white/5 flex justify-between items-center">
-                  <h3 className="font-bold text-sm text-white">Notificações</h3>
+                <div className="p-5 border-b border-[var(--color-border)] flex justify-between items-center">
+                  <h3 className="font-bold text-sm text-[var(--color-text)]">Notificações</h3>
                   {unreadCount > 0 && (
                     <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[#E8B4BC] text-black uppercase tracking-widest">
                       {unreadCount} novas
@@ -244,16 +244,16 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.map((notif) => (
-                      <div key={notif.id} className={`p-5 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
+                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/5 transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC] mb-1">{notif.title}</p>
-                        <p className="text-sm font-medium text-white/60 mb-2 leading-relaxed">
+                        <p className="text-sm font-medium text-[var(--color-text-muted)] mb-2 leading-relaxed">
                           {notif.message}
                         </p>
-                        <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest">{notif.time}</p>
+                        <p className="text-[10px] font-bold text-[var(--color-text-muted)]/40 uppercase tracking-widest">{notif.time}</p>
                       </div>
                     ))
                   ) : (
-                    <div className="p-8 text-center text-white/20 text-sm">
+                    <div className="p-8 text-center text-[var(--color-text-muted)]/20 text-sm">
                       Tudo tranquilo por aqui. ✨
                     </div>
                   )}
@@ -277,7 +277,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           <div className="w-14 h-14 rounded-2xl bg-[#E8B4BC]/10 flex items-center justify-center shrink-0">
             <Sparkles size={28} className="text-[#E8B4BC]" />
           </div>
-          <p className="text-xl md:text-2xl font-bold text-white/90 leading-tight tracking-tight italic">
+          <p className="text-xl md:text-2xl font-bold text-[var(--color-text)]/90 leading-tight tracking-tight italic">
             "Sua evolução é um processo contínuo de florescimento. Cada escolha consciente hoje é uma semente para o seu amanhã radiante."
           </p>
         </div>
@@ -288,8 +288,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         {/* Progress & Stats */}
         <section className="space-y-6 lg:col-span-1 xl:col-span-1">
           <div className="flex justify-between items-end px-2">
-            <h3 className="text-2xl font-bold text-white tracking-tight">Seu Equilíbrio</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/20">Status Atual</span>
+            <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Seu Equilíbrio</h3>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/20">Status Atual</span>
           </div>
           
           <div className="bento-card space-y-8">
@@ -300,11 +300,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               { label: 'Amor Próprio', value: emotionalStats.amorProprio, color: '#D4B996' },
             ].map((stat, idx) => (
               <div key={`${stat.label}-${idx}`} className="space-y-3">
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-white/40">
+                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
                   <span>{stat.label}</span>
-                  <span className="text-white">{stat.value}%</span>
+                  <span className="text-[var(--color-text)]">{stat.value}%</span>
                 </div>
-                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                <div className="h-2 bg-[var(--color-text)]/5 rounded-full overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${stat.value}%` }}
@@ -320,8 +320,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         {/* Daily Missions */}
         <section className="space-y-6">
           <div className="flex justify-between items-end px-2">
-            <h3 className="text-2xl font-bold text-white tracking-tight">Metas do Dia</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/20">
+            <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Metas do Dia</h3>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/20">
               {completedMissionsCount}/{dailyMissions.length} concluídas
             </span>
           </div>
@@ -337,22 +337,22 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 className={`p-6 rounded-3xl border transition-all flex items-center justify-between cursor-pointer group ${
                   mission.completed 
                     ? 'bg-[#E8B4BC]/5 border-[#E8B4BC]/20' 
-                    : 'bg-white/5 border-white/5 hover:border-[#E8B4BC]/30'
+                    : 'bg-[var(--color-text)]/5 border-[var(--color-border)] hover:border-[#E8B4BC]/30'
                 }`}
               >
                 <div className="flex items-center gap-5">
                   <div 
                     className={`w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${
-                      mission.completed ? 'bg-[#E8B4BC] border-[#E8B4BC]' : 'border-white/10 group-hover:border-[#E8B4BC]'
+                      mission.completed ? 'bg-[#E8B4BC] border-[#E8B4BC]' : 'border-[var(--color-border)] group-hover:border-[#E8B4BC]'
                     }`}
                   >
                     {mission.completed && <CheckCircle2 size={14} className="text-black" />}
                   </div>
-                  <span className={`text-lg font-bold transition-all ${mission.completed ? 'text-white/20 line-through' : 'text-white'}`}>
+                  <span className={`text-lg font-bold transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/20 line-through' : 'text-[var(--color-text)]'}`}>
                     {mission.title}
                   </span>
                 </div>
-                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-white/10' : 'text-white/20 group-hover:text-[#E8B4BC]'}`} />
+                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/10' : 'text-[var(--color-text-muted)]/20 group-hover:text-[#E8B4BC]'}`} />
               </motion.div>
             ))}
           </div>
@@ -364,7 +364,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         
         {/* Next Lesson */}
         <div className="lg:col-span-2 xl:col-span-3 space-y-6">
-          <h3 className="text-2xl font-bold text-white tracking-tight px-2">Próxima Lição</h3>
+          <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight px-2">Próxima Lição</h3>
           <motion.div 
             whileHover={{ y: -5 }}
             onClick={() => onNavigate('content')}
@@ -374,10 +374,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <Play size={32} fill="currentColor" />
             </div>
             <div className="flex-1">
-              <h4 className="text-2xl font-bold text-white mb-2 tracking-tight">O poder do "não"</h4>
-              <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
+              <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2 tracking-tight">O poder do "não"</h4>
+              <p className="text-sm font-bold text-[var(--color-text-muted)]/40 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/20 group-hover:text-[#E8B4BC] transition-all">
+            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 group-hover:text-[#E8B4BC] transition-all">
               <ChevronRight size={24} />
             </div>
           </motion.div>
@@ -385,7 +385,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
 
         {/* Community Card */}
         <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-white tracking-tight px-2">Comunidade</h3>
+          <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight px-2">Comunidade</h3>
           <motion.div 
             whileHover={{ y: -5 }}
             onClick={() => setShowCommunityUpsell(true)}
@@ -425,11 +425,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="glass-card rounded-[3rem] p-8 sm:p-12 max-w-lg w-full shadow-2xl relative overflow-hidden border border-white/10"
+              className="glass-card rounded-[3rem] p-8 sm:p-12 max-w-lg w-full shadow-2xl relative overflow-hidden border border-[var(--color-border)]"
             >
               <button 
                 onClick={() => setShowCommunityUpsell(false)}
-                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/20 hover:text-white transition-colors border border-white/5"
+                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 hover:text-[var(--color-text)] transition-colors border border-[var(--color-border)]"
               >
                 <X size={24} />
               </button>
@@ -439,11 +439,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   <Users size={44} />
                 </div>
                 
-                <h2 className="text-4xl font-bold text-white mb-4 leading-tight tracking-tighter">
+                <h2 className="text-4xl font-bold text-[var(--color-text)] mb-4 leading-tight tracking-tighter">
                   Espaço Exclusivo <span className="gradient-text italic">Premium</span> 🌸
                 </h2>
                 
-                <p className="text-lg text-white/40 mb-10 font-medium leading-relaxed">
+                <p className="text-lg text-[var(--color-text-muted)]/40 mb-10 font-medium leading-relaxed">
                   A nossa comunidade é um jardim secreto reservado para alunas Premium. Um lugar de troca real, apoio e crescimento mútuo.
                 </p>
 
@@ -454,10 +454,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
                   ].map((item, idx) => (
                     <div key={`benefit-comm-${item.text}`} className="flex items-center gap-5">
-                      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center shrink-0 text-[#E8B4BC]">
+                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[#E8B4BC]">
                         <item.icon size={24} />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">{item.text}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/60">{item.text}</span>
                     </div>
                   ))}
                 </div>

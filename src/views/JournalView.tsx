@@ -72,18 +72,18 @@ Seja concisa, use emojis e foque no acolhimento.`,
   };
 
   return (
-    <div className="p-6 space-y-10 relative min-h-full flex flex-col bg-[#0A0A0A] text-white font-sans overflow-hidden">
+    <div className="p-4 sm:p-6 space-y-10 relative min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] font-sans overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <header className="space-y-3 relative z-10">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E8B4BC] shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[#E8B4BC] shadow-2xl backdrop-blur-xl">
             <BookHeart size={32} />
           </div>
-          <h2 className="text-5xl font-bold text-white tracking-tighter">Meu <span className="gradient-text">Diário</span></h2>
+          <h2 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Meu <span className="gradient-text">Diário</span></h2>
         </div>
-        <p className="text-sm font-bold text-white/30 uppercase tracking-widest leading-relaxed max-w-md">
+        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest leading-relaxed max-w-md">
           Este é o seu refúgio seguro. Pode soltar tudo o que sente, refletir e se reencontrar.
         </p>
       </header>
@@ -96,7 +96,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
         >
           {/* Prompts */}
           <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/20">Sobre o que seu coração quer falar?</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Sobre o que seu coração quer falar?</span>
             <div className="flex flex-wrap gap-3">
               {prompts.map((prompt, idx) => (
                 <button
@@ -108,7 +108,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                   className={`text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-2xl border transition-all shadow-2xl ${
                     selectedPrompt === prompt 
                       ? 'bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black border-transparent scale-105' 
-                      : 'bg-white/5 text-white/40 border-white/5 hover:border-white/20 hover:text-white'
+                      : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-text)]/20 hover:text-[var(--color-text)]'
                   }`}
                 >
                   {prompt}
@@ -123,7 +123,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
               value={entry}
               onChange={(e) => setEntry(e.target.value)}
               placeholder="Pode soltar tudo aqui..."
-              className="flex-1 w-full p-10 rounded-[2.5rem] bg-white/5 border border-white/5 resize-none focus:border-[#E8B4BC]/30 outline-none text-white leading-relaxed font-bold text-xl placeholder:text-white/5 shadow-2xl transition-all backdrop-blur-md"
+              className="flex-1 w-full p-10 rounded-[2.5rem] bg-[var(--color-text)]/5 border border-[var(--color-border)] resize-none focus:border-[#E8B4BC]/30 outline-none text-[var(--color-text)] leading-relaxed font-bold text-xl placeholder:text-[var(--color-text-muted)]/20 shadow-2xl transition-all backdrop-blur-md"
             />
             
             <button
@@ -142,7 +142,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
           animate={{ opacity: 1, scale: 1 }}
           className="flex-1 flex flex-col relative z-10"
         >
-          <div className="glass-card p-10 rounded-[3rem] border border-white/5 relative overflow-hidden flex-1 shadow-2xl flex flex-col">
+          <div className="glass-card p-10 rounded-[3rem] border border-[var(--color-border)] relative overflow-hidden flex-1 shadow-2xl flex flex-col">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] -mr-20 -mt-20"></div>
             
             <div className="relative z-10 flex flex-col h-full">
@@ -151,20 +151,20 @@ Seja concisa, use emojis e foque no acolhimento.`,
                   <Sparkles size={36} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-3xl text-white tracking-tight">Sua Mentora</h3>
-                  <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mt-1">Acolhendo suas palavras...</p>
+                  <h3 className="font-bold text-3xl text-[var(--color-text)] tracking-tight">Sua Mentora</h3>
+                  <p className="text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest mt-1">Acolhendo suas palavras...</p>
                 </div>
               </div>
               
               <div className="flex-1 overflow-y-auto hide-scrollbar pr-4">
                 {isSubmitting ? (
                   <div className="flex gap-3 items-center justify-center h-full opacity-20">
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 ) : (
-                  <p className="text-white/80 leading-relaxed whitespace-pre-wrap font-bold text-2xl italic tracking-tight">
+                  <p className="text-[var(--color-text)]/80 leading-relaxed whitespace-pre-wrap font-bold text-2xl italic tracking-tight">
                     "{aiResponse}"
                   </p>
                 )}
@@ -177,7 +177,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                     setEntry('');
                     setSelectedPrompt(null);
                   }}
-                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-white/20 bg-white/5 hover:bg-white/10 hover:text-white transition-all border border-white/5 shadow-2xl"
+                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 hover:text-[var(--color-text)] transition-all border border-[var(--color-border)] shadow-2xl"
                 >
                   Voltar para minhas reflexões
                 </button>
