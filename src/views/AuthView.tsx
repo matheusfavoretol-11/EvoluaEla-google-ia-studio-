@@ -147,7 +147,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center justify-center gap-3 mb-4"
           >
-            <img src="/logo.png" alt="EvoluaEla Logo" className="w-12 h-12 rounded-xl object-cover" referrerPolicy="no-referrer" />
+            <img src="/logo.png" alt="EvoluaEla Logo" className="w-16 h-16 rounded-xl object-cover" referrerPolicy="no-referrer" />
             <span className="font-bold text-3xl tracking-tighter text-white">EVOLUAELA</span>
           </motion.div>
           <motion.p 
