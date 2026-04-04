@@ -128,13 +128,16 @@ function AppContent() {
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
-              <div className="flex flex-col">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter text-white leading-none">
-                  {tabs.find(t => t.id === activeTab)?.label || 'EvoluaEla'}
-                </h1>
-                <span className="text-[7px] sm:text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">
-                  {activeTab === 'home' ? 'High Performance' : 'Sua Jornada'}
-                </span>
+              <div className="flex items-center gap-3">
+                <img src="/logo.png" alt="EvoluaEla Logo" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover lg:hidden" referrerPolicy="no-referrer" />
+                <div className="flex flex-col">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter text-white leading-none">
+                    {tabs.find(t => t.id === activeTab)?.label || 'EvoluaEla'}
+                  </h1>
+                  <span className="text-[7px] sm:text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1 sm:mt-1.5">
+                    {activeTab === 'home' ? 'High Performance' : 'Sua Jornada'}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
