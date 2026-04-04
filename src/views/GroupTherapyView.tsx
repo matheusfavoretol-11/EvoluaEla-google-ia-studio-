@@ -148,7 +148,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
             onClick={onUpgrade}
             className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-white text-black shadow-xl relative z-10"
           >
-            Fazer Upgrade por R$ 97/mês
+            Fazer Upgrade por R$ 109,90/mês
           </button>
         </motion.div>
       </div>
