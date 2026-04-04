@@ -43,9 +43,12 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
     <aside className="hidden lg:flex flex-col w-72 h-screen bg-[#141414] border-r border-white/5 sticky top-0 z-30">
       {/* Logo Section */}
       <div className="p-8 pb-10">
-        <div className="flex flex-col">
-          <h1 className="text-2xl font-bold tracking-tighter text-white leading-none">EvoluaEla</h1>
-          <span className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-2">High Performance</span>
+        <div className="flex items-center gap-3 mb-4">
+          <img src="/logo.png" alt="EvoluaEla Logo" className="w-10 h-10 rounded-xl object-cover" referrerPolicy="no-referrer" />
+          <div className="flex flex-col">
+            <h1 className="text-xl font-bold tracking-tighter text-white leading-none">EvoluaEla</h1>
+            <span className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1">High Performance</span>
+          </div>
         </div>
       </div>
 
