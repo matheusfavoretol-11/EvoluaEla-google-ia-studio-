@@ -20,29 +20,29 @@
   --color-bg: #0A0A0A;
   --color-surface: #141414;
   --color-text: #FFFFFF;
-  --color-text-muted: #888888;
+  --color-text-muted: #A0A0A0;
   --color-accent: #D4B996;
   --color-accent-rgb: 212, 185, 150;
-  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.15);
 }
 
 .light-mode {
   --color-primary: #C9848C;
   --color-primary-rgb: 201, 132, 140;
-  --color-bg: #FAF8F5;
+  --color-bg: #F2EFE9;
   --color-surface: #FFFFFF;
   --color-text: #1A1A1A;
-  --color-text-muted: #444444;
+  --color-text-muted: #555555;
   --color-accent: #B89A76;
   --color-accent-rgb: 184, 154, 118;
-  --color-border: #E0D8D0;
+  --color-border: #D0C8C0;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: radial-gradient(circle, var(--color-text-muted) 0.5px, transparent 0.5px);
-  opacity: 0.1;
+  opacity: 0.15;
 }
 
 .branding-title {

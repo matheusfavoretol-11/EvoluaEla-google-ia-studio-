@@ -74,14 +74,14 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
     <div className="min-h-screen w-full flex flex-col bg-[var(--color-bg)] font-sans text-[var(--color-text)] relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/20 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/20 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
         
         {/* Progress Bar */}
-        <div className="w-full h-1.5 bg-[var(--color-text)]/5 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
+        <div className="w-full h-1.5 bg-[var(--color-text)]/10 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
           <motion.div 
             className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
             initial={{ width: '0%' }}
@@ -118,7 +118,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -160,7 +160,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]'
+                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -202,7 +202,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />

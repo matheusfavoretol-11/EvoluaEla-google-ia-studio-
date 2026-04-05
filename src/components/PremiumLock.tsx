@@ -13,8 +13,8 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
   return (
     <div className="relative w-full h-full min-h-[450px] flex flex-col items-center justify-center p-8 text-center overflow-hidden rounded-[3rem] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl">
       {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-[100px] pointer-events-none"></div>
       
       <div className="relative z-10 flex flex-col items-center max-w-sm mx-auto">
         <div 
@@ -34,7 +34,7 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
           {description}
         </p>
 
-        <div className="bg-[var(--color-text)]/5 p-6 rounded-[2rem] border border-[var(--color-border)] w-full mb-10 text-left space-y-4 backdrop-blur-md">
+        <div className="bg-[var(--color-text)]/10 p-6 rounded-[2rem] border border-[var(--color-border)] w-full mb-10 text-left space-y-4 backdrop-blur-md">
           {[
             "Resultados 3x mais rápidos com acompanhamento profissional",
             "Pare de tentar sozinha — tenha especialistas ao seu lado",
@@ -57,7 +57,7 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
           <ArrowRight size={20} />
         </button>
         
-        <p className="text-[10px] text-[var(--color-text-muted)]/20 mt-6 font-bold uppercase tracking-widest">
+        <p className="text-[10px] text-[var(--color-text-muted)]/40 mt-6 font-bold uppercase tracking-widest">
           Disponível apenas no Plano Premium
         </p>
       </div>

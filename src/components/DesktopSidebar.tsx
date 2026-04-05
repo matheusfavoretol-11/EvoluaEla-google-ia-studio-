@@ -128,7 +128,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
               <p className="text-[var(--color-text-muted)] text-[10px] leading-relaxed mb-4 font-medium uppercase tracking-wider">Acesso total a treinos e nutrição personalizada.</p>
               <button 
                 onClick={onUpgrade}
-                className="w-full py-3 rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform active:scale-95 shadow-lg"
+                className="w-full py-3 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform active:scale-95 shadow-lg"
               >
                 Upgrade Agora
               </button>

@@ -200,12 +200,12 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               Olá, <span className="gradient-text">{userName}</span>
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <div className="px-4 py-1.5 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center gap-2">
+              <div className="px-4 py-1.5 rounded-full bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center gap-2">
                 <Star size={12} className="text-[var(--color-primary)]" />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Nível {level}</span>
               </div>
               {subscriptionStatus === 'trial' && (
-                <div className="px-4 py-1.5 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center gap-2">
+                <div className="px-4 py-1.5 rounded-full bg-[var(--color-primary)]/90 border border-[var(--color-primary)]/90 flex items-center gap-2">
                   <Clock size={12} className="text-[var(--color-primary)]" />
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)]">{getDaysRemaining()} dias de teste</span>
                 </div>
@@ -217,7 +217,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         <div className="relative">
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
-            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:bg-[var(--color-text)]/10 transition-all" 
+            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-all" 
           >
             <Bell size={24} className="text-[var(--color-text-muted)]" />
             {unreadCount > 0 && (
@@ -244,16 +244,16 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.map((notif) => (
-                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/5 transition-colors cursor-pointer ${!notif.read ? 'bg-[var(--color-primary)]/5' : ''}`}>
+                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-colors cursor-pointer ${!notif.read ? 'bg-[var(--color-primary)]/90' : ''}`}>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)] mb-1">{notif.title}</p>
                         <p className="text-sm font-medium text-[var(--color-text-muted)] mb-2 leading-relaxed">
                           {notif.message}
                         </p>
-                        <p className="text-[10px] font-bold text-[var(--color-text-muted)]/40 uppercase tracking-widest">{notif.time}</p>
+                        <p className="text-[10px] font-bold text-[var(--color-text-muted)]/60 uppercase tracking-widest">{notif.time}</p>
                       </div>
                     ))
                   ) : (
-                    <div className="p-8 text-center text-[var(--color-text-muted)]/20 text-sm">
+                    <div className="p-8 text-center text-[var(--color-text-muted)]/90 text-sm">
                       Tudo tranquilo por aqui. ✨
                     </div>
                   )}
@@ -270,11 +270,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         animate={{ opacity: 1, y: 0 }}
         className="bento-card relative overflow-hidden group"
       >
-        <div className="absolute -right-6 -top-6 opacity-10 group-hover:opacity-20 transition-opacity">
+        <div className="absolute -right-6 -top-6 opacity-90 group-hover:opacity-90 transition-opacity">
           <Sparkles size={120} className="text-[var(--color-primary)]" />
         </div>
         <div className="relative z-10 flex items-start gap-6">
-          <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center shrink-0">
             <Sparkles size={28} className="text-[var(--color-primary)]" />
           </div>
           <p className="text-xl md:text-2xl font-bold text-[var(--color-text)]/90 leading-tight tracking-tight italic">
@@ -289,7 +289,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         <section className="space-y-6 lg:col-span-1 xl:col-span-1">
           <div className="flex justify-between items-end px-2">
             <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Seu Equilíbrio</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/20">Status Atual</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90">Status Atual</span>
           </div>
           
           <div className="bento-card space-y-8">
@@ -302,9 +302,9 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <div key={`${stat.label}-${idx}`} className="space-y-3">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
                   <span>{stat.label}</span>
-                  <span className="text-[var(--color-text)]">{stat.value}%</span>
+                  <span className="text-[var(--color-text)] font-bold">{stat.value}%</span>
                 </div>
-                <div className="h-2 bg-[var(--color-text)]/5 rounded-full overflow-hidden">
+                <div className="h-2 bg-[var(--color-text)]/90 rounded-full overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${stat.value}%` }}
@@ -321,7 +321,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         <section className="space-y-6">
           <div className="flex justify-between items-end px-2">
             <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Metas do Dia</h3>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/20">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90">
               {completedMissionsCount}/{dailyMissions.length} concluídas
             </span>
           </div>
@@ -336,8 +336,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 onClick={() => toggleMission(mission.id)}
                 className={`p-6 rounded-3xl border transition-all flex items-center justify-between cursor-pointer group ${
                   mission.completed 
-                    ? 'bg-[var(--color-primary)]/5 border-[var(--color-primary)]/20' 
-                    : 'bg-[var(--color-text)]/5 border-[var(--color-border)] hover:border-[var(--color-primary)]/30'
+                    ? 'bg-[var(--color-primary)]/90 border-[var(--color-primary)]/90' 
+                    : 'bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-primary)]/90'
                 }`}
               >
                 <div className="flex items-center gap-5">
@@ -348,11 +348,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   >
                     {mission.completed && <CheckCircle2 size={14} className="text-black" />}
                   </div>
-                  <span className={`text-lg font-bold transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/20 line-through' : 'text-[var(--color-text)]'}`}>
+                  <span className={`text-lg font-bold transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/90 line-through' : 'text-[var(--color-text)]'}`}>
                     {mission.title}
                   </span>
                 </div>
-                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/10' : 'text-[var(--color-text-muted)]/20 group-hover:text-[var(--color-primary)]'}`} />
+                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/90' : 'text-[var(--color-text-muted)]/90 group-hover:text-[var(--color-primary)]'}`} />
               </motion.div>
             ))}
           </div>
@@ -370,14 +370,14 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             onClick={() => onNavigate('content')}
             className="bento-card flex items-center gap-8 cursor-pointer group p-8"
           >
-            <div className="w-20 h-20 rounded-3xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
+            <div className="w-20 h-20 rounded-3xl bg-[var(--color-primary)]/90 flex items-center justify-center shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
               <Play size={32} fill="currentColor" />
             </div>
             <div className="flex-1">
               <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2 tracking-tight">O poder do "não"</h4>
-              <p className="text-sm font-bold text-[var(--color-text-muted)]/40 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
+              <p className="text-sm font-bold text-[var(--color-text-muted)]/70 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 group-hover:text-[var(--color-primary)] transition-all">
+            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/90 flex items-center justify-center text-[var(--color-text-muted)]/90 group-hover:text-[var(--color-primary)] transition-all">
               <ChevronRight size={24} />
             </div>
           </motion.div>
@@ -391,17 +391,17 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             onClick={() => setShowCommunityUpsell(true)}
             className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-8 rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
           >
-            <div className="absolute -right-8 -bottom-8 opacity-20 group-hover:opacity-30 transition-opacity">
+            <div className="absolute -right-8 -bottom-8 opacity-90 group-hover:opacity-90 transition-opacity">
               <Users size={160} className="text-black" />
             </div>
             <div className="relative z-10">
               <div className="flex -space-x-3 mb-6">
                 {[1, 2, 3, 4].map(i => (
-                  <div key={`user-${i}`} className="w-12 h-12 rounded-full border-4 border-black/10 overflow-hidden bg-neutral-800">
+                  <div key={`user-${i}`} className="w-12 h-12 rounded-full border-4 border-black/90 overflow-hidden bg-neutral-800">
                     <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="User" />
                   </div>
                 ))}
-                <div className="w-12 h-12 rounded-full border-4 border-black/10 bg-black flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-widest">
+                <div className="w-12 h-12 rounded-full border-4 border-black/90 bg-black flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-widest">
                   +2k
                 </div>
               </div>
@@ -429,7 +429,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             >
               <button 
                 onClick={() => setShowCommunityUpsell(false)}
-                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 hover:text-[var(--color-text)] transition-colors border border-[var(--color-border)]"
+                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors border border-[var(--color-border)]"
               >
                 <X size={24} />
               </button>
@@ -443,7 +443,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   Espaço Exclusivo <span className="gradient-text italic">Premium</span> 🌸
                 </h2>
                 
-                <p className="text-lg text-[var(--color-text-muted)]/40 mb-10 font-medium leading-relaxed">
+                <p className="text-lg text-[var(--color-text-muted)]/90 mb-10 font-medium leading-relaxed">
                   A nossa comunidade é um jardim secreto reservado para alunas Premium. Um lugar de troca real, apoio e crescimento mútuo.
                 </p>
 
@@ -454,10 +454,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
                   ].map((item, idx) => (
                     <div key={`benefit-comm-${item.text}`} className="flex items-center gap-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[var(--color-primary)]">
+                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[var(--color-primary)]">
                         <item.icon size={24} />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/60">{item.text}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/80">{item.text}</span>
                     </div>
                   ))}
                 </div>
