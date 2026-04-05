@@ -60,7 +60,7 @@ export default function ProgressView() {
   return (
     <div className="p-4 sm:p-6 space-y-10 bg-[var(--color-bg)] min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <header className="relative z-10">
         <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Sua <span className="gradient-text">Evolução</span></h2>
@@ -69,7 +69,7 @@ export default function ProgressView() {
 
       {/* Weight Tracker */}
       <section className="p-8 rounded-[2.5rem] border border-[var(--color-border)] glass-card relative overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4B996]/5 rounded-full blur-[80px] -mr-10 -mt-10"></div>
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[var(--color-accent)]/5 rounded-full blur-[80px] -mr-10 -mt-10"></div>
         <div className="flex justify-between items-start mb-10 relative z-10">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] block mb-3">Peso Atual</span>
@@ -93,13 +93,13 @@ export default function ProgressView() {
               value={newWeight}
               onChange={(e) => setNewWeight(e.target.value)}
               placeholder="Novo peso (kg)"
-              className="w-full bg-[var(--color-text)]/5 border border-[var(--color-border)] rounded-2xl px-8 py-5 text-sm font-bold text-[var(--color-text)] outline-none focus:border-[#E8B4BC]/30 transition-all placeholder:text-[var(--color-text-muted)]/30"
+              className="w-full bg-[var(--color-text)]/5 border border-[var(--color-border)] rounded-2xl px-8 py-5 text-sm font-bold text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]/30 transition-all placeholder:text-[var(--color-text-muted)]/30"
             />
           </div>
           <button 
             onClick={handleAddWeight}
             disabled={!newWeight}
-            className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-30 disabled:hover:scale-100 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
+            className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-30 disabled:hover:scale-100 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
           >
             Registrar
           </button>
@@ -111,8 +111,8 @@ export default function ProgressView() {
             <AreaChart data={weightData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorWeight" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#E8B4BC" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#E8B4BC" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(var(--color-text-rgb), 0.03)" />
@@ -132,13 +132,13 @@ export default function ProgressView() {
               />
               <Tooltip 
                 contentStyle={{ borderRadius: '24px', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
-                itemStyle={{ color: '#E8B4BC', fontWeight: 700, fontSize: '12px' }}
+                itemStyle={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '12px' }}
                 labelStyle={{ color: 'var(--color-text)', fontWeight: 700, fontSize: '12px', marginBottom: '6px' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="weight" 
-                stroke="#E8B4BC" 
+                stroke="var(--color-primary)" 
                 strokeWidth={4}
                 fillOpacity={1} 
                 fill="url(#colorWeight)" 
@@ -156,7 +156,7 @@ export default function ProgressView() {
         
         <div className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] shadow-2xl">
           <div className="flex items-center justify-center gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
-            <Lock size={14} className="text-[#D4B996]" /> Ambiente seguro e privado
+            <Lock size={14} className="text-[var(--color-accent)]" /> Ambiente seguro e privado
           </div>
           
           <div className="grid grid-cols-2 gap-6">
@@ -182,7 +182,7 @@ export default function ProgressView() {
               {photos.length > 1 ? (
                 <>
                   <img src={photos[photos.length - 1].url} alt="Depois" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black text-[10px] font-bold px-4 py-2 rounded-2xl uppercase tracking-widest shadow-2xl">Depois</div>
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black text-[10px] font-bold px-4 py-2 rounded-2xl uppercase tracking-widest shadow-2xl">Depois</div>
                   <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
                     <p className="text-white font-bold text-lg mb-1 tracking-tight">{photos[photos.length - 1].date}</p>
                     <p className="text-white/40 text-xs font-bold uppercase tracking-widest">{photos[photos.length - 1].weight}</p>
@@ -193,10 +193,10 @@ export default function ProgressView() {
                   onClick={() => fileInputRef.current?.click()}
                   className="absolute inset-0 flex flex-col items-center justify-center text-[var(--color-text-muted)]/20 hover:bg-[var(--color-text)]/5 transition-all border-2 border-dashed border-[var(--color-border)] rounded-3xl m-2 group"
                 >
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[var(--color-primary)]/10 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
                     <Camera size={28} />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC]">Adicionar Foto</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)]">Adicionar Foto</span>
                 </button>
               )}
             </div>
@@ -223,7 +223,7 @@ export default function ProgressView() {
           />
           <button 
             onClick={() => fileInputRef.current?.click()}
-            className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:text-[var(--color-text)] transition-colors text-[#E8B4BC]" 
+            className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:text-[var(--color-text)] transition-colors text-[var(--color-primary)]" 
           >
             <Plus size={18} /> Nova Foto
           </button>
@@ -234,7 +234,7 @@ export default function ProgressView() {
             <motion.div 
               key={`${photo.id}-${index}`}
               whileHover={{ y: -8, scale: 1.02 }} 
-              className="w-40 shrink-0 aspect-[3/4] rounded-3xl overflow-hidden relative group cursor-pointer border border-[var(--color-border)] shadow-2xl transition-all hover:border-[#E8B4BC]/30 bg-[var(--color-text)]/5" 
+              className="w-40 shrink-0 aspect-[3/4] rounded-3xl overflow-hidden relative group cursor-pointer border border-[var(--color-border)] shadow-2xl transition-all hover:border-[var(--color-primary)]/30 bg-[var(--color-text)]/5" 
             >
               <img 
                 src={photo.url} 
@@ -254,7 +254,7 @@ export default function ProgressView() {
             onClick={() => fileInputRef.current?.click()}
             className="w-40 shrink-0 aspect-[3/4] rounded-3xl border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 border-[var(--color-border)] text-[var(--color-text-muted)]/20 group"
           >
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[var(--color-text)]/5 transition-all group-hover:bg-[#E8B4BC] group-hover:text-black">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-[var(--color-text)]/5 transition-all group-hover:bg-[var(--color-primary)] group-hover:text-black">
               <Camera size={28} />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest">Nova Foto</span>

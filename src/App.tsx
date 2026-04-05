@@ -78,7 +78,7 @@ function AppContent() {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[var(--color-bg)]">
         <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center border-white/5">
-           <div className="w-10 h-10 border-2 border-[#E8B4BC]/20 border-t-[#E8B4BC] rounded-full animate-spin" />
+           <div className="w-10 h-10 border-2 border-[var(--color-primary)]/20 border-t-[var(--color-primary)] rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -105,7 +105,7 @@ function AppContent() {
   if (!hasCompletedOnboarding) {
     return (
       <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/5">
+        <div className="w-full lg:max-w-md min-h-[100dvh] lg:min-h-[800px] lg:h-auto lg:rounded-[3rem] lg:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] lg:border lg:border-white/5">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -123,15 +123,15 @@ function AppContent() {
         onUpgrade={() => setShowSubscription(true)}
       />
 
-      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-[var(--color-surface)] lg:border-none">
+      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-[var(--color-bg)]">
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-border)] sticky top-0 z-10 bg-[var(--color-surface)]/80 backdrop-blur-xl shrink-0">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-border)] sticky top-0 z-10 bg-[var(--color-bg)]/80 backdrop-blur-xl shrink-0">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-[var(--color-text-muted)] hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -145,19 +145,19 @@ function AppContent() {
                   const { toggleTheme } = (window as any).themeContext;
                   toggleTheme();
                 }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-white/5 border border-white/5 text-[var(--color-text-muted)] hover:bg-[#E8B4BC]/10 hover:text-[#E8B4BC] mr-1"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] mr-1"
               >
                 {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2 sm:py-2.5 lg:py-4 rounded-full text-[8px] sm:text-[9px] lg:text-[11px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-black transition-all hover:scale-105 active:scale-95"
+                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2 sm:py-2.5 lg:py-4 rounded-full text-[8px] sm:text-[9px] lg:text-[11px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black transition-all hover:scale-105 active:scale-95"
                 >
                   <Crown size={10} className="sm:w-3 sm:h-3 lg:w-4 lg:h-4" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center justify-center text-[#E8B4BC]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)]">
                   <Crown size={20} className="sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" />
                 </div>
               )}
@@ -204,7 +204,7 @@ function AppContent() {
                   <button
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
-                      isActive ? 'text-[#E8B4BC]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
@@ -212,7 +212,7 @@ function AppContent() {
                       {isActive && (
                         <motion.div 
                           layoutId="nav-indicator"
-                          className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-1 sm:h-1.5 sm:w-1.5 h-1 rounded-full bg-[#E8B4BC]"
+                          className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-1 sm:h-1.5 sm:w-1.5 h-1 rounded-full bg-[var(--color-primary)]"
                         />
                       )}
                     </div>
@@ -247,7 +247,7 @@ function AppContent() {
                 <h2 className="text-2xl font-bold text-[var(--color-text)] mb-4 tracking-tighter">Aviso Importante</h2>
                 <div className="space-y-4 text-sm text-[var(--color-text-muted)] mb-8 font-bold uppercase tracking-widest text-[10px]">
                   <p>O <strong className="font-bold text-[var(--color-text)]">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
-                  <p className="font-bold text-[#E8B4BC] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <p className="font-bold text-[var(--color-primary)] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
                   <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-muted)]/60">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
@@ -258,7 +258,7 @@ function AppContent() {
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
-                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
+                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
                 >
                   Entendi, vamos lá!
                 </button>

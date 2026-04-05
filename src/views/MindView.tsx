@@ -26,7 +26,7 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
   return (
     <div className="p-4 sm:p-6 pb-32 bg-[var(--color-bg)] min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="mb-10 relative z-10">
         <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Equilíbrio <span className="gradient-text">Emocional</span></h2>
@@ -36,10 +36,10 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
       <div className="space-y-8 relative z-10">
         {/* Therapist Profile */}
         <div className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4B996]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-accent)]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
           <div className="flex items-center justify-between mb-8">
             <h3 className="font-bold text-2xl text-[var(--color-text)] tracking-tight">Sua Terapeuta</h3>
-            <span className="px-4 py-1.5 bg-emerald-500/10 text-emerald-500 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20">Online</span>
+            <span className="px-4 py-1.5 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[var(--color-primary)]/20">Online</span>
           </div>
           <div className="flex items-center gap-5 mb-8">
             <div className="w-20 h-20 rounded-3xl bg-[var(--color-text)]/5 overflow-hidden border border-[var(--color-border)] shadow-2xl p-1">
@@ -48,7 +48,7 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
             <div>
               <p className="font-bold text-[var(--color-text)] text-xl tracking-tight">Dra. Camila Costa</p>
               <p className="text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest mt-1">Psicóloga Clínica</p>
-              <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#E8B4BC] hover:text-[var(--color-text)] transition-colors">Ver Perfil</button>
+              <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[var(--color-primary)] hover:text-[var(--color-text)] transition-colors">Ver Perfil</button>
             </div>
           </div>
           <button className="w-full py-5 rounded-2xl bg-[var(--color-text)] text-[var(--color-bg)] font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-2xl">
@@ -59,14 +59,14 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-5">
-          <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[#E8B4BC]/30 transition-all group shadow-2xl">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[#E8B4BC]/10 text-[#E8B4BC] group-hover:bg-[#E8B4BC] group-hover:text-black transition-all border border-[#E8B4BC]/20">
+          <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-primary)]/30 transition-all group shadow-2xl">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[var(--color-primary)]/10 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all border border-[var(--color-primary)]/20">
               <BookHeart size={28} />
             </div>
             <span className="font-bold text-[var(--color-text-muted)] text-[10px] uppercase tracking-widest group-hover:text-[var(--color-text)] transition-colors">Diário Emocional</span>
           </button>
-          <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[#D4B996]/30 transition-all group shadow-2xl">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[#D4B996]/10 text-[#D4B996] group-hover:bg-[#D4B996] group-hover:text-black transition-all border border-[#D4B996]/20">
+          <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-accent)]/30 transition-all group shadow-2xl">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[var(--color-accent)]/10 text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-black transition-all border border-[var(--color-accent)]/20">
               <Activity size={28} />
             </div>
             <span className="font-bold text-[var(--color-text-muted)] text-[10px] uppercase tracking-widest group-hover:text-[var(--color-text)] transition-colors">Evolução Mental</span>
@@ -79,15 +79,15 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
           <div className="space-y-5">
             {[
               { title: 'Lidando com a Ansiedade', duration: '15 min', icon: Brain, color: 'text-[var(--color-text)]', bg: 'bg-[var(--color-text)]/5' },
-              { title: 'Construindo Autoestima', duration: '20 min', icon: HeartHandshake, color: 'text-[#E8B4BC]', bg: 'bg-[#E8B4BC]/10' },
-              { title: 'Desbloqueios Emocionais', duration: '30 min', icon: Activity, color: 'text-[#D4B996]', bg: 'bg-[#D4B996]/10' },
+              { title: 'Construindo Autoestima', duration: '20 min', icon: HeartHandshake, color: 'text-[var(--color-primary)]', bg: 'bg-[var(--color-primary)]/10' },
+              { title: 'Desbloqueios Emocionais', duration: '30 min', icon: Activity, color: 'text-[var(--color-accent)]', bg: 'bg-[var(--color-accent)]/10' },
             ].map((session, idx) => (
               <div key={`${session.title}-${idx}`} className="glass-card p-6 rounded-[2rem] border border-[var(--color-border)] flex items-center gap-5 hover:border-[var(--color-text)]/20 transition-all cursor-pointer group shadow-2xl">
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${session.bg} ${session.color} group-hover:scale-110 transition-transform border border-[var(--color-border)]`}>
                   <session.icon size={28} />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-bold text-[var(--color-text)] text-lg tracking-tight mb-1 group-hover:text-[#E8B4BC] transition-colors">{session.title}</h4>
+                  <h4 className="font-bold text-[var(--color-text)] text-lg tracking-tight mb-1 group-hover:text-[var(--color-primary)] transition-colors">{session.title}</h4>
                   <p className="text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest">{session.duration} • Áudio guiado</p>
                 </div>
               </div>

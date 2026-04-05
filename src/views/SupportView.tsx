@@ -18,15 +18,15 @@ function FAQItem({ question, answer }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-white/5 last:border-0">
+    <div className="border-b border-[var(--color-border)] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left group transition-all"
       >
-        <span className={`text-sm font-semibold tracking-tight transition-colors ${isOpen ? 'text-[#E8B4BC]' : 'text-white/60 group-hover:text-white'}`}>
+        <span className={`text-sm font-semibold tracking-tight transition-colors ${isOpen ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'}`}>
           {question}
         </span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[#E8B4BC]/10 text-[#E8B4BC] rotate-180' : 'bg-white/5 text-white/20'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] rotate-180' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)]'}`}>
           <ChevronDown size={16} />
         </div>
       </button>
@@ -36,7 +36,7 @@ function FAQItem({ question, answer }: any) {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <p className="pb-6 text-sm text-white/40 leading-relaxed max-w-2xl">
+        <p className="pb-6 text-sm text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
           {answer}
         </p>
       </motion.div>
@@ -73,7 +73,7 @@ export default function SupportView() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 text-[#E8B4BC] text-[10px] font-bold uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-[10px] font-bold uppercase tracking-widest mb-4"
           >
             <Headphones size={14} />
             Central de Suporte
@@ -104,7 +104,7 @@ export default function SupportView() {
             viewport={{ once: true }}
             className="p-8 rounded-[2.5rem] bg-[var(--color-text)]/5 border border-[var(--color-border)] space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#E8B4BC]/10 flex items-center justify-center text-[#E8B4BC]">
+            <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center text-[var(--color-primary)]">
               <Users size={24} />
             </div>
             <div className="space-y-4">
@@ -119,9 +119,9 @@ export default function SupportView() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#E8B4BC]/10 to-transparent border border-[#E8B4BC]/10 space-y-6"
+            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[var(--color-primary)]/10 to-transparent border border-[var(--color-primary)]/10 space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#D4B996]/10 flex items-center justify-center text-[#D4B996]">
+            <div className="w-12 h-12 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)]">
               <Target size={24} />
             </div>
             <div className="space-y-4">
@@ -146,27 +146,27 @@ export default function SupportView() {
               href="https://instagram.com/evoluaela_" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[#E8B4BC]/30 transition-all flex items-center gap-6"
+              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-[#E8B4BC] group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 flex items-center justify-center text-[var(--color-primary)] group-hover:scale-110 transition-transform">
                 <Instagram size={28} />
               </div>
               <div>
                 <span className="block text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-widest mb-1">Instagram</span>
-                <span className="text-lg font-bold text-[var(--color-text)] group-hover:text-[#E8B4BC] transition-colors">@evoluaela_</span>
+                <span className="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">@evoluaela_</span>
               </div>
             </a>
 
             <a 
               href="mailto:evoluaela@gmail.com"
-              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[#D4B996]/30 transition-all flex items-center gap-6"
+              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#D4B996]/10 flex items-center justify-center text-[#D4B996] group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)] group-hover:scale-110 transition-transform">
                 <Mail size={28} />
               </div>
               <div>
                 <span className="block text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-widest mb-1">E-mail</span>
-                <span className="text-lg font-bold text-[var(--color-text)] group-hover:text-[#D4B996] transition-colors">evoluaela@gmail.com</span>
+                <span className="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">evoluaela@gmail.com</span>
               </div>
             </a>
           </div>
@@ -193,7 +193,7 @@ export default function SupportView() {
         </section>
 
         {/* Bottom CTA */}
-        <section className="p-12 rounded-[3rem] bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] text-center space-y-6 relative overflow-hidden">
+        <section className="p-12 rounded-[3rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-center space-y-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
           <div className="relative z-10">
             <h2 className="text-3xl font-bold text-black tracking-tighter mb-2">Ainda tem dúvidas?</h2>

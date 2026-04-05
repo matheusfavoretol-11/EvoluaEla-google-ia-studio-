@@ -56,23 +56,24 @@ export const predefinedThemes: Record<string, Theme> = {
   castify: {
     id: 'castify',
     name: 'Castify',
-    primary: '#E8B4BC', // Rose Premium
-    bg: '#0A0A0A', // Deep Dark
-    surface: '#141414', // Card Dark
+    primary: '#E8B4BC',
+    bg: '#0A0A0A',
+    surface: '#141414',
     text: '#FFFFFF',
     textMuted: '#888888',
-    accent: '#D4B996', // Gold
+    accent: '#D4B996',
+    border: 'rgba(255, 255, 255, 0.1)',
   },
   light: {
     id: 'light',
     name: 'Claro',
-    primary: '#E8B4BC',
+    primary: '#C9848C',
     bg: '#FAF8F5',
     surface: '#FFFFFF',
     text: '#1A1A1A',
-    textMuted: '#666666',
-    accent: '#D4B996',
-    border: '#E8E0D8'
+    textMuted: '#555555',
+    accent: '#B89A76',
+    border: '#E0D8D0',
   },
 };
 

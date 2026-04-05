@@ -36,10 +36,10 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
             <h3 className="text-[9px] font-bold text-[var(--color-text-muted)] uppercase tracking-[0.2em] mb-4">Aparência</h3>
             <button 
               onClick={toggleTheme}
-              className="w-full flex items-center justify-between p-5 rounded-[1.5rem] bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[#E8B4BC]/30 transition-all group"
+              className="w-full flex items-center justify-between p-5 rounded-[1.5rem] bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all group"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[#E8B4BC] shadow-sm">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[var(--color-primary)] shadow-sm">
                   {isDark ? <Moon size={24} /> : <Sun size={24} />}
                 </div>
                 <div className="text-left">
@@ -47,7 +47,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                   <p className="text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest">Toque para alternar</p>
                 </div>
               </div>
-              <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-[#E8B4BC]' : 'bg-gray-300'}`}>
+              <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-[var(--color-primary)]' : 'bg-gray-300'}`}>
                 <div className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isDark ? 'translate-x-6' : 'translate-x-0'}`} />
               </div>
             </button>
@@ -67,7 +67,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                     type="text"
                     value={tempName}
                     onChange={(e) => setTempName(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:ring-1 focus:ring-[#E8B4BC]/30 focus:outline-none transition-all text-[var(--color-text)] font-bold"
+                    className="w-full pl-11 pr-4 py-3 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:ring-1 focus:ring-[var(--color-primary)]/30 focus:outline-none transition-all text-[var(--color-text)] font-bold"
                   />
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                   <p className="text-[9px] font-bold text-[var(--color-text-muted)] mb-1 uppercase tracking-widest">Seu Plano</p>
                   <div className="flex items-center gap-1.5">
                     {isPremium ? (
-                      <span className="text-[#E8B4BC] font-bold flex items-center gap-1 text-sm tracking-tight"><Crown size={14} fill="currentColor" /> Premium</span>
+                      <span className="text-[var(--color-primary)] font-bold flex items-center gap-1 text-sm tracking-tight"><Crown size={14} fill="currentColor" /> Premium</span>
                     ) : subscriptionStatus === 'trial' ? (
                       <span className="text-[#A8C4B8] font-bold flex items-center gap-1 text-sm tracking-tight"><Crown size={14} fill="currentColor" /> Teste Grátis (7 dias)</span>
                     ) : (
@@ -86,7 +86,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                   </div>
                 </div>
                 {!isPremium && subscriptionStatus !== 'trial' && (
-                  <button className="text-[9px] font-bold px-3 py-1.5 rounded-full bg-[#E8B4BC] text-white uppercase tracking-widest hover:scale-105 transition-transform">
+                  <button className="text-[9px] font-bold px-3 py-1.5 rounded-full bg-[var(--color-primary)] text-white uppercase tracking-widest hover:scale-105 transition-transform">
                     Fazer Upgrade
                   </button>
                 )}
@@ -103,7 +103,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                   key={t.id}
                   onClick={() => setTheme(t)}
                   className={`flex flex-col items-center gap-2 p-3 rounded-[1.5rem] border transition-all ${
-                    theme.id === t.id ? 'border-[#E8B4BC]/50 bg-[var(--color-bg)] shadow-sm' : 'border-[var(--color-border)] hover:border-[#E8B4BC]/20 bg-[var(--color-surface)]'
+                    theme.id === t.id ? 'border-[var(--color-primary)]/50 bg-[var(--color-bg)] shadow-sm' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]'
                   }`}
                 >
                   <div 
@@ -137,7 +137,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
 
           <button 
             onClick={handleSave}
-            className="w-full py-5 rounded-full font-bold text-black shadow-lg transition-transform active:scale-95 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] sticky bottom-0 uppercase tracking-widest text-[10px]"
+            className="w-full py-5 rounded-full font-bold text-black shadow-lg transition-transform active:scale-95 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] sticky bottom-0 uppercase tracking-widest text-[10px]"
           >
             Pronto, fechar
           </button>

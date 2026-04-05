@@ -52,11 +52,11 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
   return (
     <div className="flex-1 overflow-y-auto pb-24 bg-[var(--color-bg)] relative min-h-full text-[var(--color-text)] font-sans">
       {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="px-4 sm:px-6 pt-12 pb-10 relative z-10">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[#E8B4BC] shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
             <Sparkles size={32} />
           </div>
           <h1 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
@@ -101,7 +101,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`glass-card p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
-                  isLocked ? 'opacity-40 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[#E8B4BC]/30 cursor-pointer'
+                  isLocked ? 'opacity-40 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/30 cursor-pointer'
                 }`}
                 onClick={() => handleContentClick(item, isLockedByPremium, isLockedByLevel)}
               >
@@ -115,7 +115,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className={`font-bold text-xl tracking-tight transition-all ${isLocked ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text)] group-hover:text-[#E8B4BC]'}`}>
+                  <h3 className={`font-bold text-xl tracking-tight transition-all ${isLocked ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text)] group-hover:text-[var(--color-primary)]'}`}>
                     {item.title}
                   </h3>
                   <div className="flex items-center gap-3 mt-2">
@@ -123,7 +123,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                       {activeCategory === 'audios' ? (item as any).duration : (item as any).pages}
                     </span>
                     {item.premium && (
-                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[#E8B4BC]/10 text-[#E8B4BC] border border-[#E8B4BC]/20">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20">
                         Premium
                       </span>
                     )}
@@ -158,7 +158,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             >
               <div className="p-8 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-surface)]/80">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[#E8B4BC]">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-primary)]">
                     {activeCategory === 'audios' ? <Headphones size={24} /> : <FileText size={24} />}
                   </div>
                   <h3 className="font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)]">
@@ -174,13 +174,13 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
               </div>
 
               <div className="p-10 flex-1 overflow-y-auto flex flex-col items-center text-center relative">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#E8B4BC]/5 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none"></div>
                 
                 {activeCategory === 'audios' ? (
                   <>
                     <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] overflow-hidden">
-                      <div className={`absolute inset-0 bg-gradient-to-br from-[#E8B4BC]/20 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
-                      <div className={`absolute inset-0 border-4 border-[#E8B4BC]/30 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/20 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
+                      <div className={`absolute inset-0 border-4 border-[var(--color-primary)]/30 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
                       <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] relative z-10">
                         <Headphones size={56} />
                       </div>
@@ -195,7 +195,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                         <motion.div 
                           initial={{ width: '0%' }}
                           animate={{ width: isPlaying ? '33%' : '33%' }}
-                          className="h-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] rounded-full"
+                          className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full"
                         ></motion.div>
                       </div>
                       <div className="flex justify-between text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest">
@@ -234,7 +234,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     <p className="text-[var(--color-text-muted)] text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
                     <button 
-                      className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] text-xs"
+                      className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-xs"
                     >
                       <FileText size={20} />
                       Quero ler agora

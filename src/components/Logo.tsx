@@ -39,10 +39,10 @@ export const Logo: React.FC<LogoProps> = ({ className = '', showText = true, siz
       </div>
       {showText && (
         <div className="flex flex-col">
-          <span className={`${titleSizes[size]} font-bold tracking-tighter text-white leading-none`}>
+          <span className={`${titleSizes[size]} font-bold tracking-tighter text-[var(--color-text)] leading-none`}>
             EvoluaEla
           </span>
-          <span className={`${subtitleSizes[size]} font-bold uppercase tracking-[0.3em] text-[#E8B4BC] mt-1`}>
+          <span className={`${subtitleSizes[size]} font-bold uppercase tracking-[0.3em] text-[var(--color-primary)] mt-1`}>
             HIGH PERFORMANCE
           </span>
         </div>

@@ -74,8 +74,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
     <div className="min-h-screen w-full flex flex-col bg-[var(--color-bg)] font-sans text-[var(--color-text)] relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#E8B4BC]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#D4B996]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
@@ -83,7 +83,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
         {/* Progress Bar */}
         <div className="w-full h-1.5 bg-[var(--color-text)]/5 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
           <motion.div 
-            className="h-full rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
+            className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
             initial={{ width: '0%' }}
             animate={{ width: `${(step / 3) * 100}%` }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -112,13 +112,13 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setObjective(obj.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[#E8B4BC]/20 bg-[var(--color-surface)]/50'
+                          ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#E8B4BC]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -154,13 +154,13 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setFeeling(feel.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#D4B996] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[#D4B996]/20 bg-[var(--color-surface)]/50'
+                          ? 'border-[var(--color-accent)] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[var(--color-accent)]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#D4B996] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#D4B996]'
+                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -196,13 +196,13 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setChallenge(chal.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[#E8B4BC] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[#E8B4BC]/20 bg-[var(--color-surface)]/50'
+                          ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
+                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]/50'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[#E8B4BC] text-black' : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] group-hover:text-[#E8B4BC]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -222,7 +222,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           <button
             onClick={handleNext}
             disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge)}
-            className="w-full py-6 sm:py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:hover:shadow-2xl bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
+            className="w-full py-6 sm:py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:hover:shadow-2xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
           >
             {isSaving ? (
               <div className="flex items-center gap-4">

@@ -201,13 +201,13 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-6">
               <div className="px-4 py-1.5 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center gap-2">
-                <Star size={12} className="text-[#E8B4BC]" />
+                <Star size={12} className="text-[var(--color-primary)]" />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Nível {level}</span>
               </div>
               {subscriptionStatus === 'trial' && (
-                <div className="px-4 py-1.5 rounded-full bg-[#E8B4BC]/10 border border-[#E8B4BC]/20 flex items-center gap-2">
-                  <Clock size={12} className="text-[#E8B4BC]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC]">{getDaysRemaining()} dias de teste</span>
+                <div className="px-4 py-1.5 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center gap-2">
+                  <Clock size={12} className="text-[var(--color-primary)]" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)]">{getDaysRemaining()} dias de teste</span>
                 </div>
               )}
             </div>
@@ -221,7 +221,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           >
             <Bell size={24} className="text-[var(--color-text-muted)]" />
             {unreadCount > 0 && (
-              <span className="absolute top-4 right-4 w-3 h-3 rounded-full border-2 border-[var(--color-bg)] bg-[#E8B4BC]"></span>
+              <span className="absolute top-4 right-4 w-3 h-3 rounded-full border-2 border-[var(--color-bg)] bg-[var(--color-primary)]"></span>
             )}
           </button>
 
@@ -236,7 +236,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="p-5 border-b border-[var(--color-border)] flex justify-between items-center">
                   <h3 className="font-bold text-sm text-[var(--color-text)]">Notificações</h3>
                   {unreadCount > 0 && (
-                    <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[#E8B4BC] text-black uppercase tracking-widest">
+                    <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[var(--color-primary)] text-black uppercase tracking-widest">
                       {unreadCount} novas
                     </span>
                   )}
@@ -244,8 +244,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.map((notif) => (
-                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/5 transition-colors cursor-pointer ${!notif.read ? 'bg-[#E8B4BC]/5' : ''}`}>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8B4BC] mb-1">{notif.title}</p>
+                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/5 transition-colors cursor-pointer ${!notif.read ? 'bg-[var(--color-primary)]/5' : ''}`}>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)] mb-1">{notif.title}</p>
                         <p className="text-sm font-medium text-[var(--color-text-muted)] mb-2 leading-relaxed">
                           {notif.message}
                         </p>
@@ -271,11 +271,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         className="bento-card relative overflow-hidden group"
       >
         <div className="absolute -right-6 -top-6 opacity-10 group-hover:opacity-20 transition-opacity">
-          <Sparkles size={120} className="text-[#E8B4BC]" />
+          <Sparkles size={120} className="text-[var(--color-primary)]" />
         </div>
         <div className="relative z-10 flex items-start gap-6">
-          <div className="w-14 h-14 rounded-2xl bg-[#E8B4BC]/10 flex items-center justify-center shrink-0">
-            <Sparkles size={28} className="text-[#E8B4BC]" />
+          <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0">
+            <Sparkles size={28} className="text-[var(--color-primary)]" />
           </div>
           <p className="text-xl md:text-2xl font-bold text-[var(--color-text)]/90 leading-tight tracking-tight italic">
             "Sua evolução é um processo contínuo de florescimento. Cada escolha consciente hoje é uma semente para o seu amanhã radiante."
@@ -294,10 +294,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           
           <div className="bento-card space-y-8">
             {[
-              { label: 'Confiança', value: emotionalStats.confianca, color: '#E8B4BC' },
-              { label: 'Autoestima', value: emotionalStats.autoestima, color: '#D4B996' },
-              { label: 'Disciplina', value: emotionalStats.disciplina, color: '#E8B4BC' },
-              { label: 'Amor Próprio', value: emotionalStats.amorProprio, color: '#D4B996' },
+              { label: 'Confiança', value: emotionalStats.confianca, color: 'var(--color-primary)' },
+              { label: 'Autoestima', value: emotionalStats.autoestima, color: 'var(--color-accent)' },
+              { label: 'Disciplina', value: emotionalStats.disciplina, color: 'var(--color-primary)' },
+              { label: 'Amor Próprio', value: emotionalStats.amorProprio, color: 'var(--color-accent)' },
             ].map((stat, idx) => (
               <div key={`${stat.label}-${idx}`} className="space-y-3">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
@@ -309,7 +309,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     initial={{ width: 0 }}
                     animate={{ width: `${stat.value}%` }}
                     transition={{ duration: 1.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#E8B4BC] to-[#D4B996]"
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
                   />
                 </div>
               </div>
@@ -336,14 +336,14 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 onClick={() => toggleMission(mission.id)}
                 className={`p-6 rounded-3xl border transition-all flex items-center justify-between cursor-pointer group ${
                   mission.completed 
-                    ? 'bg-[#E8B4BC]/5 border-[#E8B4BC]/20' 
-                    : 'bg-[var(--color-text)]/5 border-[var(--color-border)] hover:border-[#E8B4BC]/30'
+                    ? 'bg-[var(--color-primary)]/5 border-[var(--color-primary)]/20' 
+                    : 'bg-[var(--color-text)]/5 border-[var(--color-border)] hover:border-[var(--color-primary)]/30'
                 }`}
               >
                 <div className="flex items-center gap-5">
                   <div 
                     className={`w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${
-                      mission.completed ? 'bg-[#E8B4BC] border-[#E8B4BC]' : 'border-[var(--color-border)] group-hover:border-[#E8B4BC]'
+                      mission.completed ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'border-[var(--color-border)] group-hover:border-[var(--color-primary)]'
                     }`}
                   >
                     {mission.completed && <CheckCircle2 size={14} className="text-black" />}
@@ -352,7 +352,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     {mission.title}
                   </span>
                 </div>
-                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/10' : 'text-[var(--color-text-muted)]/20 group-hover:text-[#E8B4BC]'}`} />
+                <ChevronRight size={18} className={`transition-all ${mission.completed ? 'text-[var(--color-text-muted)]/10' : 'text-[var(--color-text-muted)]/20 group-hover:text-[var(--color-primary)]'}`} />
               </motion.div>
             ))}
           </div>
@@ -370,14 +370,14 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             onClick={() => onNavigate('content')}
             className="bento-card flex items-center gap-8 cursor-pointer group p-8"
           >
-            <div className="w-20 h-20 rounded-3xl bg-[#E8B4BC]/10 flex items-center justify-center shrink-0 group-hover:bg-[#E8B4BC] group-hover:text-black transition-all">
+            <div className="w-20 h-20 rounded-3xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
               <Play size={32} fill="currentColor" />
             </div>
             <div className="flex-1">
               <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2 tracking-tight">O poder do "não"</h4>
               <p className="text-sm font-bold text-[var(--color-text-muted)]/40 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 group-hover:text-[#E8B4BC] transition-all">
+            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/20 group-hover:text-[var(--color-primary)] transition-all">
               <ChevronRight size={24} />
             </div>
           </motion.div>
@@ -389,7 +389,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           <motion.div 
             whileHover={{ y: -5 }}
             onClick={() => setShowCommunityUpsell(true)}
-            className="bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] p-8 rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
+            className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-8 rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
           >
             <div className="absolute -right-8 -bottom-8 opacity-20 group-hover:opacity-30 transition-opacity">
               <Users size={160} className="text-black" />
@@ -435,7 +435,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               </button>
 
               <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] flex items-center justify-center mb-8 text-black shadow-2xl">
+                <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center mb-8 text-black shadow-2xl">
                   <Users size={44} />
                 </div>
                 
@@ -454,7 +454,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
                   ].map((item, idx) => (
                     <div key={`benefit-comm-${item.text}`} className="flex items-center gap-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[#E8B4BC]">
+                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[var(--color-primary)]">
                         <item.icon size={24} />
                       </div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/60">{item.text}</span>
@@ -467,7 +467,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     setShowCommunityUpsell(false);
                     onUpgrade();
                   }}
-                  className="w-full py-6 rounded-full font-bold text-black bg-gradient-to-r from-[#E8B4BC] to-[#D4B996] hover:scale-[1.02] shadow-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-xs"
+                  className="w-full py-6 rounded-full font-bold text-black bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] shadow-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-xs"
                 >
                   Quero ser Premium
                   <ArrowRight size={18} />
