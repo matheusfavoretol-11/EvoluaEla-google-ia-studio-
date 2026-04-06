@@ -45,10 +45,37 @@ export default function LandingView({ onStart }: LandingViewProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar selection:bg-[var(--color-primary)] selection:text-black">
+    <div className="min-h-screen bg-[#0A0A0A] font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar selection:bg-[var(--color-primary)] selection:text-black relative">
       
+      {/* Fixed Background for Infinite Feel */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0A0A0A]">
+        {/* Top Glow */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.4, 0.3],
+            x: ['-50%', '-48%', '-50%']
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-20%] left-1/2 w-[140%] h-[70%] bg-gradient-to-b from-[var(--color-primary)]/30 via-[var(--color-primary)]/10 to-transparent rounded-full blur-[140px]" 
+        />
+        
+        {/* Bottom Glow */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.25, 0.15]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-15%] right-[-10%] w-[70%] h-[60%] bg-[var(--color-accent)]/15 rounded-full blur-[120px]" 
+        />
+        
+        {/* Overall Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/40 to-[#0A0A0A]" />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-8 bg-transparent backdrop-blur-3xl border-none">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-[calc(1.5rem+env(safe-area-inset-top))] pb-6 bg-transparent backdrop-blur-3xl border-none">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Logo size="sm" />
@@ -67,7 +94,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
             </button>
             <button 
               onClick={onStart} 
-              className="px-6 py-2.5 rounded-full bg-[var(--color-text)] text-[var(--color-bg)] text-sm font-bold hover:bg-[var(--color-primary)] hover:text-black transition-all duration-300 active:scale-95"
+              className="px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-[var(--color-primary)] transition-all duration-300 active:scale-95 shadow-xl"
             >
               Começar Agora
             </button>
@@ -76,11 +103,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 min-h-screen flex items-center overflow-hidden">
-        {/* Background Gradients */}
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none" />
-
+      <section className="relative pt-[calc(8rem+env(safe-area-inset-top))] pb-20 px-6 min-h-[100dvh] flex items-center overflow-hidden z-10">
         <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -164,7 +187,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Bento Features Section */}
-      <section id="features" className="py-32 px-6 bg-[var(--color-bg)]">
+      <section id="features" className="relative py-32 px-6 z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Tudo o que você precisa <br /> para sua <span className="gradient-text">evolução</span>.</h2>
@@ -194,7 +217,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Episodes/Programs Section */}
-      <section id="episodes" className="py-32 px-6 bg-[var(--color-surface)]">
+      <section id="episodes" className="relative py-32 px-6 z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div>
@@ -236,7 +259,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-32 px-6 bg-[var(--color-bg)]">
+      <section id="testimonials" className="relative py-32 px-6 z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">O que as <span className="gradient-text">mulheres</span> dizem.</h2>
@@ -292,7 +315,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-32 px-6 bg-[var(--color-bg)]">
+      <section id="pricing" className="relative py-32 px-6 z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Escolha seu <span className="gradient-text">plano</span>.</h2>
@@ -359,7 +382,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-32 px-6 bg-[var(--color-surface)]">
+      <section id="faq" className="relative py-32 px-6 z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 tracking-tight">Dúvidas Frequentes</h2>
@@ -403,7 +426,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-[var(--color-border)]">
+      <footer className="relative py-20 px-6 border-t border-[var(--color-border)] z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
             <div className="col-span-2">
