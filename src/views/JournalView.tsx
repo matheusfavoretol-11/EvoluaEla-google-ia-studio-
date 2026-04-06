@@ -72,13 +72,13 @@ Seja concisa, use emojis e foque no acolhimento.`,
   };
 
   return (
-    <div className="p-4 sm:p-6 space-y-10 relative min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] font-sans overflow-hidden">
+    <div className="p-4 sm:p-6 space-y-10 relative min-h-full flex flex-col bg-transparent text-[var(--color-text)] font-sans overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <header className="space-y-3 relative z-10">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
             <BookHeart size={32} />
           </div>
           <h2 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Meu <span className="gradient-text">Diário</span></h2>
@@ -108,7 +108,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                   className={`text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-2xl border transition-all shadow-2xl ${
                     selectedPrompt === prompt 
                       ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black border-transparent scale-105' 
-                      : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-text)]/90 hover:text-[var(--color-text)]'
+                      : 'bg-white/10 text-[var(--color-text-muted)] border-white/10 hover:border-white/20 hover:text-[var(--color-text)]'
                   }`}
                 >
                   {prompt}
@@ -123,7 +123,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
               value={entry}
               onChange={(e) => setEntry(e.target.value)}
               placeholder="Pode soltar tudo aqui..."
-              className="flex-1 w-full p-10 rounded-[2.5rem] bg-[var(--color-text)]/90 border border-[var(--color-border)] resize-none focus:border-[var(--color-primary)]/90 outline-none text-[var(--color-text)] leading-relaxed font-bold text-xl placeholder:text-[var(--color-text-muted)]/90 shadow-2xl transition-all backdrop-blur-md"
+              className="flex-1 w-full p-10 rounded-[2.5rem] bg-white/5 border border-white/10 resize-none focus:border-[var(--color-primary)]/90 outline-none text-[var(--color-text)] leading-relaxed font-bold text-xl placeholder:text-[var(--color-text-muted)]/90 shadow-2xl transition-all backdrop-blur-md"
             />
             
             <button
@@ -142,7 +142,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
           animate={{ opacity: 1, scale: 1 }}
           className="flex-1 flex flex-col relative z-10"
         >
-          <div className="glass-card p-10 rounded-[3rem] border border-[var(--color-border)] relative overflow-hidden flex-1 shadow-2xl flex flex-col">
+          <div className="glass-morphism p-10 rounded-[3rem] border border-white/10 relative overflow-hidden flex-1 shadow-2xl flex flex-col">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-[100px] -mr-20 -mt-20"></div>
             
             <div className="relative z-10 flex flex-col h-full">
@@ -177,7 +177,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                     setEntry('');
                     setSelectedPrompt(null);
                   }}
-                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/90 hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)] transition-all border border-[var(--color-border)] shadow-2xl"
+                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-white/5 hover:bg-white/10 hover:text-[var(--color-text)] transition-all border border-white/10 shadow-2xl"
                 >
                   Voltar para minhas reflexões
                 </button>

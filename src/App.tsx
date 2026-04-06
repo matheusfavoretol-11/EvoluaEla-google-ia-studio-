@@ -123,15 +123,16 @@ function AppContent() {
         onUpgrade={() => setShowSubscription(true)}
       />
 
-      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-[var(--color-bg)]">
+      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-transparent">
+        <div className="infinite-bg" />
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 sticky top-0 z-30 bg-[var(--color-bg)]/80 backdrop-blur-2xl shrink-0 shadow-sm border-none">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 sticky top-0 z-30 bg-transparent backdrop-blur-xl shrink-0 border-none">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/90 hover:text-[var(--color-primary)]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -145,7 +146,7 @@ function AppContent() {
                   const { toggleTheme } = (window as any).themeContext;
                   toggleTheme();
                 }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/90 hover:text-[var(--color-primary)] mr-1"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-[var(--color-text-muted)] hover:text-[var(--color-primary)] mr-1"
               >
                 {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
@@ -166,7 +167,7 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-32 lg:pb-12 hide-scrollbar bg-[var(--color-bg)] bg-grid-pattern relative scroll-container overscroll-none">
+        <main className="flex-1 overflow-y-auto pb-32 lg:pb-12 hide-scrollbar bg-transparent relative scroll-container overscroll-none">
           <div className="w-full px-4 sm:px-8 lg:px-12 py-8 lg:py-12">
             <AnimatePresence mode="wait">
               <motion.div
@@ -194,7 +195,7 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="lg:hidden fixed bottom-0 w-full px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 bg-[var(--color-surface)]/95 backdrop-blur-3xl border-t border-[var(--color-border)]/50 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+        <nav className="lg:hidden fixed bottom-0 w-full px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 bg-transparent backdrop-blur-3xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;

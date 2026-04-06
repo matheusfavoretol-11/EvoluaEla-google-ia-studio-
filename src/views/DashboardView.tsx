@@ -209,11 +209,49 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="p-4 sm:p-10 space-y-10 relative bg-[var(--color-bg)] min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
+      className="p-4 sm:p-10 space-y-12 relative bg-transparent min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
     >
       
+      {/* Hero Overview - Infinite Screen Style */}
+      <motion.section 
+        variants={itemVariants}
+        className="relative pt-8 pb-12 px-2"
+      >
+        <div className="space-y-1 mb-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--color-text-muted)]/60">Welcome • Overview</p>
+          <div className="flex items-baseline gap-4">
+            <h1 className="text-8xl md:text-9xl font-light tracking-tighter text-white leading-none">
+              {emotionalStats.disciplina}%
+            </h1>
+            <div className="glass-morphism px-4 py-2 rounded-full flex items-center gap-2">
+              <TrendingUp size={14} className="text-[var(--color-primary)]" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">All Programs (+12%)</span>
+            </div>
+          </div>
+          <p className="text-xl md:text-2xl font-light text-white/60 tracking-tight">Efficiency Improvements</p>
+        </div>
+
+        {/* Minimalist Graph Placeholder (Infinite Style) */}
+        <div className="relative h-48 w-full flex items-end justify-between gap-2 px-4">
+          {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95].map((height, i) => (
+            <div key={i} className="flex flex-col items-center gap-2 flex-1">
+              <motion.div 
+                initial={{ height: 0 }}
+                animate={{ height: `${height}%` }}
+                transition={{ duration: 1, delay: i * 0.05 }}
+                className="w-0.5 bg-white/20 relative"
+              >
+                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+              </motion.div>
+              <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][i]}</span>
+            </div>
+          ))}
+          <div className="absolute bottom-10 left-0 right-0 h-px bg-white/5" />
+        </div>
+      </motion.section>
+
       {/* Header & Greeting */}
-      <header className="flex justify-between items-start pt-4">
+      <header className="flex justify-between items-start">
         <motion.div 
           variants={itemVariants}
           className="space-y-3"
@@ -227,7 +265,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               Olá, <span className="gradient-text">{userName}</span>
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <div className="px-4 py-1.5 rounded-full bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center gap-2">
+              <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/10 flex items-center gap-2">
                 <Star size={12} className="text-[var(--color-primary)]" />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Nível {level}</span>
               </div>
@@ -245,7 +283,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           <motion.button 
             whileTap={{ scale: 0.97 }}
             onClick={() => setShowNotifications(!showNotifications)}
-            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-all" 
+            className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-white/5 border border-white/10 hover:bg-white/10 transition-all" 
           >
             <Bell size={24} className="text-[var(--color-text-muted)]" />
             {unreadCount > 0 && (
@@ -259,9 +297,9 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute top-16 right-0 w-80 rounded-3xl shadow-2xl z-50 overflow-hidden glass-card border border-[var(--color-border)]"
+                className="absolute top-16 right-0 w-80 rounded-3xl shadow-2xl z-50 overflow-hidden glass-morphism border border-white/10"
               >
-                <div className="p-5 border-b border-[var(--color-border)] flex justify-between items-center">
+                <div className="p-5 border-b border-white/10 flex justify-between items-center">
                   <h3 className="font-bold text-sm text-[var(--color-text)]">Notificações</h3>
                   {unreadCount > 0 && (
                     <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[var(--color-primary)] text-black uppercase tracking-widest">
@@ -272,7 +310,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.map((notif) => (
-                      <div key={notif.id} className={`p-5 border-b border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-colors cursor-pointer ${!notif.read ? 'bg-[var(--color-primary)]/90' : ''}`}>
+                      <div key={notif.id} className={`p-5 border-b border-white/10 hover:bg-white/10 transition-colors cursor-pointer ${!notif.read ? 'bg-[var(--color-primary)]/90' : ''}`}>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)] mb-1">{notif.title}</p>
                         <p className="text-sm font-medium text-[var(--color-text-muted)] mb-2 leading-relaxed">
                           {notif.message}
@@ -295,14 +333,14 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       {/* Daily Quote Card */}
       <motion.div 
         variants={itemVariants}
-        className="bento-card relative overflow-hidden group"
+        className="glass-morphism p-8 rounded-[2.5rem] relative overflow-hidden group"
       >
         <div className="absolute -right-6 -top-6 opacity-90 group-hover:opacity-90 transition-opacity">
           <Sparkles size={120} className="text-[var(--color-primary)]" />
         </div>
         <div className="relative z-10 flex items-start gap-6">
           <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center shrink-0">
-            <Sparkles size={28} className="text-[var(--color-primary)]" />
+            <Sparkles size={28} className="text-black" />
           </div>
           <p className="text-xl md:text-2xl font-bold text-[var(--color-text)]/90 leading-tight tracking-tight italic">
             "Sua evolução é um processo contínuo de florescimento. Cada escolha consciente hoje é uma semente para o seu amanhã radiante."
@@ -319,7 +357,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90">Status Atual</span>
           </div>
           
-          <div className="bento-card space-y-8">
+          <div className="glass-morphism p-8 rounded-[2.5rem] space-y-8">
             {[
               { label: 'Confiança', value: emotionalStats.confianca, color: 'var(--color-primary)' },
               { label: 'Autoestima', value: emotionalStats.autoestima, color: 'var(--color-accent)' },
@@ -331,7 +369,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   <span>{stat.label}</span>
                   <span className="text-[var(--color-text)] font-bold">{stat.value}%</span>
                 </div>
-                <div className="h-2 bg-[var(--color-text)]/90 rounded-full overflow-hidden">
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${stat.value}%` }}
@@ -363,13 +401,13 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 className={`p-6 rounded-3xl border transition-all flex items-center justify-between cursor-pointer group ${
                   mission.completed 
                     ? 'bg-[var(--color-primary)]/90 border-[var(--color-primary)]/90' 
-                    : 'bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-primary)]/90'
+                    : 'glass-morphism border-white/10 hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center gap-5">
                   <div 
                     className={`w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${
-                      mission.completed ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'border-[var(--color-border)] group-hover:border-[var(--color-primary)]'
+                      mission.completed ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'border-white/10 group-hover:border-[var(--color-primary)]'
                     }`}
                   >
                     {mission.completed && <CheckCircle2 size={14} className="text-black" />}
@@ -395,7 +433,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => onNavigate('content')}
-            className="bento-card flex items-center gap-8 cursor-pointer group p-8"
+            className="glass-morphism flex items-center gap-8 cursor-pointer group p-8 rounded-[2.5rem]"
           >
             <div className="w-20 h-20 rounded-3xl bg-[var(--color-primary)]/90 flex items-center justify-center shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
               <Play size={32} fill="currentColor" />
@@ -404,7 +442,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2 tracking-tight">O poder do "não"</h4>
               <p className="text-sm font-bold text-[var(--color-text-muted)]/70 uppercase tracking-widest">Áudio • 5 minutos • Especial para você</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/90 flex items-center justify-center text-[var(--color-text-muted)]/90 group-hover:text-[var(--color-primary)] transition-all">
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[var(--color-text-muted)]/90 group-hover:text-[var(--color-primary)] transition-all">
               <ChevronRight size={24} />
             </div>
           </motion.div>
@@ -458,7 +496,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <motion.button 
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setShowCommunityUpsell(false)}
-                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors border border-[var(--color-border)]"
+                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors border border-white/10"
               >
                 <X size={24} />
               </motion.button>
@@ -483,7 +521,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                     { icon: Sparkles, text: 'Mentoria e conteúdos extras' }
                   ].map((item, idx) => (
                     <div key={`benefit-comm-${item.text}`} className="flex items-center gap-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center shrink-0 text-[var(--color-primary)]">
+                      <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0 text-[var(--color-primary)]">
                         <item.icon size={24} />
                       </div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/80">{item.text}</span>

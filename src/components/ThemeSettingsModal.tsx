@@ -21,9 +21,9 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/90 backdrop-blur-sm">
-      <div className="bg-[var(--color-surface)] w-full rounded-t-3xl p-6 shadow-2xl animate-in slide-in-from-bottom-full duration-300 max-h-[90vh] overflow-y-auto border-t border-[var(--color-border)]">
-        <div className="flex justify-between items-center mb-6 sticky top-0 bg-[var(--color-surface)] z-10 py-2">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-md">
+      <div className="glass-morphism w-full rounded-t-[3rem] p-8 shadow-2xl animate-in slide-in-from-bottom-full duration-500 max-h-[90vh] overflow-y-auto border-t border-white/20">
+        <div className="flex justify-between items-center mb-8 sticky top-0 bg-transparent z-10 py-2">
           <h2 className="text-2xl font-bold text-[var(--color-text)] tracking-tighter">Configurações</h2>
           <button onClick={onClose} className="w-8 h-8 bg-[var(--color-bg)] rounded-full flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 transition-colors">
             <X size={18} />
@@ -36,7 +36,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
             <h3 className="text-[9px] font-bold text-[var(--color-text-muted)] uppercase tracking-[0.2em] mb-4">Aparência</h3>
             <button 
               onClick={toggleTheme}
-              className="w-full flex items-center justify-between p-5 rounded-[1.5rem] bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/90 transition-all group"
+              className="w-full flex items-center justify-between p-6 rounded-[2rem] bg-white/5 border border-white/10 hover:border-[var(--color-primary)]/90 transition-all group backdrop-blur-xl"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[var(--color-primary)] shadow-sm">
@@ -67,12 +67,12 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                     type="text"
                     value={tempName}
                     onChange={(e) => setTempName(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:ring-1 focus:ring-[var(--color-primary)]/90 focus:outline-none transition-all text-[var(--color-text)] font-bold"
+                    className="w-full pl-11 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-1 focus:ring-[var(--color-primary)]/90 focus:outline-none transition-all text-[var(--color-text)] font-bold"
                   />
                 </div>
               </div>
               
-              <div className="p-4 bg-[var(--color-bg)] rounded-[1.5rem] border border-[var(--color-border)] flex items-center justify-between">
+              <div className="p-5 bg-white/5 rounded-[2rem] border border-white/10 flex items-center justify-between backdrop-blur-xl">
                 <div>
                   <p className="text-[9px] font-bold text-[var(--color-text-muted)] mb-1 uppercase tracking-widest">Seu Plano</p>
                   <div className="flex items-center gap-1.5">
@@ -102,8 +102,8 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                 <button
                   key={t.id}
                   onClick={() => setTheme(t)}
-                  className={`flex flex-col items-center gap-2 p-3 rounded-[1.5rem] border transition-all ${
-                    theme.id === t.id ? 'border-[var(--color-primary)]/90 bg-[var(--color-bg)] shadow-sm' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]'
+                  className={`flex flex-col items-center gap-2 p-4 rounded-[2rem] border transition-all ${
+                    theme.id === t.id ? 'border-[var(--color-primary)]/90 bg-white/10 shadow-sm' : 'border-white/10 hover:border-[var(--color-primary)]/90 bg-white/5 backdrop-blur-xl'
                   }`}
                 >
                   <div 
@@ -121,7 +121,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
           {/* Custom Color Picker */}
           <div>
             <h3 className="text-[9px] font-bold text-[var(--color-text-muted)] uppercase tracking-[0.2em] mb-4">Cor Principal Customizada</h3>
-            <div className="flex items-center gap-4 p-4 bg-[var(--color-bg)] rounded-[1.5rem] border border-[var(--color-border)] shadow-sm">
+            <div className="flex items-center gap-4 p-5 bg-white/5 rounded-[2rem] border border-white/10 shadow-sm backdrop-blur-xl">
               <input 
                 type="color" 
                 value={customPrimary}

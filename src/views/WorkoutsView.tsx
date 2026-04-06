@@ -304,15 +304,15 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   };
 
   const renderWorkoutCard = (workout: Workout) => (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
-      key={workout.id} 
-      onClick={() => setActiveWorkoutId(workout.id)}
-      className="glass-card p-6 cursor-pointer transition-all hover:bg-[var(--color-text)]/90 group border border-[var(--color-border)]"
-    >
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -4, scale: 1.01 }}
+        whileTap={{ scale: 0.98 }}
+        key={workout.id} 
+        onClick={() => setActiveWorkoutId(workout.id)}
+        className="glass-morphism p-6 cursor-pointer transition-all hover:bg-white/10 group border border-white/10"
+      >
       <div className="flex justify-between items-start mb-6">
         <div>
           <h4 className="text-2xl font-bold text-[var(--color-text)] leading-tight mb-2 group-hover:text-[var(--color-primary)] transition-colors tracking-tight">{workout.title}</h4>
@@ -372,7 +372,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex flex-col h-full bg-[var(--color-bg)] text-[var(--color-text)] font-sans relative"
+      className="flex flex-col h-full bg-transparent text-[var(--color-text)] font-sans relative"
     >
       <AnimatePresence mode="wait">
         {!activeWorkoutId && !isEditing ? (
@@ -389,7 +389,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</motion.p>
               
               {/* Tabs */}
-              <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 mb-8 border border-[var(--color-border)]">
+              <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-white/5 mb-8 border border-white/10">
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setActiveTab('meus')}
@@ -426,7 +426,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   {!isPremium && (
                     <motion.div 
                       variants={itemVariants}
-                      className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-card border border-[var(--color-border)]"
+                      className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
                     >
                       <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
                       <Star className="w-16 h-16 text-[var(--color-accent)] mx-auto mb-6 relative z-10" />
@@ -463,7 +463,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
               {activeTab === 'sugestoes' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-3 glass-card p-5 text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest border border-[var(--color-border)] text-center">
+                  <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-3 glass-morphism p-5 text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest border border-white/10 text-center">
                     Sugestões preparadas com carinho para você começar agora.
                   </motion.div>
                   {defaultSuggestions.map((workout) => (
@@ -474,7 +474,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 </div>
               )}
 
-              <motion.div variants={itemVariants} className="mt-8 p-6 glass-card border border-[var(--color-border)] flex gap-4 items-start text-[var(--color-text-muted)] text-[10px] font-bold uppercase tracking-widest">
+              <motion.div variants={itemVariants} className="mt-8 p-6 glass-morphism border border-white/10 flex gap-4 items-start text-[var(--color-text-muted)] text-[10px] font-bold uppercase tracking-widest">
                 <Info size={20} className="shrink-0 mt-0.5 text-[var(--color-accent)]" />
                 <p className="leading-relaxed">Lembrete: os treinos são sugestões para te apoiar, mas não substituem o olhar de um profissional de educação física, tá?</p>
               </motion.div>
@@ -488,12 +488,12 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             exit={{ opacity: 0, x: 20 }}
             className="flex flex-col h-full bg-[var(--color-bg)]"
           >
-            <div className="px-4 sm:px-6 pt-8 pb-6 border-b border-[var(--color-border)] flex items-center justify-between sticky top-0 glass-nav z-30">
+            <div className="px-4 sm:px-6 pt-8 pb-6 border-b border-white/5 flex items-center justify-between sticky top-0 backdrop-blur-xl z-30">
               <div className="flex items-center gap-4">
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={isEditing ? handleCancelEdit : () => setActiveWorkoutId(null)}
-                  className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 transition-all border border-[var(--color-border)]"
+                  className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all border border-white/10"
                 >
                   {isEditing ? <X size={24} /> : <ChevronRight size={24} className="rotate-180" />}
                 </motion.button>
@@ -509,7 +509,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={() => startEditing(activeWorkout!)}
-                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-[var(--color-text)]/5 text-[var(--color-text)] border border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-all"
+                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-white/5 text-[var(--color-text)] border border-white/10 hover:bg-white/10 transition-all"
                 >
                   <Edit2 size={18} /> Editar
                 </motion.button>
@@ -537,7 +537,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
             {/* Progress Bar (View Mode) */}
             {!isEditing && (
-              <div className="px-4 sm:px-6 pt-6 bg-[var(--color-bg)]">
+              <div className="px-4 sm:px-6 pt-6 bg-transparent">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-[var(--color-text-muted)]">
                   <span>Progresso do Treino</span>
                   <span className="text-[var(--color-primary)]">{Math.round(progressPercent)}%</span>
@@ -561,12 +561,12 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                       type="text"
                       value={editingWorkout?.title || ''}
                       onChange={(e) => setEditingWorkout(prev => prev ? {...prev, title: e.target.value} : null)}
-                      className="w-full text-2xl font-bold text-[var(--color-text)] bg-[var(--color-text)]/5 p-6 rounded-3xl border border-[var(--color-border)] outline-none focus:border-[var(--color-primary)]/90 transition-all"
+                      className="w-full text-2xl font-bold text-[var(--color-text)] bg-white/5 p-6 rounded-3xl border border-white/10 outline-none focus:border-[var(--color-primary)]/90 transition-all"
                     />
                   </div>
                   
                   {isPremium && (
-                    <div className="glass-card p-6 border border-[var(--color-border)] shadow-2xl">
+                    <div className="glass-morphism p-6 border border-white/10 shadow-2xl">
                       <p className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase mb-4 flex items-center gap-2 tracking-widest">
                         <Star size={14} className="text-[#D4B996]" /> Sugestões Inteligentes
                       </p>
@@ -574,14 +574,14 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                         <motion.button 
                           whileTap={{ scale: 0.97 }}
                           onClick={() => addPremiumSuggestion('cardio')} 
-                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/90 text-[var(--color-text)] transition-all border border-[var(--color-border)]"
+                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-[var(--color-text)] transition-all border border-white/10"
                         >
                           + Cardio
                         </motion.button>
                         <motion.button 
                           whileTap={{ scale: 0.97 }}
                           onClick={() => addPremiumSuggestion('core')} 
-                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/90 text-[var(--color-text)] transition-all border border-[var(--color-border)]"
+                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-[var(--color-text)] transition-all border border-white/10"
                         >
                           + Core
                         </motion.button>
@@ -596,17 +596,17 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 
                 if (isEditing) {
                   return (
-                    <div key={`edit-${exercise.id}`} className="flex flex-col gap-4 p-6 glass-card border border-[var(--color-border)] shadow-2xl">
+                    <div key={`edit-${exercise.id}`} className="flex flex-col gap-4 p-6 glass-morphism border border-white/10 shadow-2xl">
                       <div className="flex justify-between items-center gap-4">
                         <input 
-                          className="font-bold text-xl text-[var(--color-text)] bg-[var(--color-text)]/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                          className="font-bold text-xl text-[var(--color-text)] bg-white/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
                           value={exercise.name} 
                           onChange={(e) => updateExercise(exercise.id, 'name', e.target.value)}
                           placeholder="Nome do exercício"
                         />
                         <div className="flex gap-2 shrink-0">
-                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-[var(--color-text)]/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-[var(--color-text)]/90"><ArrowUp size={18}/></motion.button>
-                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-[var(--color-text)]/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-[var(--color-text)]/90"><ArrowDown size={18}/></motion.button>
+                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-white/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-white/10"><ArrowUp size={18}/></motion.button>
+                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-white/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-white/10"><ArrowDown size={18}/></motion.button>
                           <motion.button whileTap={{ scale: 0.97 }} onClick={() => removeExercise(exercise.id)} className="p-3 bg-rose-500/90 rounded-xl text-rose-500 hover:bg-rose-500/90"><Trash2 size={18}/></motion.button>
                         </div>
                       </div>
@@ -614,7 +614,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                         <div className="flex-1">
                           <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Séries</label>
                           <input 
-                            className="w-full bg-[var(--color-text)]/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
                             value={exercise.sets}
                             onChange={(e) => updateExercise(exercise.id, 'sets', e.target.value)}
                             placeholder="Ex: 3"
@@ -623,7 +623,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                         <div className="flex-1">
                           <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Reps/Tempo</label>
                           <input 
-                            className="w-full bg-[var(--color-text)]/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
                             value={exercise.reps}
                             onChange={(e) => updateExercise(exercise.id, 'reps', e.target.value)}
                             placeholder="Ex: 15 reps"
@@ -653,7 +653,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     className={`p-6 rounded-3xl border cursor-pointer transition-all ${
                       isCompleted 
                         ? 'bg-[var(--color-text)]/90 border-transparent' 
-                        : 'glass-card border-[var(--color-border)] shadow-xl hover:border-[var(--color-primary)]/90'
+                        : 'glass-morphism border-white/10 shadow-xl hover:border-white/20'
                     }`}
                   >
                     <div className="flex justify-between items-center">
@@ -683,7 +683,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={addExercise}
-                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/90 transition-all flex items-center justify-center gap-3 mt-6 border border-[var(--color-border)]"
+                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-3 mt-6 border border-white/10"
                 >
                   <Plus size={24} /> Adicionar Exercício
                 </motion.button>
@@ -691,7 +691,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             </div>
 
             {!isEditing && (
-              <div className="p-8 border-t border-[var(--color-border)] glass-nav sticky bottom-0 z-20">
+              <div className="p-8 border-t border-white/5 backdrop-blur-xl sticky bottom-0 z-20">
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={handleFinishWorkout}
@@ -714,7 +714,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="glass-card p-10 w-full shadow-2xl text-center relative border border-[var(--color-border)]"
+              className="glass-morphism p-10 w-full shadow-2xl text-center relative border border-white/10"
             >
               <motion.button 
                 whileTap={{ scale: 0.97 }}
@@ -723,7 +723,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   setActiveWorkoutId(null);
                   setCompletedExercises({});
                 }}
-                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 transition-all"
+                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all"
               >
                 <X size={20} />
               </motion.button>
@@ -734,7 +734,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <h2 className="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">Treino concluído!</h2>
               <p className="text-[var(--color-text-muted)] font-medium mb-8">Sinta esse orgulho! Você está evoluindo a cada movimento. 💪</p>
               
-              <div className="bg-[var(--color-text)]/5 rounded-3xl p-6 mb-8 grid grid-cols-3 gap-4 border border-[var(--color-border)]">
+              <div className="bg-white/5 rounded-3xl p-6 mb-8 grid grid-cols-3 gap-4 border border-white/10">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl font-bold text-[var(--color-text)]">{completedCount}</span>
                   <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Excs</span>

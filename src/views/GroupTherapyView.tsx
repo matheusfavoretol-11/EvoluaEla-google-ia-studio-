@@ -106,7 +106,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
   if (!hasAccess) {
     return (
-      <div className="flex flex-col h-full bg-[var(--color-bg)] text-[var(--color-text)] p-6">
+      <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] p-6">
         <div className="mb-10">
           <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
           <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Terapia em grupo quinzenal para mulheres que buscam evolução real.</p>
@@ -115,7 +115,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-card border border-[var(--color-border)]"
+          className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
           <Heart className="w-16 h-16 text-[var(--color-accent)] mx-auto mb-6 relative z-10" />
@@ -126,19 +126,19 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
-            <div className="flex items-start gap-3 bg-[var(--color-text)]/5 p-4 rounded-2xl border border-[var(--color-border)]">
+            <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
               <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
               <p className="text-sm text-[var(--color-text-muted)]">Sessões quinzenais ao vivo</p>
             </div>
-            <div className="flex items-start gap-3 bg-[var(--color-text)]/5 p-4 rounded-2xl border border-[var(--color-border)]">
+            <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
               <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
               <p className="text-sm text-[var(--color-text-muted)]">Ambiente seguro e anônimo</p>
             </div>
-            <div className="flex items-start gap-3 bg-[var(--color-text)]/5 p-4 rounded-2xl border border-[var(--color-border)]">
+            <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
               <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
               <p className="text-sm text-[var(--color-text-muted)]">Gravações disponíveis por 7 dias</p>
             </div>
-            <div className="flex items-start gap-3 bg-[var(--color-text)]/5 p-4 rounded-2xl border border-[var(--color-border)]">
+            <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
               <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
               <p className="text-sm text-[var(--color-text-muted)]">Máximo de 25 participantes</p>
             </div>
@@ -156,7 +156,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
   }
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-bg)] text-[var(--color-text)] p-6 pb-32 overflow-y-auto hide-scrollbar">
+    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] p-6 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
         <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
         <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Seu espaço seguro de acolhimento e troca.</p>
@@ -167,7 +167,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] shadow-2xl relative overflow-hidden mb-10"
+          className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl relative overflow-hidden mb-10"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20"></div>
           
@@ -208,7 +208,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
           </div>
         </motion.div>
       ) : (
-        <div className="glass-card p-10 rounded-[2.5rem] border border-[var(--color-border)] text-center mb-10">
+        <div className="glass-morphism p-10 rounded-[2.5rem] border border-white/10 text-center mb-10">
           <Calendar className="w-12 h-12 text-[var(--color-text-muted)]/90 mx-auto mb-4" />
           <p className="text-[var(--color-text-muted)] font-medium">Nenhuma sessão agendada no momento.</p>
         </div>
@@ -221,17 +221,17 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {upcomingSessions.length > 0 ? upcomingSessions.map((session, idx) => (
-            <div key={session.id} className="glass-card p-6 rounded-3xl border border-[var(--color-border)] hover:border-[var(--color-text)]/90 transition-all">
+            <div key={session.id} className="glass-morphism p-6 rounded-3xl border border-white/10 hover:border-white/20 transition-all">
               <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent)] mb-2">Sessão {idx + 2}</p>
               <p className="font-bold text-lg mb-1">{format(new Date(session.date), "dd/MM", { locale: ptBR })}</p>
               <p className="text-sm text-[var(--color-text-muted)]">{format(new Date(session.date), "EEEE, HH:mm", { locale: ptBR })}</p>
             </div>
           )) : (
             [1, 2, 3].map(i => (
-              <div key={i} className="glass-card p-6 rounded-3xl border border-[var(--color-border)] opacity-90">
-                <div className="h-4 w-12 bg-[var(--color-text)]/90 rounded mb-2" />
-                <div className="h-6 w-20 bg-[var(--color-text)]/90 rounded mb-1" />
-                <div className="h-4 w-24 bg-[var(--color-text)]/90 rounded" />
+              <div key={i} className="glass-morphism p-6 rounded-3xl border border-white/10 opacity-90">
+                <div className="h-4 w-12 bg-white/10 rounded mb-2" />
+                <div className="h-6 w-20 bg-white/10 rounded mb-1" />
+                <div className="h-4 w-24 bg-white/10 rounded" />
               </div>
             ))
           )}
@@ -245,9 +245,9 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
         </h3>
         <div className="space-y-4">
           {pastSessions.length > 0 ? pastSessions.map((session) => (
-            <div key={session.id} className="glass-card p-6 rounded-3xl border border-[var(--color-border)] flex items-center justify-between group hover:bg-[var(--color-text)]/5 transition-all">
+            <div key={session.id} className="glass-morphism p-6 rounded-3xl border border-white/10 flex items-center justify-between group hover:bg-white/5 transition-all">
               <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/90 flex items-center justify-center text-[var(--color-text-muted)] group-hover:bg-[var(--color-primary)]/90 group-hover:text-[var(--color-primary)] transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-[var(--color-text-muted)] group-hover:bg-[var(--color-primary)]/90 group-hover:text-[var(--color-primary)] transition-all">
                   <Play size={24} />
                 </div>
                 <div>
@@ -256,7 +256,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
                 </div>
               </div>
               <button 
-                className="w-12 h-12 rounded-2xl bg-[var(--color-text)]/90 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 transition-all border border-[var(--color-border)]"
+                className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all border border-white/10"
                 onClick={() => session.recorded_url && window.open(session.recorded_url, '_blank')}
               >
                 <ExternalLink size={20} />
@@ -278,7 +278,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="glass-card p-10 w-full shadow-2xl text-center relative border border-[var(--color-border)]"
+              className="glass-morphism p-10 w-full shadow-2xl text-center relative border border-white/10"
             >
               <button onClick={() => setShowFeedback(false)} className="absolute top-6 right-6 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                 <X size={24} />
@@ -294,7 +294,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
                   <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90 mb-3 block">O quanto você se sentiu acolhida? (0-10)</label>
                   <div className="flex justify-between gap-2">
                     {[1, 2, 3, 4, 5].map(n => (
-                      <button key={n} className="flex-1 py-3 rounded-xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-all font-bold">{n}</button>
+                      <button key={n} className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--color-primary)] transition-all font-bold">{n}</button>
                     ))}
                   </div>
                 </div>

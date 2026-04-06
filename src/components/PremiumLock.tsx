@@ -11,7 +11,7 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
   const { theme } = useTheme();
 
   return (
-    <div className="relative w-full h-full min-h-[450px] flex flex-col items-center justify-center p-8 text-center overflow-hidden rounded-[3rem] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl">
+    <div className="relative w-full h-full min-h-[450px] flex flex-col items-center justify-center p-8 text-center overflow-hidden rounded-[3rem] glass-morphism border border-white/10 shadow-2xl">
       {/* Background Glows */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none"></div>

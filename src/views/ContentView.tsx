@@ -73,14 +73,14 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex-1 overflow-y-auto pb-24 bg-[var(--color-bg)] relative min-h-full text-[var(--color-text)] font-sans scroll-container"
+      className="flex-1 overflow-y-auto pb-24 bg-transparent relative min-h-full text-[var(--color-text)] font-sans scroll-container"
     >
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="px-4 sm:px-6 pt-12 pb-10 relative z-10">
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
             <Sparkles size={32} />
           </div>
           <h1 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
@@ -90,7 +90,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
 
       <div className="px-4 sm:px-6 relative z-10">
         {/* Tabs */}
-        <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] mb-10 backdrop-blur-md">
+        <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={() => setActiveCategory('audios')}
@@ -125,13 +125,13 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 key={item.id}
                 variants={itemVariants}
                 whileTap={{ scale: 0.98 }}
-                className={`glass-card p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
-                  isLocked ? 'opacity-90 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 cursor-pointer'
+                className={`glass-morphism p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
+                  isLocked ? 'opacity-90 border-white/10' : 'border-white/10 hover:border-white/20 cursor-pointer'
                 }`}
                 onClick={() => handleContentClick(item, isLockedByPremium, isLockedByLevel)}
               >
                 <div 
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all border border-[var(--color-border)] bg-[var(--color-text)]/5 group-hover:bg-[var(--color-text)] group-hover:text-[var(--color-bg)]"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all border border-white/10 bg-white/5 group-hover:bg-[var(--color-text)] group-hover:text-[var(--color-bg)]"
                   style={{ 
                     color: isLocked ? 'rgba(var(--color-text-rgb), 0.2)' : 'var(--color-text)'
                   }}
@@ -179,11 +179,11 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="w-full bg-[var(--color-surface)] rounded-t-[3rem] sm:rounded-[3rem] overflow-hidden flex flex-col max-h-[90vh] border border-[var(--color-border)] shadow-2xl"
+              className="w-full bg-transparent backdrop-blur-3xl rounded-t-[3rem] sm:rounded-[3rem] overflow-hidden flex flex-col max-h-[90vh] border border-white/10 shadow-2xl"
             >
-              <div className="p-8 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-surface)]/80">
+              <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/5 backdrop-blur-xl">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-primary)]">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-[var(--color-primary)]">
                     {activeCategory === 'audios' ? <Headphones size={24} /> : <FileText size={24} />}
                   </div>
                   <h3 className="font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)]">
@@ -193,7 +193,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setSelectedContent(null)}
-                  className="w-10 h-10 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
                 >
                   <X size={20} />
                 </motion.button>
@@ -204,7 +204,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 
                 {activeCategory === 'audios' ? (
                   <>
-                    <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] overflow-hidden">
+                    <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-white/5 border border-white/10 overflow-hidden">
                       <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/90 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
                       <div className={`absolute inset-0 border-4 border-[var(--color-primary)]/90 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
                       <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] relative z-10">
@@ -217,7 +217,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     
                     {/* Audio Controls */}
                     <div className="w-full space-y-8">
-                      <div className="w-full bg-[var(--color-text)]/5 h-2 rounded-full overflow-hidden border border-[var(--color-border)]">
+                      <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/10">
                         <motion.div 
                           initial={{ width: '0%' }}
                           animate={{ width: isPlaying ? '33%' : '33%' }}
@@ -248,7 +248,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                   </>
                 ) : (
                   <>
-                    <div className="w-full aspect-[3/4] bg-[var(--color-text)]/5 rounded-[2.5rem] mb-8 border border-[var(--color-border)] flex items-center justify-center relative overflow-hidden shadow-2xl group">
+                    <div className="w-full aspect-[3/4] bg-white/5 rounded-[2.5rem] mb-8 border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl group">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
                       <FileText size={80} className="text-[var(--color-text-muted)]/90 group-hover:scale-110 transition-transform duration-500" />
                       <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white text-left backdrop-blur-sm">

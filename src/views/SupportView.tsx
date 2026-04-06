@@ -65,7 +65,7 @@ export default function SupportView() {
   ];
 
   return (
-    <div className="flex-1 overflow-y-auto hide-scrollbar bg-[var(--color-bg)]">
+    <div className="flex-1 overflow-y-auto hide-scrollbar bg-transparent">
       <div className="mx-auto px-4 sm:px-6 py-12 space-y-16">
         
         {/* Hero Section */}
@@ -102,7 +102,7 @@ export default function SupportView() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2.5rem] bg-[var(--color-text)]/5 border border-[var(--color-border)] space-y-6"
+            className="p-8 rounded-[2.5rem] glass-morphism border border-white/10 space-y-6"
           >
             <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center text-[var(--color-primary)]">
               <Users size={24} />
@@ -185,7 +185,7 @@ export default function SupportView() {
             <div className="h-px flex-1 bg-[var(--color-border)]" />
           </div>
 
-          <div className="bg-[var(--color-text)]/5 border border-[var(--color-border)] rounded-[2.5rem] px-8 py-4">
+          <div className="glass-morphism border border-white/10 rounded-[2.5rem] px-8 py-4">
             {faqs.map((faq, index) => (
               <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}

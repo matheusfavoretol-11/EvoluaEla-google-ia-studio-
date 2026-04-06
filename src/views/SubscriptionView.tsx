@@ -66,7 +66,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[var(--color-bg)] overflow-y-auto font-sans text-[var(--color-text)]">
+    <div className="fixed inset-0 z-50 flex flex-col bg-transparent overflow-y-auto font-sans text-[var(--color-text)]">
       <div className="relative h-72 sm:h-80 shrink-0">
         <img 
           src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200&h=800" 
@@ -74,7 +74,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         
         <button 
           onClick={onClose}
@@ -92,7 +92,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="p-4 sm:p-10 flex-1 flex flex-col bg-[var(--color-bg)] relative">
+      <div className="p-4 sm:p-10 flex-1 flex flex-col bg-transparent relative">
         {/* Background Glow */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none"></div>
 

@@ -71,7 +71,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[var(--color-bg)] font-sans text-[var(--color-text)] relative overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col bg-transparent font-sans text-[var(--color-text)] relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/90 rounded-full blur-[120px] animate-pulse-soft"></div>
@@ -112,8 +112,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setObjective(obj.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]/90'
+                          ? 'border-[var(--color-primary)] bg-white/10 shadow-2xl' 
+                          : 'border-white/10 hover:border-[var(--color-primary)]/90 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 
@@ -154,8 +154,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setFeeling(feel.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-accent)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-accent)]/90 bg-[var(--color-surface)]/90'
+                          ? 'border-[var(--color-accent)] bg-white/10 shadow-2xl' 
+                          : 'border-white/10 hover:border-[var(--color-accent)]/90 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 
@@ -196,8 +196,8 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       onClick={() => setChallenge(chal.id)}
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]/90'
+                          ? 'border-[var(--color-primary)] bg-white/10 shadow-2xl' 
+                          : 'border-white/10 hover:border-[var(--color-primary)]/90 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 

@@ -135,7 +135,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-[var(--color-bg)] font-sans selection:bg-[var(--color-primary)] selection:text-black">
+    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-transparent font-sans selection:bg-[var(--color-primary)] selection:text-black">
       {/* Background Gradients */}
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/5 rounded-full blur-[100px] pointer-events-none" />
@@ -161,13 +161,13 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.div
+            <motion.div
             key={isLogin ? 'login' : 'register'}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="sm:bg-[var(--color-surface)] sm:p-12 rounded-[2.5rem] w-full sm:border sm:border-[var(--color-border)] sm:shadow-2xl"
+            className="sm:glass-morphism sm:p-12 rounded-[2.5rem] w-full sm:border sm:border-white/10 sm:shadow-2xl"
           >
             <h2 className="text-3xl font-bold text-[var(--color-text)] mb-10 text-center tracking-tight">
               {isLogin ? 'Bem-vinda de volta' : 'Crie sua conta'}
@@ -208,7 +208,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       placeholder="Seu nome"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                      className="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-white/10 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                     />
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     placeholder="seu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                    className="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-white/10 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                   />
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                    className="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-white/10 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                   />
                 </div>
               </div>
@@ -258,7 +258,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                      className="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-white/10 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                     />
                   </div>
                 </div>
@@ -271,7 +271,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       className="w-4 h-4 rounded border flex items-center justify-center transition-all"
                       style={{ 
                         backgroundColor: keepConnected ? 'var(--color-primary)' : 'transparent',
-                        borderColor: keepConnected ? 'var(--color-primary)' : 'var(--color-border)'
+                        borderColor: keepConnected ? 'var(--color-primary)' : 'rgba(255,255,255,0.1)'
                       }}
                       onClick={() => setKeepConnected(!keepConnected)}
                     >
@@ -290,7 +290,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       className="w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 transition-all"
                       style={{ 
                         backgroundColor: acceptTerms ? 'var(--color-primary)' : 'transparent',
-                        borderColor: acceptTerms ? 'var(--color-primary)' : 'var(--color-border)'
+                        borderColor: acceptTerms ? 'var(--color-primary)' : 'rgba(255,255,255,0.1)'
                       }}
                       onClick={() => setAcceptTerms(!acceptTerms)}
                     >

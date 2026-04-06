@@ -61,7 +61,7 @@ export default function RoutineView() {
   }
 
   return (
-    <div className="p-4 sm:p-6 space-y-10 bg-[var(--color-bg)] min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
+    <div className="p-4 sm:p-6 space-y-10 bg-transparent min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8B4BC]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -71,11 +71,11 @@ export default function RoutineView() {
       </header>
 
       {/* Tabs */}
-      <div className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] relative z-10 backdrop-blur-md">
+      <div className="flex p-1.5 rounded-2xl bg-white/5 border border-white/10 relative z-10 backdrop-blur-md">
         <button
           onClick={() => setActiveTab('habits')}
           className={`flex-1 py-4 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-            activeTab === 'habits' ? 'bg-[var(--color-text)] shadow-2xl text-[var(--color-bg)] scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+            activeTab === 'habits' ? 'bg-white shadow-2xl text-black scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
           }`}
         >
           Meus Hábitos
@@ -83,7 +83,7 @@ export default function RoutineView() {
         <button
           onClick={() => setActiveTab('meals')}
           className={`flex-1 py-4 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-            activeTab === 'meals' ? 'bg-[var(--color-text)] shadow-2xl text-[var(--color-bg)] scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+            activeTab === 'meals' ? 'bg-white shadow-2xl text-black scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
           }`}
         >
           Minhas Refeições
@@ -100,7 +100,7 @@ export default function RoutineView() {
             className="space-y-10 relative z-10"
           >
             {/* Progress Card */}
-            <div className="p-10 rounded-[3rem] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg)] text-[var(--color-text)] relative overflow-hidden shadow-2xl border border-[var(--color-border)]">
+            <div className="p-10 rounded-[3rem] glass-morphism text-[var(--color-text)] relative overflow-hidden shadow-2xl border border-white/10">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/90 rounded-full blur-[100px] -mr-20 -mt-20"></div>
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#D4B996]/5 rounded-full blur-[80px] -ml-20 -mb-20"></div>
               
@@ -115,7 +115,7 @@ export default function RoutineView() {
                 </div>
               </div>
               
-              <div className="h-3 w-full rounded-full overflow-hidden bg-[var(--color-text)]/5 relative z-10 backdrop-blur-sm border border-[var(--color-border)]">
+              <div className="h-3 w-full rounded-full overflow-hidden bg-white/5 relative z-10 backdrop-blur-sm border border-white/10">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
@@ -139,14 +139,14 @@ export default function RoutineView() {
                     onClick={() => toggleHabit(habit.id)}
                     className={`w-full flex items-center p-6 rounded-[2.5rem] transition-all border shadow-2xl ${
                       habit.completed 
-                        ? 'bg-[var(--color-text)]/5 border-transparent opacity-90' 
-                        : 'glass-card border-[var(--color-border)] hover:border-[#E8B4BC]/90'
+                        ? 'bg-white/5 border-transparent opacity-90' 
+                        : 'glass-morphism border-white/10 hover:border-[#E8B4BC]/90'
                     }`}
                   >
                     <div 
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mr-5 transition-all shadow-2xl border border-[var(--color-border)]"
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center mr-5 transition-all shadow-2xl border border-white/10"
                       style={{ 
-                        backgroundColor: habit.completed ? '#E8B4BC' : 'rgba(var(--color-text-rgb), 0.05)', 
+                        backgroundColor: habit.completed ? '#E8B4BC' : 'rgba(255, 255, 255, 0.05)', 
                         color: habit.completed ? '#000' : '#E8B4BC' 
                       }}
                     >
@@ -177,7 +177,7 @@ export default function RoutineView() {
                       className="w-10 h-10 rounded-xl flex items-center justify-center border transition-all shadow-2xl"
                       style={{ 
                         backgroundColor: habit.completed ? '#E8B4BC' : 'transparent',
-                        borderColor: habit.completed ? '#E8B4BC' : 'rgba(var(--color-text-rgb), 0.1)',
+                        borderColor: habit.completed ? '#E8B4BC' : 'rgba(255, 255, 255, 0.1)',
                         color: habit.completed ? '#000' : 'transparent'
                       }}
                     >
@@ -196,9 +196,9 @@ export default function RoutineView() {
             exit={{ opacity: 0, x: -20 }}
             className="space-y-8 relative z-10"
           >
-            <div className="glass-card p-10 rounded-[3rem] border border-[var(--color-border)] text-center shadow-2xl relative overflow-hidden">
+            <div className="glass-morphism p-10 rounded-[3rem] border border-white/10 text-center shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#E8B4BC]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
-              <div className="w-24 h-24 mx-auto rounded-[2rem] flex items-center justify-center mb-8 bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[#E8B4BC] shadow-2xl">
+              <div className="w-24 h-24 mx-auto rounded-[2rem] flex items-center justify-center mb-8 bg-white/5 border border-white/10 text-[#E8B4BC] shadow-2xl">
                 <Camera size={44} strokeWidth={1.5} />
               </div>
               <h3 className="text-3xl font-bold text-[var(--color-text)] mb-4 tracking-tight">Nutrindo meu corpo</h3>
@@ -226,8 +226,8 @@ export default function RoutineView() {
               
               <div className="grid grid-cols-2 gap-5">
                 {meals.map((meal, idx) => (
-                  <div key={meal.id} className="glass-card rounded-[2.5rem] overflow-hidden border border-[var(--color-border)] shadow-2xl group">
-                    <div className="aspect-square relative bg-[var(--color-text)]/5 overflow-hidden">
+                  <div key={meal.id} className="glass-morphism rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
+                    <div className="aspect-square relative bg-white/5 overflow-hidden">
                       {meal.url ? (
                         <img src={meal.url} alt="Refeição" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                       ) : (

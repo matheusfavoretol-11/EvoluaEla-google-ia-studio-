@@ -47,10 +47,10 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
           animate={{ x: 0 }}
           exit={{ x: '-100%' }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed top-0 left-0 bottom-0 w-[85%] bg-[var(--color-surface)] z-50 shadow-2xl flex flex-col font-sans text-[var(--color-text)]"
+          className="fixed top-0 left-0 bottom-0 w-[85%] glass-morphism z-50 shadow-2xl flex flex-col font-sans text-[var(--color-text)] border-r border-white/10"
         >
             {/* Header */}
-            <div className="p-8 pt-16 border-b border-[var(--color-border)] flex items-center justify-between bg-[var(--color-surface)]">
+            <div className="p-8 pt-16 border-b border-white/10 flex items-center justify-between bg-transparent">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center shadow-sm text-[var(--color-text-muted)]">
                   <User size={28} />
@@ -111,7 +111,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                       onClose();
                       item.onClick();
                     }}
-                    className="w-full flex items-center gap-5 p-5 rounded-3xl hover:bg-[var(--color-text)]/90 transition-all text-left group border border-transparent hover:border-[var(--color-border)]"
+                    className="w-full flex items-center gap-5 p-5 rounded-3xl hover:bg-white/10 transition-all text-left group border border-transparent hover:border-white/20"
                   >
                     <div 
                       className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
@@ -129,7 +129,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
             </div>
 
             {/* Footer */}
-            <div className="p-8 border-t border-[var(--color-border)] bg-[var(--color-text)]/90">
+            <div className="p-8 border-t border-white/10 bg-transparent">
               <button 
                 onClick={handleLogout}
                 className="w-full flex items-center justify-center gap-3 py-4 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)]/90 hover:text-rose-500 hover:border-rose-500/90 hover:bg-rose-500/90 transition-all text-[9px] font-bold uppercase tracking-[0.2em]"
