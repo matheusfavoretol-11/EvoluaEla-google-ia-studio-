@@ -95,7 +95,7 @@ function AppContent() {
 
     return (
       <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/90">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-bg)]">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -105,7 +105,7 @@ function AppContent() {
   if (!hasCompletedOnboarding) {
     return (
       <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:max-w-md min-h-[100dvh] lg:min-h-[800px] lg:h-auto lg:rounded-[3rem] lg:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] lg:border lg:border-white/90">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-bg)]">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -126,7 +126,7 @@ function AppContent() {
       <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-[var(--color-bg)]">
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-border)] sticky top-0 z-10 bg-[var(--color-bg)]/80 backdrop-blur-xl shrink-0">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 sticky top-0 z-30 bg-[var(--color-bg)]/80 backdrop-blur-2xl shrink-0 shadow-sm border-none">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
@@ -166,15 +166,15 @@ function AppContent() {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto pb-28 lg:pb-12 hide-scrollbar bg-[var(--color-bg)] bg-grid-pattern relative">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-8 lg:py-12">
+        <main className="flex-1 overflow-y-auto pb-32 lg:pb-12 hide-scrollbar bg-[var(--color-bg)] bg-grid-pattern relative scroll-container overscroll-none">
+          <div className="w-full px-4 sm:px-8 lg:px-12 py-8 lg:py-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="h-full"
               >
                 {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
@@ -194,14 +194,15 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation */}
-        <nav className="lg:hidden fixed bottom-0 w-full border-t border-[var(--color-border)] px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-20 bg-[var(--color-surface)]/95 backdrop-blur-2xl">
+        <nav className="lg:hidden fixed bottom-0 w-full px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 bg-[var(--color-surface)]/95 backdrop-blur-3xl border-t border-[var(--color-border)]/50 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
                 <li key={tab.id} className="flex-1">
-                  <button
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
                       isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -211,15 +212,25 @@ function AppContent() {
                       <Icon size={isActive ? 22 : 20} className="sm:w-6 sm:h-6" strokeWidth={isActive ? 2.5 : 2} />
                       {isActive && (
                         <motion.div 
-                          layoutId="nav-indicator"
-                          className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-1 sm:h-1.5 sm:w-1.5 h-1 rounded-full bg-[var(--color-primary)]"
+                          layoutId="activeTabGlow"
+                          className="absolute -inset-2 bg-[var(--color-primary)]/10 blur-xl rounded-full -z-10"
                         />
                       )}
                     </div>
-                    <span className={`text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-                      {tab.label}
-                    </span>
-                  </button>
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.span 
+                          initial={{ opacity: 0, y: 5, scale: 0.8 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 5, scale: 0.8 }}
+                          transition={{ duration: 0.2 }}
+                          className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em]"
+                        >
+                          {tab.label}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
                 </li>
               );
             })}

@@ -45,6 +45,27 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  width: 100vw;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Native-like scroll for iOS */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  height: 100%;
+  overscroll-behavior-y: contain;
+}
+
+/* Remove 300ms delay on iOS */
+button, a, [role="button"], .interactive {
+  touch-action: manipulation;
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {

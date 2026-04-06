@@ -49,25 +49,50 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
+
   return (
-    <div className="flex-1 overflow-y-auto pb-24 bg-[var(--color-bg)] relative min-h-full text-[var(--color-text)] font-sans">
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex-1 overflow-y-auto pb-24 bg-[var(--color-bg)] relative min-h-full text-[var(--color-text)] font-sans scroll-container"
+    >
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="px-4 sm:px-6 pt-12 pb-10 relative z-10">
-        <div className="flex items-center gap-4 mb-4">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
           <div className="w-16 h-16 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
             <Sparkles size={32} />
           </div>
           <h1 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
-        </div>
-        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest max-w-md">Uma curadoria especial para nutrir sua mente e alma.</p>
+        </motion.div>
+        <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Uma curadoria especial para nutrir sua mente e alma.</motion.p>
       </div>
 
       <div className="px-4 sm:px-6 relative z-10">
         {/* Tabs */}
-        <div className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] mb-10 backdrop-blur-md">
-          <button
+        <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] mb-10 backdrop-blur-md">
+          <motion.button
+            whileTap={{ scale: 0.97 }}
             onClick={() => setActiveCategory('audios')}
             className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
               activeCategory === 'audios' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -75,8 +100,9 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
           >
             <Headphones size={18} />
             Áudios
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.97 }}
             onClick={() => setActiveCategory('guides')}
             className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
               activeCategory === 'guides' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -84,8 +110,8 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
           >
             <FileText size={18} />
             Guias
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Content List */}
         <div className="space-y-5">
@@ -97,9 +123,8 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                variants={itemVariants}
+                whileTap={{ scale: 0.98 }}
                 className={`glass-card p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
                   isLocked ? 'opacity-90 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 cursor-pointer'
                 }`}
@@ -154,7 +179,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="w-full max-w-md bg-[var(--color-surface)] rounded-t-[3rem] sm:rounded-[3rem] overflow-hidden flex flex-col max-h-[90vh] border border-[var(--color-border)] shadow-2xl"
+              className="w-full bg-[var(--color-surface)] rounded-t-[3rem] sm:rounded-[3rem] overflow-hidden flex flex-col max-h-[90vh] border border-[var(--color-border)] shadow-2xl"
             >
               <div className="p-8 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-surface)]/80">
                 <div className="flex items-center gap-4">
@@ -165,12 +190,13 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     {activeCategory === 'audios' ? 'Sua Jornada Sonora' : 'Sua Leitura de Hoje'}
                   </h3>
                 </div>
-                <button 
+                <motion.button 
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => setSelectedContent(null)}
                   className="w-10 h-10 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
                 >
                   <X size={20} />
-                </button>
+                </motion.button>
               </div>
 
               <div className="p-10 flex-1 overflow-y-auto flex flex-col items-center text-center relative">
@@ -204,18 +230,19 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                       </div>
                       
                       <div className="flex items-center justify-center gap-10">
-                        <button className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
+                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                           <SkipBack size={32} />
-                        </button>
-                        <button 
+                        </motion.button>
+                        <motion.button 
+                          whileTap={{ scale: 0.97 }}
                           onClick={() => setIsPlaying(!isPlaying)}
                           className="w-20 h-20 rounded-3xl flex items-center justify-center text-[var(--color-bg)] shadow-2xl hover:scale-105 transition-all bg-[var(--color-text)]"
                         >
                           {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" className="ml-1" />}
-                        </button>
-                        <button className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
+                        </motion.button>
+                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                           <SkipForward size={32} />
-                        </button>
+                        </motion.button>
                       </div>
                     </div>
                   </>
@@ -233,12 +260,13 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     <h2 className="text-3xl font-bold text-[var(--color-text)] mb-4 tracking-tight">{selectedContent.title}</h2>
                     <p className="text-[var(--color-text-muted)] text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
-                    <button 
+                    <motion.button 
+                      whileTap={{ scale: 0.97 }}
                       className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-xs"
                     >
                       <FileText size={20} />
                       Quero ler agora
-                    </button>
+                    </motion.button>
                   </>
                 )}
               </div>
@@ -246,6 +274,6 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

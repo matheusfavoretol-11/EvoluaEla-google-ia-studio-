@@ -185,12 +185,39 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
   const completedMissionsCount = dailyMissions.filter(m => m.completed).length;
   const allMissionsCompleted = completedMissionsCount === dailyMissions.length;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
+
   return (
-    <div className="p-4 sm:p-10 space-y-10 relative bg-[var(--color-bg)] min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar">
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="p-4 sm:p-10 space-y-10 relative bg-[var(--color-bg)] min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
+    >
       
       {/* Header & Greeting */}
       <header className="flex justify-between items-start pt-4">
-        <div className="space-y-3">
+        <motion.div 
+          variants={itemVariants}
+          className="space-y-3"
+        >
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -212,10 +239,11 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               )}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
-        <div className="relative">
-          <button 
+        <motion.div variants={itemVariants} className="relative">
+          <motion.button 
+            whileTap={{ scale: 0.97 }}
             onClick={() => setShowNotifications(!showNotifications)}
             className="w-14 h-14 rounded-2xl flex items-center justify-center relative bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:bg-[var(--color-text)]/90 transition-all" 
           >
@@ -223,7 +251,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             {unreadCount > 0 && (
               <span className="absolute top-4 right-4 w-3 h-3 rounded-full border-2 border-[var(--color-bg)] bg-[var(--color-primary)]"></span>
             )}
-          </button>
+          </motion.button>
 
           <AnimatePresence>
             {showNotifications && (
@@ -261,13 +289,12 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </header>
 
       {/* Daily Quote Card */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        variants={itemVariants}
         className="bento-card relative overflow-hidden group"
       >
         <div className="absolute -right-6 -top-6 opacity-90 group-hover:opacity-90 transition-opacity">
@@ -286,7 +313,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
         
         {/* Progress & Stats */}
-        <section className="space-y-6 lg:col-span-1 xl:col-span-1">
+        <motion.section variants={itemVariants} className="space-y-6 lg:col-span-1 xl:col-span-1">
           <div className="flex justify-between items-end px-2">
             <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Seu Equilíbrio</h3>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90">Status Atual</span>
@@ -315,10 +342,10 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Daily Missions */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <div className="flex justify-between items-end px-2">
             <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Metas do Dia</h3>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90">
@@ -330,9 +357,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             {dailyMissions.map((mission, idx) => (
               <motion.div 
                 key={mission.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                variants={itemVariants}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => toggleMission(mission.id)}
                 className={`p-6 rounded-3xl border transition-all flex items-center justify-between cursor-pointer group ${
                   mission.completed 
@@ -356,17 +382,18 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
       </div>
 
       {/* Content & Community Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-10 pb-12">
         
         {/* Next Lesson */}
-        <div className="lg:col-span-2 xl:col-span-3 space-y-6">
+        <motion.div variants={itemVariants} className="lg:col-span-2 xl:col-span-3 space-y-6">
           <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight px-2">Próxima Lição</h3>
           <motion.div 
             whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => onNavigate('content')}
             className="bento-card flex items-center gap-8 cursor-pointer group p-8"
           >
@@ -381,13 +408,14 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               <ChevronRight size={24} />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Community Card */}
-        <div className="space-y-6">
+        <motion.div variants={itemVariants} className="space-y-6">
           <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight px-2">Comunidade</h3>
           <motion.div 
             whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setShowCommunityUpsell(true)}
             className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-8 rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
           >
@@ -414,7 +442,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               Ver Comunidade <ArrowRight size={14} />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Upsell Modal */}
@@ -425,14 +453,15 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="glass-card rounded-[3rem] p-8 sm:p-12 max-w-lg w-full shadow-2xl relative overflow-hidden border border-[var(--color-border)]"
+              className="glass-card rounded-[3rem] p-8 sm:p-12 w-full shadow-2xl relative overflow-hidden border border-[var(--color-border)]"
             >
-              <button 
+              <motion.button 
+                whileTap={{ scale: 0.97 }}
                 onClick={() => setShowCommunityUpsell(false)}
                 className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors border border-[var(--color-border)]"
               >
                 <X size={24} />
-              </button>
+              </motion.button>
 
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center mb-8 text-black shadow-2xl">
@@ -462,7 +491,8 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                   ))}
                 </div>
 
-                <button 
+                <motion.button 
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => {
                     setShowCommunityUpsell(false);
                     onUpgrade();
@@ -471,12 +501,12 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 >
                   Quero ser Premium
                   <ArrowRight size={18} />
-                </button>
+                </motion.button>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
