@@ -61,8 +61,8 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
                 onClick={() => setActiveTab(item.id)}
                 className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group ${
                   isActive 
-                    ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/10' 
-                    : 'text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 hover:text-[var(--color-text)] border border-transparent'
+                    ? 'bg-[var(--color-primary)]/90 text-[var(--color-primary)] border border-[var(--color-primary)]/90' 
+                    : 'text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)] border border-transparent'
                 }`}
               >
                 <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
@@ -82,7 +82,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
           {isPremium && (
             <button
               onClick={handleManageSubscription}
-              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 hover:text-[var(--color-text)] transition-all duration-300 group border border-transparent"
+              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)] transition-all duration-300 group border border-transparent"
             >
               <CreditCard size={20} />
               <span className="text-sm font-semibold tracking-tight">Gerenciar Assinatura</span>
@@ -91,7 +91,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
 
           <button
             onClick={onOpenSettings}
-            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 hover:text-[var(--color-text)] transition-all duration-300 group border border-transparent"
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)] transition-all duration-300 group border border-transparent"
           >
             <Settings size={20} className="group-hover:rotate-45 transition-transform duration-500" />
             <span className="text-sm font-semibold tracking-tight">Configurações</span>
@@ -99,7 +99,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
 
           <button
             onClick={() => logout()}
-            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-rose-500/10 hover:text-rose-500 transition-all duration-300 group border border-transparent"
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[var(--color-text-muted)] hover:bg-rose-500/90 hover:text-rose-500 transition-all duration-300 group border border-transparent"
           >
             <LogOut size={20} />
             <span className="text-sm font-semibold tracking-tight">Sair</span>
@@ -109,8 +109,8 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
             onClick={() => setActiveTab('support')}
             className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group border border-transparent ${
               activeTab === 'support' 
-                ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] border-[var(--color-primary)]/10' 
-                : 'text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 hover:text-[var(--color-text)]'
+                ? 'bg-[var(--color-primary)]/90 text-[var(--color-primary)] border-[var(--color-primary)]/90' 
+                : 'text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)]'
             }`}
           >
             <Headphones size={20} className={activeTab === 'support' ? 'scale-110' : 'group-hover:scale-110 transition-transform duration-300'} />
@@ -121,8 +121,8 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
         {/* Upgrade Section */}
         {!isPremium && (
           <div className="px-4 mt-8 mb-6">
-            <div className="bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 p-6 rounded-[2rem] border border-[var(--color-border)] relative overflow-hidden group">
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-[var(--color-text)]/5 rounded-full blur-2xl group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500" />
+            <div className="bg-gradient-to-br from-[var(--color-primary)]/90 to-[var(--color-accent)]/90 p-6 rounded-[2rem] border border-[var(--color-border)] relative overflow-hidden group">
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-[var(--color-text)]/90 rounded-full blur-2xl group-hover:bg-[var(--color-primary)]/90 transition-colors duration-500" />
               <Crown className="text-[var(--color-primary)] mb-3" size={24} fill="currentColor" />
               <h3 className="text-[var(--color-text)] font-bold text-sm mb-1 tracking-tight">Seja Premium</h3>
               <p className="text-[var(--color-text-muted)] text-[10px] leading-relaxed mb-4 font-medium uppercase tracking-wider">Acesso total a treinos e nutrição personalizada.</p>
@@ -138,9 +138,9 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
       </div>
 
       {/* Profile Section */}
-      <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-bg)]/50">
+      <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-bg)]/90">
         <div className="flex items-center gap-3 px-2 py-3">
-          <div className="w-10 h-10 rounded-xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)]">
+          <div className="w-10 h-10 rounded-xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)]">
             <User size={20} />
           </div>
           <div className="flex-1 min-w-0">

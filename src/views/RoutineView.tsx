@@ -101,13 +101,13 @@ export default function RoutineView() {
           >
             {/* Progress Card */}
             <div className="p-10 rounded-[3rem] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg)] text-[var(--color-text)] relative overflow-hidden shadow-2xl border border-[var(--color-border)]">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/10 rounded-full blur-[100px] -mr-20 -mt-20"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8B4BC]/90 rounded-full blur-[100px] -mr-20 -mt-20"></div>
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#D4B996]/5 rounded-full blur-[80px] -ml-20 -mb-20"></div>
               
               <div className="flex justify-between items-end mb-8 relative z-10">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-widest block mb-3 text-[var(--color-text-muted)]">Progresso Diário</span>
-                  <span className="text-6xl font-bold tracking-tighter">{completedCount}<span className="text-2xl font-bold text-[var(--color-text-muted)]/20 ml-2">/{habits.length}</span></span>
+                  <span className="text-6xl font-bold tracking-tighter">{completedCount}<span className="text-2xl font-bold text-[var(--color-text-muted)]/90 ml-2">/{habits.length}</span></span>
                 </div>
                 <div className="text-right">
                   <span className="font-bold text-3xl block tracking-tight">{Math.round(progress)}%</span>
@@ -139,8 +139,8 @@ export default function RoutineView() {
                     onClick={() => toggleHabit(habit.id)}
                     className={`w-full flex items-center p-6 rounded-[2.5rem] transition-all border shadow-2xl ${
                       habit.completed 
-                        ? 'bg-[var(--color-text)]/5 border-transparent opacity-40' 
-                        : 'glass-card border-[var(--color-border)] hover:border-[#E8B4BC]/30'
+                        ? 'bg-[var(--color-text)]/5 border-transparent opacity-90' 
+                        : 'glass-card border-[var(--color-border)] hover:border-[#E8B4BC]/90'
                     }`}
                   >
                     <div 
@@ -161,7 +161,7 @@ export default function RoutineView() {
                       </span>
                       {habit.streak > 0 && (
                         <div className="flex items-center gap-2 mt-2">
-                          <Flame size={14} className={habit.completed ? "text-[#D4B996]/20" : "text-[#D4B996]"} />
+                          <Flame size={14} className={habit.completed ? "text-[#D4B996]/90" : "text-[#D4B996]"} />
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
                             {habit.streak} {habit.streak === 1 ? 'dia' : 'dias'} seguidos
                           </span>
@@ -231,7 +231,7 @@ export default function RoutineView() {
                       {meal.url ? (
                         <img src={meal.url} alt="Refeição" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[var(--color-text-muted)]/10">
+                        <div className="w-full h-full flex items-center justify-center text-[var(--color-text-muted)]/90">
                           <ImageIcon size={40} />
                         </div>
                       )}

@@ -80,7 +80,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
       <header className="px-4 sm:px-6 pt-8 pb-6 flex flex-col gap-4 shrink-0 glass-nav border-b border-[var(--color-border)] sticky top-0 z-20">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-black relative overflow-hidden group">
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            <div className="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
             <Bot size={28} className="relative z-10" />
           </div>
           <div>
@@ -92,14 +92,14 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         {/* Status & Limits */}
         <div className="flex flex-wrap gap-3">
           {hasUnlimitedCoach ? (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)]">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[var(--color-primary)]/90 border border-[var(--color-primary)]/90 text-[var(--color-primary)]">
               <Crown size={12} fill="currentColor" />
               <span>Acesso Ilimitado Premium</span>
             </div>
           ) : (
             <div className="flex items-center gap-3 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text-muted)]">
               <span>Mensagens:</span>
-              <span className={`px-2 py-0.5 rounded-md font-bold ${messagesRemaining === 0 ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text)]'}`}>
+              <span className={`px-2 py-0.5 rounded-md font-bold ${messagesRemaining === 0 ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/90 text-[var(--color-text)]'}`}>
                 {messagesRemaining} / {MAX_FREE_MESSAGES}
               </span>
             </div>
@@ -146,7 +146,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
       <div className="p-4 sm:p-6 shrink-0 glass-nav border-t border-[var(--color-border)]">
         {isBlocked ? (
           <div className="glass-card p-8 text-center shadow-2xl border border-[var(--color-border)]">
-            <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center mx-auto mb-4">
               <Lock size={24} className="text-[var(--color-primary)]" />
             </div>
             <h3 className="text-lg font-bold text-[var(--color-text)] mb-2 tracking-tight">Limite diário atingido 🌸</h3>
@@ -160,19 +160,19 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-3 glass-card rounded-full p-2 pr-3 focus-within:ring-2 focus-within:ring-[var(--color-primary)]/30 transition-all shadow-2xl border border-[var(--color-border)]">
+          <div className="flex items-center gap-3 glass-card rounded-full p-2 pr-3 focus-within:ring-2 focus-within:ring-[var(--color-primary)]/90 transition-all shadow-2xl border border-[var(--color-border)]">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="O que está no seu coração agora?"
-              className="flex-1 bg-transparent border-none focus:ring-0 px-5 py-3 text-sm outline-none text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/40 font-medium"
+              className="flex-1 bg-transparent border-none focus:ring-0 px-5 py-3 text-sm outline-none text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/90 font-medium"
             />
             <button 
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-50 disabled:hover:scale-100 text-black shadow-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)]"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-90 disabled:hover:scale-100 text-black shadow-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)]"
             >
               <Send size={20} className="ml-1" />
             </button>

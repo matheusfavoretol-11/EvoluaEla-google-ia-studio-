@@ -34,7 +34,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', showText = true, siz
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <div className={`${containerSizes[size]} rounded-full bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] flex items-center justify-center shadow-lg shadow-[#E8B4BC]/20`}>
+      <div className={`${containerSizes[size]} rounded-full bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] flex items-center justify-center shadow-lg shadow-[#E8B4BC]/90`}>
         <Heart size={iconSizes[size]} className="text-black" fill="black" />
       </div>
       {showText && (

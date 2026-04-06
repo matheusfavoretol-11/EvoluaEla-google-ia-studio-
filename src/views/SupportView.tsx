@@ -26,7 +26,7 @@ function FAQItem({ question, answer }: any) {
         <span className={`text-sm font-semibold tracking-tight transition-colors ${isOpen ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'}`}>
           {question}
         </span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] rotate-180' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)]'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--color-primary)]/90 text-[var(--color-primary)] rotate-180' : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)]'}`}>
           <ChevronDown size={16} />
         </div>
       </button>
@@ -73,7 +73,7 @@ export default function SupportView() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-[10px] font-bold uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-primary)]/90 border border-[var(--color-primary)]/90 text-[var(--color-primary)] text-[10px] font-bold uppercase tracking-widest mb-4"
           >
             <Headphones size={14} />
             Central de Suporte
@@ -104,7 +104,7 @@ export default function SupportView() {
             viewport={{ once: true }}
             className="p-8 rounded-[2.5rem] bg-[var(--color-text)]/5 border border-[var(--color-border)] space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center text-[var(--color-primary)]">
+            <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center text-[var(--color-primary)]">
               <Users size={24} />
             </div>
             <div className="space-y-4">
@@ -119,9 +119,9 @@ export default function SupportView() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[var(--color-primary)]/10 to-transparent border border-[var(--color-primary)]/10 space-y-6"
+            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[var(--color-primary)]/90 to-transparent border border-[var(--color-primary)]/90 space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)]">
+            <div className="w-12 h-12 rounded-2xl bg-[var(--color-accent)]/90 flex items-center justify-center text-[var(--color-accent)]">
               <Target size={24} />
             </div>
             <div className="space-y-4">
@@ -146,9 +146,9 @@ export default function SupportView() {
               href="https://instagram.com/evoluaela_" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all flex items-center gap-6"
+              className="group p-6 rounded-3xl bg-[var(--color-text)]/90 border border-[var(--color-border)] hover:border-[var(--color-primary)]/90 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 flex items-center justify-center text-[var(--color-primary)] group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/90 to-[var(--color-accent)]/90 flex items-center justify-center text-[var(--color-primary)] group-hover:scale-110 transition-transform">
                 <Instagram size={28} />
               </div>
               <div>
@@ -159,9 +159,9 @@ export default function SupportView() {
 
             <a 
               href="mailto:evoluaela@gmail.com"
-              className="group p-6 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 transition-all flex items-center gap-6"
+              className="group p-6 rounded-3xl bg-[var(--color-text)]/90 border border-[var(--color-border)] hover:border-[var(--color-accent)]/90 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)] group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/90 flex items-center justify-center text-[var(--color-accent)] group-hover:scale-110 transition-transform">
                 <Mail size={28} />
               </div>
               <div>
@@ -194,7 +194,7 @@ export default function SupportView() {
 
         {/* Bottom CTA */}
         <section className="p-12 rounded-[3rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-center space-y-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/90 rounded-full blur-3xl -mr-32 -mt-32" />
           <div className="relative z-10">
             <h2 className="text-3xl font-bold text-black tracking-tighter mb-2">Ainda tem dúvidas?</h2>
             <p className="text-black/60 text-sm font-medium mb-8">Nossa Coach IA está disponível 24/7 para te ajudar.</p>

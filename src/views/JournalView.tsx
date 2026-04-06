@@ -108,7 +108,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                   className={`text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-2xl border transition-all shadow-2xl ${
                     selectedPrompt === prompt 
                       ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black border-transparent scale-105' 
-                      : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-text)]/20 hover:text-[var(--color-text)]'
+                      : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-text)]/90 hover:text-[var(--color-text)]'
                   }`}
                 >
                   {prompt}
@@ -123,13 +123,13 @@ Seja concisa, use emojis e foque no acolhimento.`,
               value={entry}
               onChange={(e) => setEntry(e.target.value)}
               placeholder="Pode soltar tudo aqui..."
-              className="flex-1 w-full p-10 rounded-[2.5rem] bg-[var(--color-text)]/5 border border-[var(--color-border)] resize-none focus:border-[var(--color-primary)]/30 outline-none text-[var(--color-text)] leading-relaxed font-bold text-xl placeholder:text-[var(--color-text-muted)]/20 shadow-2xl transition-all backdrop-blur-md"
+              className="flex-1 w-full p-10 rounded-[2.5rem] bg-[var(--color-text)]/90 border border-[var(--color-border)] resize-none focus:border-[var(--color-primary)]/90 outline-none text-[var(--color-text)] leading-relaxed font-bold text-xl placeholder:text-[var(--color-text-muted)]/90 shadow-2xl transition-all backdrop-blur-md"
             />
             
             <button
               onClick={handleSubmit}
               disabled={!entry.trim() || isSubmitting}
-              className="absolute bottom-8 right-8 px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-30 disabled:hover:scale-100 flex items-center gap-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+              className="absolute bottom-8 right-8 px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-90 disabled:hover:scale-100 flex items-center gap-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
             >
               <MessageCircleHeart size={20} />
               Quero desabafar
@@ -158,7 +158,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
               
               <div className="flex-1 overflow-y-auto hide-scrollbar pr-4">
                 {isSubmitting ? (
-                  <div className="flex gap-3 items-center justify-center h-full opacity-20">
+                  <div className="flex gap-3 items-center justify-center h-full opacity-90">
                     <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '0ms' }} />
                     <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '150ms' }} />
                     <div className="w-3 h-3 rounded-full bg-[var(--color-text)] animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -177,7 +177,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
                     setEntry('');
                     setSelectedPrompt(null);
                   }}
-                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/5 hover:bg-[var(--color-text)]/10 hover:text-[var(--color-text)] transition-all border border-[var(--color-border)] shadow-2xl"
+                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-[var(--color-text)]/90 hover:bg-[var(--color-text)]/90 hover:text-[var(--color-text)] transition-all border border-[var(--color-border)] shadow-2xl"
                 >
                   Voltar para minhas reflexões
                 </button>

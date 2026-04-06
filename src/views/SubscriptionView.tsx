@@ -74,11 +74,11 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/90 to-transparent" />
         
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 w-12 h-12 bg-black/40 backdrop-blur-xl rounded-2xl flex items-center justify-center text-white hover:bg-black/60 transition-all border border-white/10"
+          className="absolute top-6 right-6 w-12 h-12 bg-black/90 backdrop-blur-xl rounded-2xl flex items-center justify-center text-white hover:bg-black/90 transition-all border border-white/90"
         >
           <X size={24} />
         </button>
@@ -98,10 +98,10 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
 
         <div className="space-y-8 flex-1 relative z-10">
           <div className="text-center">
-            <div className="inline-block px-5 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-bold text-[10px] rounded-full mb-4 uppercase tracking-widest border border-[var(--color-primary)]/20">
+            <div className="inline-block px-5 py-2 bg-[var(--color-primary)]/90 text-[var(--color-primary)] font-bold text-[10px] rounded-full mb-4 uppercase tracking-widest border border-[var(--color-primary)]/90">
               Experimente por 7 Dias Grátis
             </div>
-            <div className="text-6xl sm:text-7xl font-bold text-[var(--color-text)] mb-2 tracking-tighter">R$ 109,90<span className="text-xl text-[var(--color-text-muted)] font-bold tracking-normal opacity-20">/mês</span></div>
+            <div className="text-6xl sm:text-7xl font-bold text-[var(--color-text)] mb-2 tracking-tighter">R$ 109,90<span className="text-xl text-[var(--color-text-muted)] font-bold tracking-normal opacity-90">/mês</span></div>
             <p className="text-[var(--color-text-muted)] text-sm font-medium tracking-wide">Acompanhamento profissional completo. Cancele quando quiser.</p>
           </div>
 
@@ -112,15 +112,15 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             </h3>
             
             <div className="grid grid-cols-1 gap-4">
-              <div className="p-6 rounded-[2.5rem] bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 border border-[var(--color-primary)]/30 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-primary)]/10 rounded-full blur-[60px] -mr-10 -mt-10"></div>
+              <div className="p-6 rounded-[2.5rem] bg-gradient-to-br from-[var(--color-primary)]/90 to-[var(--color-accent)]/90 border border-[var(--color-primary)]/90 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-primary)]/90 rounded-full blur-[60px] -mr-10 -mt-10"></div>
                 <div className="flex items-start gap-5 relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)] text-black flex items-center justify-center shrink-0 shadow-2xl">
                     <HeartHandshake size={28} />
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2 tracking-tight">Acompanhamento Profissional Real</h4>
-                    <p className="text-sm text-white/60 leading-relaxed font-medium">
+                    <p className="text-sm text-white/90 leading-relaxed font-medium">
                       Diferente de outros apps, aqui você tem <span className="text-[var(--color-primary)] font-bold">Nutricionistas e Psicólogas</span> de verdade cuidando de você. Não é apenas um plano, é um time focado na sua evolução.
                     </p>
                   </div>
@@ -129,7 +129,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             </div>
 
             <h3 className="font-bold text-[var(--color-text)] text-xl uppercase tracking-widest flex items-center gap-3 pt-4">
-              <div className="w-8 h-1 bg-[var(--color-text)]/20 rounded-full"></div>
+              <div className="w-8 h-1 bg-[var(--color-text)]/90 rounded-full"></div>
               O que preparamos para você
             </h3>
             
@@ -142,8 +142,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                 'Ajustes semanais e chat direto',
                 'Comunidade exclusiva de mulheres'
               ].map((item, idx) => (
-                <div key={`benefit-${idx}`} className="flex items-center gap-4 p-5 rounded-3xl bg-[var(--color-text)]/5 border border-[var(--color-border)] group hover:bg-[var(--color-text)]/10 transition-all">
-                  <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[var(--color-primary)]/10 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
+                <div key={`benefit-${idx}`} className="flex items-center gap-4 p-5 rounded-3xl bg-[var(--color-text)]/90 border border-[var(--color-border)] group hover:bg-[var(--color-text)]/90 transition-all">
+                  <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[var(--color-primary)]/90 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
                     <Check size={20} strokeWidth={3} />
                   </div>
                   <span className="text-sm font-bold text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">{item}</span>
@@ -160,7 +160,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
 
           <div className="bg-[var(--color-text)]/5 p-6 rounded-3xl border border-[var(--color-border)] flex gap-4 items-start">
             <AlertCircle className="text-[var(--color-accent)] shrink-0 mt-0.5" size={24} />
-            <p className="text-[11px] text-[var(--color-text-muted)]/30 leading-relaxed font-bold uppercase tracking-widest">
+            <p className="text-[11px] text-[var(--color-text-muted)]/90 leading-relaxed font-bold uppercase tracking-widest">
               <strong className="text-[var(--color-text-muted)]/60">Lembrete importante:</strong> Nosso apoio é complementar e não substitui consultas médicas presenciais ou atendimentos de emergência, tá?
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-6 rounded-3xl bg-rose-500/10 text-rose-500 text-sm font-bold flex items-center gap-4 border border-rose-500/20 shadow-2xl"
+              className="p-6 rounded-3xl bg-rose-500/90 text-rose-500 text-sm font-bold flex items-center gap-4 border border-rose-500/90 shadow-2xl"
             >
               <AlertCircle size={20} />
               {error}
@@ -178,23 +178,23 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         </div>
 
         <div className="mt-12 pt-8 border-t border-[var(--color-border)] relative z-10">
-          <div className="flex items-center justify-center gap-3 mb-6 text-[var(--color-text-muted)]/20 text-[10px] font-bold uppercase tracking-widest">
+          <div className="flex items-center justify-center gap-3 mb-6 text-[var(--color-text-muted)]/90 text-[10px] font-bold uppercase tracking-widest">
             <CreditCard size={16} />
             <span>Cobrança segura apenas após 7 dias</span>
           </div>
           <button 
             onClick={handleSubscribe}
             disabled={isProcessing}
-            className="w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-black shadow-3xl hover:shadow-white/10 transition-all transform hover:-translate-y-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
+            className="w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-black shadow-3xl hover:shadow-white/90 transition-all transform hover:-translate-y-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:translate-y-0 flex items-center justify-center"
           >
             {isProcessing ? (
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-black/90 border-t-black rounded-full animate-spin" />
                 <span>Processando...</span>
               </div>
             ) : 'Quero começar meu teste grátis'}
           </button>
-          <p className="text-center text-[9px] text-[var(--color-text-muted)]/10 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
+          <p className="text-center text-[9px] text-[var(--color-text-muted)]/90 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
             Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 109,90/mês será renovada automaticamente. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>

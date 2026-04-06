@@ -78,8 +78,8 @@ export default function LandingView({ onStart }: LandingViewProps) {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 min-h-screen flex items-center overflow-hidden">
         {/* Background Gradients */}
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -107,7 +107,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               >
                 Iniciar Jornada <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text)] font-bold text-lg rounded-full hover:bg-[var(--color-text)]/10 transition-all flex items-center justify-center gap-3">
+              <button className="px-8 py-4 bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text)] font-bold text-lg rounded-full hover:bg-[var(--color-text)]/90 transition-all flex items-center justify-center gap-3">
                 <Play size={18} fill="currentColor" /> Ver Demo
               </button>
             </div>
@@ -146,7 +146,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
                 <div className="glass-card p-6 rounded-2xl border-[var(--color-border)]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Treino do Dia</span>
-                    <span className="px-2 py-1 rounded bg-[var(--color-primary)]/20 text-[var(--color-primary)] text-[10px] font-bold">LIVE</span>
+                    <span className="px-2 py-1 rounded bg-[var(--color-primary)]/90 text-[var(--color-primary)] text-[10px] font-bold">LIVE</span>
                   </div>
                   <h3 className="text-xl font-bold mb-2">Yoga & Mindfulness Flow</h3>
                   <div className="flex items-center gap-4 text-sm text-[var(--color-text-muted)]">
@@ -157,8 +157,8 @@ export default function LandingView({ onStart }: LandingViewProps) {
               </div>
             </div>
             {/* Decorative circles */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[var(--color-primary)]/30 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--color-accent)]/20 rounded-full blur-3xl" />
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[var(--color-primary)]/90 rounded-full blur-3xl" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--color-accent)]/90 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </section>
@@ -214,10 +214,10 @@ export default function LandingView({ onStart }: LandingViewProps) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group flex items-center justify-between p-6 rounded-2xl bg-[var(--color-bg)]/50 border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:border-[var(--color-primary)]/40 transition-all cursor-pointer"
+                className="group flex items-center justify-between p-6 rounded-2xl bg-[var(--color-bg)]/90 border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:border-[var(--color-primary)]/90 transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-8">
-                  <span className="text-2xl font-bold text-[var(--color-text)]/10 group-hover:text-[var(--color-primary)]/40 transition-colors">{ep.id}</span>
+                  <span className="text-2xl font-bold text-[var(--color-text)]/90 group-hover:text-[var(--color-primary)]/90 transition-colors">{ep.id}</span>
                   <div>
                     <h4 className="text-xl font-bold mb-1">{ep.title}</h4>
                     <div className="flex items-center gap-4 text-xs text-[var(--color-text-muted)] font-medium">
@@ -251,7 +251,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex flex-col h-full shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-black/20 text-black text-[10px] font-bold uppercase tracking-widest">
+              <div className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-black/90 text-black text-[10px] font-bold uppercase tracking-widest">
                 Plano Único & Completo
               </div>
               <div className="mb-8">
@@ -261,7 +261,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               <div className="mb-10">
                 <span className="text-6xl font-bold text-black tracking-tighter">R$ 109,90</span>
                 <span className="text-black/60 text-lg font-medium">/mês</span>
-                <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest mt-2">Acompanhamento Profissional Incluso</p>
+                <p className="text-[10px] font-bold text-black/90 uppercase tracking-widest mt-2">Acompanhamento Profissional Incluso</p>
               </div>
               <div className="grid md:grid-cols-2 gap-8 mb-12">
                 <ul className="space-y-4">
@@ -285,7 +285,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
                     'Acesso a todos os Programas'
                   ].map((item, i) => (
                     <li key={`benefit-secondary-${i}`} className="flex items-center gap-3 text-black/80 text-sm font-medium">
-                      <CheckCircle2 size={18} className="text-black/40" />
+                      <CheckCircle2 size={18} className="text-black/90" />
                       {item}
                     </li>
                   ))}
@@ -306,7 +306,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       <section className="py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-12 md:p-24 text-center">
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/90" />
             <div className="relative z-10">
               <h2 className="text-4xl md:text-7xl font-bold text-black mb-8 tracking-tighter">Pronta para sua <br /> transformação?</h2>
               <p className="text-black/60 text-lg md:text-xl mb-12 max-w-xl mx-auto font-medium">
@@ -355,8 +355,8 @@ export default function LandingView({ onStart }: LandingViewProps) {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-[var(--color-border)] gap-6">
-            <p className="text-[var(--color-text-muted)]/20 text-xs">© 2026 EvoluaEla. Todos os direitos reservados.</p>
-            <div className="flex gap-8 text-[var(--color-text-muted)]/20 text-xs font-bold uppercase tracking-widest">
+            <p className="text-[var(--color-text-muted)]/90 text-xs">© 2026 EvoluaEla. Todos os direitos reservados.</p>
+            <div className="flex gap-8 text-[var(--color-text-muted)]/90 text-xs font-bold uppercase tracking-widest">
               <a href="#" className="hover:text-[var(--color-text)] transition-colors">Instagram</a>
               <a href="#" className="hover:text-[var(--color-text)] transition-colors">YouTube</a>
               <a href="#" className="hover:text-[var(--color-text)] transition-colors">TikTok</a>

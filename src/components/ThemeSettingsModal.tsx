@@ -21,7 +21,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/90 backdrop-blur-sm">
       <div className="bg-[var(--color-surface)] w-full max-w-md rounded-t-3xl p-6 shadow-2xl animate-in slide-in-from-bottom-full duration-300 max-h-[90vh] overflow-y-auto border-t border-[var(--color-border)]">
         <div className="flex justify-between items-center mb-6 sticky top-0 bg-[var(--color-surface)] z-10 py-2">
           <h2 className="text-2xl font-bold text-[var(--color-text)] tracking-tighter">Configurações</h2>
@@ -36,7 +36,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
             <h3 className="text-[9px] font-bold text-[var(--color-text-muted)] uppercase tracking-[0.2em] mb-4">Aparência</h3>
             <button 
               onClick={toggleTheme}
-              className="w-full flex items-center justify-between p-5 rounded-[1.5rem] bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all group"
+              className="w-full flex items-center justify-between p-5 rounded-[1.5rem] bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/90 transition-all group"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[var(--color-primary)] shadow-sm">
@@ -67,7 +67,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                     type="text"
                     value={tempName}
                     onChange={(e) => setTempName(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:ring-1 focus:ring-[var(--color-primary)]/30 focus:outline-none transition-all text-[var(--color-text)] font-bold"
+                    className="w-full pl-11 pr-4 py-3 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:ring-1 focus:ring-[var(--color-primary)]/90 focus:outline-none transition-all text-[var(--color-text)] font-bold"
                   />
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
                   key={t.id}
                   onClick={() => setTheme(t)}
                   className={`flex flex-col items-center gap-2 p-3 rounded-[1.5rem] border transition-all ${
-                    theme.id === t.id ? 'border-[var(--color-primary)]/50 bg-[var(--color-bg)] shadow-sm' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]'
+                    theme.id === t.id ? 'border-[var(--color-primary)]/90 bg-[var(--color-bg)] shadow-sm' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]'
                   }`}
                 >
                   <div 

@@ -35,7 +35,7 @@ export default function CoachView() {
         
         {/* Premium Overlay for Essential Plan */}
         <div className="absolute inset-0 bg-[var(--color-bg)]/80 backdrop-blur-xl flex flex-col items-center justify-center z-20 p-8 text-center border border-[var(--color-border)] rounded-[2.5rem]">
-          <div className="w-20 h-20 rounded-3xl bg-[var(--color-accent)]/10 flex items-center justify-center mb-6 border border-[var(--color-accent)]/20">
+          <div className="w-20 h-20 rounded-3xl bg-[var(--color-accent)]/90 flex items-center justify-center mb-6 border border-[var(--color-accent)]/90">
             <Lock className="text-[var(--color-accent)]" size={32} />
           </div>
           <h4 className="font-bold text-3xl mb-3 tracking-tight">Acesso <span className="text-[var(--color-accent)]">Exclusivo</span></h4>
@@ -49,7 +49,7 @@ export default function CoachView() {
       {/* Mindset Content */}
       <section className="relative z-10">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center border border-[var(--color-accent)]/20">
+          <div className="w-10 h-10 rounded-xl bg-[var(--color-accent)]/90 flex items-center justify-center border border-[var(--color-accent)]/90">
             <Sparkles className="text-[var(--color-accent)]" size={20} />
           </div>
           <h3 className="text-2xl font-bold text-[var(--color-text)] tracking-tight">Doses de Motivação</h3>
@@ -57,12 +57,12 @@ export default function CoachView() {
         
         <div className="grid gap-5">
           {articles.map(article => (
-            <div key={article.id} className="glass-card p-6 rounded-[2rem] border border-[var(--color-border)] flex justify-between items-center cursor-pointer hover:border-[var(--color-primary)]/30 transition-all group shadow-2xl">
+            <div key={article.id} className="glass-card p-6 rounded-[2rem] border border-[var(--color-border)] flex justify-between items-center cursor-pointer hover:border-[var(--color-primary)]/90 transition-all group shadow-2xl">
               <div className="flex-1">
                 <h4 className="font-bold text-[var(--color-text)] mb-2 text-lg group-hover:text-[var(--color-primary)] transition-colors tracking-tight">{article.title}</h4>
                 <div className="flex items-center gap-3">
                   <span className="text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest block">Leitura: {article.readTime}</span>
-                  <div className="w-1 h-1 rounded-full bg-[var(--color-text)]/10"></div>
+                  <div className="w-1 h-1 rounded-full bg-[var(--color-text)]/90"></div>
                   <span className="text-[10px] text-[var(--color-accent)] font-bold uppercase tracking-widest block">Mindset</span>
                 </div>
               </div>

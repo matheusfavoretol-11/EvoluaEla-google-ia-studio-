@@ -74,14 +74,14 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
     <div className="min-h-screen w-full flex flex-col bg-[var(--color-bg)] font-sans text-[var(--color-text)] relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/20 rounded-full blur-[120px] animate-pulse-soft"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/20 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-primary)]/90 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/90 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
         
         {/* Progress Bar */}
-        <div className="w-full h-1.5 bg-[var(--color-text)]/10 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
+        <div className="w-full h-1.5 bg-[var(--color-text)]/90 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">
           <motion.div 
             className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
             initial={{ width: '0%' }}
@@ -113,12 +113,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
                           ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]/50'
+                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]/90'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -155,12 +155,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
                           ? 'border-[var(--color-accent)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-accent)]/20 bg-[var(--color-surface)]/50'
+                          : 'border-[var(--color-border)] hover:border-[var(--color-accent)]/90 bg-[var(--color-surface)]/90'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]'
+                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -197,12 +197,12 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
                       className={`p-6 rounded-3xl border flex flex-col items-start gap-6 transition-all text-left group ${
                         isSelected 
                           ? 'border-[var(--color-primary)] bg-[var(--color-surface)] shadow-2xl' 
-                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/20 bg-[var(--color-surface)]/50'
+                          : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 bg-[var(--color-surface)]/90'
                       }`}
                     >
                       <div 
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/10 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
+                          isSelected ? 'bg-[var(--color-primary)] text-black' : 'bg-[var(--color-text)]/90 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)]'
                         }`}
                       >
                         <Icon size={28} />
@@ -222,11 +222,11 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           <button
             onClick={handleNext}
             disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge)}
-            className="w-full py-6 sm:py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:hover:shadow-2xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
+            className="w-full py-6 sm:py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-90 disabled:hover:shadow-2xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
           >
             {isSaving ? (
               <div className="flex items-center gap-4">
-                <div className="w-6 h-6 border-3 border-black/30 border-t-black rounded-full animate-spin" />
+                <div className="w-6 h-6 border-3 border-black/90 border-t-black rounded-full animate-spin" />
                 <span>Preparando sua jornada...</span>
               </div>
             ) : (

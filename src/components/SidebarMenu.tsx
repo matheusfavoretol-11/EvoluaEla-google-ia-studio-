@@ -37,7 +37,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40"
         />
       )}
       {isOpen && (
@@ -52,7 +52,7 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
             {/* Header */}
             <div className="p-8 pt-16 border-b border-[var(--color-border)] flex items-center justify-between bg-[var(--color-surface)]">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center shadow-sm text-[var(--color-text-muted)]">
+                <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center shadow-sm text-[var(--color-text-muted)]">
                   <User size={28} />
                 </div>
                 <div>
@@ -63,14 +63,14 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                     ) : subscriptionStatus === 'trial' ? (
                       <span className="text-[var(--color-accent)] flex items-center gap-1.5"><Crown size={12} fill="currentColor" /> Teste Grátis</span>
                     ) : (
-                      <span className="text-[var(--color-text-muted)]/60">Plano Gratuito</span>
+                      <span className="text-[var(--color-text-muted)]/90">Plano Gratuito</span>
                     )}
                   </div>
                 </div>
               </div>
               <button 
                 onClick={onClose}
-                className="w-10 h-10 rounded-xl bg-[var(--color-text)]/5 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+                className="w-10 h-10 rounded-xl bg-[var(--color-text)]/90 border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
               >
                 <X size={20} />
               </button>
@@ -111,17 +111,17 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                       onClose();
                       item.onClick();
                     }}
-                    className="w-full flex items-center gap-5 p-5 rounded-3xl hover:bg-[var(--color-text)]/5 transition-all text-left group border border-transparent hover:border-[var(--color-border)]"
+                    className="w-full flex items-center gap-5 p-5 rounded-3xl hover:bg-[var(--color-text)]/90 transition-all text-left group border border-transparent hover:border-[var(--color-border)]"
                   >
                     <div 
                       className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
-                      style={{ backgroundColor: `color-mix(in srgb, ${item.color}, transparent 85%)`, color: item.color }}
+                      style={{ backgroundColor: `color-mix(in srgb, ${item.color}, transparent 10%)`, color: item.color }}
                     >
                       <item.icon size={24} />
                     </div>
                     <div>
                       <span className="block font-bold text-[var(--color-text)] text-lg tracking-tight">{item.title}</span>
-                      <span className="text-[10px] text-[var(--color-text-muted)]/60 font-bold uppercase tracking-widest">{item.subtitle}</span>
+                      <span className="text-[10px] text-[var(--color-text-muted)]/90 font-bold uppercase tracking-widest">{item.subtitle}</span>
                     </div>
                   </button>
                 ))}
@@ -129,10 +129,10 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
             </div>
 
             {/* Footer */}
-            <div className="p-8 border-t border-[var(--color-border)] bg-[var(--color-text)]/5">
+            <div className="p-8 border-t border-[var(--color-border)] bg-[var(--color-text)]/90">
               <button 
                 onClick={handleLogout}
-                className="w-full flex items-center justify-center gap-3 py-4 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)]/60 hover:text-rose-500 hover:border-rose-500/20 hover:bg-rose-500/5 transition-all text-[9px] font-bold uppercase tracking-[0.2em]"
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)]/90 hover:text-rose-500 hover:border-rose-500/90 hover:bg-rose-500/90 transition-all text-[9px] font-bold uppercase tracking-[0.2em]"
               >
                 <LogOut size={16} />
                 Sair da conta

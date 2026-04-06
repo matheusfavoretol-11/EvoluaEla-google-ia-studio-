@@ -111,8 +111,8 @@ export default function TherapistDashboardView() {
                   <td className="px-8 py-6">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${
                       isAfter(new Date(session.date), new Date()) 
-                        ? 'bg-[var(--color-accent)]/10 text-[var(--color-accent)] border-[var(--color-accent)]/20' 
-                        : 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] border-[var(--color-primary)]/20'
+                        ? 'bg-[var(--color-accent)]/90 text-[var(--color-accent)] border-[var(--color-accent)]/90' 
+                        : 'bg-[var(--color-primary)]/90 text-[var(--color-primary)] border-[var(--color-primary)]/90'
                     }`}>
                       {isAfter(new Date(session.date), new Date()) ? 'Agendada' : 'Concluída'}
                     </span>
@@ -180,7 +180,7 @@ export default function TherapistDashboardView() {
               {selectedSession.participants?.length > 0 ? selectedSession.participants.map((pId, idx) => (
                 <div key={pId} className="flex items-center justify-between p-4 bg-[var(--color-text)]/5 rounded-2xl border border-[var(--color-border)]">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center text-[var(--color-primary)] font-bold">
+                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/90 flex items-center justify-center text-[var(--color-primary)] font-bold">
                       {idx + 1}
                     </div>
                     <div>

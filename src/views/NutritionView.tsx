@@ -40,7 +40,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-accent)]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
             <div className="flex items-center justify-between mb-8">
               <h3 className="font-bold text-2xl text-[var(--color-text)] tracking-tight">Sua Dieta Atual</h3>
-              <span className="px-4 py-1.5 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[var(--color-primary)]/20">Ativo</span>
+              <span className="px-4 py-1.5 bg-[var(--color-primary)]/90 text-[var(--color-primary)] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[var(--color-primary)]/90">Ativo</span>
             </div>
             <div className="flex items-center gap-5 mb-8">
               <div className="w-20 h-20 rounded-3xl bg-[var(--color-text)]/5 overflow-hidden border border-[var(--color-border)] shadow-2xl p-1">
@@ -66,13 +66,13 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
 
           {/* Quick Actions */}
           <div className="grid grid-cols-2 gap-5">
-            <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-primary)]/30 transition-all group shadow-2xl">
+            <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-primary)]/90 transition-all group shadow-2xl">
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all border border-[var(--color-border)]">
                 <MessageCircle size={28} />
               </div>
               <span className="font-bold text-[var(--color-text-muted)] text-[10px] uppercase tracking-widest group-hover:text-[var(--color-text)] transition-colors">Chat com a Nutri</span>
             </button>
-            <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-primary)]/30 transition-all group shadow-2xl">
+            <button className="glass-card p-8 rounded-[2.5rem] border border-[var(--color-border)] flex flex-col items-center justify-center gap-4 hover:border-[var(--color-primary)]/90 transition-all group shadow-2xl">
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[var(--color-text)]/5 text-[var(--color-text-muted)] group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all border border-[var(--color-border)]">
                 <Camera size={28} />
               </div>
@@ -91,7 +91,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
               { time: '16:00', name: 'Lanche', desc: 'Iogurte com whey', done: false },
               { time: '20:00', name: 'Jantar', desc: 'Salada completa com atum', done: false },
             ].map((meal, idx) => (
-              <div key={`meal-${meal.name}-${idx}`} className={`p-6 rounded-[2rem] border transition-all shadow-2xl flex items-center gap-5 ${meal.done ? 'bg-[var(--color-primary)]/5 border-[var(--color-primary)]/20' : 'bg-[var(--color-text)]/5 border-[var(--color-border)] hover:border-[var(--color-text)]/10'}`}>
+              <div key={`meal-${meal.name}-${idx}`} className={`p-6 rounded-[2rem] border transition-all shadow-2xl flex items-center gap-5 ${meal.done ? 'bg-[var(--color-primary)]/90 border-[var(--color-primary)]/90' : 'bg-[var(--color-text)]/90 border-[var(--color-border)] hover:border-[var(--color-text)]/90'}`}>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border ${meal.done ? 'bg-[var(--color-primary)] text-black border-[var(--color-primary)]' : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] border-[var(--color-border)]'}`}>
                   {meal.done ? <CheckCircle2 size={28} /> : <Apple size={28} />}
                 </div>
@@ -100,7 +100,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
                     <h4 className={`font-bold text-lg tracking-tight ${meal.done ? 'text-[var(--color-primary)]' : 'text-[var(--color-text)]'}`}>{meal.name}</h4>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">{meal.time}</span>
                   </div>
-                  <p className={`text-sm font-bold ${meal.done ? 'text-[var(--color-primary)]/40' : 'text-[var(--color-text-muted)]'}`}>{meal.desc}</p>
+                  <p className={`text-sm font-bold ${meal.done ? 'text-[var(--color-primary)]/90' : 'text-[var(--color-text-muted)]'}`}>{meal.desc}</p>
                 </div>
               </div>
             ))}

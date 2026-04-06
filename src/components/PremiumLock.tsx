@@ -13,15 +13,15 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
   return (
     <div className="relative w-full h-full min-h-[450px] flex flex-col items-center justify-center p-8 text-center overflow-hidden rounded-[3rem] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl">
       {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/10 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none"></div>
       
       <div className="relative z-10 flex flex-col items-center max-w-sm mx-auto">
         <div 
-          className="w-24 h-24 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl relative border border-[var(--color-border)] bg-gradient-to-br from-[var(--color-text)]/10 to-transparent backdrop-blur-xl"
+          className="w-24 h-24 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl relative border border-[var(--color-border)] bg-gradient-to-br from-[var(--color-text)]/90 to-transparent backdrop-blur-xl"
         >
           <Lock size={40} className="text-[var(--color-accent)]" />
-          <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-2xl border border-[var(--color-text)]/20">
+          <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-2xl border border-[var(--color-text)]/90">
             <Star size={18} className="text-black" fill="currentColor" />
           </div>
         </div>
@@ -34,14 +34,14 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
           {description}
         </p>
 
-        <div className="bg-[var(--color-text)]/10 p-6 rounded-[2rem] border border-[var(--color-border)] w-full mb-10 text-left space-y-4 backdrop-blur-md">
+        <div className="bg-[var(--color-text)]/90 p-6 rounded-[2rem] border border-[var(--color-border)] w-full mb-10 text-left space-y-4 backdrop-blur-md">
           {[
             "Resultados 3x mais rápidos com acompanhamento profissional",
             "Pare de tentar sozinha — tenha especialistas ao seu lado",
             "Seu corpo e sua mente evoluindo juntos"
           ].map((benefit, idx) => (
             <div key={idx} className="flex items-center gap-4">
-              <div className="w-8 h-8 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0 border border-[var(--color-primary)]/20">
+              <div className="w-8 h-8 rounded-xl bg-[var(--color-primary)]/90 flex items-center justify-center shrink-0 border border-[var(--color-primary)]/90">
                 <span className="text-[var(--color-primary)] font-bold text-xs">{idx + 1}</span>
               </div>
               <p className="text-xs text-[var(--color-text-muted)] font-bold leading-tight">{benefit}</p>
@@ -57,7 +57,7 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
           <ArrowRight size={20} />
         </button>
         
-        <p className="text-[10px] text-[var(--color-text-muted)]/40 mt-6 font-bold uppercase tracking-widest">
+        <p className="text-[10px] text-[var(--color-text-muted)]/90 mt-6 font-bold uppercase tracking-widest">
           Disponível apenas no Plano Premium
         </p>
       </div>

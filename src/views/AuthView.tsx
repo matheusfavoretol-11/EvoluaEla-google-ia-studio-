@@ -137,7 +137,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
   return (
     <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-[var(--color-bg)] font-sans selection:bg-[var(--color-primary)] selection:text-black">
       {/* Background Gradients */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 py-12 relative z-10 max-w-lg mx-auto w-full">
@@ -177,7 +177,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
               <motion.div 
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
-                className="mb-8 p-4 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm flex items-start gap-3 border border-[var(--color-primary)]/20"
+                className="mb-8 p-4 rounded-2xl bg-[var(--color-primary)]/90 text-[var(--color-primary)] text-sm flex items-start gap-3 border border-[var(--color-primary)]/90"
               >
                 <AlertCircle size={18} className="shrink-0 mt-0.5" />
                 <p className="font-medium leading-relaxed">{error}</p>
@@ -188,7 +188,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
               <motion.div 
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
-                className="mb-8 p-4 rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-sm flex items-start gap-3 border border-[var(--color-accent)]/20"
+                className="mb-8 p-4 rounded-2xl bg-[var(--color-accent)]/90 text-[var(--color-accent)] text-sm flex items-start gap-3 border border-[var(--color-accent)]/90"
               >
                 <Check size={18} className="shrink-0 mt-0.5" />
                 <p className="font-medium leading-relaxed">{successMsg}</p>
@@ -208,7 +208,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       placeholder="Seu nome"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/50 focus:bg-[var(--color-bg)]/80 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                     />
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     placeholder="seu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/50 focus:bg-[var(--color-bg)]/80 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                   />
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/50 focus:bg-[var(--color-bg)]/80 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                    className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                   />
                 </div>
               </div>
@@ -258,7 +258,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/50 focus:bg-[var(--color-bg)]/80 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
+                      className="w-full pl-14 pr-6 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl focus:border-[var(--color-primary)]/90 focus:bg-[var(--color-bg)]/90 focus:outline-none transition-all text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] font-bold text-base"
                     />
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
               >
                 {isLoading ? (
                   <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-black/90 border-t-black rounded-full animate-spin" />
                     <span className="text-base">Processando...</span>
                   </div>
                 ) : (

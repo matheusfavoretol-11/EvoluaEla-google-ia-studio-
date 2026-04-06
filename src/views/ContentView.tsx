@@ -101,7 +101,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`glass-card p-6 rounded-[2rem] border transition-all flex items-center gap-5 group shadow-2xl ${
-                  isLocked ? 'opacity-40 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/30 cursor-pointer'
+                  isLocked ? 'opacity-90 border-[var(--color-border)]' : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/90 cursor-pointer'
                 }`}
                 onClick={() => handleContentClick(item, isLockedByPremium, isLockedByLevel)}
               >
@@ -123,7 +123,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                       {activeCategory === 'audios' ? (item as any).duration : (item as any).pages}
                     </span>
                     {item.premium && (
-                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[var(--color-primary)]/90 text-[var(--color-primary)] border border-[var(--color-primary)]/90">
                         Premium
                       </span>
                     )}
@@ -179,8 +179,8 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 {activeCategory === 'audios' ? (
                   <>
                     <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-[var(--color-text)]/5 border border-[var(--color-border)] overflow-hidden">
-                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/20 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
-                      <div className={`absolute inset-0 border-4 border-[var(--color-primary)]/30 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/90 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
+                      <div className={`absolute inset-0 border-4 border-[var(--color-primary)]/90 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
                       <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] relative z-10">
                         <Headphones size={56} />
                       </div>
@@ -204,7 +204,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                       </div>
                       
                       <div className="flex items-center justify-center gap-10">
-                        <button className="p-4 text-[var(--color-text-muted)]/40 hover:text-[var(--color-text)] transition-colors">
+                        <button className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                           <SkipBack size={32} />
                         </button>
                         <button 
@@ -213,7 +213,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                         >
                           {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" className="ml-1" />}
                         </button>
-                        <button className="p-4 text-[var(--color-text-muted)]/40 hover:text-[var(--color-text)] transition-colors">
+                        <button className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                           <SkipForward size={32} />
                         </button>
                       </div>
@@ -223,10 +223,10 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                   <>
                     <div className="w-full aspect-[3/4] bg-[var(--color-text)]/5 rounded-[2.5rem] mb-8 border border-[var(--color-border)] flex items-center justify-center relative overflow-hidden shadow-2xl group">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
-                      <FileText size={80} className="text-[var(--color-text-muted)]/10 group-hover:scale-110 transition-transform duration-500" />
+                      <FileText size={80} className="text-[var(--color-text-muted)]/90 group-hover:scale-110 transition-transform duration-500" />
                       <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white text-left backdrop-blur-sm">
                         <p className="font-bold text-2xl tracking-tight mb-1">{selectedContent.title}</p>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">{selectedContent.pages}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-white/80">{selectedContent.pages}</p>
                       </div>
                     </div>
                     

@@ -77,8 +77,8 @@ function AppContent() {
   if (!isAuthReady) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center border-white/5">
-           <div className="w-10 h-10 border-2 border-[var(--color-primary)]/20 border-t-[var(--color-primary)] rounded-full animate-spin" />
+        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center border-white/90">
+           <div className="w-10 h-10 border-2 border-[var(--color-primary)]/90 border-t-[var(--color-primary)] rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -95,7 +95,7 @@ function AppContent() {
 
     return (
       <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/5">
+        <div className="w-full lg:max-w-md min-h-[100dvh] sm:min-h-[800px] sm:h-auto sm:rounded-[3rem] sm:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] sm:border sm:border-white/90">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -105,7 +105,7 @@ function AppContent() {
   if (!hasCompletedOnboarding) {
     return (
       <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:max-w-md min-h-[100dvh] lg:min-h-[800px] lg:h-auto lg:rounded-[3rem] lg:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] lg:border lg:border-white/5">
+        <div className="w-full lg:max-w-md min-h-[100dvh] lg:min-h-[800px] lg:h-auto lg:rounded-[3rem] lg:shadow-2xl relative flex flex-col overflow-hidden bg-[var(--color-surface)] lg:border lg:border-white/90">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -131,7 +131,7 @@ function AppContent() {
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/90 hover:text-[var(--color-primary)]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -145,7 +145,7 @@ function AppContent() {
                   const { toggleTheme } = (window as any).themeContext;
                   toggleTheme();
                 }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/5 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] mr-1"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/90 hover:text-[var(--color-primary)] mr-1"
               >
                 {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
@@ -157,7 +157,7 @@ function AppContent() {
                   <Crown size={10} className="sm:w-3 sm:h-3 lg:w-4 lg:h-4" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[var(--color-primary)]/90 border border-[var(--color-primary)]/90 flex items-center justify-center text-[var(--color-primary)]">
                   <Crown size={20} className="sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" />
                 </div>
               )}
@@ -238,7 +238,7 @@ function AppContent() {
             onOpenSupport={() => setActiveTab('support')}
           />
           {showDisclaimer && (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
+            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm p-6">
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -248,13 +248,13 @@ function AppContent() {
                 <div className="space-y-4 text-sm text-[var(--color-text-muted)] mb-8 font-bold uppercase tracking-widest text-[10px]">
                   <p>O <strong className="font-bold text-[var(--color-text)]">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
                   <p className="font-bold text-[var(--color-primary)] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
-                  <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-muted)]/60">
+                  <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-muted)]/90">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-[10px] text-[var(--color-text-muted)]/40 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)]/90 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
