@@ -127,7 +127,7 @@ function AppContent() {
         <div className="infinite-bg" />
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-4 sm:px-8 lg:px-12 sticky top-0 z-30 bg-transparent backdrop-blur-xl shrink-0 border-none">
+        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-6 sm:px-10 lg:px-12 sticky top-0 z-30 bg-transparent backdrop-blur-3xl shrink-0 border-none">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
@@ -168,7 +168,7 @@ function AppContent() {
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto pb-32 lg:pb-12 hide-scrollbar bg-transparent relative scroll-container overscroll-none">
-          <div className="w-full px-4 sm:px-8 lg:px-12 py-8 lg:py-12">
+          <div className="w-full h-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -194,8 +194,8 @@ function AppContent() {
           </div>
         </main>
 
-        {/* Bottom Navigation */}
-        <nav className="lg:hidden fixed bottom-0 w-full px-4 sm:px-8 py-4 sm:py-5 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 bg-transparent backdrop-blur-3xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+        {/* Bottom Navigation - Floating Style */}
+        <nav className="lg:hidden fixed bottom-6 left-6 right-6 px-6 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 glass-morphism rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10">
           <ul className="flex justify-between items-center">
             {tabs.map((tab) => {
               const Icon = tab.icon;

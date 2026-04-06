@@ -384,7 +384,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <div className="px-4 sm:px-6 pt-8 pb-4">
+            <div className="px-6 sm:px-10 pt-8 pb-4">
               <motion.h2 variants={itemVariants} className="text-5xl font-bold mb-3 text-[var(--color-text)] tracking-tighter">Seus <span className="gradient-text">Treinos</span></motion.h2>
               <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</motion.p>
               
@@ -411,7 +411,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               </motion.div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-10 space-y-6 hide-scrollbar">
+            <div className="flex-1 overflow-y-auto px-6 sm:px-10 pb-10 space-y-6 hide-scrollbar">
               {activeTab === 'meus' && (
                 <>
                   <motion.button 
@@ -488,7 +488,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             exit={{ opacity: 0, x: 20 }}
             className="flex flex-col h-full bg-[var(--color-bg)]"
           >
-            <div className="px-4 sm:px-6 pt-8 pb-6 border-b border-white/5 flex items-center justify-between sticky top-0 backdrop-blur-xl z-30">
+            <div className="px-6 sm:px-10 pt-8 pb-6 border-b border-white/5 flex items-center justify-between sticky top-0 backdrop-blur-xl z-30">
               <div className="flex items-center gap-4">
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
@@ -537,7 +537,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
             {/* Progress Bar (View Mode) */}
             {!isEditing && (
-              <div className="px-4 sm:px-6 pt-6 bg-transparent">
+              <div className="px-6 sm:px-10 pt-6 bg-transparent">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-[var(--color-text-muted)]">
                   <span>Progresso do Treino</span>
                   <span className="text-[var(--color-primary)]">{Math.round(progressPercent)}%</span>
@@ -552,7 +552,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               </div>
             )}
 
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 hide-scrollbar">
+            <div className="flex-1 overflow-y-auto p-6 sm:p-10 space-y-4 hide-scrollbar">
               {isEditing && (
                 <div className="mb-8 space-y-6">
                   <div>

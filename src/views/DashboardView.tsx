@@ -209,7 +209,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="p-4 sm:p-10 space-y-12 relative bg-transparent min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
+      className="px-6 py-10 sm:px-10 space-y-12 relative bg-transparent min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
     >
       
       {/* Hero Overview - Infinite Screen Style */}

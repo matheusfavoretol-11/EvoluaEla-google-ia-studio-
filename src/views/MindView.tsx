@@ -9,7 +9,7 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
 
   if (!isPremium) {
     return (
-      <div className="p-4 sm:p-6 h-full flex flex-col bg-transparent text-[var(--color-text)]">
+    <div className="px-6 py-10 sm:px-10 h-full flex flex-col bg-transparent text-[var(--color-text)]">
         <div className="mb-10">
           <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Equilíbrio <span className="gradient-text">Emocional</span></h2>
           <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Trate a ansiedade, autoestima, disciplina e bloqueios emocionais com especialistas.</p>
@@ -24,7 +24,7 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
   }
 
   return (
-    <div className="p-4 sm:p-6 pb-32 bg-transparent min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
+    <div className="px-6 py-10 sm:px-10 pb-32 bg-transparent min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 

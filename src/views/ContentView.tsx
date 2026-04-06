@@ -78,7 +78,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="px-4 sm:px-6 pt-12 pb-10 relative z-10">
+      <div className="px-6 sm:px-10 pt-12 pb-10 relative z-10">
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
           <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
             <Sparkles size={32} />
@@ -88,7 +88,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
         <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Uma curadoria especial para nutrir sua mente e alma.</motion.p>
       </div>
 
-      <div className="px-4 sm:px-6 relative z-10">
+      <div className="px-6 sm:px-10 relative z-10">
         {/* Tabs */}
         <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-white/5 border border-white/10 mb-10 backdrop-blur-md">
           <motion.button

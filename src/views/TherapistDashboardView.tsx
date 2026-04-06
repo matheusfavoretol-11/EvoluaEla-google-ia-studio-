@@ -58,7 +58,7 @@ export default function TherapistDashboardView() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] p-6 pb-32 overflow-y-auto hide-scrollbar">
+    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
         <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Painel da <span className="gradient-text">Terapeuta</span></h2>
         <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Gerencie suas sessões, participantes e replays.</p>

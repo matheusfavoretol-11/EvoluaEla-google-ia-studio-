@@ -77,7 +77,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
 
   return (
     <div className="flex flex-col h-full relative bg-transparent text-[var(--color-text)] font-sans">
-      <header className="px-4 sm:px-6 pt-8 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
+      <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-black relative overflow-hidden group">
             <div className="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
@@ -112,7 +112,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 hide-scrollbar bg-transparent">
+      <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10 space-y-6 hide-scrollbar bg-transparent">
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
@@ -143,7 +143,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 sm:p-6 shrink-0 backdrop-blur-xl border-t border-white/5">
+      <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
         {isBlocked ? (
           <div className="glass-morphism p-8 text-center shadow-2xl border border-white/10">
             <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/90 flex items-center justify-center mx-auto mb-4">

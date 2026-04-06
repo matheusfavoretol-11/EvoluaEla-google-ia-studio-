@@ -106,7 +106,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
   if (!hasAccess) {
     return (
-      <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] p-6">
+      <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10">
         <div className="mb-10">
           <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
           <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Terapia em grupo quinzenal para mulheres que buscam evolução real.</p>
@@ -156,7 +156,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
   }
 
   return (
-    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] p-6 pb-32 overflow-y-auto hide-scrollbar">
+    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
         <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
         <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Seu espaço seguro de acolhimento e troca.</p>

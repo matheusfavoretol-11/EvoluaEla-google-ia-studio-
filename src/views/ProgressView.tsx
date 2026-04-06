@@ -58,7 +58,7 @@ export default function ProgressView() {
   }
 
   return (
-    <div className="p-4 sm:p-6 space-y-10 bg-transparent min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
+    <div className="px-6 py-10 sm:px-10 space-y-10 bg-transparent min-h-full text-[var(--color-text)] font-sans relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none"></div>
 

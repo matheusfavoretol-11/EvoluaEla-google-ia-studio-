@@ -48,7 +48,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
     <div className="min-h-screen bg-[var(--color-bg)] font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar selection:bg-[var(--color-primary)] selection:text-black">
       
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 glass-nav bg-[var(--color-surface)]/80 backdrop-blur-xl border-b border-[var(--color-border)]">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-8 bg-transparent backdrop-blur-3xl border-none">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Logo size="sm" />
@@ -76,7 +76,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 min-h-screen flex items-center overflow-hidden">
+      <section className="relative pt-40 pb-20 px-6 min-h-screen flex items-center overflow-hidden">
         {/* Background Gradients */}
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none" />

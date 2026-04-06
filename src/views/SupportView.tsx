@@ -66,7 +66,7 @@ export default function SupportView() {
 
   return (
     <div className="flex-1 overflow-y-auto hide-scrollbar bg-transparent">
-      <div className="mx-auto px-4 sm:px-6 py-12 space-y-16">
+      <div className="mx-auto px-6 py-10 sm:px-10 space-y-16">
         
         {/* Hero Section */}
         <section className="text-center space-y-4">
