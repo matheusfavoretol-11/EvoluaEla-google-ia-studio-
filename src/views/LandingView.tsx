@@ -96,7 +96,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               <span className="gradient-text">versão</span> começa <br />
               aqui.
             </h1>
-            <p className="text-lg md:text-xl text-[var(--color-text-muted)] mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-[var(--color-text-muted)] mb-10 max-w-lg leading-relaxed">
               Uma plataforma completa de biohacking, mindset e performance desenhada exclusivamente para a mulher moderna.
             </p>
             
@@ -235,6 +235,62 @@ export default function LandingView({ onStart }: LandingViewProps) {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-32 px-6 bg-[var(--color-bg)]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">O que as <span className="gradient-text">mulheres</span> dizem.</h2>
+            <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">Histórias reais de transformação e evolução.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Juliana Silva",
+                role: "Empresária",
+                text: "O EvoluaEla mudou minha perspectiva sobre produtividade e saúde. O coach de IA é como ter uma mentora no bolso 24h por dia.",
+                image: "https://picsum.photos/seed/user1/100/100"
+              },
+              {
+                name: "Mariana Costa",
+                role: "Atleta Amadora",
+                text: "Os treinos são incríveis e a comunidade me mantém motivada. Finalmente encontrei um app que entende as necessidades femininas.",
+                image: "https://picsum.photos/seed/user2/100/100"
+              },
+              {
+                name: "Beatriz Oliveira",
+                role: "Designer",
+                text: "A parte de nutrição e psicologia integrada é o que eu sempre procurei. Sinto que estou evoluindo em todas as áreas da minha vida.",
+                image: "https://picsum.photos/seed/user3/100/100"
+              }
+            ].map((testimonial, i) => (
+              <motion.div
+                key={`testimonial-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bento-card bg-[var(--color-surface)] border border-[var(--color-border)] p-8 rounded-[2.5rem]"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--color-primary)]">
+                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">{testimonial.name}</h4>
+                    <p className="text-xs text-[var(--color-text-muted)]">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-[var(--color-accent)] mb-4">
+                  {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed italic">"{testimonial.text}"</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-32 px-6 bg-[var(--color-bg)]">
         <div className="max-w-7xl mx-auto">
@@ -298,6 +354,29 @@ export default function LandingView({ onStart }: LandingViewProps) {
                 Começar minha evolução agora
               </button>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-32 px-6 bg-[var(--color-surface)]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 tracking-tight">Dúvidas Frequentes</h2>
+            <p className="text-[var(--color-text-muted)]">Tudo o que você precisa saber sobre o EvoluaEla.</p>
+          </div>
+          <div className="space-y-4">
+            {[
+              { q: "O EvoluaEla é para iniciantes?", a: "Sim! Nossa plataforma adapta os treinos e conteúdos de acordo com seu nível atual, garantindo uma evolução segura e constante." },
+              { q: "Como funciona o acompanhamento profissional?", a: "No plano premium, você tem acesso a chats diretos com nutricionistas e psicólogas parceiras para tirar dúvidas e receber orientações." },
+              { q: "Posso cancelar a qualquer momento?", a: "Com certeza. Não temos contratos de fidelidade. Você pode cancelar sua assinatura diretamente pelo app quando desejar." },
+              { q: "O coach de IA realmente funciona?", a: "Nossa IA foi treinada com base em protocolos reais de biohacking e psicologia comportamental para oferecer o melhor suporte 24/7." }
+            ].map((item, i) => (
+              <div key={`faq-${i}`} className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                <h4 className="font-bold mb-2">{item.q}</h4>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{item.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
