@@ -209,53 +209,83 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="px-6 py-10 sm:px-10 space-y-12 relative bg-transparent min-h-full font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar"
+      className="relative min-h-full font-sans text-[var(--color-text)]"
     >
-      
-      {/* Hero Overview - Infinite Screen Style */}
-      <motion.section 
-        variants={itemVariants}
-        className="relative pt-8 pb-12 px-2"
-      >
-        <div className="space-y-1 mb-12">
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--color-text-muted)]/60">Welcome • Overview</p>
-          <div className="flex items-baseline gap-4">
-            <h1 className="text-8xl md:text-9xl font-light tracking-tighter text-white leading-none">
-              {emotionalStats.disciplina}%
-            </h1>
-            <div className="glass-morphism px-4 py-2 rounded-full flex items-center gap-2">
-              <TrendingUp size={14} className="text-[var(--color-primary)]" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">All Programs (+12%)</span>
+      {/* Immersive Background Image Section */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1920" 
+          alt="Background" 
+          className="w-full h-full object-cover opacity-60 scale-110 blur-[2px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0A0A0A]" />
+      </div>
+
+      <div className="relative z-10 px-6 py-10 sm:px-10 space-y-12">
+        
+        {/* Hero Overview - Immersive App Style */}
+        <motion.section 
+          variants={itemVariants}
+          className="relative pt-12 pb-20"
+        >
+          <div className="flex justify-between items-start mb-12">
+            <div className="space-y-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/60">Welcome • Overview</p>
+              <h1 className="text-9xl md:text-[12rem] font-serif italic tracking-tighter text-white leading-none">
+                {emotionalStats.disciplina}%
+              </h1>
+              <p className="text-2xl md:text-3xl font-light text-white/80 tracking-tight">Efficiency Improvements</p>
+            </div>
+            
+            <div className="glass-morphism px-6 py-3 rounded-full flex items-center gap-3 mt-12">
+              <TrendingUp size={16} className="text-[var(--color-primary)]" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">All Programs (+12%)</span>
+              <ChevronRight size={14} className="text-white/40" />
             </div>
           </div>
-          <p className="text-xl md:text-2xl font-light text-white/60 tracking-tight">Efficiency Improvements</p>
-        </div>
 
-        {/* Minimalist Graph Placeholder (Infinite Style) */}
-        <div className="relative h-48 w-full flex items-end justify-between gap-2 px-4">
-          {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95].map((height, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 flex-1">
-              <motion.div 
-                initial={{ height: 0 }}
-                animate={{ height: `${height}%` }}
-                transition={{ duration: 1, delay: i * 0.05 }}
-                className="w-0.5 bg-white/20 relative"
-              >
-                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
-              </motion.div>
-              <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][i]}</span>
-            </div>
-          ))}
-          <div className="absolute bottom-10 left-0 right-0 h-px bg-white/5" />
-        </div>
-      </motion.section>
+          {/* Minimalist Graph (Infinite Style) */}
+          <div className="relative h-64 w-full flex items-end justify-between gap-1 px-2">
+            {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95, 65, 85, 75].map((height, i) => (
+              <div key={i} className="flex flex-col items-center gap-2 flex-1">
+                <motion.div 
+                  initial={{ height: 0 }}
+                  animate={{ height: `${height}%` }}
+                  transition={{ duration: 1.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-px bg-white/20 relative"
+                >
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      boxShadow: [
+                        "0 0 15px rgba(255,255,255,0.5)",
+                        "0 0 25px rgba(255,255,255,0.8)",
+                        "0 0 15px rgba(255,255,255,0.5)"
+                      ]
+                    }}
+                    transition={{ 
+                      scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.1 },
+                      boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.1 }
+                    }}
+                    className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white" 
+                  />
+                </motion.div>
+                <span className="text-[7px] font-bold text-white/20 uppercase tracking-widest mt-2">
+                  {['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][i % 12]}
+                </span>
+              </div>
+            ))}
+            <div className="absolute bottom-12 left-0 right-0 h-px bg-white/5" />
+          </div>
+        </motion.section>
 
-      {/* Header & Greeting */}
-      <header className="flex justify-between items-start">
-        <motion.div 
-          variants={itemVariants}
-          className="space-y-3"
-        >
+        {/* Header & Greeting */}
+        <header className="flex justify-between items-start pt-12 border-t border-white/5">
+          <motion.div 
+            variants={itemVariants}
+            className="space-y-3"
+          >
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -545,6 +575,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
           </div>
         )}
       </AnimatePresence>
-    </motion.div>
-  );
+    </div>
+  </motion.div>
+);
 }

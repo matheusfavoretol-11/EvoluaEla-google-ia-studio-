@@ -127,7 +127,7 @@ function AppContent() {
         <div className="infinite-bg" />
         
         {/* Header */}
-        <header className="pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-6 sm:px-10 lg:px-12 sticky top-0 z-30 bg-transparent backdrop-blur-3xl shrink-0 border-none">
+        <header className={`pt-10 sm:pt-14 lg:pt-8 pb-4 sm:pb-6 lg:pb-8 px-6 sm:px-10 lg:px-12 sticky top-0 z-30 bg-transparent shrink-0 border-none transition-all duration-500 ${activeTab === 'home' ? 'backdrop-blur-0' : 'backdrop-blur-3xl'}`}>
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
