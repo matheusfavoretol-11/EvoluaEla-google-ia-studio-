@@ -121,7 +121,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div 
-              className={`max-w-[85%] p-5 rounded-3xl ${
+              className={`p-5 rounded-3xl ${
                 msg.role === 'user' 
                   ? 'rounded-tr-sm text-black font-bold shadow-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)]' 
                   : 'glass-card rounded-tl-sm text-[var(--color-text)]/90 shadow-xl border border-[var(--color-border)]'

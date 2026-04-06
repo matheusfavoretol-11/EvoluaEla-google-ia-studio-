@@ -78,7 +78,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent)]/90 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 max-w-xl mx-auto w-full relative z-10">
+      <div className="flex-1 flex flex-col px-4 sm:px-8 py-12 sm:py-20 mx-auto w-full relative z-10">
         
         {/* Progress Bar */}
         <div className="w-full h-1.5 bg-[var(--color-text)]/90 rounded-full mb-12 sm:mb-20 overflow-hidden border border-[var(--color-border)]">

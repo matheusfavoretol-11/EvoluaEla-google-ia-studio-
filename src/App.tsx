@@ -77,7 +77,7 @@ function AppContent() {
   if (!isAuthReady) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center border-white/90">
+        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center">
            <div className="w-10 h-10 border-2 border-[var(--color-primary)]/90 border-t-[var(--color-primary)] rounded-full animate-spin" />
         </div>
       </div>

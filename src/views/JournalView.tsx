@@ -83,7 +83,7 @@ Seja concisa, use emojis e foque no acolhimento.`,
           </div>
           <h2 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Meu <span className="gradient-text">Diário</span></h2>
         </div>
-        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest leading-relaxed max-w-md">
+        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest leading-relaxed">
           Este é o seu refúgio seguro. Pode soltar tudo o que sente, refletir e se reencontrar.
         </p>
       </header>

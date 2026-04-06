@@ -140,7 +140,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[var(--color-primary)]/90 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[var(--color-accent)]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 py-12 relative z-10 max-w-lg mx-auto w-full">
+      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 py-12 relative z-10 mx-auto w-full">
         <div className="text-center mb-12">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}

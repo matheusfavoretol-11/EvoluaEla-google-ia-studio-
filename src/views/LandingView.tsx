@@ -96,7 +96,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               <span className="gradient-text">versão</span> começa <br />
               aqui.
             </h1>
-            <p className="text-lg md:text-xl text-[var(--color-text-muted)] mb-10 max-w-lg leading-relaxed">
+            <p className="text-lg md:text-xl text-[var(--color-text-muted)] mb-10 leading-relaxed">
               Uma plataforma completa de biohacking, mindset e performance desenhada exclusivamente para a mulher moderna.
             </p>
             

@@ -278,7 +278,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="glass-card p-10 max-w-md w-full shadow-2xl text-center relative border border-[var(--color-border)]"
+              className="glass-card p-10 w-full shadow-2xl text-center relative border border-[var(--color-border)]"
             >
               <button onClick={() => setShowFeedback(false)} className="absolute top-6 right-6 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
                 <X size={24} />

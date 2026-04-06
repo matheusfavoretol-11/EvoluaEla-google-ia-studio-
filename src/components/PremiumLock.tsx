@@ -16,7 +16,7 @@ export default function PremiumLock({ title, description, onUpgrade }: PremiumLo
       <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/90 rounded-full blur-[100px] pointer-events-none"></div>
       
-      <div className="relative z-10 flex flex-col items-center max-w-sm mx-auto">
+      <div className="relative z-10 flex flex-col items-center mx-auto">
         <div 
           className="w-24 h-24 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl relative border border-[var(--color-border)] bg-gradient-to-br from-[var(--color-text)]/90 to-transparent backdrop-blur-xl"
         >

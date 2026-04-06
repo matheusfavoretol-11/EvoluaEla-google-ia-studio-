@@ -194,7 +194,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
               </div>
             ) : 'Quero começar meu teste grátis'}
           </button>
-          <p className="text-center text-[9px] text-[var(--color-text-muted)]/90 mt-6 font-bold leading-relaxed uppercase tracking-widest max-w-md mx-auto">
+          <p className="text-center text-[9px] text-[var(--color-text-muted)]/90 mt-6 font-bold leading-relaxed uppercase tracking-widest mx-auto">
             Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 109,90/mês será renovada automaticamente. Você tem total liberdade para cancelar quando quiser.
           </p>
         </div>

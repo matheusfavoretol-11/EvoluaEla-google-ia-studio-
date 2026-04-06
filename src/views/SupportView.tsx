@@ -36,7 +36,7 @@ function FAQItem({ question, answer }: any) {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <p className="pb-6 text-sm text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
+        <p className="pb-6 text-sm text-[var(--color-text-muted)] leading-relaxed">
           {answer}
         </p>
       </motion.div>
@@ -66,7 +66,7 @@ export default function SupportView() {
 
   return (
     <div className="flex-1 overflow-y-auto hide-scrollbar bg-[var(--color-bg)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-16">
+      <div className="mx-auto px-4 sm:px-6 py-12 space-y-16">
         
         {/* Hero Section */}
         <section className="text-center space-y-4">
@@ -90,7 +90,7 @@ export default function SupportView() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-[var(--color-text-muted)] text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-[var(--color-text-muted)] text-lg mx-auto leading-relaxed"
           >
             Tire suas dúvidas, conheça nossa história e entre em contato com nosso team de especialistas.
           </motion.p>

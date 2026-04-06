@@ -22,7 +22,7 @@ export default function ThemeSettingsModal({ onClose }: { onClose: () => void })
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/90 backdrop-blur-sm">
-      <div className="bg-[var(--color-surface)] w-full max-w-md rounded-t-3xl p-6 shadow-2xl animate-in slide-in-from-bottom-full duration-300 max-h-[90vh] overflow-y-auto border-t border-[var(--color-border)]">
+      <div className="bg-[var(--color-surface)] w-full rounded-t-3xl p-6 shadow-2xl animate-in slide-in-from-bottom-full duration-300 max-h-[90vh] overflow-y-auto border-t border-[var(--color-border)]">
         <div className="flex justify-between items-center mb-6 sticky top-0 bg-[var(--color-surface)] z-10 py-2">
           <h2 className="text-2xl font-bold text-[var(--color-text)] tracking-tighter">Configurações</h2>
           <button onClick={onClose} className="w-8 h-8 bg-[var(--color-bg)] rounded-full flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-text)]/5 transition-colors">
