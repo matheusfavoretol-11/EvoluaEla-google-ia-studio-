@@ -1,6 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
-import { Heart, Send, Sparkles, BookHeart, MessageCircleHeart } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  Calendar as CalendarIcon, 
+  CheckCircle2, 
+  Clock, 
+  Dumbbell, 
+  Heart,
+  Sparkles,
+  BookHeart,
+  MessageCircleHeart,
+  X
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { getGeminiAI, hasGeminiKey } from '../lib/gemini';
@@ -9,20 +21,75 @@ import { supabase } from '../lib/supabase';
 export default function JournalView() {
   const { theme } = useTheme();
   const { userName, userId } = useUser();
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showJournal, setShowJournal] = useState(false);
   const [entry, setEntry] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showAIResponse, setShowAIResponse] = useState(false);
   const [aiResponse, setAiResponse] = useState('');
-  const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
+  const [showAIResponse, setShowAIResponse] = useState(false);
 
-  const prompts = [
-    "O que está no seu coração hoje?",
-    "O que sua alma precisa ouvir agora?",
-    "Pelo que seu coração transborda gratidão hoje?",
-    "Como foi o seu primeiro pensamento ao acordar?"
+  const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
+
+  const monthNames = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
 
-  const handleSubmit = async () => {
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  };
+
+  const renderCalendar = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const days = daysInMonth(year, month);
+    const firstDay = firstDayOfMonth(year, month);
+    const calendarDays = [];
+
+    // Empty slots for previous month
+    for (let i = 0; i < firstDay; i++) {
+      calendarDays.push(<div key={`empty-${i}`} className="h-14 w-full" />);
+    }
+
+    // Days of the month
+    for (let day = 1; day <= days; day++) {
+      const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
+      const isSelected = selectedDate.toDateString() === new Date(year, month, day).toDateString();
+      
+      // Mock data for completed workouts
+      const hasWorkout = day % 3 === 0;
+
+      calendarDays.push(
+        <motion.button
+          key={day}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setSelectedDate(new Date(year, month, day))}
+          className={`h-14 w-full rounded-2xl flex flex-col items-center justify-center relative transition-all ${
+            isSelected 
+              ? 'bg-[#D81BFF] text-white shadow-lg' 
+              : isToday 
+                ? 'bg-white/10 text-white border border-[#D81BFF]/30' 
+                : 'text-white/40 hover:bg-white/5'
+          }`}
+        >
+          <span className="text-sm font-bold">{day}</span>
+          {hasWorkout && !isSelected && (
+            <div className="absolute bottom-2 w-1 h-1 rounded-full bg-[#D81BFF]" />
+          )}
+        </motion.button>
+      );
+    }
+
+    return calendarDays;
+  };
+
+  const handleSubmitJournal = async () => {
     if (!entry.trim() || !userId) return;
     
     setIsSubmitting(true);
@@ -37,155 +104,167 @@ export default function JournalView() {
       const chat = ai.chats.create({
         model: 'gemini-3-flash-preview',
         config: {
-          systemInstruction: `Você é uma amiga e mentora empática, acolhedora e humana do app EvoluaEla. 
-A usuária ${userName} está desabafando no diário emocional dela.
-Seu objetivo é validar o sentimento dela, dar um direcionamento prático e firme, mas com muito amor.
-Nunca pareça robótica. Use um tom de "amiga + mentora firme".
-Exemplo de tom: "Eu entendo o que você está sentindo… mas você não pode se abandonar agora. Vamos juntas sair disso."
-Seja concisa, use emojis e foque no acolhimento.`,
+          systemInstruction: `Você é uma mentora empática do app EvoluaEla. A usuária ${userName} está escrevendo no diário. Valide os sentimentos dela com elegância e sofisticação. Seja breve, use emojis e foque no acolhimento de luxo.`,
         }
       });
 
-      const response = await chat.sendMessage({ message: `Meu desabafo: ${entry}` });
-      const responseText = response.text || '';
-      setAiResponse(responseText);
+      const response = await chat.sendMessage({ message: entry });
+      setAiResponse(response.text || '');
 
-      // Save to Supabase
-      const entryId = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      await supabase
-        .from('journal_entries')
-        .insert({
-          id: entryId,
-          user_id: userId,
-          content: entry,
-          ai_response: responseText,
-          prompt_used: selectedPrompt || '',
-          created_at: new Date().toISOString()
-        });
+      // Save to Supabase (mocked for now)
+      console.log("Saving journal entry...");
 
     } catch (error) {
-      console.error("Error getting AI response or saving to Supabase:", error);
-      setAiResponse("Estou aqui segurando sua mão, mas meu sinal falhou. Respire fundo, sinta meu abraço. Você não está sozinha. 💖");
+      setAiResponse("Estou aqui com você. Respire fundo. Você é maravilhosa. 💖");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="px-6 py-10 sm:px-10 space-y-10 relative min-h-full flex flex-col bg-transparent text-white font-sans overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#8B4357]/5 rounded-full blur-[120px] pointer-events-none"></div>
-
-      <header className="space-y-3 relative z-10">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[#C5A059] shadow-2xl backdrop-blur-xl">
-            <BookHeart size={32} />
-          </div>
-          <h2 className="text-5xl font-bold text-white tracking-tighter">Meu <span className="gradient-text">Diário</span></h2>
-        </div>
-        <p className="text-sm font-bold text-white/40 uppercase tracking-widest leading-relaxed">
-          Este é o seu refúgio seguro. Pode soltar tudo o que sente, refletir e se reencontrar.
-        </p>
+    <div className="px-6 sm:px-10 py-8 space-y-10 flex flex-col h-full overflow-y-auto pb-32">
+      <header className="space-y-2">
+        <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em]">Sua Jornada</p>
+        <h2 className="text-4xl font-sans font-bold text-white tracking-tight">Calendário</h2>
       </header>
 
-      {!showAIResponse ? (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex-1 flex flex-col space-y-8 relative z-10"
-        >
-          {/* Prompts */}
-          <div className="space-y-4">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Sobre o que seu coração quer falar?</span>
-            <div className="flex flex-wrap gap-3">
-              {prompts.map((prompt, idx) => (
-                <button
-                  key={`${prompt}-${idx}`}
-                  onClick={() => {
-                    setSelectedPrompt(prompt);
-                    setEntry(prompt + "\n\n");
-                  }}
-                  className={`text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-2xl border transition-all shadow-2xl ${
-                    selectedPrompt === prompt 
-                      ? 'bg-gradient-to-r from-[#8B4357] to-[#C5A059] text-black border-transparent scale-105' 
-                      : 'bg-white/10 text-white/40 border-white/10 hover:border-white/20 hover:text-white'
-                  }`}
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Text Area */}
-          <div className="flex-1 flex flex-col relative group">
-            <textarea
-              value={entry}
-              onChange={(e) => setEntry(e.target.value)}
-              placeholder="Pode soltar tudo aqui..."
-              className="flex-1 w-full p-10 rounded-[2.5rem] bg-white/5 border border-white/10 resize-none focus:border-[#C5A059]/90 outline-none text-white leading-relaxed font-bold text-xl placeholder:text-white/20 shadow-2xl transition-all backdrop-blur-md"
-            />
-            
-            <button
-              onClick={handleSubmit}
-              disabled={!entry.trim() || isSubmitting}
-              className="absolute bottom-8 right-8 px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-105 transition-all disabled:opacity-90 disabled:hover:scale-100 flex items-center gap-3 bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
-            >
-              <MessageCircleHeart size={20} />
-              Quero desabafar
+      {/* Calendar Card */}
+      <div className="luxury-card p-6 space-y-8">
+        <div className="flex justify-between items-center">
+          <h3 className="text-xl font-bold text-white tracking-tight">
+            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+          </h3>
+          <div className="flex gap-2">
+            <button onClick={handlePrevMonth} className="p-2 bg-white/5 rounded-xl text-white/40 hover:text-white transition-colors">
+              <ChevronLeft size={20} />
+            </button>
+            <button onClick={handleNextMonth} className="p-2 bg-white/5 rounded-xl text-white/40 hover:text-white transition-colors">
+              <ChevronRight size={20} />
             </button>
           </div>
-        </motion.div>
-      ) : (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="flex-1 flex flex-col relative z-10"
-        >
-          <div className="glass-morphism p-10 rounded-[3rem] border border-white/10 relative overflow-hidden flex-1 shadow-2xl flex flex-col">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B4357]/5 rounded-full blur-[100px] -mr-20 -mt-20"></div>
-            
-            <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center gap-5 mb-10">
-                <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-[#8B4357] to-[#C5A059] flex items-center justify-center text-black shadow-2xl">
-                  <Sparkles size={36} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-3xl text-white tracking-tight">Sua Mentora</h3>
-                  <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">Acolhendo suas palavras...</p>
-                </div>
-              </div>
-              
-              <div className="flex-1 overflow-y-auto hide-scrollbar pr-4">
-                {isSubmitting ? (
-                  <div className="flex gap-3 items-center justify-center h-full opacity-90">
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
-                ) : (
-                  <p className="text-white/80 leading-relaxed whitespace-pre-wrap font-bold text-2xl italic tracking-tight">
-                    "{aiResponse}"
-                  </p>
-                )}
-              </div>
+        </div>
 
-              {!isSubmitting && (
-                <button
-                  onClick={() => {
-                    setShowAIResponse(false);
-                    setEntry('');
-                    setSelectedPrompt(null);
-                  }}
-                  className="mt-10 w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] text-white/40 bg-white/5 hover:bg-white/10 hover:text-white transition-all border border-white/10 shadow-2xl"
-                >
-                  Voltar para minhas reflexões
-                </button>
-              )}
+        <div className="grid grid-cols-7 gap-2">
+          {["D", "S", "T", "Q", "Q", "S", "S"].map(day => (
+            <div key={day} className="text-center text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest py-2">
+              {day}
+            </div>
+          ))}
+          {renderCalendar()}
+        </div>
+      </div>
+
+      {/* Selected Day Info */}
+      <div className="space-y-6">
+        <div className="flex justify-between items-end">
+          <h3 className="text-xl font-bold text-white tracking-tight">
+            {selectedDate.getDate()} de {monthNames[selectedDate.getMonth()]}
+          </h3>
+          <button 
+            onClick={() => setShowJournal(true)}
+            className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-widest flex items-center gap-2"
+          >
+            <BookHeart size={14} /> Escrever no Diário
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          <div className="luxury-card p-5 flex items-center justify-between group">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center text-[#D81BFF]">
+                <Dumbbell size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-white">Treino de Superiores</p>
+                <p className="text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest">Concluído • 25 min</p>
+              </div>
+            </div>
+            <CheckCircle2 size={20} className="text-[#D81BFF]" />
+          </div>
+
+          <div className="luxury-card p-5 flex items-center justify-between group opacity-50">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/20">
+                <Heart size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-white">Meditação Guiada</p>
+                <p className="text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest">Não realizado</p>
+              </div>
             </div>
           </div>
-        </motion.div>
-      )}
+        </div>
+      </div>
+
+      {/* Journal Modal */}
+      <AnimatePresence>
+        {showJournal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-xl p-6">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="luxury-card w-full max-w-lg p-8 space-y-8 relative overflow-hidden"
+            >
+              <button 
+                onClick={() => {
+                  setShowJournal(false);
+                  setShowAIResponse(false);
+                  setEntry('');
+                }} 
+                className="absolute top-6 right-6 text-white/20 hover:text-white transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center text-[#D81BFF]">
+                  <BookHeart size={24} />
+                </div>
+                <h3 className="text-2xl font-bold text-white tracking-tight">Diário de Emoções</h3>
+              </div>
+
+              {!showAIResponse ? (
+                <div className="space-y-6">
+                  <p className="text-sm text-[#B8B0C8] leading-relaxed">
+                    Como você está se sentindo hoje? Este espaço é só seu.
+                  </p>
+                  <textarea
+                    value={entry}
+                    onChange={(e) => setEntry(e.target.value)}
+                    placeholder="Escreva aqui seu desabafo..."
+                    className="w-full h-40 p-6 rounded-3xl bg-white/5 border border-white/10 text-white outline-none focus:border-[#D81BFF]/50 transition-all resize-none font-medium"
+                  />
+                  <button 
+                    onClick={handleSubmitJournal}
+                    disabled={!entry.trim() || isSubmitting}
+                    className="luxury-button w-full py-5 rounded-full font-bold text-white uppercase tracking-widest text-xs flex items-center justify-center gap-3"
+                  >
+                    {isSubmitting ? "Processando..." : "Enviar para Mentora"}
+                    <MessageCircleHeart size={18} />
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Sparkles size={20} className="text-[#D81BFF]" />
+                    <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-widest">Resposta da Mentora</p>
+                  </div>
+                  <div className="p-6 rounded-3xl bg-white/5 border border-white/10 italic text-white/80 leading-relaxed">
+                    {isSubmitting ? "..." : aiResponse}
+                  </div>
+                  <button 
+                    onClick={() => setShowJournal(false)}
+                    className="w-full py-5 rounded-full bg-white/5 text-white/40 font-bold uppercase tracking-widest text-[10px] border border-white/10"
+                  >
+                    Fechar
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

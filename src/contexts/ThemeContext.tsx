@@ -13,6 +13,17 @@ type Theme = {
 };
 
 export const predefinedThemes: Record<string, Theme> = {
+  luxury: {
+    id: 'luxury',
+    name: 'Luxury',
+    primary: '#D81BFF',
+    bg: '#0F0A1F',
+    surface: '#1F1638',
+    text: '#FFFFFF',
+    textMuted: '#B8B0C8',
+    accent: '#F8C1FF',
+    border: 'rgba(216, 27, 255, 0.15)',
+  },
   premium: {
     id: 'premium',
     name: 'Premium',
@@ -81,7 +92,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('evoluaela-theme');
-    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.premium;
+    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.luxury;
   });
 
   useEffect(() => {
@@ -102,13 +113,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     if (theme.id === 'light') {
       root.classList.add('light-mode');
-      root.classList.remove('clean-mode');
+      root.classList.remove('clean-mode', 'luxury-mode');
     } else if (theme.id === 'clean') {
       root.classList.add('clean-mode');
-      root.classList.remove('light-mode');
+      root.classList.remove('light-mode', 'luxury-mode');
+    } else if (theme.id === 'luxury') {
+      root.classList.add('luxury-mode');
+      root.classList.remove('light-mode', 'clean-mode');
     } else {
-      root.classList.remove('light-mode');
-      root.classList.remove('clean-mode');
+      root.classList.remove('light-mode', 'clean-mode', 'luxury-mode');
     }
   }, [theme]);
 
@@ -117,7 +130,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    setTheme(prev => prev.id === 'light' ? predefinedThemes.premium : predefinedThemes.light);
+    setTheme(prev => prev.id === 'light' ? predefinedThemes.luxury : predefinedThemes.light);
   };
 
   const isDark = theme.id !== 'light';

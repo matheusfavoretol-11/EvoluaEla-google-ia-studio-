@@ -18,6 +18,7 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
   const [objective, setObjective] = useState('');
   const [feeling, setFeeling] = useState('');
   const [challenge, setChallenge] = useState('');
+  const [commitment, setCommitment] = useState('');
 
   const objectives = [
     { id: 'emagrecer', label: 'Emagrecer com saúde', icon: Target },
@@ -40,13 +41,21 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
     { id: 'motivacao', label: 'Falta de motivação', icon: Flame },
   ];
 
+  const commitments = [
+    { id: '2-3', label: '2 a 3 dias por semana', icon: Clock },
+    { id: '4-5', label: '4 a 5 dias por semana', icon: Activity },
+    { id: '6-7', label: 'Todos os dias', icon: Flame },
+    { id: 'flexivel', label: 'O que for possível', icon: Sparkles },
+  ];
+
   const handleNext = async () => {
     if (step === 1 && objective) setStep(2);
     else if (step === 2 && feeling) setStep(3);
-    else if (step === 3 && challenge) {
+    else if (step === 3 && challenge) setStep(4);
+    else if (step === 4 && commitment) {
       setIsSaving(true);
       try {
-        const answers = { objective, feeling, challenge };
+        const answers = { objective, feeling, challenge, commitment };
         setOnboardingAnswers(answers);
         
         if (userId) {
@@ -62,7 +71,6 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
         onComplete();
       } catch (error) {
         console.error("Error saving onboarding answers:", error);
-        // Still complete onboarding even if save fails to not block user
         onComplete();
       } finally {
         setIsSaving(false);
@@ -71,21 +79,21 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#0A0A0A] font-sans text-white relative overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col bg-[#0F0A1F] font-sans text-white relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#8B4357]/20 rounded-full blur-[120px] animate-pulse-soft"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#C5A059]/10 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#D81BFF]/10 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#F8C1FF]/5 rounded-full blur-[120px] animate-pulse-soft" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="flex-1 flex flex-col px-6 sm:px-12 py-16 sm:py-24 mx-auto w-full max-w-5xl relative z-10">
+      <div className="flex-1 flex flex-col px-6 sm:px-12 py-12 sm:py-20 mx-auto w-full max-w-4xl relative z-10">
         
         {/* Progress Bar */}
-        <div className="w-full h-1 bg-white/5 rounded-full mb-16 sm:mb-24 overflow-hidden border border-white/5">
+        <div className="w-full h-1 bg-white/5 rounded-full mb-12 sm:mb-16 overflow-hidden border border-white/5">
           <motion.div 
-            className="h-full rounded-full bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
+            className="h-full rounded-full bg-gradient-to-r from-[#D81BFF] to-[#F8C1FF]"
             initial={{ width: '0%' }}
-            animate={{ width: `${(step / 3) * 100}%` }}
+            animate={{ width: `${(step / 4) * 100}%` }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
@@ -99,31 +107,31 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -30 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-5xl sm:text-7xl font-serif italic text-white mb-6 leading-tight tracking-tighter">Qual o seu <span className="gradient-text">grande sonho</span> hoje?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-12 sm:mb-16 font-bold leading-relaxed tracking-[0.3em] uppercase">Isso nos ajuda a criar uma jornada que realmente faça sentido para você.</p>
+              <h2 className="text-4xl sm:text-6xl font-sans font-bold text-white mb-4 leading-tight tracking-tight">Qual o seu <span className="text-[#D81BFF]">grande sonho</span> hoje?</h2>
+              <p className="text-xs sm:text-sm text-[#B8B0C8] mb-10 font-bold leading-relaxed tracking-[0.3em] uppercase">Isso nos ajuda a criar uma jornada exclusiva para você.</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
-                {objectives.map((obj, idx) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                {objectives.map((obj) => {
                   const Icon = obj.icon;
                   const isSelected = objective === obj.id;
                   return (
                     <button
                       key={obj.id}
                       onClick={() => setObjective(obj.id)}
-                      className={`p-8 rounded-[2.5rem] border flex flex-col items-start gap-8 transition-all duration-500 text-left group ${
+                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-accent)] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[var(--color-accent)]/30 bg-white/5 backdrop-blur-xl'
+                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-white/5 text-white/20 group-hover:text-[var(--color-accent)]'
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
                         }`}
                       >
-                        <Icon size={32} />
+                        <Icon size={24} />
                       </div>
-                      <span className={`text-lg font-medium tracking-tight ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>
+                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
                         {obj.label}
                       </span>
                     </button>
@@ -141,31 +149,31 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -30 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-5xl sm:text-7xl font-serif italic text-white mb-6 leading-tight tracking-tighter">Como está sua <span className="gradient-text">relação</span> com seu corpo?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-12 sm:mb-16 font-bold leading-relaxed tracking-[0.3em] uppercase">Este é o seu espaço seguro. Pode ser sincera com seu coração.</p>
+              <h2 className="text-4xl sm:text-6xl font-sans font-bold text-white mb-4 leading-tight tracking-tight">Como está sua <span className="text-[#D81BFF]">relação</span> com seu corpo?</h2>
+              <p className="text-xs sm:text-sm text-[#B8B0C8] mb-10 font-bold leading-relaxed tracking-[0.3em] uppercase">Este é o seu espaço seguro. Pode ser sincera.</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
-                {feelings.map((feel, idx) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                {feelings.map((feel) => {
                   const Icon = feel.icon;
                   const isSelected = feeling === feel.id;
                   return (
                     <button
                       key={feel.id}
                       onClick={() => setFeeling(feel.id)}
-                      className={`p-8 rounded-[2.5rem] border flex flex-col items-start gap-8 transition-all duration-500 text-left group ${
+                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-accent)] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[var(--color-accent)]/30 bg-white/5 backdrop-blur-xl'
+                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-white/5 text-white/20 group-hover:text-[var(--color-accent)]'
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
                         }`}
                       >
-                        <Icon size={32} />
+                        <Icon size={24} />
                       </div>
-                      <span className={`text-lg font-medium tracking-tight ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>
+                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
                         {feel.label}
                       </span>
                     </button>
@@ -183,32 +191,74 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               exit={{ opacity: 0, y: -30 }}
               className="flex-1 flex flex-col"
             >
-              <h2 className="text-5xl sm:text-7xl font-serif italic text-white mb-6 leading-tight tracking-tighter">O que mais te <span className="gradient-text">desafia</span> no dia a dia?</h2>
-              <p className="text-sm sm:text-base text-white/40 mb-12 sm:mb-16 font-bold leading-relaxed tracking-[0.3em] uppercase">Vamos juntas encontrar o caminho para superar isso.</p>
+              <h2 className="text-4xl sm:text-6xl font-sans font-bold text-white mb-4 leading-tight tracking-tight">O que mais te <span className="text-[#D81BFF]">desafia</span> no dia a dia?</h2>
+              <p className="text-xs sm:text-sm text-[#B8B0C8] mb-10 font-bold leading-relaxed tracking-[0.3em] uppercase">Vamos juntas encontrar o caminho para superar isso.</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
-                {challenges.map((chal, idx) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                {challenges.map((chal) => {
                   const Icon = chal.icon;
                   const isSelected = challenge === chal.id;
                   return (
                     <button
                       key={chal.id}
                       onClick={() => setChallenge(chal.id)}
-                      className={`p-8 rounded-[2.5rem] border flex flex-col items-start gap-8 transition-all duration-500 text-left group ${
+                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
                         isSelected 
-                          ? 'border-[var(--color-accent)] bg-white/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[var(--color-accent)]/30 bg-white/5 backdrop-blur-xl'
+                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
                       }`}
                     >
                       <div 
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[var(--color-accent)] text-black' : 'bg-white/5 text-white/20 group-hover:text-[var(--color-accent)]'
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
                         }`}
                       >
-                        <Icon size={32} />
+                        <Icon size={24} />
                       </div>
-                      <span className={`text-lg font-medium tracking-tight ${isSelected ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>
+                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
                         {chal.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+
+          {step === 4 && (
+            <motion.div
+              key="step4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              className="flex-1 flex flex-col"
+            >
+              <h2 className="text-4xl sm:text-6xl font-sans font-bold text-white mb-4 leading-tight tracking-tight">Quanto tempo você <span className="text-[#D81BFF]">dedicará</span> a você?</h2>
+              <p className="text-xs sm:text-sm text-[#B8B0C8] mb-10 font-bold leading-relaxed tracking-[0.3em] uppercase">Defina seu compromisso semanal com sua evolução.</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                {commitments.map((com) => {
+                  const Icon = com.icon;
+                  const isSelected = commitment === com.id;
+                  return (
+                    <button
+                      key={com.id}
+                      onClick={() => setCommitment(com.id)}
+                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
+                        isSelected 
+                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
+                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
+                      }`}
+                    >
+                      <div 
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
+                        }`}
+                      >
+                        <Icon size={24} />
+                      </div>
+                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
+                        {com.label}
                       </span>
                     </button>
                   );
@@ -218,21 +268,21 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           )}
         </AnimatePresence>
 
-        <div className="pt-16 sm:pt-24 mt-auto">
+        <div className="pt-12 sm:pt-16 mt-auto">
           <button
             onClick={handleNext}
-            disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge)}
-            className="w-full py-7 rounded-full font-bold text-black shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 bg-[var(--color-accent)] hover:scale-[1.02] active:scale-95 uppercase tracking-[0.2em] text-xs sm:text-sm"
+            disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge) || (step === 4 && !commitment)}
+            className="luxury-button w-full py-6 rounded-full font-bold text-white flex items-center justify-center gap-4 disabled:opacity-50 active:scale-95 uppercase tracking-[0.3em] text-xs"
           >
             {isSaving ? (
               <div className="flex items-center gap-4">
-                <div className="w-6 h-6 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                 <span>Preparando sua jornada...</span>
               </div>
             ) : (
               <>
-                {step === 3 ? 'Quero começar minha evolução!' : 'Continuar'}
-                <ArrowRight size={24} />
+                {step === 4 ? 'Quero começar minha evolução!' : 'Continuar'}
+                <ArrowRight size={20} />
               </>
             )}
           </button>

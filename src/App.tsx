@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Logo } from './components/Logo';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Contexts
@@ -55,11 +55,8 @@ function AppContent() {
   const tabs = [
     { id: 'home', icon: Home, label: 'Início' },
     { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
-    { id: 'nutrition', icon: Apple, label: 'Nutrição' },
-    { id: 'mind', icon: Brain, label: 'Mente' },
-    { id: 'therapy', icon: Heart, label: 'Terapia' },
-    { id: 'coach', icon: Bot, label: 'Coach IA' },
-    { id: 'support', icon: Headphones, label: 'Suporte' },
+    { id: 'journal', icon: Heart, label: 'Calendário' },
+    { id: 'profile', icon: User, label: 'Perfil' },
   ];
 
   const handleLogin = (name: string) => {
@@ -76,9 +73,9 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A]">
-        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A] items-center justify-center">
-           <div className="w-10 h-10 border-2 border-[#8B4357]/30 border-t-[#8B4357] rounded-full animate-spin" />
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0F0A1F]">
+        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F] items-center justify-center">
+           <div className="w-10 h-10 border-2 border-[#D81BFF]/30 border-t-[#D81BFF] rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -90,8 +87,8 @@ function AppContent() {
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0F0A1F]">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F]">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -100,8 +97,8 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0F0A1F]">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F]">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -109,7 +106,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen-dynamic flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] overflow-hidden h-screen-dynamic">
+    <div className="min-h-screen-dynamic flex lg:flex-row justify-center items-center font-sans bg-[#0F0A1F] overflow-hidden h-screen-dynamic">
       
       {/* Desktop Sidebar */}
       <DesktopSidebar 
@@ -176,15 +173,8 @@ function AppContent() {
               >
                 {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'workouts' && <WorkoutsView onUpgrade={() => setShowSubscription(true)} />}
-                {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
-                {activeTab === 'mind' && <MindView onUpgrade={() => setShowSubscription(true)} />}
-                {activeTab === 'therapy' && (
-                  role === 'therapist' || role === 'admin' 
-                    ? <TherapistDashboardView /> 
-                    : <GroupTherapyView onUpgrade={() => setShowSubscription(true)} />
-                )}
-                {activeTab === 'coach' && <AICoachView />}
-                {activeTab === 'support' && <SupportView />}
+                {activeTab === 'journal' && <JournalView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'profile' && <ThemeSettingsModal onClose={() => setActiveTab('home')} isFullView={true} />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -202,7 +192,7 @@ function AppContent() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
-                      isActive ? 'text-[#8B4357]' : 'text-white/40 hover:text-white'
+                      isActive ? 'text-[#D81BFF]' : 'text-white/40 hover:text-white'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
@@ -210,7 +200,7 @@ function AppContent() {
                       {isActive && (
                         <motion.div 
                           layoutId="activeTabGlow"
-                          className="absolute -inset-2 bg-[#8B4357]/10 blur-xl rounded-full -z-10"
+                          className="absolute -inset-2 bg-[#D81BFF]/10 blur-xl rounded-full -z-10"
                         />
                       )}
                     </div>
@@ -255,7 +245,7 @@ function AppContent() {
                 <h2 className="text-2xl font-bold text-white mb-4 tracking-tighter">Aviso Importante</h2>
                 <div className="space-y-4 text-sm text-white/40 mb-8 font-bold uppercase tracking-widest text-[10px]">
                   <p>O <strong className="font-bold text-white">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
-                  <p className="font-bold text-[#8B4357] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <p className="font-bold text-[#D81BFF] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
                   <ul className="list-disc pl-5 space-y-2 text-white/40">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
@@ -266,7 +256,7 @@ function AppContent() {
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
-                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[#8B4357] to-[#C5A059] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
+                  className="luxury-button w-full py-5 rounded-full font-bold text-white hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
                 >
                   Entendi, vamos lá!
                 </button>
