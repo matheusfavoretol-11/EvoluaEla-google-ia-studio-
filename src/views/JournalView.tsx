@@ -145,8 +145,8 @@ export default function JournalView() {
         </div>
 
         <div className="grid grid-cols-7 gap-2">
-          {["D", "S", "T", "Q", "Q", "S", "S"].map(day => (
-            <div key={day} className="text-center text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest py-2">
+          {["D", "S", "T", "Q", "Q", "S", "S"].map((day, idx) => (
+            <div key={`${day}-${idx}`} className="text-center text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest py-2">
               {day}
             </div>
           ))}
