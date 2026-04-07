@@ -131,15 +131,6 @@ function AppContent() {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
-              <button 
-                onClick={() => {
-                  const { toggleTheme } = (window as any).themeContext;
-                  toggleTheme();
-                }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#D81BFF] mr-1"
-              >
-                {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}

@@ -24,59 +24,6 @@ export const predefinedThemes: Record<string, Theme> = {
     accent: '#F8C1FF',
     border: 'rgba(216, 27, 255, 0.15)',
   },
-  premium: {
-    id: 'premium',
-    name: 'Premium',
-    primary: '#8B4357',
-    bg: '#0A0A0A',
-    surface: '#141414',
-    text: '#FFFFFF',
-    textMuted: '#888888',
-    accent: '#C5A059',
-    border: 'rgba(255, 255, 255, 0.1)',
-  },
-  delicado: {
-    id: 'delicado',
-    name: 'Delicado',
-    primary: '#f43f5e', // rose-500
-    bg: '#fafaf9', // stone-50
-    surface: '#ffffff',
-    text: '#292524', // stone-800
-    textMuted: '#78716c', // stone-500
-    accent: '#ffe4e6', // rose-100
-  },
-  elegante: {
-    id: 'elegante',
-    name: 'Elegante',
-    primary: '#b45309', // amber-700
-    bg: '#fdfbf7',
-    surface: '#ffffff',
-    text: '#1c1917',
-    textMuted: '#a8a29e',
-    accent: '#fef3c7', // amber-100
-  },
-  clean: {
-    id: 'clean',
-    name: 'Clean',
-    primary: '#8B4357',
-    bg: '#FFFFFF',
-    surface: '#F9F9F9',
-    text: '#1A1A1A',
-    textMuted: '#717171',
-    accent: '#8B4357',
-    border: '#EEEEEE',
-  },
-  light: {
-    id: 'light',
-    name: 'Claro',
-    primary: '#8B4357',
-    bg: '#FAF8F5',
-    surface: '#FFFFFF',
-    text: '#1A1A1A',
-    textMuted: '#555555',
-    accent: '#C5A059',
-    border: '#E0D8D0',
-  },
 };
 
 interface ThemeContextType {
@@ -90,10 +37,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('evoluaela-theme');
-    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.luxury;
-  });
+  const [theme, setTheme] = useState<Theme>(predefinedThemes.luxury);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -103,26 +47,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--color-text', theme.text);
     root.style.setProperty('--color-text-muted', theme.textMuted);
     root.style.setProperty('--color-accent', theme.accent);
-    if ('border' in theme) {
-      root.style.setProperty('--color-border', (theme as any).border);
-    } else {
-      root.style.setProperty('--color-border', 'rgba(255,255,255,0.05)');
-    }
+    root.style.setProperty('--color-border', theme.border || 'rgba(216, 27, 255, 0.15)');
     
-    localStorage.setItem('evoluaela-theme', theme.id);
-    
-    if (theme.id === 'light') {
-      root.classList.add('light-mode');
-      root.classList.remove('clean-mode', 'luxury-mode');
-    } else if (theme.id === 'clean') {
-      root.classList.add('clean-mode');
-      root.classList.remove('light-mode', 'luxury-mode');
-    } else if (theme.id === 'luxury') {
-      root.classList.add('luxury-mode');
-      root.classList.remove('light-mode', 'clean-mode');
-    } else {
-      root.classList.remove('light-mode', 'clean-mode', 'luxury-mode');
-    }
+    root.classList.add('luxury-mode');
+    root.classList.remove('light-mode', 'clean-mode');
   }, [theme]);
 
   const setCustomColor = (key: keyof Theme, value: string) => {
@@ -130,10 +58,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    setTheme(prev => prev.id === 'light' ? predefinedThemes.luxury : predefinedThemes.light);
+    // No-op as we only have one theme now
   };
 
-  const isDark = theme.id !== 'light';
+  const isDark = true;
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, setCustomColor, toggleTheme, isDark }}>

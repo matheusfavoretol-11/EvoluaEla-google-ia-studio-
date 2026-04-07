@@ -91,52 +91,6 @@ export default function ThemeSettingsModal({ onClose, isFullView }: { onClose: (
             </div>
           </div>
 
-          {/* Theme Toggle */}
-          <div>
-            <h3 className="text-[10px] font-bold text-[#B8B0C8] uppercase tracking-[0.3em] mb-6">Preferências</h3>
-            <button 
-              onClick={toggleTheme}
-              className="w-full flex items-center justify-between p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-[#D81BFF]/50 transition-all group backdrop-blur-xl"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[#D81BFF] shadow-sm border border-white/10">
-                  {isDark ? <Moon size={24} /> : <Sun size={24} />}
-                </div>
-                <div className="text-left">
-                  <p className="font-bold text-white text-lg tracking-tight">Modo {isDark ? 'Escuro' : 'Claro'}</p>
-                  <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest">Alternar visual</p>
-                </div>
-              </div>
-              <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-[#D81BFF]' : 'bg-white/20'}`}>
-                <div className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isDark ? 'translate-x-6' : 'translate-x-0'}`} />
-              </div>
-            </button>
-          </div>
-
-          {/* Predefined Themes */}
-          <div>
-            <h3 className="text-[10px] font-bold text-[#B8B0C8] uppercase tracking-[0.3em] mb-6">Temas Exclusivos</h3>
-            <div className="grid grid-cols-3 gap-4">
-              {Object.values(predefinedThemes).map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setTheme(t)}
-                  className={`flex flex-col items-center gap-3 p-5 rounded-[2rem] border transition-all ${
-                    theme.id === t.id ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
-                  }`}
-                >
-                  <div 
-                    className="w-10 h-10 rounded-full shadow-lg flex items-center justify-center"
-                    style={{ backgroundColor: t.primary }}
-                  >
-                    {theme.id === t.id && <Check size={16} color="#fff" strokeWidth={3} />}
-                  </div>
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{t.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Logout button in full view */}
           {isFullView && (
             <div className="pt-6">
