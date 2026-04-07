@@ -38,6 +38,8 @@ interface UserContextType {
   updateEmotionalStats: (updates: Partial<EmotionalStats>) => void;
   dailyMissions: DailyMission[];
   setDailyMissions: (missions: DailyMission[]) => void;
+  toggleMission: (id: string) => void;
+  streakCount: number;
   onboardingAnswers: Record<string, string>;
   setOnboardingAnswers: (answers: Record<string, string>) => void;
   hasCompletedOnboarding: boolean;
@@ -71,6 +73,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     { id: '2', title: 'Evite se criticar hoje', completed: false },
     { id: '3', title: 'Faça algo só por você', completed: false }
   ]);
+  const [streakCount, setStreakCount] = useState<number>(3);
   const [onboardingAnswers, setOnboardingAnswers] = useState<Record<string, string>>({});
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
   const [acessoTerapiaGrupo, setAcessoTerapiaGrupo] = useState<boolean>(false);
@@ -78,6 +81,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+
+  const toggleMission = (id: string) => {
+    setDailyMissions(prev => prev.map(m => m.id === id ? { ...m, completed: !m.completed } : m));
+  };
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -264,6 +271,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       emotionalStats, setEmotionalStats,
       updateEmotionalStats,
       dailyMissions, setDailyMissions,
+      toggleMission,
+      streakCount,
       onboardingAnswers, setOnboardingAnswers,
       hasCompletedOnboarding,
       acessoTerapiaGrupo,
