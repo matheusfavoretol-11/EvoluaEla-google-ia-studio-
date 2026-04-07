@@ -55,6 +55,9 @@ function AppContent() {
   const tabs = [
     { id: 'home', icon: Home, label: 'Início' },
     { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
+    { id: 'nutrition', icon: Apple, label: 'Nutrição' },
+    { id: 'therapy', icon: Brain, label: 'Terapia' },
+    { id: 'coach', icon: Bot, label: 'Coach IA' },
     { id: 'journal', icon: Heart, label: 'Calendário' },
     { id: 'profile', icon: User, label: 'Perfil' },
   ];
@@ -73,10 +76,8 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0F0A1F]">
-        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F] items-center justify-center">
-           <div className="w-10 h-10 border-2 border-[#D81BFF]/30 border-t-[#D81BFF] rounded-full animate-spin" />
-        </div>
+      <div className="w-full h-screen-dynamic relative flex flex-col overflow-hidden bg-[#0F0A1F] items-center justify-center">
+         <div className="w-10 h-10 border-2 border-[#D81BFF]/30 border-t-[#D81BFF] rounded-full animate-spin" />
       </div>
     );
   }
@@ -87,26 +88,22 @@ function AppContent() {
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0F0A1F]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F]">
-          <AuthView onLogin={handleLogin} onRegister={handleRegister} />
-        </div>
+      <div className="w-full h-screen-dynamic relative flex flex-col overflow-hidden bg-[#0F0A1F]">
+        <AuthView onLogin={handleLogin} onRegister={handleRegister} />
       </div>
     );
   }
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0F0A1F]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0F0A1F]">
-          <OnboardingView onComplete={handleOnboardingComplete} />
-        </div>
+      <div className="w-full h-screen-dynamic relative flex flex-col overflow-hidden bg-[#0F0A1F]">
+        <OnboardingView onComplete={handleOnboardingComplete} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen-dynamic flex lg:flex-row justify-center items-center font-sans bg-[#0F0A1F] overflow-hidden h-screen-dynamic">
+    <div className="w-full h-screen-dynamic relative flex flex-col lg:flex-row overflow-hidden bg-[#0F0A1F] font-sans">
       
       {/* Desktop Sidebar */}
       <DesktopSidebar 
@@ -116,7 +113,7 @@ function AppContent() {
         onUpgrade={() => setShowSubscription(true)}
       />
 
-      <div className="w-full lg:flex-1 h-screen-dynamic relative flex flex-col overflow-hidden transition-all duration-500 bg-transparent">
+      <div className="w-full lg:flex-1 h-full relative flex flex-col overflow-hidden transition-all duration-500 bg-transparent">
         <div className="infinite-bg" />
         
         {/* Header */}
@@ -125,7 +122,7 @@ function AppContent() {
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#8B4357]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#D81BFF]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -139,19 +136,19 @@ function AppContent() {
                   const { toggleTheme } = (window as any).themeContext;
                   toggleTheme();
                 }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#8B4357] mr-1"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#D81BFF] mr-1"
               >
                 {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full text-[9px] sm:text-[10px] font-bold shadow-2xl uppercase tracking-[0.2em] bg-[#C5A059] text-black transition-all hover:bg-white hover:scale-105 active:scale-95"
+                  className="flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full text-[9px] sm:text-[10px] font-bold shadow-2xl uppercase tracking-[0.2em] bg-[#D81BFF] text-white transition-all hover:bg-white hover:text-[#D81BFF] hover:scale-105 active:scale-95"
                 >
                   <Crown size={12} className="sm:w-3.5 sm:h-3.5" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center justify-center text-[#C5A059] shadow-xl">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[#D81BFF]/10 border border-[#D81BFF]/20 flex items-center justify-center text-[#D81BFF] shadow-xl">
                   <Crown size={20} className="sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" />
                 </div>
               )}
@@ -173,7 +170,10 @@ function AppContent() {
               >
                 {activeTab === 'home' && <DashboardView onNavigate={setActiveTab} onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'workouts' && <WorkoutsView onUpgrade={() => setShowSubscription(true)} />}
-                {activeTab === 'journal' && <JournalView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'therapy' && <GroupTherapyView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'coach' && <AICoachView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'journal' && <JournalView />}
                 {activeTab === 'profile' && <ThemeSettingsModal onClose={() => setActiveTab('home')} isFullView={true} />}
               </motion.div>
             </AnimatePresence>
@@ -181,22 +181,22 @@ function AppContent() {
         </main>
 
         {/* Bottom Navigation - Floating Style */}
-        <nav className="lg:hidden fixed bottom-6 left-6 right-6 px-6 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 glass-morphism rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10">
-          <ul className="flex justify-between items-center">
+        <nav className="lg:hidden fixed bottom-6 left-6 right-6 px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-40 glass-morphism rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 overflow-x-auto hide-scrollbar">
+          <ul className="flex justify-between items-center min-w-max gap-4 px-2">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
-                <li key={tab.id} className="flex-1">
+                <li key={tab.id} className="shrink-0">
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
+                    className={`flex flex-col items-center gap-1.5 transition-all duration-500 ${
                       isActive ? 'text-[#D81BFF]' : 'text-white/40 hover:text-white'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
-                      <Icon size={isActive ? 22 : 20} className="sm:w-6 sm:h-6" strokeWidth={isActive ? 2.5 : 2} />
+                      <Icon size={isActive ? 22 : 20} strokeWidth={isActive ? 2.5 : 2} />
                       {isActive && (
                         <motion.div 
                           layoutId="activeTabGlow"
@@ -211,7 +211,7 @@ function AppContent() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 5, scale: 0.8 }}
                           transition={{ duration: 0.2 }}
-                          className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em]"
+                          className="text-[8px] font-bold uppercase tracking-[0.2em]"
                         >
                           {tab.label}
                         </motion.span>

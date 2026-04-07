@@ -10,7 +10,8 @@ import {
   ShieldCheck, 
   Stethoscope,
   Clock,
-  MessageCircle
+  MessageCircle,
+  Crown
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -23,10 +24,10 @@ function FAQItem({ question, answer }: any) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left group transition-all"
       >
-        <span className={`text-sm font-semibold tracking-tight transition-colors ${isOpen ? 'text-[#8B4357]' : 'text-white/40 group-hover:text-white'}`}>
+        <span className={`text-sm font-bold tracking-tight transition-colors ${isOpen ? 'text-[#D81BFF]' : 'text-[#B8B0C8] group-hover:text-white'}`}>
           {question}
         </span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[#8B4357]/90 text-white rotate-180' : 'bg-white/5 text-white/40'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-[#D81BFF] text-white rotate-180' : 'bg-white/5 text-[#B8B0C8]'}`}>
           <ChevronDown size={16} />
         </div>
       </button>
@@ -36,7 +37,7 @@ function FAQItem({ question, answer }: any) {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <p className="pb-6 text-sm text-white/40 leading-relaxed">
+        <p className="pb-6 text-sm text-[#B8B0C8] leading-relaxed font-medium">
           {answer}
         </p>
       </motion.div>
@@ -73,7 +74,7 @@ export default function SupportView() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8B4357]/20 border border-[#8B4357]/30 text-[#8B4357] text-[10px] font-bold uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D81BFF]/10 border border-[#D81BFF]/20 text-[#D81BFF] text-[10px] font-bold uppercase tracking-widest mb-4"
           >
             <Headphones size={14} />
             Central de Suporte
@@ -84,13 +85,13 @@ export default function SupportView() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white tracking-tighter"
           >
-            Estamos aqui para <span className="gradient-text">você</span>
+            Estamos aqui para <span className="text-[#D81BFF]">você</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-white/40 text-lg mx-auto leading-relaxed"
+            className="text-[#B8B0C8] text-lg mx-auto leading-relaxed font-medium"
           >
             Tire suas dúvidas, conheça nossa história e entre em contato com nosso time de especialistas.
           </motion.p>
@@ -102,14 +103,14 @@ export default function SupportView() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2.5rem] glass-morphism border border-white/10 space-y-6"
+            className="p-8 luxury-card space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#8B4357]/20 flex items-center justify-center text-[#8B4357]">
+            <div className="w-12 h-12 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center text-[#D81BFF]">
               <Users size={24} />
             </div>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-white tracking-tight">Sobre a EvoluaEla</h2>
-              <p className="text-white/40 text-sm leading-relaxed">
+              <p className="text-[#B8B0C8] text-sm leading-relaxed font-medium">
                 A EvoluaEla nasceu com um propósito claro: ser o espaço onde mulheres encontram suporte real para evoluir em todas as dimensões da vida. Acreditamos que saúde, mente, corpo e emoções são inseparáveis — e é por isso que reunimos treinos personalizados, nutrição inteligente, saúde mental e comunidade em um único lugar. Somos mais do que um app. Somos um time que caminha ao seu lado em cada passo da sua jornada de evolução.
               </p>
             </div>
@@ -119,14 +120,14 @@ export default function SupportView() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#8B4357]/20 to-transparent border border-[#8B4357]/30 space-y-6"
+            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#D81BFF]/10 to-transparent border border-[#D81BFF]/20 space-y-6"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/20 flex items-center justify-center text-[#C5A059]">
+            <div className="w-12 h-12 rounded-2xl bg-[#F8C1FF]/10 flex items-center justify-center text-[#F8C1FF]">
               <Target size={24} />
             </div>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-white tracking-tight">Nossa Missão</h2>
-              <p className="text-white/40 text-sm leading-relaxed">
+              <p className="text-[#B8B0C8] text-sm leading-relaxed font-medium">
                 Empoderar mulheres através de ferramentas práticas, conteúdo de qualidade e uma comunidade acolhedora, ajudando cada uma a se tornar a melhor versão de si mesma.
               </p>
             </div>
@@ -146,32 +147,32 @@ export default function SupportView() {
               href="https://instagram.com/evoluaela_" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-[#8B4357]/90 transition-all flex items-center gap-6"
+              className="group p-6 luxury-card hover:border-[#D81BFF]/50 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#8B4357] to-[#C5A059] flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#D81BFF] to-[#F8C1FF] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                 <Instagram size={28} />
               </div>
               <div>
-                <span className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Instagram</span>
-                <span className="text-lg font-bold text-white group-hover:text-[#8B4357] transition-colors">@evoluaela_</span>
+                <span className="block text-xs font-bold text-[#B8B0C8] uppercase tracking-widest mb-1">Instagram</span>
+                <span className="text-lg font-bold text-white group-hover:text-[#D81BFF] transition-colors">@evoluaela_</span>
               </div>
             </a>
 
             <a 
               href="mailto:evoluaela@gmail.com"
-              className="group p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-[#C5A059]/90 transition-all flex items-center gap-6"
+              className="group p-6 luxury-card hover:border-[#F8C1FF]/50 transition-all flex items-center gap-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#C5A059] flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8C1FF] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                 <Mail size={28} />
               </div>
               <div>
-                <span className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1">E-mail</span>
-                <span className="text-lg font-bold text-white group-hover:text-[#C5A059] transition-colors">evoluaela@gmail.com</span>
+                <span className="block text-xs font-bold text-[#B8B0C8] uppercase tracking-widest mb-1">E-mail</span>
+                <span className="text-lg font-bold text-white group-hover:text-[#F8C1FF] transition-colors">evoluaela@gmail.com</span>
               </div>
             </a>
           </div>
 
-          <div className="flex items-center justify-center gap-2 text-white/40 text-xs font-medium">
+          <div className="flex items-center justify-center gap-2 text-white/20 text-xs font-medium">
             <Clock size={14} />
             Nossa equipe responde em até 24 horas úteis
           </div>
@@ -185,7 +186,7 @@ export default function SupportView() {
             <div className="h-px flex-1 bg-white/5" />
           </div>
 
-          <div className="glass-morphism border border-white/10 rounded-[2.5rem] px-8 py-4">
+          <div className="luxury-card px-8 py-4">
             {faqs.map((faq, index) => (
               <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}
@@ -193,13 +194,13 @@ export default function SupportView() {
         </section>
 
         {/* Bottom CTA */}
-        <section className="p-12 rounded-[3rem] bg-gradient-to-br from-[#8B4357] to-[#C5A059] text-center space-y-6 relative overflow-hidden">
+        <section className="p-12 luxury-button text-center space-y-6 relative overflow-hidden rounded-[3rem]">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -mr-32 -mt-32" />
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold text-black tracking-tighter mb-2">Ainda tem dúvidas?</h2>
-            <p className="text-black/60 text-sm font-medium mb-8">Nossa Coach IA está disponível 24/7 para te ajudar.</p>
+            <h2 className="text-3xl font-bold text-white tracking-tighter mb-2">Ainda tem dúvidas?</h2>
+            <p className="text-white/80 text-sm font-medium mb-8">Nossa Coach IA está disponível 24/7 para te ajudar.</p>
             <button 
-              className="px-8 py-4 rounded-full bg-black text-white text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform active:scale-95 shadow-2xl"
+              className="px-8 py-4 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform active:scale-95 shadow-2xl"
               onClick={() => window.dispatchEvent(new CustomEvent('open-coach'))}
             >
               Falar com a Coach
