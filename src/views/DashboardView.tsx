@@ -286,7 +286,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
         </motion.section>
 
         {/* Header & Greeting */}
-        <header className="flex justify-between items-start pt-16 border-t border-white/5">
+        <header className="flex justify-between items-start pt-8 md:pt-16 border-t border-white/5">
           <motion.div 
             variants={itemVariants}
             className="space-y-6"
@@ -363,16 +363,16 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       {/* Daily Quote Card */}
       <motion.div 
         variants={itemVariants}
-        className="glass-morphism p-10 rounded-[3rem] relative overflow-hidden group border border-white/5"
+        className="glass-morphism p-6 md:p-10 rounded-3xl md:rounded-[3rem] relative overflow-hidden group border border-white/5"
       >
         <div className="absolute -right-10 -top-10 opacity-10 group-hover:opacity-20 transition-opacity">
           <Sparkles size={200} className="text-[#C5A059]" />
         </div>
-        <div className="relative z-10 flex items-start gap-8">
-          <div className="w-16 h-16 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center justify-center shrink-0">
-            <Sparkles size={32} className="text-[#C5A059]" />
+        <div className="relative z-10 flex items-start gap-4 md:gap-8">
+          <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center justify-center shrink-0">
+            <Sparkles size={24} className="text-[#C5A059]" />
           </div>
-          <p className="text-2xl md:text-3xl font-serif italic text-white/90 leading-tight tracking-tight">
+          <p className="text-xl md:text-3xl font-serif italic text-white/90 leading-tight tracking-tight">
             "Sua evolução é um processo contínuo de florescimento. Cada escolha consciente hoje é uma semente para o seu amanhã radiante."
           </p>
         </div>
@@ -387,7 +387,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Status Atual</span>
           </div>
           
-          <div className="glass-morphism p-10 rounded-[3rem] space-y-10 border border-white/5">
+          <div className="glass-morphism p-6 md:p-10 rounded-3xl md:rounded-[3rem] space-y-8 md:space-y-10 border border-white/5">
             {[
               { label: 'Confiança', value: emotionalStats.confianca, color: '#C5A059' },
               { label: 'Autoestima', value: emotionalStats.autoestima, color: '#8B4357' },
@@ -428,7 +428,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
                 variants={itemVariants}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => toggleMission(mission.id)}
-                className={`p-8 rounded-[2.5rem] border transition-all duration-500 flex items-center justify-between cursor-pointer group ${
+                className={`p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border transition-all duration-500 flex items-center justify-between cursor-pointer group ${
                   mission.completed 
                     ? 'bg-[var(--color-accent)] border-[var(--color-accent)]' 
                     : 'glass-morphism border-white/5 hover:border-white/20'
@@ -463,7 +463,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => onNavigate('content')}
-            className="glass-morphism flex items-center gap-8 cursor-pointer group p-8 rounded-[2.5rem]"
+            className="glass-morphism flex items-center gap-6 md:gap-8 cursor-pointer group p-6 md:p-8 rounded-3xl md:rounded-[2.5rem]"
           >
             <div className="w-20 h-20 rounded-3xl bg-[#8B4357]/90 flex items-center justify-center shrink-0 group-hover:bg-[#8B4357] group-hover:text-black transition-all">
               <Play size={32} fill="currentColor" />
@@ -485,7 +485,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setShowCommunityUpsell(true)}
-            className="bg-gradient-to-br from-[#8B4357] to-[#C5A059] p-8 rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
+            className="bg-gradient-to-br from-[#8B4357] to-[#C5A059] p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] relative overflow-hidden cursor-pointer h-full flex flex-col justify-between group"
           >
             <div className="absolute -right-8 -bottom-8 opacity-90 group-hover:opacity-90 transition-opacity">
               <Users size={160} className="text-black" />

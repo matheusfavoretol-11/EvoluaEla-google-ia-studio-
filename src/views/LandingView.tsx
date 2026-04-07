@@ -104,7 +104,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </header>
 
       {/* Hero Section - AIDA: ATTENTION */}
-      <section className="relative pt-[calc(12rem+env(safe-area-inset-top))] pb-32 px-8 min-h-[100dvh] flex items-center overflow-hidden z-10">
+      <section className="relative pt-[calc(8rem+env(safe-area-inset-top))] md:pt-[calc(12rem+env(safe-area-inset-top))] pb-20 md:pb-32 px-6 md:px-8 min-h-screen-dynamic flex items-center overflow-hidden z-10">
         <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-24 items-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -115,7 +115,7 @@ export default function LandingView({ onStart }: LandingViewProps) {
               <Sparkles size={16} className="text-[var(--color-accent)]" />
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40">A Referência Premium em Evolução Feminina</span>
             </div>
-            <h1 className="text-7xl md:text-9xl font-serif italic font-light leading-[0.95] mb-12 tracking-tighter text-white">
+            <h1 className="text-5xl md:text-9xl font-serif italic font-light leading-[0.95] mb-12 tracking-tighter text-white">
               Desperte a <br />
               <span className="gradient-text">Mulher</span> que o <br />
               Mundo espera.
@@ -333,63 +333,61 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Pricing Section - AIDA: ACTION */}
-      <section id="pricing" className="relative py-48 px-8 z-10">
+      <section id="pricing" className="relative py-32 md:py-48 px-6 md:px-8 z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32">
-            <h2 className="text-6xl md:text-8xl font-serif italic mb-10 tracking-tight text-white">Seu <span className="gradient-text">Investimento</span>.</h2>
-            <p className="text-white/40 max-w-2xl mx-auto text-2xl font-light">O valor de uma nova vida é incalculável. O acesso a ela é exclusivo.</p>
+          <div className="text-center mb-20 md:mb-32">
+            <h2 className="text-5xl md:text-8xl font-serif italic mb-8 md:mb-10 tracking-tight text-white">Seu <span className="gradient-text">Investimento</span>.</h2>
+            <p className="text-white/40 max-w-2xl mx-auto text-xl md:text-2xl font-light">O valor de uma nova vida é incalculável. O acesso a ela é exclusivo.</p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="p-16 md:p-24 rounded-[5rem] bg-gradient-to-br from-[#121212] to-[#0A0A0A] border border-white/5 flex flex-col h-full shadow-2xl relative overflow-hidden group"
+              className="p-10 md:p-20 rounded-[3rem] md:rounded-[5rem] bg-gradient-to-br from-[#121212] to-[#0A0A0A] border border-white/5 flex flex-col h-full shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 p-16 opacity-5 pointer-events-none">
+              <div className="absolute top-0 right-0 p-16 opacity-5 pointer-events-none hidden md:block">
                 <Logo size="lg" className="scale-[4] rotate-12" />
               </div>
               
-              <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-12">
-                <div>
-                  <div className="inline-flex px-6 py-2 rounded-full bg-[var(--color-accent)] text-black text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
-                    Membro Premium
-                  </div>
-                  <h3 className="text-5xl font-bold text-white mb-4 tracking-tight">Acesso Vitalício Anual</h3>
-                  <p className="text-white/40 text-xl font-light">Tudo o que você precisa para sua transformação definitiva.</p>
+              <div className="flex flex-col items-center text-center mb-12 md:mb-16 gap-6">
+                <div className="inline-flex px-6 py-2 rounded-full bg-[var(--color-accent)] text-black text-[10px] font-bold uppercase tracking-[0.3em]">
+                  Plano Mensal
                 </div>
-                <div className="text-right">
-                  <div className="text-lg text-white/20 line-through mb-2">R$ 1.997</div>
-                  <div className="text-7xl font-serif italic text-white tracking-tighter">R$ 997</div>
-                  <div className="text-[10px] font-bold text-[var(--color-accent)] uppercase tracking-[0.3em] mt-4">Ou 12x de R$ 99,70</div>
-                </div>
+                <h3 className="text-4xl md:text-6xl font-bold text-white tracking-tight">Círculo Premium</h3>
+                <p className="text-white/40 text-lg md:text-xl font-light max-w-md">Tudo o que você precisa para sua transformação definitiva, com flexibilidade total.</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-16 mb-20">
-                <ul className="space-y-8">
+              <div className="flex flex-col items-center text-center mb-12">
+                <div className="text-6xl md:text-8xl font-serif italic text-white tracking-tighter mb-2">R$ 109,90<span className="text-xl md:text-2xl text-white/40 font-sans font-light tracking-normal ml-2">/mês</span></div>
+                <div className="text-[10px] md:text-xs font-bold text-[var(--color-accent)] uppercase tracking-[0.3em]">Cobrado mensalmente • Cancele quando quiser</div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16">
+                <ul className="space-y-6">
                   {[
                     'Acompanhamento com Nutricionista',
                     'Suporte Terapêutico Mensal',
                     'Protocolos de Biohacking',
                     'Coach IA 24/7 Ilimitado'
                   ].map((item, i) => (
-                    <li key={`benefit-primary-${i}`} className="flex items-center gap-6 text-white font-medium text-lg">
-                      <CheckCircle2 size={24} className="text-[var(--color-accent)]" />
+                    <li key={`benefit-primary-${i}`} className="flex items-center gap-4 text-white font-medium text-base md:text-lg">
+                      <CheckCircle2 size={20} className="text-[var(--color-accent)] shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <ul className="space-y-8">
+                <ul className="space-y-6">
                   {[
                     'Networking de Alto Valor',
                     'Aulas de Etiqueta & Estilo',
                     'Mindset de Performance',
-                    'Eventos Exclusivos Online'
+                    'Comunidade Exclusiva'
                   ].map((item, i) => (
-                    <li key={`benefit-secondary-${i}`} className="flex items-center gap-6 text-white/40 text-lg font-light">
-                      <CheckCircle2 size={24} className="text-[var(--color-accent)]/30" />
+                    <li key={`benefit-secondary-${i}`} className="flex items-center gap-4 text-white/40 text-base md:text-lg font-light">
+                      <CheckCircle2 size={20} className="text-[var(--color-accent)]/30 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -399,17 +397,17 @@ export default function LandingView({ onStart }: LandingViewProps) {
               <div className="space-y-8">
                 <button 
                   onClick={onStart}
-                  className="w-full py-8 rounded-full bg-[var(--color-accent)] text-black font-bold text-sm uppercase tracking-[0.4em] hover:bg-white transition-all duration-700 shadow-[0_0_50px_rgba(197,160,89,0.15)]"
+                  className="w-full py-6 md:py-8 rounded-full bg-[var(--color-accent)] text-black font-bold text-xs md:text-sm uppercase tracking-[0.4em] hover:bg-white transition-all duration-700 shadow-[0_0_50px_rgba(197,160,89,0.15)] active:scale-95"
                 >
                   Garantir Minha Vaga Premium
                 </button>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-12 opacity-30">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-12 opacity-30">
                   <div className="flex items-center gap-3">
-                    <Shield size={18} />
+                    <Shield size={16} />
                     <span className="text-[9px] font-bold uppercase tracking-[0.3em]">Pagamento 100% Seguro</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Star size={18} />
+                    <Star size={16} />
                     <span className="text-[9px] font-bold uppercase tracking-[0.3em]">Satisfação Garantida</span>
                   </div>
                 </div>

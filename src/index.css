@@ -28,15 +28,64 @@
 }
 
 .light-mode {
-  --color-primary: #C9848C;
-  --color-primary-rgb: 201, 132, 140;
+  --color-primary: #8B4357;
+  --color-primary-rgb: 139, 67, 87;
   --color-bg: #F2EFE9;
   --color-surface: #FFFFFF;
   --color-text: #1A1A1A;
   --color-text-muted: #555555;
-  --color-accent: #B89A76;
-  --color-accent-rgb: 184, 154, 118;
+  --color-accent: #C5A059;
+  --color-accent-rgb: 197, 160, 89;
   --color-border: #D0C8C0;
+}
+
+.clean-mode {
+  --color-primary: #8B4357;
+  --color-bg: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1A1A;
+  --color-text-muted: #6C757D;
+  --color-accent: #8B4357;
+  --color-border: #E9ECEF;
+}
+
+.clean-mode .infinite-bg,
+.clean-mode .absolute.inset-0.z-0.overflow-hidden.pointer-events-none {
+  display: none !important;
+}
+
+.clean-mode .glass-morphism {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04) !important;
+}
+
+.clean-mode .text-white {
+  color: var(--color-text) !important;
+}
+
+.clean-mode .text-white\/40,
+.clean-mode .text-white\/60,
+.clean-mode .text-white\/20 {
+  color: var(--color-text-muted) !important;
+}
+
+.clean-mode .bg-white\/5,
+.clean-mode .bg-white\/10 {
+  background-color: #F1F3F5 !important;
+}
+
+.clean-mode .border-white\/5,
+.clean-mode .border-white\/10 {
+  border-color: #E9ECEF !important;
+}
+
+.clean-mode .gradient-text {
+  background-image: none !important;
+  -webkit-text-fill-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
 }
 
 body {
@@ -48,6 +97,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Native-like scroll for iOS */
@@ -56,6 +107,17 @@ body {
   overflow-y: auto;
   height: 100%;
   overscroll-behavior-y: contain;
+}
+
+/* Fix for mobile height issues */
+.h-screen-dynamic {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-screen-dynamic {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Remove 300ms delay on iOS */

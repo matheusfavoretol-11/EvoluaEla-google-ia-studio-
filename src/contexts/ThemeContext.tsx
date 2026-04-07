@@ -44,6 +44,17 @@ export const predefinedThemes: Record<string, Theme> = {
     textMuted: '#a8a29e',
     accent: '#fef3c7', // amber-100
   },
+  clean: {
+    id: 'clean',
+    name: 'Clean',
+    primary: '#8B4357',
+    bg: '#FFFFFF',
+    surface: '#F9F9F9',
+    text: '#1A1A1A',
+    textMuted: '#717171',
+    accent: '#8B4357',
+    border: '#EEEEEE',
+  },
   light: {
     id: 'light',
     name: 'Claro',
@@ -91,8 +102,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     if (theme.id === 'light') {
       root.classList.add('light-mode');
+      root.classList.remove('clean-mode');
+    } else if (theme.id === 'clean') {
+      root.classList.add('clean-mode');
+      root.classList.remove('light-mode');
     } else {
       root.classList.remove('light-mode');
+      root.classList.remove('clean-mode');
     }
   }, [theme]);
 

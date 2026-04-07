@@ -99,10 +99,10 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         <div className="space-y-12 flex-1 relative z-10 max-w-4xl mx-auto w-full">
           <div className="text-center">
             <div className="inline-block px-6 py-2 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold text-[10px] rounded-full mb-6 uppercase tracking-[0.2em] border border-[var(--color-accent)]/20">
-              Experimente por 7 Dias Grátis
+              Assinatura Mensal Premium
             </div>
             <div className="text-7xl sm:text-9xl font-serif italic text-white mb-4 tracking-tighter">R$ 109,90<span className="text-2xl text-white/40 font-sans font-light tracking-normal opacity-90">/mês</span></div>
-            <p className="text-white/40 text-lg font-medium tracking-tight">Acompanhamento profissional completo. Cancele quando quiser.</p>
+            <p className="text-white/40 text-lg font-medium tracking-tight">Acesso total e ilimitado. Cancele quando quiser.</p>
           </div>
 
           <div className="space-y-10">
@@ -180,7 +180,7 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
         <div className="mt-20 pt-12 border-t border-white/5 relative z-10 max-w-4xl mx-auto w-full">
           <div className="flex items-center justify-center gap-4 mb-8 text-white/20 text-[10px] font-bold uppercase tracking-[0.3em]">
             <CreditCard size={20} />
-            <span>Cobrança segura apenas após 7 dias</span>
+            <span>Pagamento Seguro & Criptografado</span>
           </div>
           <button 
             onClick={handleSubscribe}
@@ -192,10 +192,10 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                 <div className="w-6 h-6 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                 <span>Processando...</span>
               </div>
-            ) : 'Quero começar meu teste grátis'}
+            ) : 'Assinar Agora'}
           </button>
           <p className="text-center text-[10px] text-white/20 mt-8 font-bold leading-relaxed uppercase tracking-[0.2em] max-w-2xl mx-auto">
-            Fique tranquila, nada será cobrado hoje. Após os 7 dias, a assinatura de R$ 109,90/mês será renovada automaticamente. Você tem total liberdade para cancelar quando quiser.
+            Assinatura recorrente de R$ 109,90/mês. Cobrado mensalmente no seu cartão. Você tem total liberdade para cancelar sua assinatura a qualquer momento diretamente nas configurações.
           </p>
         </div>
       </div>

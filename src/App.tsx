@@ -109,7 +109,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] overflow-hidden">
+    <div className="min-h-screen-dynamic flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] overflow-hidden h-screen-dynamic">
       
       {/* Desktop Sidebar */}
       <DesktopSidebar 
@@ -119,7 +119,7 @@ function AppContent() {
         onUpgrade={() => setShowSubscription(true)}
       />
 
-      <div className="w-full lg:flex-1 h-screen min-h-[100dvh] lg:min-h-0 relative flex flex-col overflow-hidden transition-all duration-500 bg-transparent">
+      <div className="w-full lg:flex-1 h-screen-dynamic relative flex flex-col overflow-hidden transition-all duration-500 bg-transparent">
         <div className="infinite-bg" />
         
         {/* Header */}
