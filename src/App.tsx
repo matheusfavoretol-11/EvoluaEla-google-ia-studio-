@@ -76,9 +76,9 @@ function AppContent() {
 
   if (!isAuthReady) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-surface)] items-center justify-center">
-           <div className="w-10 h-10 border-2 border-[var(--color-primary)]/90 border-t-[var(--color-primary)] rounded-full animate-spin" />
+      <div className="min-h-screen flex flex-col justify-center items-center font-sans bg-[#0A0A0A]">
+        <div className="w-full lg:h-screen min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A] items-center justify-center">
+           <div className="w-10 h-10 border-2 border-[#8B4357]/30 border-t-[#8B4357] rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -86,16 +86,12 @@ function AppContent() {
 
   if (!userId) {
     if (showLanding) {
-      return (
-        <div className="min-h-screen font-sans bg-[var(--color-bg)]">
-          <LandingView onStart={() => setShowLanding(false)} />
-        </div>
-      );
+      return <LandingView onStart={() => setShowLanding(false)} />;
     }
 
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-bg)]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A]">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A]">
           <AuthView onLogin={handleLogin} onRegister={handleRegister} />
         </div>
       </div>
@@ -104,8 +100,8 @@ function AppContent() {
 
   if (!hasCompletedOnboarding) {
     return (
-      <div className="min-h-screen flex justify-center items-center font-sans bg-[var(--color-bg)]">
-        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[var(--color-bg)]">
+      <div className="min-h-screen flex justify-center items-center font-sans bg-[#0A0A0A]">
+        <div className="w-full min-h-[100dvh] relative flex flex-col overflow-hidden bg-[#0A0A0A]">
           <OnboardingView onComplete={handleOnboardingComplete} />
         </div>
       </div>
@@ -113,7 +109,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[var(--color-bg)] overflow-hidden">
+    <div className="min-h-screen flex lg:flex-row justify-center items-center font-sans bg-[#0A0A0A] overflow-hidden">
       
       {/* Desktop Sidebar */}
       <DesktopSidebar 
@@ -132,7 +128,7 @@ function AppContent() {
             <div className="flex items-center gap-3 sm:gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#8B4357]"
               >
                 <Menu size={20} className="sm:w-6 sm:h-6" />
               </button>
@@ -146,19 +142,19 @@ function AppContent() {
                   const { toggleTheme } = (window as any).themeContext;
                   toggleTheme();
                 }}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-[var(--color-text-muted)] hover:text-[var(--color-primary)] mr-1"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm transition-all glass-morphism text-white/40 hover:text-[#8B4357] mr-1"
               >
                 {(window as any).themeContext?.isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2 sm:py-2.5 lg:py-4 rounded-full text-[8px] sm:text-[9px] lg:text-[11px] font-bold shadow-lg uppercase tracking-widest bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black transition-all hover:scale-105 active:scale-95"
+                  className="flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full text-[9px] sm:text-[10px] font-bold shadow-2xl uppercase tracking-[0.2em] bg-[#C5A059] text-black transition-all hover:bg-white hover:scale-105 active:scale-95"
                 >
-                  <Crown size={10} className="sm:w-3 sm:h-3 lg:w-4 lg:h-4" fill="currentColor" /> UPGRADE
+                  <Crown size={12} className="sm:w-3.5 sm:h-3.5" fill="currentColor" /> UPGRADE
                 </button>
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[var(--color-primary)]/90 border border-[var(--color-primary)]/90 flex items-center justify-center text-[var(--color-primary)]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl lg:rounded-[1.5rem] bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center justify-center text-[#C5A059] shadow-xl">
                   <Crown size={20} className="sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" />
                 </div>
               )}
@@ -206,7 +202,7 @@ function AppContent() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex flex-col items-center gap-1.5 sm:gap-2.5 transition-all duration-500 ${
-                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                      isActive ? 'text-[#8B4357]' : 'text-white/40 hover:text-white'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
@@ -214,7 +210,7 @@ function AppContent() {
                       {isActive && (
                         <motion.div 
                           layoutId="activeTabGlow"
-                          className="absolute -inset-2 bg-[var(--color-primary)]/10 blur-xl rounded-full -z-10"
+                          className="absolute -inset-2 bg-[#8B4357]/10 blur-xl rounded-full -z-10"
                         />
                       )}
                     </div>
@@ -254,23 +250,23 @@ function AppContent() {
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-[var(--color-surface)] rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border border-[var(--color-border)]"
+                className="glass-morphism rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border border-white/10"
               >
-                <h2 className="text-2xl font-bold text-[var(--color-text)] mb-4 tracking-tighter">Aviso Importante</h2>
-                <div className="space-y-4 text-sm text-[var(--color-text-muted)] mb-8 font-bold uppercase tracking-widest text-[10px]">
-                  <p>O <strong className="font-bold text-[var(--color-text)]">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
-                  <p className="font-bold text-[var(--color-primary)] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
-                  <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-muted)]/90">
+                <h2 className="text-2xl font-bold text-white mb-4 tracking-tighter">Aviso Importante</h2>
+                <div className="space-y-4 text-sm text-white/40 mb-8 font-bold uppercase tracking-widest text-[10px]">
+                  <p>O <strong className="font-bold text-white">EvoluaEla</strong> é uma plataforma para te ajudar na organização, motivação e apoio na sua rotina.</p>
+                  <p className="font-bold text-[#8B4357] uppercase tracking-widest text-[10px]">Lembre-se: ele NÃO substitui o acompanhamento de profissionais como:</p>
+                  <ul className="list-disc pl-5 space-y-2 text-white/40">
                     <li>Nutricionistas</li>
                     <li>Médicos</li>
                     <li>Educadores Físicos</li>
                     <li>Psicólogos</li>
                   </ul>
-                  <p className="text-[10px] text-[var(--color-text-muted)]/90 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
+                  <p className="text-[10px] text-white/40 leading-relaxed font-bold uppercase tracking-widest">Os resultados variam de pessoa para pessoa e você é responsável pelas próprias decisões. Sempre consulte um especialista antes de começar dietas ou exercícios intensos, combinado?</p>
                 </div>
                 <button 
                   onClick={() => setShowDisclaimer(false)}
-                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
+                  className="w-full py-5 rounded-full font-bold text-black bg-gradient-to-r from-[#8B4357] to-[#C5A059] hover:scale-[1.02] transition-all uppercase tracking-widest text-[10px]"
                 >
                   Entendi, vamos lá!
                 </button>

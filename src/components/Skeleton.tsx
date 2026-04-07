@@ -7,7 +7,7 @@ interface SkeletonProps {
 
 export function Skeleton({ className = '' }: SkeletonProps) {
   return (
-    <div className={`animate-pulse bg-stone-200 rounded-xl ${className}`} />
+    <div className={`animate-pulse bg-white/10 rounded-xl ${className}`} />
   );
 }
 
@@ -88,7 +88,7 @@ export function RoutineSkeleton() {
       </div>
 
       {/* Tabs Skeleton */}
-      <div className="flex p-1 bg-stone-100 rounded-2xl">
+      <div className="flex p-1 bg-white/5 rounded-2xl">
         <Skeleton className="flex-1 h-10 rounded-xl" />
         <Skeleton className="flex-1 h-10 rounded-xl" />
       </div>

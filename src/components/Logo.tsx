@@ -34,15 +34,15 @@ export const Logo: React.FC<LogoProps> = ({ className = '', showText = true, siz
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <div className={`${containerSizes[size]} rounded-full bg-gradient-to-br from-[#E8B4BC] to-[#D4B996] flex items-center justify-center shadow-lg shadow-[#E8B4BC]/90`}>
+      <div className={`${containerSizes[size]} rounded-full bg-gradient-to-br from-[#8B4357] to-[#C5A059] flex items-center justify-center shadow-lg shadow-[#8B4357]/30`}>
         <Heart size={iconSizes[size]} className="text-black" fill="black" />
       </div>
       {showText && (
         <div className="flex flex-col">
-          <span className={`${titleSizes[size]} font-bold tracking-tighter text-[var(--color-text)] leading-none`}>
+          <span className={`${titleSizes[size]} font-serif italic text-[var(--color-text)] leading-none`}>
             EvoluaEla
           </span>
-          <span className={`${subtitleSizes[size]} font-bold uppercase tracking-[0.3em] text-[var(--color-primary)] mt-1`}>
+          <span className={`${subtitleSizes[size]} font-bold uppercase tracking-[0.4em] text-[var(--color-accent)] mt-1.5`}>
             HIGH PERFORMANCE
           </span>
         </div>

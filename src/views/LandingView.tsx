@@ -15,37 +15,37 @@ export default function LandingView({ onStart }: LandingViewProps) {
     { 
       icon: HeartHandshake, 
       title: 'Nutrição & Psicologia', 
-      desc: 'Acompanhamento direto com nutricionistas e terapeutas para sua saúde física e mental.',
-      tag: 'Diferencial'
+      desc: 'Acompanhamento estratégico com especialistas para o seu equilíbrio hormonal e mental.',
+      tag: 'Exclusivo'
     },
     { 
       icon: Bot, 
       title: 'Coach IA 24/7', 
-      desc: 'Sua mentora pessoal disponível a qualquer momento para guiar sua evolução.',
+      desc: 'Sua mentora pessoal disponível em tempo real para guiar cada passo da sua jornada.',
       tag: 'Tecnologia'
     },
     { 
       icon: Users, 
-      title: 'Comunidade Exclusiva', 
-      desc: 'Conecte-se com mulheres que compartilham seus objetivos e ambições.',
-      tag: 'Networking'
+      title: 'Networking Feminino', 
+      desc: 'Conecte-se com um ecossistema de mulheres ambiciosas e de alto valor.',
+      tag: 'Comunidade'
     },
     { 
       icon: Trophy, 
-      title: 'Gamificação', 
-      desc: 'Transforme sua rotina em um jogo e conquiste medalhas por cada meta batida.',
-      tag: 'Motivação'
+      title: 'Metas & Conquistas', 
+      desc: 'Um sistema de gamificação luxuoso que recompensa sua disciplina e evolução.',
+      tag: 'Performance'
     },
   ];
 
   const episodes = [
-    { id: '01', title: 'Mentalidade de Alta Performance', duration: '15 min', type: 'Mindset' },
-    { id: '02', title: 'Nutrição Estratégica para Mulheres', duration: '22 min', type: 'Biohacking' },
-    { id: '03', title: 'Rotina Matinal das 5AM', duration: '10 min', type: 'Hábito' },
+    { id: '01', title: 'A Psicologia da Mulher de Sucesso', duration: '18 min', type: 'Mindset' },
+    { id: '02', title: 'Biohacking: Otimização Hormonal', duration: '25 min', type: 'Saúde' },
+    { id: '03', title: 'Elegância e Postura de Alto Valor', duration: '12 min', type: 'Estilo' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] font-sans text-[var(--color-text)] overflow-y-auto hide-scrollbar selection:bg-[var(--color-primary)] selection:text-black relative">
+    <div className="min-h-screen bg-[#0A0A0A] font-sans text-white overflow-y-auto hide-scrollbar selection:bg-[#8B4357] selection:text-white relative">
       
       {/* Fixed Background for Infinite Feel */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#0A0A0A]">
@@ -53,48 +53,49 @@ export default function LandingView({ onStart }: LandingViewProps) {
         <motion.div 
           animate={{ 
             scale: [1, 1.1, 1],
-            opacity: [0.3, 0.4, 0.3],
+            opacity: [0.15, 0.25, 0.15],
             x: ['-50%', '-48%', '-50%']
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-20%] left-1/2 w-[140%] h-[70%] bg-gradient-to-b from-[var(--color-primary)]/30 via-[var(--color-primary)]/10 to-transparent rounded-full blur-[140px]" 
+          className="absolute top-[-20%] left-1/2 w-[140%] h-[70%] bg-gradient-to-b from-[#8B4357]/20 via-[#8B4357]/5 to-transparent rounded-full blur-[140px]" 
         />
         
         {/* Bottom Glow */}
         <motion.div 
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15]
+            opacity: [0.05, 0.15, 0.05]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[-15%] right-[-10%] w-[70%] h-[60%] bg-[var(--color-accent)]/15 rounded-full blur-[120px]" 
+          className="absolute bottom-[-15%] right-[-10%] w-[70%] h-[60%] bg-[#C5A059]/10 rounded-full blur-[120px]" 
         />
         
         {/* Overall Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/40 to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/60 to-[#0A0A0A]" />
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-[calc(1.5rem+env(safe-area-inset-top))] pb-6 bg-transparent backdrop-blur-3xl border-none">
+      <header className="fixed top-0 left-0 right-0 z-50 px-8 pt-[calc(2rem+env(safe-area-inset-top))] pb-8 bg-[#0A0A0A]/40 backdrop-blur-3xl border-none">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Logo size="sm" />
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--color-text-muted)]">
-            <a href="#features" className="hover:text-[var(--color-text)] transition-colors">Funcionalidades</a>
-            <a href="#episodes" className="hover:text-[var(--color-text)] transition-colors">Programas</a>
-            <a href="#testimonials" className="hover:text-[var(--color-text)] transition-colors">Comunidade</a>
+          <nav className="hidden md:flex items-center gap-12 text-[10px] font-bold uppercase tracking-[0.4em] text-white/40">
+            <a href="#features" className="hover:text-[var(--color-accent)] transition-colors">O Método</a>
+            <a href="#episodes" className="hover:text-[var(--color-accent)] transition-colors">Programas</a>
+            <a href="#testimonials" className="hover:text-[var(--color-accent)] transition-colors">Depoimentos</a>
+            <a href="#pricing" className="hover:text-[var(--color-accent)] transition-colors">Investimento</a>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-8">
             <button 
               onClick={onStart} 
-              className="text-sm font-medium hover:text-[var(--color-primary)] transition-colors hidden sm:block"
+              className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-[var(--color-accent)] transition-colors hidden sm:block"
             >
               Entrar
             </button>
             <button 
               onClick={onStart} 
-              className="px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-[var(--color-primary)] transition-all duration-300 active:scale-95 shadow-xl"
+              className="px-10 py-4 rounded-full bg-[var(--color-accent)] text-black text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 active:scale-95 shadow-2xl"
             >
               Começar Agora
             </button>
@@ -102,52 +103,54 @@ export default function LandingView({ onStart }: LandingViewProps) {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-[calc(8rem+env(safe-area-inset-top))] pb-20 px-6 min-h-[100dvh] flex items-center overflow-hidden z-10">
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
+      {/* Hero Section - AIDA: ATTENTION */}
+      <section className="relative pt-[calc(12rem+env(safe-area-inset-top))] pb-32 px-8 min-h-[100dvh] flex items-center overflow-hidden z-10">
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-24 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-text)]/5 border border-[var(--color-border)] mb-8">
-              <Sparkles size={14} className="text-[var(--color-primary)]" />
-              <span className="text-xs font-bold tracking-wider uppercase text-[var(--color-text-muted)]">A Nova Era da Evolução Feminina</span>
+            <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/5 mb-12">
+              <Sparkles size={16} className="text-[var(--color-accent)]" />
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40">A Referência Premium em Evolução Feminina</span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-bold leading-[1.05] mb-8 tracking-tighter">
-              Sua melhor <br />
-              <span className="gradient-text">versão</span> começa <br />
-              aqui.
+            <h1 className="text-7xl md:text-9xl font-serif italic font-light leading-[0.95] mb-12 tracking-tighter text-white">
+              Desperte a <br />
+              <span className="gradient-text">Mulher</span> que o <br />
+              Mundo espera.
             </h1>
-            <p className="text-lg md:text-xl text-[var(--color-text-muted)] mb-10 max-w-lg leading-relaxed">
-              Uma plataforma completa de biohacking, mindset e performance desenhada exclusivamente para a mulher moderna.
+            <p className="text-xl md:text-2xl text-white/40 mb-16 max-w-xl leading-relaxed font-light">
+              A plataforma definitiva de biohacking, nutrição e mindset desenhada para a mulher que não aceita nada menos que a excelência.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-8">
               <button 
                 onClick={onStart}
-                className="group px-8 py-4 bg-[var(--color-primary)] text-black font-bold text-lg rounded-full hover:bg-[var(--color-text)] hover:text-[var(--color-bg)] transition-all duration-300 flex items-center justify-center gap-3 active:scale-95"
+                className="group px-12 py-6 bg-[var(--color-accent)] text-black font-bold text-sm uppercase tracking-[0.3em] rounded-full hover:bg-white transition-all duration-500 flex items-center justify-center gap-6 active:scale-95 shadow-2xl"
               >
-                Iniciar Jornada <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                Começar Minha Evolução <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
               </button>
-              <button className="px-8 py-4 bg-[var(--color-text)]/90 border border-[var(--color-border)] text-[var(--color-text)] font-bold text-lg rounded-full hover:bg-[var(--color-text)]/90 transition-all flex items-center justify-center gap-3">
-                <Play size={18} fill="currentColor" /> Ver Demo
-              </button>
+              <div className="flex items-center gap-6 px-8 py-5 rounded-full border border-white/5 glass-morphism">
+                <div className="flex -space-x-3">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0A0A0A] bg-neutral-800 overflow-hidden">
+                      <img src={`https://i.pravatar.cc/100?u=${i+20}`} alt="User" referrerPolicy="no-referrer" />
+                    </div>
+                  ))}
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">+10k Mulheres</span>
+              </div>
             </div>
 
-            <div className="mt-12 flex items-center gap-6">
-              <div className="flex -space-x-3">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-[var(--color-bg)] bg-[var(--color-surface)] overflow-hidden">
-                    <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" className="w-full h-full object-cover" />
-                  </div>
-                ))}
+            <div className="mt-24 flex items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+              <div className="flex items-center gap-3">
+                <Shield size={18} className="text-[var(--color-accent)]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Ambiente Seguro</span>
               </div>
-              <div>
-                <div className="flex items-center gap-1 text-[var(--color-accent)]">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
-                </div>
-                <p className="text-xs text-[var(--color-text-muted)] mt-1 font-medium">+10k mulheres evoluindo diariamente</p>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={18} className="text-[var(--color-accent)]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Garantia de 7 Dias</span>
               </div>
             </div>
           </motion.div>
@@ -155,102 +158,107 @@ export default function LandingView({ onStart }: LandingViewProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.2 }}
+            transition={{ duration: 1.8, delay: 0.3 }}
             className="relative hidden lg:block"
           >
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-[var(--color-border)] bento-card p-0 aspect-[4/5] bg-[var(--color-surface)]">
+            <div className="relative z-10 rounded-[4rem] overflow-hidden border border-white/5 p-0 aspect-[4/5] bg-[#121212] shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=800" 
-                alt="App Preview" 
-                className="w-full h-full object-cover opacity-80"
+                src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?auto=format&fit=crop&q=80&w=800" 
+                alt="Lifestyle Premium" 
+                className="w-full h-full object-cover opacity-60"
+                referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent" />
-              <div className="absolute bottom-10 left-10 right-10">
-                <div className="glass-card p-6 rounded-2xl border-[var(--color-border)]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Treino do Dia</span>
-                    <span className="px-2 py-1 rounded bg-[var(--color-primary)]/90 text-[var(--color-primary)] text-[10px] font-bold">LIVE</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+              <div className="absolute bottom-16 left-16 right-16">
+                <div className="glass-morphism p-10 rounded-[2.5rem] border border-white/5">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="text-[10px] font-bold text-[var(--color-accent)] uppercase tracking-[0.4em]">Status da Evolução</span>
+                    <div className="flex gap-1.5">
+                      {[1,2,3,4,5].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />)}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Yoga & Mindfulness Flow</h3>
-                  <div className="flex items-center gap-4 text-sm text-[var(--color-text-muted)]">
-                    <span className="flex items-center gap-1"><CalendarCheck size={14} /> 45 min</span>
-                    <span className="flex items-center gap-1"><Flame size={14} /> 320 kcal</span>
+                  <h3 className="text-3xl font-serif italic mb-6 leading-tight">"A disciplina é a forma mais alta de amor próprio."</h3>
+                  <div className="flex items-center gap-6">
+                    <div className="h-1.5 flex-1 bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full w-[85%] bg-[var(--color-accent)] rounded-full" />
+                    </div>
+                    <span className="text-[10px] font-bold text-white/40">85%</span>
                   </div>
                 </div>
               </div>
             </div>
-            {/* Decorative circles */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[var(--color-primary)]/90 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--color-accent)]/90 rounded-full blur-3xl" />
+            {/* Decorative elements */}
+            <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#8B4357]/10 rounded-full blur-[120px]" />
+            <div className="absolute -bottom-16 -left-16 w-80 h-80 bg-[#C5A059]/10 rounded-full blur-[140px]" />
           </motion.div>
         </div>
       </section>
 
-      {/* Bento Features Section */}
-      <section id="features" className="relative py-32 px-6 z-10">
+      {/* Bento Features Section - AIDA: INTEREST */}
+      <section id="features" className="relative py-48 px-8 z-10 bg-[#0A0A0A]/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Tudo o que você precisa <br /> para sua <span className="gradient-text">evolução</span>.</h2>
-            <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">Ferramentas integradas para transformar seu corpo, mente e rotina.</p>
+          <div className="text-center mb-32">
+            <h2 className="text-6xl md:text-8xl font-serif italic mb-10 tracking-tight text-white">O Método <span className="gradient-text">EvoluaEla</span>.</h2>
+            <p className="text-white/40 max-w-2xl mx-auto text-2xl font-light leading-relaxed">Uma abordagem holística e científica para a mulher que busca o topo.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {features.map((feature, i) => (
               <motion.div
                 key={`feature-${feature.title}-${i}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bento-card group bg-[var(--color-surface)] border border-[var(--color-border)] p-8 rounded-[2.5rem]"
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="glass-morphism group bg-white/[0.01] border border-white/5 p-12 rounded-[3.5rem] hover:bg-white/[0.03] transition-all duration-700"
               >
-                <div className="w-12 h-12 rounded-xl bg-[var(--color-text)]/5 flex items-center justify-center mb-6 group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
-                  <feature.icon size={24} />
+                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-[var(--color-accent)] group-hover:text-black transition-all duration-700">
+                  <feature.icon size={32} />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)] mb-2 block">{feature.tag}</span>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">{feature.desc}</p>
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--color-accent)] mb-6 block">{feature.tag}</span>
+                <h3 className="text-2xl font-bold mb-6 tracking-tight">{feature.title}</h3>
+                <p className="text-white/40 text-lg leading-relaxed font-medium">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Episodes/Programs Section */}
-      <section id="episodes" className="relative py-32 px-6 z-10">
+      {/* Episodes/Programs Section - AIDA: DESIRE */}
+      <section id="episodes" className="relative py-48 px-8 z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Programas em Destaque</h2>
-              <p className="text-[var(--color-text-muted)] text-lg">Conteúdo exclusivo atualizado semanalmente.</p>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+            <div className="max-w-2xl">
+              <h2 className="text-6xl md:text-7xl font-serif italic mb-8 tracking-tight text-white">Conteúdo de <span className="gradient-text">Elite</span>.</h2>
+              <p className="text-white/40 text-2xl font-light leading-relaxed">Aulas cinematográficas e protocolos práticos para sua transformação diária.</p>
             </div>
-            <button className="text-[var(--color-primary)] font-bold flex items-center gap-2 hover:gap-3 transition-all">
-              Ver todos os programas <ChevronRight size={20} />
+            <button className="text-[var(--color-accent)] text-[10px] font-bold uppercase tracking-[0.4em] flex items-center gap-4 hover:gap-8 transition-all duration-500">
+              Explorar Catálogo Completo <ChevronRight size={20} />
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid gap-8">
             {episodes.map((ep, i) => (
               <motion.div
                 key={ep.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group flex items-center justify-between p-6 rounded-2xl bg-[var(--color-bg)]/90 border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:border-[var(--color-primary)]/90 transition-all cursor-pointer"
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="group flex items-center justify-between p-10 rounded-[2.5rem] bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] hover:border-[var(--color-accent)]/30 transition-all duration-700 cursor-pointer"
               >
-                <div className="flex items-center gap-8">
-                  <span className="text-2xl font-bold text-[var(--color-text)]/90 group-hover:text-[var(--color-primary)]/90 transition-colors">{ep.id}</span>
+                <div className="flex items-center gap-12">
+                  <span className="text-4xl font-serif italic text-white/10 group-hover:text-[var(--color-accent)] transition-colors duration-700">{ep.id}</span>
                   <div>
-                    <h4 className="text-xl font-bold mb-1">{ep.title}</h4>
-                    <div className="flex items-center gap-4 text-xs text-[var(--color-text-muted)] font-medium">
-                      <span className="px-2 py-0.5 rounded bg-[var(--color-text)]/5 text-[var(--color-text-muted)]">{ep.type}</span>
-                      <span>{ep.duration}</span>
+                    <h4 className="text-3xl font-bold mb-3 tracking-tight">{ep.title}</h4>
+                    <div className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+                      <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/5">{ep.type}</span>
+                      <span className="flex items-center gap-3"><CalendarCheck size={16} /> {ep.duration}</span>
                     </div>
                   </div>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-[var(--color-text)]/5 flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
-                  <Play size={20} fill="currentColor" />
+                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:text-black transition-all duration-700 shadow-2xl">
+                  <Play size={28} fill="currentColor" />
                 </div>
               </motion.div>
             ))}
@@ -258,167 +266,197 @@ export default function LandingView({ onStart }: LandingViewProps) {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="relative py-32 px-6 z-10">
+      {/* Testimonials Section - SOCIAL PROOF */}
+      <section id="testimonials" className="relative py-48 px-8 z-10 bg-[#0A0A0A]/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">O que as <span className="gradient-text">mulheres</span> dizem.</h2>
-            <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">Histórias reais de transformação e evolução.</p>
+          <div className="text-center mb-32">
+            <h2 className="text-6xl md:text-8xl font-serif italic mb-10 tracking-tight text-white">Vidas <span className="gradient-text">Transformadas</span>.</h2>
+            <p className="text-white/40 max-w-2xl mx-auto text-2xl font-light">Histórias reais de mulheres que decidiram ser protagonistas.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                name: "Juliana Silva",
-                role: "Empresária",
-                text: "O EvoluaEla mudou minha perspectiva sobre produtividade e saúde. O coach de IA é como ter uma mentora no bolso 24h por dia.",
-                image: "https://picsum.photos/seed/user1/100/100"
+                name: "Alessandra Martins",
+                role: "CEO & Mentora",
+                text: "O EvoluaEla não é apenas um app, é um estilo de vida. A clareza mental que conquistei com os protocolos de mindset me permitiu dobrar o faturamento da minha empresa.",
+                image: "https://i.pravatar.cc/150?u=alessandra"
               },
               {
-                name: "Mariana Costa",
-                role: "Atleta Amadora",
-                text: "Os treinos são incríveis e a comunidade me mantém motivada. Finalmente encontrei um app que entende as necessidades femininas.",
-                image: "https://picsum.photos/seed/user2/100/100"
+                name: "Carolina Valente",
+                role: "Médica",
+                text: "Como profissional da saúde, sou exigente. O biohacking feminino proposto aqui é sério, científico e extremamente eficaz para o nosso equilíbrio hormonal.",
+                image: "https://i.pravatar.cc/150?u=carolina"
               },
               {
-                name: "Beatriz Oliveira",
-                role: "Designer",
-                text: "A parte de nutrição e psicologia integrada é o que eu sempre procurei. Sinto que estou evoluindo em todas as áreas da minha vida.",
-                image: "https://picsum.photos/seed/user3/100/100"
+                name: "Isabela Rocha",
+                role: "Arquiteta",
+                text: "A comunidade é o maior diferencial. Estar cercada de mulheres que buscam o mesmo nível de excelência é o combustível que eu precisava para não parar.",
+                image: "https://i.pravatar.cc/150?u=isabela"
               }
             ].map((testimonial, i) => (
               <motion.div
                 key={`testimonial-${i}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bento-card bg-[var(--color-surface)] border border-[var(--color-border)] p-8 rounded-[2.5rem]"
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="glass-morphism bg-white/[0.01] border border-white/5 p-12 rounded-[3.5rem] relative"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--color-primary)]">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                <div className="flex items-center gap-6 mb-10">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--color-accent)] shadow-2xl">
+                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                   <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
-                    <p className="text-xs text-[var(--color-text-muted)]">{testimonial.role}</p>
+                    <h4 className="font-bold text-xl">{testimonial.name}</h4>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">{testimonial.role}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-[var(--color-accent)] mb-4">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
+                <div className="flex items-center gap-1.5 text-[var(--color-accent)] mb-8">
+                  {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
                 </div>
-                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed italic">"{testimonial.text}"</p>
+                <p className="text-white/60 text-xl leading-relaxed font-light italic">"{testimonial.text}"</p>
               </motion.div>
             ))}
+          </div>
+          
+          <div className="mt-32 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/20 mb-12">Resultados Reais • +10.000 Alunas</p>
+            <div className="flex justify-center gap-16 opacity-10">
+              {/* Placeholder for logos or trust badges */}
+              <div className="h-10 w-32 bg-white rounded-lg" />
+              <div className="h-10 w-32 bg-white rounded-lg" />
+              <div className="h-10 w-32 bg-white rounded-lg" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="relative py-32 px-6 z-10">
+      {/* Pricing Section - AIDA: ACTION */}
+      <section id="pricing" className="relative py-48 px-8 z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Escolha seu <span className="gradient-text">plano</span>.</h2>
-            <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">Invista em você e comece sua transformação hoje mesmo.</p>
+          <div className="text-center mb-32">
+            <h2 className="text-6xl md:text-8xl font-serif italic mb-10 tracking-tight text-white">Seu <span className="gradient-text">Investimento</span>.</h2>
+            <p className="text-white/40 max-w-2xl mx-auto text-2xl font-light">O valor de uma nova vida é incalculável. O acesso a ela é exclusivo.</p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
-            {/* Single Premium Plan */}
+          <div className="max-w-4xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-10 rounded-[3rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex flex-col h-full shadow-2xl relative overflow-hidden group"
+              transition={{ duration: 1 }}
+              className="p-16 md:p-24 rounded-[5rem] bg-gradient-to-br from-[#121212] to-[#0A0A0A] border border-white/5 flex flex-col h-full shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-black/90 text-black text-[10px] font-bold uppercase tracking-widest">
-                Plano Único & Completo
+              <div className="absolute top-0 right-0 p-16 opacity-5 pointer-events-none">
+                <Logo size="lg" className="scale-[4] rotate-12" />
               </div>
-              <div className="mb-8">
-                <h3 className="text-3xl font-bold text-black mb-2 tracking-tight">Acesso Total</h3>
-                <p className="text-black/60 text-sm font-medium">Tudo o que você precisa para sua transformação definitiva.</p>
+              
+              <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-12">
+                <div>
+                  <div className="inline-flex px-6 py-2 rounded-full bg-[var(--color-accent)] text-black text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
+                    Membro Premium
+                  </div>
+                  <h3 className="text-5xl font-bold text-white mb-4 tracking-tight">Acesso Vitalício Anual</h3>
+                  <p className="text-white/40 text-xl font-light">Tudo o que você precisa para sua transformação definitiva.</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg text-white/20 line-through mb-2">R$ 1.997</div>
+                  <div className="text-7xl font-serif italic text-white tracking-tighter">R$ 997</div>
+                  <div className="text-[10px] font-bold text-[var(--color-accent)] uppercase tracking-[0.3em] mt-4">Ou 12x de R$ 99,70</div>
+                </div>
               </div>
-              <div className="mb-10">
-                <span className="text-6xl font-bold text-black tracking-tighter">R$ 109,90</span>
-                <span className="text-black/60 text-lg font-medium">/mês</span>
-                <p className="text-[10px] font-bold text-black/90 uppercase tracking-widest mt-2">Acompanhamento Profissional Incluso</p>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <ul className="space-y-4">
+
+              <div className="grid md:grid-cols-2 gap-16 mb-20">
+                <ul className="space-y-8">
                   {[
                     'Acompanhamento com Nutricionista',
-                    'Acompanhamento com Psicóloga',
-                    'Treinos 100% Personalizados',
+                    'Suporte Terapêutico Mensal',
+                    'Protocolos de Biohacking',
                     'Coach IA 24/7 Ilimitado'
                   ].map((item, i) => (
-                    <li key={`benefit-primary-${i}`} className="flex items-center gap-3 text-black font-bold text-sm">
-                      <CheckCircle2 size={18} className="text-black" />
+                    <li key={`benefit-primary-${i}`} className="flex items-center gap-6 text-white font-medium text-lg">
+                      <CheckCircle2 size={24} className="text-[var(--color-accent)]" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <ul className="space-y-4">
+                <ul className="space-y-8">
                   {[
-                    'Comunidade Exclusiva',
-                    'Diário de Evolução IA',
-                    'Biohacking & Mindset',
-                    'Acesso a todos os Programas'
+                    'Networking de Alto Valor',
+                    'Aulas de Etiqueta & Estilo',
+                    'Mindset de Performance',
+                    'Eventos Exclusivos Online'
                   ].map((item, i) => (
-                    <li key={`benefit-secondary-${i}`} className="flex items-center gap-3 text-black/80 text-sm font-medium">
-                      <CheckCircle2 size={18} className="text-black/90" />
+                    <li key={`benefit-secondary-${i}`} className="flex items-center gap-6 text-white/40 text-lg font-light">
+                      <CheckCircle2 size={24} className="text-[var(--color-accent)]/30" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <button 
-                onClick={onStart}
-                className="w-full py-6 rounded-full bg-black text-white font-bold hover:scale-[1.02] transition-all duration-300 uppercase tracking-widest text-sm shadow-2xl"
-              >
-                Começar minha evolução agora
-              </button>
+
+              <div className="space-y-8">
+                <button 
+                  onClick={onStart}
+                  className="w-full py-8 rounded-full bg-[var(--color-accent)] text-black font-bold text-sm uppercase tracking-[0.4em] hover:bg-white transition-all duration-700 shadow-[0_0_50px_rgba(197,160,89,0.15)]"
+                >
+                  Garantir Minha Vaga Premium
+                </button>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-12 opacity-30">
+                  <div className="flex items-center gap-3">
+                    <Shield size={18} />
+                    <span className="text-[9px] font-bold uppercase tracking-[0.3em]">Pagamento 100% Seguro</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Star size={18} />
+                    <span className="text-[9px] font-bold uppercase tracking-[0.3em]">Satisfação Garantida</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="relative py-32 px-6 z-10">
+      <section id="faq" className="relative py-48 px-8 z-10 bg-[#0A0A0A]/50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 tracking-tight">Dúvidas Frequentes</h2>
-            <p className="text-[var(--color-text-muted)]">Tudo o que você precisa saber sobre o EvoluaEla.</p>
+          <div className="text-center mb-24">
+            <h2 className="text-6xl font-serif italic mb-8 tracking-tight text-white">Esclarecimentos.</h2>
+            <p className="text-white/40 text-2xl font-light">Sua jornada deve começar com clareza absoluta.</p>
           </div>
-          <div className="space-y-4">
+          <div className="grid gap-8">
             {[
-              { q: "O EvoluaEla é para iniciantes?", a: "Sim! Nossa plataforma adapta os treinos e conteúdos de acordo com seu nível atual, garantindo uma evolução segura e constante." },
-              { q: "Como funciona o acompanhamento profissional?", a: "No plano premium, você tem acesso a chats diretos com nutricionistas e psicólogas parceiras para tirar dúvidas e receber orientações." },
-              { q: "Posso cancelar a qualquer momento?", a: "Com certeza. Não temos contratos de fidelidade. Você pode cancelar sua assinatura diretamente pelo app quando desejar." },
-              { q: "O coach de IA realmente funciona?", a: "Nossa IA foi treinada com base em protocolos reais de biohacking e psicologia comportamental para oferecer o melhor suporte 24/7." }
+              { q: "O EvoluaEla é para quem está começando do zero?", a: "Sim. Nossa metodologia foi desenhada para guiar desde a mulher que está iniciando sua jornada de autoconhecimento até aquela que já busca alta performance e quer refinar seus protocolos." },
+              { q: "Como funciona o suporte das especialistas?", a: "Dentro da plataforma, você tem canais diretos de comunicação com nossa equipe de nutrição e psicologia para tirar dúvidas pontuais sobre os protocolos e aulas." },
+              { q: "O acesso é imediato?", a: "Imediato. Assim que sua inscrição for confirmada, você receberá os dados de acesso no seu e-mail e poderá começar sua primeira aula em menos de 2 minutos." },
+              { q: "Existe algum tipo de fidelidade?", a: "Não. Acreditamos tanto no valor da nossa entrega que você é livre para cancelar sua renovação a qualquer momento, sem burocracias." }
             ].map((item, i) => (
-              <div key={`faq-${i}`} className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
-                <h4 className="font-bold mb-2">{item.q}</h4>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{item.a}</p>
+              <div key={`faq-${i}`} className="p-12 rounded-[3.5rem] bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all duration-500">
+                <h4 className="text-2xl font-bold mb-6 tracking-tight text-white">{item.q}</h4>
+                <p className="text-xl text-white/40 leading-relaxed font-light">{item.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-12 md:p-24 text-center">
-            <div className="absolute inset-0 bg-black/90" />
+      {/* Final CTA */}
+      <section className="py-48 px-8 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative rounded-[5rem] overflow-hidden bg-gradient-to-br from-[var(--color-accent)] to-[#8B4357] p-20 md:p-40 text-center shadow-2xl">
+            <div className="absolute inset-0 bg-black/95" />
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-7xl font-bold text-black mb-8 tracking-tighter">Pronta para sua <br /> transformação?</h2>
-              <p className="text-black/60 text-lg md:text-xl mb-12 max-w-xl mx-auto font-medium">
-                Junte-se ao movimento que está redefinindo o potencial feminino. Comece seu teste gratuito hoje.
+              <h2 className="text-6xl md:text-9xl font-serif italic text-white mb-12 tracking-tighter leading-[0.9]">Sua nova vida <br /> não pode esperar.</h2>
+              <p className="text-white/40 text-2xl md:text-3xl mb-20 max-w-2xl mx-auto font-light leading-relaxed">
+                O convite foi feito. A decisão de cruzar o portal da excelência é exclusivamente sua.
               </p>
               <button 
                 onClick={onStart}
-                className="px-12 py-6 bg-black text-white font-bold text-xl rounded-full hover:scale-105 active:scale-95 transition-all shadow-2xl"
+                className="px-20 py-8 bg-[var(--color-accent)] text-black font-bold text-sm uppercase tracking-[0.4em] rounded-full hover:bg-white hover:scale-105 active:scale-95 transition-all duration-700 shadow-2xl"
               >
-                Garantir meu Acesso
+                Começar Agora
               </button>
             </div>
           </div>
@@ -426,42 +464,56 @@ export default function LandingView({ onStart }: LandingViewProps) {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-20 px-6 border-t border-[var(--color-border)] z-10">
+      <footer className="relative py-40 px-8 border-t border-white/5 z-10 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-24 mb-40">
             <div className="col-span-2">
-              <div className="flex items-center gap-2 mb-6">
+              <div className="flex items-center gap-2 mb-12">
                 <Logo size="md" />
               </div>
-              <p className="text-[var(--color-text-muted)] max-w-xs leading-relaxed">
-                A plataforma definitiva para a mulher que busca excelência em todas as áreas da vida.
+              <p className="text-white/40 max-w-sm text-xl font-light leading-relaxed mb-12">
+                A plataforma definitiva para a mulher que busca excelência em todas as áreas da vida. Ciência, sofisticação e resultados.
               </p>
+              <div className="flex gap-8">
+                {/* Social Icons Placeholder */}
+                {[1,2,3].map(i => <div key={i} className="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-[var(--color-accent)] hover:text-black transition-all duration-500 cursor-pointer" />)}
+              </div>
             </div>
             <div>
-              <h5 className="font-bold mb-6">Plataforma</h5>
-              <ul className="space-y-4 text-[var(--color-text-muted)] text-sm">
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Treinos</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Nutrição</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Mindset</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Coach IA</a></li>
+              <h5 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white mb-12">Ecossistema</h5>
+              <ul className="space-y-8 text-white/40 text-sm font-medium">
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">O Método</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Biohacking</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Mindset</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Networking</a></li>
               </ul>
             </div>
             <div>
-              <h5 className="font-bold mb-6">Empresa</h5>
-              <ul className="space-y-4 text-[var(--color-text-muted)] text-sm">
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Sobre Nós</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Carreiras</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Privacidade</a></li>
-                <li><a href="#" className="hover:text-[var(--color-text)] transition-colors">Contato</a></li>
+              <h5 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white mb-12">Suporte & Legal</h5>
+              <ul className="space-y-8 text-white/40 text-sm font-medium">
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Termos de Uso</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Privacidade</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Central de Ajuda</a></li>
+                <li><a href="#" className="hover:text-[var(--color-accent)] transition-colors">Fale Conosco</a></li>
               </ul>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-[var(--color-border)] gap-6">
-            <p className="text-[var(--color-text-muted)]/90 text-xs">© 2026 EvoluaEla. Todos os direitos reservados.</p>
-            <div className="flex gap-8 text-[var(--color-text-muted)]/90 text-xs font-bold uppercase tracking-widest">
-              <a href="#" className="hover:text-[var(--color-text)] transition-colors">Instagram</a>
-              <a href="#" className="hover:text-[var(--color-text)] transition-colors">YouTube</a>
-              <a href="#" className="hover:text-[var(--color-text)] transition-colors">TikTok</a>
+          
+          <div className="flex flex-col md:flex-row justify-between items-center pt-20 border-t border-white/5 gap-12">
+            <div className="flex flex-col items-center md:items-start gap-6">
+              <p className="text-white/20 text-[10px] font-bold uppercase tracking-[0.4em]">© 2026 EvoluaEla. Todos os direitos reservados.</p>
+              <div className="flex gap-6 opacity-10 grayscale">
+                {/* Payment Icons Placeholder */}
+                <div className="h-8 w-14 bg-white rounded-lg" />
+                <div className="h-8 w-14 bg-white rounded-lg" />
+                <div className="h-8 w-14 bg-white rounded-lg" />
+              </div>
+            </div>
+            <div className="flex items-center gap-12">
+              <div className="flex items-center gap-4 px-6 py-3 rounded-xl border border-white/5 bg-white/[0.01]">
+                <Shield size={20} className="text-[var(--color-accent)]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">Site Seguro & Criptografado</span>
+              </div>
             </div>
           </div>
         </div>

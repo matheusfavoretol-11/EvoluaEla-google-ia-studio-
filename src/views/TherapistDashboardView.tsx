@@ -58,41 +58,41 @@ export default function TherapistDashboardView() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
+    <div className="flex flex-col h-full bg-transparent text-white px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
-        <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter">Painel da <span className="gradient-text">Terapeuta</span></h2>
-        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Gerencie suas sessões, participantes e replays.</p>
+        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter">Painel da <span className="gradient-text italic">Terapeuta</span></h2>
+        <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Gerencie suas sessões, participantes e replays.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Total de Sessões</p>
-          <p className="text-4xl font-bold text-[var(--color-text)]">{sessions.length}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/20 mb-2">Total de Sessões</p>
+          <p className="text-4xl font-bold text-white">{sessions.length}</p>
         </div>
         <div className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Próxima Sessão</p>
-          <p className="text-2xl font-bold text-[var(--color-primary)]">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/20 mb-2">Próxima Sessão</p>
+          <p className="text-2xl font-bold text-[#8B4357]">
             {sessions.find(s => isAfter(new Date(s.date), new Date())) ? 
               format(new Date(sessions.find(s => isAfter(new Date(s.date), new Date()))!.date), "dd/MM 'às' HH:mm") : 
               'Nenhuma'}
           </p>
         </div>
         <div className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Participantes Totais</p>
-          <p className="text-4xl font-bold text-[var(--color-text)]">{sessions.reduce((acc, s) => acc + (s.participants?.length || 0), 0)}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/20 mb-2">Participantes Totais</p>
+          <p className="text-4xl font-bold text-white">{sessions.reduce((acc, s) => acc + (s.participants?.length || 0), 0)}</p>
         </div>
       </div>
 
       <div className="glass-morphism rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl">
         <div className="p-8 border-b border-white/10 flex items-center justify-between">
           <h3 className="text-2xl font-bold tracking-tight">Todas as Sessões</h3>
-          <button className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-text)] transition-colors">Exportar Relatório</button>
+          <button className="text-[10px] font-bold uppercase tracking-widest text-[#8B4357] hover:text-white transition-colors">Exportar Relatório</button>
         </div>
         
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="border-b border-white/5 text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
+              <tr className="border-b border-white/5 text-[10px] font-bold uppercase tracking-widest text-white/20">
                 <th className="px-8 py-6">Data/Hora</th>
                 <th className="px-8 py-6">Status</th>
                 <th className="px-8 py-6">Participantes</th>
@@ -105,14 +105,14 @@ export default function TherapistDashboardView() {
               {sessions.map((session) => (
                 <tr key={session.id} className="hover:bg-white/5 transition-all group">
                   <td className="px-8 py-6">
-                    <p className="font-bold text-[var(--color-text)]">{format(new Date(session.date), "dd 'de' MMMM", { locale: ptBR })}</p>
-                    <p className="text-xs text-[var(--color-text-muted)]">{format(new Date(session.date), "HH:mm")}</p>
+                    <p className="font-bold text-white">{format(new Date(session.date), "dd 'de' MMMM", { locale: ptBR })}</p>
+                    <p className="text-xs text-white/40">{format(new Date(session.date), "HH:mm")}</p>
                   </td>
                   <td className="px-8 py-6">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${
                       isAfter(new Date(session.date), new Date()) 
-                        ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)] border-[var(--color-accent)]/30' 
-                        : 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] border-[var(--color-primary)]/30'
+                        ? 'bg-[#C5A059]/20 text-[#C5A059] border-[#C5A059]/30' 
+                        : 'bg-[#8B4357]/20 text-[#8B4357] border-[#8B4357]/30'
                     }`}>
                       {isAfter(new Date(session.date), new Date()) ? 'Agendada' : 'Concluída'}
                     </span>
@@ -120,7 +120,7 @@ export default function TherapistDashboardView() {
                   <td className="px-8 py-6">
                     <button 
                       onClick={() => { setSelectedSession(session); setShowParticipants(true); }}
-                      className="flex items-center gap-2 text-sm font-bold text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+                      className="flex items-center gap-2 text-sm font-bold text-white/40 hover:text-[#8B4357] transition-colors"
                     >
                       <Users size={16} /> {session.participants?.length || 0} confirmadas
                     </button>
@@ -128,7 +128,7 @@ export default function TherapistDashboardView() {
                   <td className="px-8 py-6">
                     <button 
                       onClick={() => window.open(session.zoom_link, '_blank')}
-                      className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors"
+                      className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#C5A059] hover:text-white transition-colors"
                     >
                       <Video size={16} /> Abrir Zoom
                     </button>
@@ -144,14 +144,14 @@ export default function TherapistDashboardView() {
                           const url = prompt('Cole o link da gravação do Zoom:');
                           if (url) handleUpdateRecording(session.id, url);
                         }}
-                        className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+                        className="text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-[#8B4357] transition-colors"
                       >
                         Adicionar Link
                       </button>
                     )}
                   </td>
                   <td className="px-8 py-6">
-                    <button className="p-2 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">
+                    <button className="p-2 text-white/20 hover:text-white transition-colors">
                       <MoreVertical size={20} />
                     </button>
                   </td>
@@ -170,28 +170,28 @@ export default function TherapistDashboardView() {
             animate={{ scale: 1, opacity: 1 }}
             className="glass-morphism p-10 max-w-2xl w-full shadow-2xl relative border border-white/10 rounded-[2.5rem]"
           >
-            <button onClick={() => setShowParticipants(false)} className="absolute top-6 right-6 text-[var(--color-text-muted)] hover:text-[var(--color-text)]">
+            <button onClick={() => setShowParticipants(false)} className="absolute top-6 right-6 text-white/40 hover:text-white">
               <X size={24} />
             </button>
             <h3 className="text-3xl font-bold mb-2 tracking-tight">Participantes</h3>
-            <p className="text-[var(--color-text-muted)] mb-8 font-medium">Sessão de {format(new Date(selectedSession.date), "dd/MM/yyyy HH:mm")}</p>
+            <p className="text-white/40 mb-8 font-medium">Sessão de {format(new Date(selectedSession.date), "dd/MM/yyyy HH:mm")}</p>
             
             <div className="max-h-[400px] overflow-y-auto space-y-4 pr-4 scrollbar-thin scrollbar-thumb-white/10">
               {selectedSession.participants?.length > 0 ? selectedSession.participants.map((pId, idx) => (
                 <div key={pId} className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)] font-bold border border-[var(--color-primary)]/30">
+                    <div className="w-10 h-10 rounded-full bg-[#8B4357]/20 flex items-center justify-center text-[#8B4357] font-bold border border-[#8B4357]/30">
                       {idx + 1}
                     </div>
                     <div>
-                      <p className="font-bold text-[var(--color-text)]">Usuária {pId.substring(0, 8)}</p>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Presente</p>
+                      <p className="font-bold text-white">Usuária {pId.substring(0, 8)}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">Presente</p>
                     </div>
                   </div>
                   <CheckCircle2 className="text-green-500" size={20} />
                 </div>
               )) : (
-                <p className="text-center py-10 text-[var(--color-text-muted)] font-bold uppercase tracking-widest text-xs">Nenhuma participante confirmada ainda.</p>
+                <p className="text-center py-10 text-white/20 font-bold uppercase tracking-widest text-xs">Nenhuma participante confirmada ainda.</p>
               )}
             </div>
           </motion.div>

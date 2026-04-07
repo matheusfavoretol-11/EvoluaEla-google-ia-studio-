@@ -106,47 +106,47 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
   if (!hasAccess) {
     return (
-      <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10">
+      <div className="flex flex-col h-full bg-transparent text-white px-6 py-10 sm:px-10">
         <div className="mb-10">
-          <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
-          <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Terapia em grupo quinzenal para mulheres que buscam evolução real.</p>
+          <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
+          <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Terapia em grupo quinzenal para mulheres que buscam evolução real.</p>
         </div>
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
+          className="rounded-[2.5rem] p-10 text-white text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
-          <Heart className="w-16 h-16 text-[var(--color-accent)] mx-auto mb-6 relative z-10" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B4357]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
+          <Heart className="w-16 h-16 text-[#C5A059] mx-auto mb-6 relative z-10" />
           <h3 className="text-3xl font-bold mb-4 relative z-10 tracking-tight">Acesso Exclusivo Premium</h3>
-          <p className="text-[var(--color-text-muted)] text-base mb-10 relative z-10 font-medium leading-relaxed">
+          <p className="text-white/40 text-base mb-10 relative z-10 font-medium leading-relaxed">
             Nossas sessões de terapia em grupo são um espaço seguro e acolhedor. 
             Participe de encontros quinzenais ao vivo com especialistas e outras mulheres da nossa comunidade.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
             <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
-              <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
-              <p className="text-sm text-[var(--color-text-muted)]">Sessões quinzenais ao vivo</p>
+              <CheckCircle2 className="text-[#8B4357] shrink-0 mt-1" size={18} />
+              <p className="text-sm text-white/40">Sessões quinzenais ao vivo</p>
             </div>
             <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
-              <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
-              <p className="text-sm text-[var(--color-text-muted)]">Ambiente seguro e anônimo</p>
+              <CheckCircle2 className="text-[#8B4357] shrink-0 mt-1" size={18} />
+              <p className="text-sm text-white/40">Ambiente seguro e anônimo</p>
             </div>
             <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
-              <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
-              <p className="text-sm text-[var(--color-text-muted)]">Gravações disponíveis por 7 dias</p>
+              <CheckCircle2 className="text-[#8B4357] shrink-0 mt-1" size={18} />
+              <p className="text-sm text-white/40">Gravações disponíveis por 7 dias</p>
             </div>
             <div className="flex items-start gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
-              <CheckCircle2 className="text-[var(--color-primary)] shrink-0 mt-1" size={18} />
-              <p className="text-sm text-[var(--color-text-muted)]">Máximo de 25 participantes</p>
+              <CheckCircle2 className="text-[#8B4357] shrink-0 mt-1" size={18} />
+              <p className="text-sm text-white/40">Máximo de 25 participantes</p>
             </div>
           </div>
 
           <button 
             onClick={onUpgrade}
-            className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] shadow-xl relative z-10"
+            className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-white text-black shadow-xl relative z-10"
           >
             Fazer Upgrade por R$ 109,90/mês
           </button>
@@ -156,10 +156,10 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
   }
 
   return (
-    <div className="flex flex-col h-full bg-transparent text-[var(--color-text)] px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
+    <div className="flex flex-col h-full bg-transparent text-white px-6 py-10 sm:px-10 pb-32 overflow-y-auto hide-scrollbar">
       <div className="mb-10">
-        <h2 className="text-5xl font-bold text-[var(--color-text)] mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
-        <p className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Seu espaço seguro de acolhimento e troca.</p>
+        <h2 className="text-5xl font-bold text-white mb-3 tracking-tighter"><span className="gradient-text">{therapyTitle}</span></h2>
+        <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Seu espaço seguro de acolhimento e troca.</p>
       </div>
 
       {/* Próxima Sessão Card */}
@@ -169,15 +169,15 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
           animate={{ opacity: 1, scale: 1 }}
           className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl relative overflow-hidden mb-10"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B4357]/90 rounded-full blur-[100px] -mr-20 -mt-20"></div>
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-primary)]/90 text-[var(--color-primary)] rounded-full text-[10px] font-bold uppercase tracking-widest border border-[var(--color-primary)]/90">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B4357]/90 text-black rounded-full text-[10px] font-bold uppercase tracking-widest border border-[#8B4357]/90">
                 <Clock size={12} /> Próxima Sessão
               </div>
               <h3 className="text-3xl font-bold tracking-tight">O Poder da Vulnerabilidade</h3>
-              <div className="flex items-center gap-4 text-[var(--color-text-muted)] text-sm font-medium">
+              <div className="flex items-center gap-4 text-white/40 text-sm font-medium">
                 <span className="flex items-center gap-2"><Calendar size={16} /> {format(new Date(nextSession.date), "dd 'de' MMMM", { locale: ptBR })}</span>
                 <span className="flex items-center gap-2"><Clock size={16} /> {format(new Date(nextSession.date), "HH:mm")}</span>
               </div>
@@ -185,8 +185,8 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
             <div className="flex flex-col items-center md:items-end gap-4">
               <div className="text-center md:text-right">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-1">Começa em</p>
-                <p className="text-3xl font-mono font-bold text-[var(--color-accent)]">{countdown}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Começa em</p>
+                <p className="text-3xl font-mono font-bold text-[#C5A059]">{countdown}</p>
               </div>
               
               <button 
@@ -194,37 +194,37 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
                 disabled={!isJoinActive}
                 className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all shadow-2xl ${
                   isJoinActive 
-                    ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-black hover:scale-105' 
-                    : 'bg-[var(--color-text)]/5 text-[var(--color-text-muted)] cursor-not-allowed border border-[var(--color-border)]'
+                    ? 'bg-gradient-to-r from-[#8B4357] to-[#C5A059] text-black hover:scale-105' 
+                    : 'bg-white/5 text-white/40 cursor-not-allowed border border-white/10'
                 }`}
               >
                 {isJoinActive ? <Play size={18} fill="currentColor" /> : <Lock size={18} />}
                 Entrar na Sala
               </button>
               {!isJoinActive && (
-                <p className="text-[9px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Ativo 10 min antes do início</p>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-white/40">Ativo 10 min antes do início</p>
               )}
             </div>
           </div>
         </motion.div>
       ) : (
         <div className="glass-morphism p-10 rounded-[2.5rem] border border-white/10 text-center mb-10">
-          <Calendar className="w-12 h-12 text-[var(--color-text-muted)]/90 mx-auto mb-4" />
-          <p className="text-[var(--color-text-muted)] font-medium">Nenhuma sessão agendada no momento.</p>
+          <Calendar className="w-12 h-12 text-white/40 mx-auto mb-4" />
+          <p className="text-white/40 font-medium">Nenhuma sessão agendada no momento.</p>
         </div>
       )}
 
       {/* Calendário Próximas Sessões */}
       <div className="mb-12">
-        <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6 tracking-tight flex items-center gap-3">
-          <Calendar className="text-[var(--color-primary)]" size={24} /> Próximos Encontros
+        <h3 className="text-2xl font-bold text-white mb-6 tracking-tight flex items-center gap-3">
+          <Calendar className="text-[#8B4357]" size={24} /> Próximos Encontros
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {upcomingSessions.length > 0 ? upcomingSessions.map((session, idx) => (
             <div key={session.id} className="glass-morphism p-6 rounded-3xl border border-white/10 hover:border-white/20 transition-all">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent)] mb-2">Sessão {idx + 2}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#C5A059] mb-2">Sessão {idx + 2}</p>
               <p className="font-bold text-lg mb-1">{format(new Date(session.date), "dd/MM", { locale: ptBR })}</p>
-              <p className="text-sm text-[var(--color-text-muted)]">{format(new Date(session.date), "EEEE, HH:mm", { locale: ptBR })}</p>
+              <p className="text-sm text-white/40">{format(new Date(session.date), "EEEE, HH:mm", { locale: ptBR })}</p>
             </div>
           )) : (
             [1, 2, 3].map(i => (
@@ -240,30 +240,30 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
       {/* Histórico e Replays */}
       <div>
-        <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6 tracking-tight flex items-center gap-3">
-          <Play className="text-[var(--color-primary)]" size={24} /> Histórico & Replays
+        <h3 className="text-2xl font-bold text-white mb-6 tracking-tight flex items-center gap-3">
+          <Play className="text-[#8B4357]" size={24} /> Histórico & Replays
         </h3>
         <div className="space-y-4">
           {pastSessions.length > 0 ? pastSessions.map((session) => (
             <div key={session.id} className="glass-morphism p-6 rounded-3xl border border-white/10 flex items-center justify-between group hover:bg-white/5 transition-all">
               <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-[var(--color-text-muted)] group-hover:bg-[var(--color-primary)]/90 group-hover:text-[var(--color-primary)] transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white/40 group-hover:bg-[#8B4357]/90 group-hover:text-black transition-all">
                   <Play size={24} />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg tracking-tight">Sessão de {format(new Date(session.date), "dd 'de' MMMM", { locale: ptBR })}</h4>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Disponível até {format(addMinutes(new Date(session.date), 10080), "dd/MM")}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">Disponível até {format(addMinutes(new Date(session.date), 10080), "dd/MM")}</p>
                 </div>
               </div>
               <button 
-                className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all border border-white/10"
+                className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 hover:bg-white/10 transition-all border border-white/10"
                 onClick={() => session.recorded_url && window.open(session.recorded_url, '_blank')}
               >
                 <ExternalLink size={20} />
               </button>
             </div>
           )) : (
-            <div className="text-center py-10 text-[var(--color-text-muted)]/90">
+            <div className="text-center py-10 text-white/40">
               <p className="text-[10px] font-bold uppercase tracking-widest">Nenhum replay disponível ainda.</p>
             </div>
           )}
@@ -280,27 +280,27 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
               exit={{ scale: 0.8, opacity: 0 }}
               className="glass-morphism p-10 w-full shadow-2xl text-center relative border border-white/10"
             >
-              <button onClick={() => setShowFeedback(false)} className="absolute top-6 right-6 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
+              <button onClick={() => setShowFeedback(false)} className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors">
                 <X size={24} />
               </button>
-              <div className="w-20 h-20 bg-[var(--color-primary)]/90 rounded-3xl flex items-center justify-center mx-auto mb-6 text-[var(--color-primary)]">
+              <div className="w-20 h-20 bg-[#8B4357]/90 rounded-3xl flex items-center justify-center mx-auto mb-6 text-black">
                 <Star size={40} fill="currentColor" />
               </div>
               <h2 className="text-3xl font-bold mb-4 tracking-tight">Como foi sua experiência?</h2>
-              <p className="text-[var(--color-text-muted)] mb-8 font-medium">Sua opinião é fundamental para mantermos nosso círculo acolhedor.</p>
+              <p className="text-white/40 mb-8 font-medium">Sua opinião é fundamental para mantermos nosso círculo acolhedor.</p>
               
               <div className="space-y-6 text-left">
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]/90 mb-3 block">O quanto você se sentiu acolhida? (0-10)</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-3 block">O quanto você se sentiu acolhida? (0-10)</label>
                   <div className="flex justify-between gap-2">
                     {[1, 2, 3, 4, 5].map(n => (
-                      <button key={n} className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--color-primary)] transition-all font-bold">{n}</button>
+                      <button key={n} className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#8B4357] transition-all font-bold">{n}</button>
                     ))}
                   </div>
                 </div>
                 <button 
                   onClick={() => setShowFeedback(false)}
-                  className="w-full py-5 rounded-full bg-[var(--color-text)] text-[var(--color-bg)] font-bold uppercase tracking-widest text-xs shadow-xl hover:scale-105 transition-all"
+                  className="w-full py-5 rounded-full bg-white text-black font-bold uppercase tracking-widest text-xs shadow-xl hover:scale-105 transition-all"
                 >
                   Enviar Feedback
                 </button>

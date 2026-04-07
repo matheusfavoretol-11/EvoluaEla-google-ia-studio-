@@ -16,12 +16,13 @@ export const predefinedThemes: Record<string, Theme> = {
   premium: {
     id: 'premium',
     name: 'Premium',
-    primary: '#E8B4BC',
-    bg: '#FAF7F5',
-    surface: '#FFFFFF',
-    text: '#3F2A2F',
-    textMuted: '#6B5E61',
-    accent: '#A8C4B8',
+    primary: '#8B4357',
+    bg: '#0A0A0A',
+    surface: '#141414',
+    text: '#FFFFFF',
+    textMuted: '#888888',
+    accent: '#C5A059',
+    border: 'rgba(255, 255, 255, 0.1)',
   },
   delicado: {
     id: 'delicado',
@@ -43,36 +44,15 @@ export const predefinedThemes: Record<string, Theme> = {
     textMuted: '#a8a29e',
     accent: '#fef3c7', // amber-100
   },
-  darkFeminino: {
-    id: 'darkFeminino',
-    name: 'Dark Feminino',
-    primary: '#fb7185', // rose-400
-    bg: '#1c1917', // stone-900
-    surface: '#292524', // stone-800
-    text: '#fafaf9', // stone-50
-    textMuted: '#a8a29e', // stone-400
-    accent: '#4c1d95', // violet-900
-  },
-  castify: {
-    id: 'castify',
-    name: 'Castify',
-    primary: '#E8B4BC',
-    bg: '#0A0A0A',
-    surface: '#141414',
-    text: '#FFFFFF',
-    textMuted: '#888888',
-    accent: '#D4B996',
-    border: 'rgba(255, 255, 255, 0.1)',
-  },
   light: {
     id: 'light',
     name: 'Claro',
-    primary: '#C9848C',
+    primary: '#8B4357',
     bg: '#FAF8F5',
     surface: '#FFFFFF',
     text: '#1A1A1A',
     textMuted: '#555555',
-    accent: '#B89A76',
+    accent: '#C5A059',
     border: '#E0D8D0',
   },
 };
@@ -90,7 +70,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('evoluaela-theme');
-    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.castify;
+    return saved && predefinedThemes[saved] ? predefinedThemes[saved] : predefinedThemes.premium;
   });
 
   useEffect(() => {
@@ -121,7 +101,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    setTheme(prev => prev.id === 'light' ? predefinedThemes.castify : predefinedThemes.light);
+    setTheme(prev => prev.id === 'light' ? predefinedThemes.premium : predefinedThemes.light);
   };
 
   const isDark = theme.id !== 'light';

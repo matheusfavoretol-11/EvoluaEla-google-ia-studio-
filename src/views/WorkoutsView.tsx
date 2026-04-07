@@ -315,31 +315,31 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       >
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h4 className="text-2xl font-bold text-[var(--color-text)] leading-tight mb-2 group-hover:text-[var(--color-primary)] transition-colors tracking-tight">{workout.title}</h4>
-          <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-muted)] uppercase tracking-widest">
-            <span className="flex items-center gap-1.5"><Clock size={14} className="text-[var(--color-primary)]" /> {workout.duration}</span>
-            <span className="flex items-center gap-1.5"><Flame size={14} className="text-[var(--color-accent)]" /> {workout.calories}</span>
+          <h4 className="text-2xl font-bold text-white leading-tight mb-2 group-hover:text-[#C5A059] transition-colors tracking-tight">{workout.title}</h4>
+          <div className="flex items-center gap-4 text-[10px] font-bold text-white/40 uppercase tracking-widest">
+            <span className="flex items-center gap-1.5"><Clock size={14} className="text-[#C5A059]" /> {workout.duration}</span>
+            <span className="flex items-center gap-1.5"><Flame size={14} className="text-[#8B4357]" /> {workout.calories}</span>
           </div>
         </div>
-        <div className="bg-[var(--color-text)]/5 text-[var(--color-text-muted)] p-3 rounded-2xl group-hover:bg-[var(--color-primary)] group-hover:text-black transition-all">
+        <div className="bg-white/5 text-white/40 p-3 rounded-2xl group-hover:bg-[#C5A059] group-hover:text-black transition-all">
           <ChevronRight size={20} />
         </div>
       </div>
       
-      <div className="flex items-center gap-4 mt-6 pt-6 border-t border-[var(--color-border)]">
+      <div className="flex items-center gap-4 mt-6 pt-6 border-t border-white/5">
         <div className="flex -space-x-3">
           {workout.exercises.slice(0, 3).map((ex, idx) => (
-            <div key={`${ex.id}-${idx}`} className="w-10 h-10 rounded-full bg-[var(--color-bg)] border-4 border-[var(--color-bg)] flex items-center justify-center text-[10px] font-bold text-[var(--color-text-muted)] shadow-xl">
+            <div key={`${ex.id}-${idx}`} className="w-10 h-10 rounded-full bg-[#0A0A0A] border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/40 shadow-xl">
               {idx + 1}
             </div>
           ))}
           {workout.exercises.length > 3 && (
-            <div className="w-10 h-10 rounded-full bg-[var(--color-bg)] border-4 border-[var(--color-bg)] flex items-center justify-center text-[10px] font-bold text-[var(--color-text-muted)] shadow-xl">
+            <div className="w-10 h-10 rounded-full bg-[#0A0A0A] border-4 border-[#0A0A0A] flex items-center justify-center text-[10px] font-bold text-white/40 shadow-xl">
               +
             </div>
           )}
         </div>
-        <span className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase tracking-widest ml-1">{workout.exercises.length} exercícios</span>
+        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest ml-1">{workout.exercises.length} exercícios</span>
       </div>
     </motion.div>
   );
@@ -372,7 +372,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex flex-col h-full bg-transparent text-[var(--color-text)] font-sans relative"
+      className="flex flex-col h-full bg-transparent text-white font-sans relative"
     >
       <AnimatePresence mode="wait">
         {!activeWorkoutId && !isEditing ? (
@@ -385,8 +385,8 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             className="flex flex-col h-full"
           >
             <div className="px-6 sm:px-10 pt-8 pb-4">
-              <motion.h2 variants={itemVariants} className="text-5xl font-bold mb-3 text-[var(--color-text)] tracking-tighter">Seus <span className="gradient-text">Treinos</span></motion.h2>
-              <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</motion.p>
+              <motion.h2 variants={itemVariants} className="text-5xl font-bold mb-3 text-white tracking-tighter">Seus <span className="gradient-text">Treinos</span></motion.h2>
+              <motion.p variants={itemVariants} className="text-sm font-bold text-white/40 mb-8 uppercase tracking-widest">O app não manda em você. Ele se adapta ao seu ritmo.</motion.p>
               
               {/* Tabs */}
               <motion.div variants={itemVariants} className="flex p-1.5 rounded-2xl bg-white/5 mb-8 border border-white/10">
@@ -394,7 +394,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setActiveTab('meus')}
                   className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-                    activeTab === 'meus' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    activeTab === 'meus' ? 'bg-white text-black shadow-2xl' : 'text-white/40 hover:text-white'
                   }`}
                 >
                   Meus Treinos
@@ -403,7 +403,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setActiveTab('sugestoes')}
                   className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${
-                    activeTab === 'sugestoes' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    activeTab === 'sugestoes' ? 'bg-white text-black shadow-2xl' : 'text-white/40 hover:text-white'
                   }`}
                 >
                   Sugestões
@@ -418,7 +418,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     variants={itemVariants}
                     whileTap={{ scale: 0.97 }}
                     onClick={handleCreateNew}
-                    className="w-full py-6 rounded-3xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 mb-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+                    className="w-full py-6 rounded-3xl font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 mb-6 bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
                   >
                     <Plus size={22} /> Criar treino personalizado
                   </motion.button>
@@ -426,18 +426,18 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   {!isPremium && (
                     <motion.div 
                       variants={itemVariants}
-                      className="rounded-[2.5rem] p-10 text-[var(--color-text)] text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
+                      className="rounded-[2.5rem] p-10 text-white text-center mb-8 relative overflow-hidden glass-morphism border border-white/10"
                     >
-                      <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
-                      <Star className="w-16 h-16 text-[var(--color-accent)] mx-auto mb-6 relative z-10" />
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B4357]/90 rounded-full blur-[100px] -mr-20 -mt-20 animate-pulse-soft"></div>
+                      <Star className="w-16 h-16 text-[#C5A059] mx-auto mb-6 relative z-10" />
                       <h3 className="text-3xl font-bold mb-4 relative z-10 tracking-tight">Treinos feitos para você</h3>
-                      <p className="text-[var(--color-text-muted)] text-base mb-10 relative z-10 font-bold leading-relaxed">
+                      <p className="text-white/40 text-base mb-10 relative z-10 font-bold leading-relaxed">
                         Desbloqueie treinos 100% personalizados, pensados por especialistas para o seu objetivo real. Vamos juntas?
                       </p>
                       <motion.button 
                         whileTap={{ scale: 0.97 }}
                         onClick={onUpgrade}
-                        className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] shadow-xl relative z-10"
+                        className="font-bold uppercase tracking-widest text-xs py-5 px-10 rounded-full w-full transition-all hover:scale-105 hover:shadow-2xl bg-white text-black shadow-xl relative z-10"
                       >
                         Fazer Upgrade Premium
                       </motion.button>
@@ -445,7 +445,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   )}
 
                   {myWorkouts.length === 0 ? (
-                    <motion.div variants={itemVariants} className="text-center py-16 text-[var(--color-text-muted)]/90">
+                    <motion.div variants={itemVariants} className="text-center py-16 text-white/40">
                       <Dumbbell size={64} className="mx-auto mb-6 opacity-90" />
                       <p className="font-bold uppercase tracking-widest text-[10px]">Você ainda não criou nenhum treino.</p>
                     </motion.div>
@@ -463,7 +463,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
               {activeTab === 'sugestoes' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-3 glass-morphism p-5 text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest border border-white/10 text-center">
+                  <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-3 glass-morphism p-5 text-[10px] text-white/40 font-bold uppercase tracking-widest border border-white/10 text-center">
                     Sugestões preparadas com carinho para você começar agora.
                   </motion.div>
                   {defaultSuggestions.map((workout) => (
@@ -474,8 +474,8 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 </div>
               )}
 
-              <motion.div variants={itemVariants} className="mt-8 p-6 glass-morphism border border-white/10 flex gap-4 items-start text-[var(--color-text-muted)] text-[10px] font-bold uppercase tracking-widest">
-                <Info size={20} className="shrink-0 mt-0.5 text-[var(--color-accent)]" />
+              <motion.div variants={itemVariants} className="mt-8 p-6 glass-morphism border border-white/10 flex gap-4 items-start text-white/40 text-[10px] font-bold uppercase tracking-widest">
+                <Info size={20} className="shrink-0 mt-0.5 text-[#C5A059]" />
                 <p className="leading-relaxed">Lembrete: os treinos são sugestões para te apoiar, mas não substituem o olhar de um profissional de educação física, tá?</p>
               </motion.div>
             </div>
@@ -486,21 +486,21 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="flex flex-col h-full bg-[var(--color-bg)]"
+            className="flex flex-col h-full bg-[#0A0A0A]"
           >
             <div className="px-6 sm:px-10 pt-8 pb-6 border-b border-white/5 flex items-center justify-between sticky top-0 backdrop-blur-xl z-30">
               <div className="flex items-center gap-4">
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={isEditing ? handleCancelEdit : () => setActiveWorkoutId(null)}
-                  className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all border border-white/10"
+                  className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 hover:bg-white/10 transition-all border border-white/10"
                 >
                   {isEditing ? <X size={24} /> : <ChevronRight size={24} className="rotate-180" />}
                 </motion.button>
                 {!isEditing && (
                   <div>
-                    <h2 className="text-3xl font-bold text-[var(--color-text)] tracking-tight">{activeWorkout?.title}</h2>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">{activeWorkout?.duration} • {activeWorkout?.exercises.length} exercícios</p>
+                    <h2 className="text-3xl font-bold text-white tracking-tight">{activeWorkout?.title}</h2>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">{activeWorkout?.duration} • {activeWorkout?.exercises.length} exercícios</p>
                   </div>
                 )}
               </div>
@@ -509,7 +509,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={() => startEditing(activeWorkout!)}
-                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-white/5 text-[var(--color-text)] border border-white/10 hover:bg-white/10 transition-all"
+                  className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-2xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all"
                 >
                   <Edit2 size={18} /> Editar
                 </motion.button>
@@ -519,7 +519,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     <motion.button 
                       whileTap={{ scale: 0.97 }}
                       onClick={handleDeleteWorkout}
-                      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-rose-500/90 text-rose-500 shadow-xl hover:bg-rose-500/90 transition-all border border-rose-500/90"
+                      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-rose-500/90 text-white shadow-xl hover:bg-rose-500 transition-all border border-rose-500/90"
                     >
                       <Trash2 size={20} />
                     </motion.button>
@@ -527,7 +527,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   <motion.button 
                     whileTap={{ scale: 0.97 }}
                     onClick={handleSaveEdit}
-                    className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-8 py-3 rounded-2xl text-black shadow-2xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:scale-105 transition-all"
+                    className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-8 py-3 rounded-2xl text-black shadow-2xl bg-gradient-to-r from-[#8B4357] to-[#C5A059] hover:scale-105 transition-all"
                   >
                     Salvar
                   </motion.button>
@@ -538,15 +538,15 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
             {/* Progress Bar (View Mode) */}
             {!isEditing && (
               <div className="px-6 sm:px-10 pt-6 bg-transparent">
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-[var(--color-text-muted)]">
+                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3 text-white/40">
                   <span>Progresso do Treino</span>
-                  <span className="text-[var(--color-primary)]">{Math.round(progressPercent)}%</span>
+                  <span className="text-[#C5A059]">{Math.round(progressPercent)}%</span>
                 </div>
-                <div className="h-2 w-full rounded-full overflow-hidden bg-[var(--color-text)]/5">
+                <div className="h-2 w-full rounded-full overflow-hidden bg-white/5">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${progressPercent}%` }}
-                    className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+                    className="h-full rounded-full bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
                   />
                 </div>
               </div>
@@ -556,32 +556,32 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               {isEditing && (
                 <div className="mb-8 space-y-6">
                   <div>
-                    <label className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase ml-2 mb-2 block tracking-widest">Nome do Treino</label>
+                    <label className="text-[10px] font-bold text-white/40 uppercase ml-2 mb-2 block tracking-widest">Nome do Treino</label>
                     <input 
                       type="text"
                       value={editingWorkout?.title || ''}
                       onChange={(e) => setEditingWorkout(prev => prev ? {...prev, title: e.target.value} : null)}
-                      className="w-full text-2xl font-bold text-[var(--color-text)] bg-white/5 p-6 rounded-3xl border border-white/10 outline-none focus:border-[var(--color-primary)]/90 transition-all"
+                      className="w-full text-2xl font-bold text-white bg-white/5 p-6 rounded-3xl border border-white/10 outline-none focus:border-[#C5A059]/90 transition-all"
                     />
                   </div>
                   
                   {isPremium && (
                     <div className="glass-morphism p-6 border border-white/10 shadow-2xl">
-                      <p className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase mb-4 flex items-center gap-2 tracking-widest">
-                        <Star size={14} className="text-[#D4B996]" /> Sugestões Inteligentes
+                      <p className="text-[10px] font-bold text-white/40 uppercase mb-4 flex items-center gap-2 tracking-widest">
+                        <Star size={14} className="text-[#C5A059]" /> Sugestões Inteligentes
                       </p>
                       <div className="flex gap-3">
                         <motion.button 
                           whileTap={{ scale: 0.97 }}
                           onClick={() => addPremiumSuggestion('cardio')} 
-                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-[var(--color-text)] transition-all border border-white/10"
+                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10"
                         >
                           + Cardio
                         </motion.button>
                         <motion.button 
                           whileTap={{ scale: 0.97 }}
                           onClick={() => addPremiumSuggestion('core')} 
-                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-[var(--color-text)] transition-all border border-white/10"
+                          className="text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10"
                         >
                           + Core
                         </motion.button>
@@ -599,31 +599,31 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     <div key={`edit-${exercise.id}`} className="flex flex-col gap-4 p-6 glass-morphism border border-white/10 shadow-2xl">
                       <div className="flex justify-between items-center gap-4">
                         <input 
-                          className="font-bold text-xl text-[var(--color-text)] bg-white/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                          className="font-bold text-xl text-white bg-white/5 p-3 rounded-2xl outline-none w-full border border-transparent focus:border-[#C5A059]/90 transition-all" 
                           value={exercise.name} 
                           onChange={(e) => updateExercise(exercise.id, 'name', e.target.value)}
                           placeholder="Nome do exercício"
                         />
                         <div className="flex gap-2 shrink-0">
-                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-white/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-white/10"><ArrowUp size={18}/></motion.button>
-                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-white/5 rounded-xl text-[var(--color-text-muted)] disabled:opacity-90 hover:bg-white/10"><ArrowDown size={18}/></motion.button>
-                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => removeExercise(exercise.id)} className="p-3 bg-rose-500/90 rounded-xl text-rose-500 hover:bg-rose-500/90"><Trash2 size={18}/></motion.button>
+                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, -1)} disabled={index === 0} className="p-3 bg-white/5 rounded-xl text-white/40 disabled:opacity-90 hover:bg-white/10"><ArrowUp size={18}/></motion.button>
+                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => moveExercise(index, 1)} disabled={index === activeWorkout.exercises.length - 1} className="p-3 bg-white/5 rounded-xl text-white/40 disabled:opacity-90 hover:bg-white/10"><ArrowDown size={18}/></motion.button>
+                          <motion.button whileTap={{ scale: 0.97 }} onClick={() => removeExercise(exercise.id)} className="p-3 bg-rose-500/90 rounded-xl text-white hover:bg-rose-500"><Trash2 size={18}/></motion.button>
                         </div>
                       </div>
                       <div className="flex gap-4">
                         <div className="flex-1">
-                          <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Séries</label>
+                          <label className="text-[10px] text-white/40 uppercase font-bold ml-2 mb-1 block tracking-widest">Séries</label>
                           <input 
-                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-white outline-none border border-transparent focus:border-[#C5A059]/90 transition-all" 
                             value={exercise.sets}
                             onChange={(e) => updateExercise(exercise.id, 'sets', e.target.value)}
                             placeholder="Ex: 3"
                           />
                         </div>
                         <div className="flex-1">
-                          <label className="text-[10px] text-[var(--color-text-muted)] uppercase font-bold ml-2 mb-1 block tracking-widest">Reps/Tempo</label>
+                          <label className="text-[10px] text-white/40 uppercase font-bold ml-2 mb-1 block tracking-widest">Reps/Tempo</label>
                           <input 
-                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-[var(--color-text)] outline-none border border-transparent focus:border-[var(--color-primary)]/90 transition-all" 
+                            className="w-full bg-white/5 p-4 rounded-2xl text-sm font-bold text-white outline-none border border-transparent focus:border-[#C5A059]/90 transition-all" 
                             value={exercise.reps}
                             onChange={(e) => updateExercise(exercise.id, 'reps', e.target.value)}
                             placeholder="Ex: 15 reps"
@@ -652,25 +652,21 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     onClick={() => toggleExercise(exercise.id)}
                     className={`p-6 rounded-3xl border cursor-pointer transition-all ${
                       isCompleted 
-                        ? 'bg-[var(--color-text)]/90 border-transparent' 
+                        ? 'bg-white/90 border-transparent' 
                         : 'glass-morphism border-white/10 shadow-xl hover:border-white/20'
                     }`}
                   >
                     <div className="flex justify-between items-center">
                       <div>
-                        <h4 className={`font-bold text-xl transition-all tracking-tight ${isCompleted ? 'text-[var(--color-text-muted)] line-through' : 'text-[var(--color-text)]'}`}>
+                        <h4 className={`font-bold text-xl transition-all tracking-tight ${isCompleted ? 'text-black/40 line-through' : 'text-white'}`}>
                           {exercise.name}
                         </h4>
-                        <p className="text-[10px] font-bold uppercase tracking-widest mt-2 transition-colors" style={{ color: isCompleted ? 'rgba(var(--color-primary-rgb), 0.4)' : 'var(--color-primary)' }}>
+                        <p className={`text-[10px] font-bold uppercase tracking-widest mt-2 transition-colors ${isCompleted ? 'text-black/60' : 'text-[#C5A059]'}`}>
                           {exercise.sets} séries x {exercise.reps}
                         </p>
                       </div>
                     <div 
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors`}
-                      style={{ 
-                        color: isCompleted ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                        backgroundColor: isCompleted ? 'rgba(var(--color-primary-rgb), 0.15)' : 'transparent'
-                      }}
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${isCompleted ? 'text-black/80 bg-black/5' : 'text-white/40 bg-transparent'}`}
                     >
                       {isCompleted ? <CheckSquare size={32} /> : <Square size={32} />}
                     </div>
@@ -683,7 +679,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={addExercise}
-                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)] bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-3 mt-6 border border-white/10"
+                  className="w-full py-5 rounded-3xl font-bold uppercase tracking-widest text-[10px] text-white/40 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-3 mt-6 border border-white/10"
                 >
                   <Plus size={24} /> Adicionar Exercício
                 </motion.button>
@@ -696,7 +692,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   whileTap={{ scale: 0.97 }}
                   onClick={handleFinishWorkout}
                   disabled={completedCount === 0}
-                  className="w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 disabled:opacity-90 disabled:hover:scale-100 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+                  className="w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-black shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 disabled:opacity-90 disabled:hover:scale-100 bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
                 >
                   <CheckCircle2 size={24} /> Finalizar Treino
                 </motion.button>
@@ -723,38 +719,38 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                   setActiveWorkoutId(null);
                   setCompletedExercises({});
                 }}
-                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-text-muted)] hover:bg-white/10 transition-all"
+                className="absolute top-6 right-6 w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 hover:bg-white/10 transition-all"
               >
                 <X size={20} />
               </motion.button>
 
-              <div className="w-24 h-24 mx-auto bg-[var(--color-primary)]/90 rounded-3xl flex items-center justify-center mb-6 text-[var(--color-primary)]">
+              <div className="w-24 h-24 mx-auto bg-[#C5A059]/90 rounded-3xl flex items-center justify-center mb-6 text-black">
                 <Flame size={48} />
               </div>
-              <h2 className="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">Treino concluído!</h2>
-              <p className="text-[var(--color-text-muted)] font-medium mb-8">Sinta esse orgulho! Você está evoluindo a cada movimento. 💪</p>
+              <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">Treino concluído!</h2>
+              <p className="text-white/40 font-medium mb-8">Sinta esse orgulho! Você está evoluindo a cada movimento. 💪</p>
               
               <div className="bg-white/5 rounded-3xl p-6 mb-8 grid grid-cols-3 gap-4 border border-white/10">
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold text-[var(--color-text)]">{completedCount}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Excs</span>
+                  <span className="text-2xl font-bold text-white">{completedCount}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/40 text-center">Excs</span>
                 </div>
-                <div className="flex flex-col items-center border-x border-[var(--color-border)]">
-                  <span className="text-2xl font-bold text-[var(--color-text)]">{activeWorkout?.duration.replace(/[^0-9]/g, '') || '0'}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Mins</span>
+                <div className="flex flex-col items-center border-x border-white/10">
+                  <span className="text-2xl font-bold text-white">{activeWorkout?.duration.replace(/[^0-9]/g, '') || '0'}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/40 text-center">Mins</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold text-[var(--color-text)]">{activeWorkout?.calories.replace(/[^0-9]/g, '') || '0'}</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--color-text-muted)] text-center">Kcal</span>
+                  <span className="text-2xl font-bold text-white">{activeWorkout?.calories.replace(/[^0-9]/g, '') || '0'}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/40 text-center">Kcal</span>
                 </div>
               </div>
 
-              <div className="w-full h-2 bg-[var(--color-text)]/5 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
                   transition={{ duration: 5 }}
-                  className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+                  className="h-full bg-gradient-to-r from-[#8B4357] to-[#C5A059]"
                 />
               </div>
             </motion.div>

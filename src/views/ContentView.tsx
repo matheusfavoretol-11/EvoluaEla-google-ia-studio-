@@ -73,19 +73,19 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex-1 overflow-y-auto pb-24 bg-transparent relative min-h-full text-[var(--color-text)] font-sans scroll-container"
+      className="flex-1 overflow-y-auto pb-24 bg-transparent relative min-h-full text-white font-sans scroll-container"
     >
       {/* Background Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#8B4357]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="px-6 sm:px-10 pt-12 pb-10 relative z-10">
         <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-primary)] shadow-2xl backdrop-blur-xl">
+          <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-[#C5A059] shadow-2xl backdrop-blur-xl">
             <Sparkles size={32} />
           </div>
-          <h1 className="text-5xl font-bold text-[var(--color-text)] tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
+          <h1 className="text-5xl font-bold text-white tracking-tighter">Conteúdos que <span className="gradient-text">Transformam</span></h1>
         </motion.div>
-        <motion.p variants={itemVariants} className="text-sm font-bold text-[var(--color-text-muted)] uppercase tracking-widest">Uma curadoria especial para nutrir sua mente e alma.</motion.p>
+        <motion.p variants={itemVariants} className="text-sm font-bold text-white/40 uppercase tracking-widest">Uma curadoria especial para nutrir sua mente e alma.</motion.p>
       </div>
 
       <div className="px-6 sm:px-10 relative z-10">
@@ -95,7 +95,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             whileTap={{ scale: 0.97 }}
             onClick={() => setActiveCategory('audios')}
             className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
-              activeCategory === 'audios' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              activeCategory === 'audios' ? 'bg-white text-black shadow-2xl scale-[1.02]' : 'text-white/40 hover:text-white'
             }`}
           >
             <Headphones size={18} />
@@ -105,7 +105,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             whileTap={{ scale: 0.97 }}
             onClick={() => setActiveCategory('guides')}
             className={`flex-1 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3 ${
-              activeCategory === 'guides' ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl scale-[1.02]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              activeCategory === 'guides' ? 'bg-white text-black shadow-2xl scale-[1.02]' : 'text-white/40 hover:text-white'
             }`}
           >
             <FileText size={18} />
@@ -131,29 +131,29 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                 onClick={() => handleContentClick(item, isLockedByPremium, isLockedByLevel)}
               >
                 <div 
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all border border-white/10 bg-white/5 group-hover:bg-[var(--color-text)] group-hover:text-[var(--color-bg)]"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all border border-white/10 bg-white/5 group-hover:bg-white group-hover:text-black"
                   style={{ 
-                    color: isLocked ? 'rgba(var(--color-text-rgb), 0.2)' : 'var(--color-text)'
+                    color: isLocked ? 'rgba(255, 255, 255, 0.2)' : 'white'
                   }}
                 >
                   {isLocked ? <Lock size={24} /> : (activeCategory === 'audios' ? <Play size={24} className="ml-1" /> : <FileText size={24} />)}
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className={`font-bold text-xl tracking-tight transition-all ${isLocked ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text)] group-hover:text-[var(--color-primary)]'}`}>
+                  <h3 className={`font-bold text-xl tracking-tight transition-all ${isLocked ? 'text-white/40' : 'text-white group-hover:text-[#C5A059]'}`}>
                     {item.title}
                   </h3>
                   <div className="flex items-center gap-3 mt-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">
                       {activeCategory === 'audios' ? (item as any).duration : (item as any).pages}
                     </span>
                     {item.premium && (
-                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[var(--color-primary)]/90 text-[var(--color-primary)] border border-[var(--color-primary)]/90">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[#C5A059]/90 text-black border border-[#C5A059]/90">
                         Premium
                       </span>
                     )}
                     {isLockedByLevel && !isLockedByPremium && (
-                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-[var(--color-text)]/5 text-[var(--color-text-muted)] border border-[var(--color-border)]">
+                      <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-lg bg-white/5 text-white/40 border border-white/5">
                         Nível: {item.levelRequired}
                       </span>
                     )}
@@ -183,37 +183,37 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
             >
               <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/5 backdrop-blur-xl">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-[var(--color-primary)]">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-[#C5A059]">
                     {activeCategory === 'audios' ? <Headphones size={24} /> : <FileText size={24} />}
                   </div>
-                  <h3 className="font-bold uppercase tracking-widest text-[10px] text-[var(--color-text-muted)]">
+                  <h3 className="font-bold uppercase tracking-widest text-[10px] text-white/40">
                     {activeCategory === 'audios' ? 'Sua Jornada Sonora' : 'Sua Leitura de Hoje'}
                   </h3>
                 </div>
                 <motion.button 
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setSelectedContent(null)}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white transition-colors"
                 >
                   <X size={20} />
                 </motion.button>
               </div>
 
               <div className="p-10 flex-1 overflow-y-auto flex flex-col items-center text-center relative">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#8B4357]/5 rounded-full blur-[100px] pointer-events-none"></div>
                 
                 {activeCategory === 'audios' ? (
                   <>
                     <div className="w-56 h-56 rounded-[3rem] mb-10 relative flex items-center justify-center shadow-2xl bg-white/5 border border-white/10 overflow-hidden">
-                      <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/90 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
-                      <div className={`absolute inset-0 border-4 border-[var(--color-primary)]/90 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
-                      <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-[var(--color-text)] text-[var(--color-bg)] relative z-10">
+                      <div className={`absolute inset-0 bg-gradient-to-br from-[#8B4357]/90 to-transparent transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}></div>
+                      <div className={`absolute inset-0 border-4 border-[#8B4357]/90 rounded-[3rem] ${isPlaying ? 'animate-pulse' : ''}`}></div>
+                      <div className="w-36 h-36 rounded-[2.5rem] flex items-center justify-center shadow-2xl bg-white text-black relative z-10">
                         <Headphones size={56} />
                       </div>
                     </div>
                     
-                    <h2 className="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">{selectedContent.title}</h2>
-                    <p className="text-[var(--color-text-muted)] text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
+                    <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">{selectedContent.title}</h2>
+                    <p className="text-white/40 text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
                     {/* Audio Controls */}
                     <div className="w-full space-y-8">
@@ -221,26 +221,26 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                         <motion.div 
                           initial={{ width: '0%' }}
                           animate={{ width: isPlaying ? '33%' : '33%' }}
-                          className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full"
+                          className="h-full bg-gradient-to-r from-[#8B4357] to-[#C5A059] rounded-full"
                         ></motion.div>
                       </div>
-                      <div className="flex justify-between text-[10px] text-[var(--color-text-muted)] font-bold uppercase tracking-widest">
+                      <div className="flex justify-between text-[10px] text-white/40 font-bold uppercase tracking-widest">
                         <span>03:14</span>
                         <span>{selectedContent.duration}</span>
                       </div>
                       
                       <div className="flex items-center justify-center gap-10">
-                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
+                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-white/40 hover:text-white transition-colors">
                           <SkipBack size={32} />
                         </motion.button>
                         <motion.button 
                           whileTap={{ scale: 0.97 }}
                           onClick={() => setIsPlaying(!isPlaying)}
-                          className="w-20 h-20 rounded-3xl flex items-center justify-center text-[var(--color-bg)] shadow-2xl hover:scale-105 transition-all bg-[var(--color-text)]"
+                          className="w-20 h-20 rounded-3xl flex items-center justify-center text-black shadow-2xl hover:scale-105 transition-all bg-white"
                         >
                           {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" className="ml-1" />}
                         </motion.button>
-                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-[var(--color-text-muted)]/90 hover:text-[var(--color-text)] transition-colors">
+                        <motion.button whileTap={{ scale: 0.97 }} className="p-4 text-white/40 hover:text-white transition-colors">
                           <SkipForward size={32} />
                         </motion.button>
                       </div>
@@ -250,19 +250,19 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                   <>
                     <div className="w-full aspect-[3/4] bg-white/5 rounded-[2.5rem] mb-8 border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl group">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
-                      <FileText size={80} className="text-[var(--color-text-muted)]/90 group-hover:scale-110 transition-transform duration-500" />
+                      <FileText size={80} className="text-white/40 group-hover:scale-110 transition-transform duration-500" />
                       <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white text-left backdrop-blur-sm">
                         <p className="font-bold text-2xl tracking-tight mb-1">{selectedContent.title}</p>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-white/80">{selectedContent.pages}</p>
                       </div>
                     </div>
                     
-                    <h2 className="text-3xl font-bold text-[var(--color-text)] mb-4 tracking-tight">{selectedContent.title}</h2>
-                    <p className="text-[var(--color-text-muted)] text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
+                    <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">{selectedContent.title}</h2>
+                    <p className="text-white/40 text-sm mb-10 font-bold uppercase tracking-widest leading-relaxed">{selectedContent.desc}</p>
                     
                     <motion.button 
                       whileTap={{ scale: 0.97 }}
-                      className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-xs"
+                      className="w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-black shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-[#8B4357] to-[#C5A059] text-xs"
                     >
                       <FileText size={20} />
                       Quero ler agora
