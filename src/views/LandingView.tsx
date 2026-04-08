@@ -158,15 +158,15 @@ export default function LandingView({ onStart }: { onStart: () => void }) {
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40">O Poder da Evolução Feminina</span>
             </div>
             <h1 className="text-5xl md:text-8xl font-bold leading-[0.95] mb-12 tracking-tighter">
-              Sua Melhor <br />
-              <span className="text-[#D4537E]">Versão</span> em <br />
-              3 Dimensões.
+              Sua plataforma de <br />
+              <span className="text-[#D4537E]">evolução pessoal</span> <br />
+              com apoio completo.
             </h1>
             <p className="text-xl text-[#B8B0C8] mb-16 max-w-xl leading-relaxed font-medium">
-              Não é apenas emagrecer. É sobre profundidade, mentalidade e a construção de um novo estilo de vida inabalável.
+              Tenha acesso a psicólogos, nutricionistas e uma mentora com Inteligência Artificial para organizar sua mente, sua alimentação e sua rotina em um só lugar.
             </p>
             <button onClick={onStart} className="btn-3d-press px-12 py-6 bg-gradient-to-r from-[#D4537E] to-[#7F77DD] text-white font-bold text-sm uppercase tracking-[0.3em] rounded-full flex items-center gap-6 shadow-2xl">
-              Quero Evoluir <ArrowRight size={20} />
+              Começar Agora <ArrowRight size={20} />
             </button>
           </motion.div>
 
@@ -199,288 +199,122 @@ export default function LandingView({ onStart }: { onStart: () => void }) {
         </div>
       </section>
 
-      {/* IDENTIFICAÇÃO & VALIDAÇÃO */}
-      <section className="py-32 px-8 z-10 relative">
-        <div className="max-w-4xl mx-auto text-center space-y-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-              Você já fez tudo certo. E, mesmo assim, o espelho parece não colaborar.
-            </h2>
-            <div className="space-y-4 text-[#B8B0C8] text-lg leading-relaxed font-medium">
-              <p>"Você acorda decidida, segue a dieta à risca e se esforça ao máximo, mas parece que o seu corpo está sempre jogando contra você."</p>
-              <p>"A frustração de ver o peso voltar logo após tanto sacrifício não é um sinal de que você falhou, mas de que o método que te venderam nunca foi feito para a sua realidade."</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="p-12 rounded-[3rem] bg-white/5 border border-white/10 space-y-6"
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-[#D4537E] tracking-tight">
-              O problema nunca foi a sua falta de força de vontade.
-            </h3>
-            <div className="space-y-4 text-[#B8B0C8] text-base leading-relaxed font-medium">
-              <p>"Não é culpa sua se as dietas restritivas ignoraram como a sua mente e seus hormônios funcionam. Você não é um robô de academia, você é uma mulher real."</p>
-              <p>"Você não precisa de mais 'garra' ou punição; você precisa de um caminho que respeite o seu ritmo e entenda que a disciplina nasce do acolhimento, não do sofrimento."</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* O QUE É A EVOLUAELA */}
-      <section className="py-32 px-8 z-10 relative bg-gradient-to-b from-transparent to-[#0F0A1F]/50">
-        <div className="max-w-7xl mx-auto space-y-24">
-          <div className="text-center space-y-6 max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex px-4 py-2 rounded-full bg-[#D4537E]/10 text-[#D4537E] text-[10px] font-bold uppercase tracking-[0.3em] mb-4"
-            >
-              A Nova Era do Emagrecimento
-            </motion.div>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
-              Emagrecer com apoio real de quem entende você.
-            </h2>
-            <p className="text-xl text-[#B8B0C8] font-medium leading-relaxed">
-              Imagine ter um time de especialistas cuidando de você pelo celular, sem dietas malucas e com suporte de verdade.
-            </p>
-          </div>
-
-          {/* Como Funciona */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* PARA QUEM É */}
+      <section className="py-32 px-8 z-10 relative border-y border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tighter">Para quem é o <span className="text-[#D4537E]">EvoluaEla</span>?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { title: "Acesso Imediato", desc: "Você entra na plataforma e já começa a sua jornada de transformação.", icon: Play },
-              { title: "Conexão Direta", desc: "Nossa equipe de especialistas entende sua rotina, seus desafios e seus objetivos.", icon: MessageCircle },
-              { title: "Evolução Guiada", desc: "Você recebe orientações personalizadas e apoio constante para nunca mais precisar parar.", icon: TrendingUp }
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="luxury-card p-10 text-center space-y-6 group hover:border-[#D4537E]/30 transition-all"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-[#D4537E]/10 flex items-center justify-center text-[#D4537E] mx-auto group-hover:scale-110 transition-transform">
-                  <step.icon size={32} />
+              "Mulheres que se sentem estagnadas e buscam mais clareza emocional.",
+              "Quem precisa de ajuda profissional para organizar a alimentação e a saúde.",
+              "Mulheres que buscam mais disciplina e foco nos seus objetivos pessoais.",
+              "Quem deseja suporte psicológico e ferramentas práticas de desenvolvimento."
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-6 p-8 rounded-3xl bg-white/5 border border-white/5">
+                <div className="w-12 h-12 rounded-full bg-[#D4537E]/20 flex items-center justify-center text-[#D4537E] shrink-0">
+                  <CheckCircle2 size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">{step.title}</h3>
-                <p className="text-[#B8B0C8] text-sm leading-relaxed font-medium">{step.desc}</p>
-              </motion.div>
+                <p className="text-lg text-[#B8B0C8] font-medium">{item}</p>
+              </div>
             ))}
           </div>
-
-          {/* O que você tem acesso */}
-          <div className="luxury-card p-12 md:p-20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-              <Logo size="lg" />
-            </div>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
-                <h3 className="text-3xl font-bold text-white tracking-tight">O que você ganha ao entrar:</h3>
-                <ul className="space-y-6">
-                  {[
-                    "Nutricionistas que entendem sua fome e respeitam a sua rotina real.",
-                    "Psicólogos prontos para te ajudar a vencer a ansiedade e os bloqueios.",
-                    "Treinos inteligentes que se adaptam ao seu tempo e ao seu corpo.",
-                    "Apoio real para aqueles momentos em que a vontade de desistir aparece.",
-                    "A segurança de saber exatamente o que fazer em cada passo do caminho.",
-                    "Uma comunidade de mulheres que vibram com cada pequena conquista sua."
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <CheckCircle2 size={20} className="text-[#D4537E] shrink-0 mt-1" />
-                      <span className="text-[#B8B0C8] font-medium leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="text-center space-y-8">
-                <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#D4537E]/20 to-[#7F77DD]/20 border border-white/10 backdrop-blur-xl">
-                  <p className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight">
-                    "Não é uma dieta, é um time de especialistas segurando a sua mão todos os dias."
-                  </p>
-                </div>
-                <button onClick={onStart} className="btn-3d-press w-full py-6 bg-white text-black font-bold text-sm uppercase tracking-[0.4em] rounded-full shadow-2xl">
-                  Garantir Meu Acesso
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Seção de Benefícios com Profundidade */}
+      {/* O QUE VOCÊ ENCONTRA NA PLATAFORMA */}
       <section className="py-32 px-8 z-10 relative bg-[#0F0A1F]/50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 perspective-1000">
-            {features.map((feature, i) => (
+          <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tighter">O que você encontra na <span className="text-[#7F77DD]">plataforma</span></h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-1000">
+            {[
+              { 
+                title: "Acompanhamento Psicológico", 
+                desc: "Suporte especializado para lidar com emoções, ansiedade e bloqueios.",
+                icon: Heart
+              },
+              { 
+                title: "Acompanhamento Nutricional", 
+                desc: "Orientações e planos para uma alimentação equilibrada e saudável.",
+                icon: Activity
+              },
+              { 
+                title: "Coach com IA", 
+                desc: "Uma mentora disponível 24h por dia para tirar dúvidas e motivar sua rotina.",
+                icon: Bot
+              },
+              { 
+                title: "Ferramentas de Evolução", 
+                desc: "Conteúdos práticos e métodos para você aplicar no seu dia a dia.",
+                icon: Target
+              }
+            ].map((feature, i) => (
               <motion.div
                 key={i}
                 whileHover={{ translateZ: 20, scale: 1.05, rotateX: 5 }}
-                className="luxury-card p-12 transition-all duration-300 preserve-3d cursor-default border border-white/5 hover:border-[#D4537E]/50"
+                className="luxury-card p-10 transition-all duration-300 preserve-3d border border-white/5 hover:border-[#D4537E]/50"
               >
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-10 text-[#D4537E] group-hover:bg-[#D4537E] group-hover:text-white transition-all">
-                  <feature.icon size={32} />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 text-[#D4537E]">
+                  <feature.icon size={28} />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 tracking-tight">{feature.title}</h3>
-                <p className="text-[#B8B0C8] text-lg leading-relaxed font-medium">{feature.desc}</p>
+                <h3 className="text-xl font-bold mb-4 tracking-tight">{feature.title}</h3>
+                <p className="text-[#B8B0C8] text-sm leading-relaxed font-medium">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ESPERANÇA & AUTORIDADE */}
+      {/* COMO FUNCIONA */}
       <section className="py-32 px-8 z-10 relative">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
-              E se esta fosse, finalmente, a sua última <span className="text-[#7F77DD]">'primeira vez'</span>?
-            </h2>
-            <div className="space-y-6 text-[#B8B0C8] text-lg leading-relaxed font-medium">
-              <p>"Existe um caminho onde o emagrecimento não é uma batalha, mas uma consequência natural de um corpo nutrido e uma mente em paz."</p>
-              <p>"Imagine a liberdade de não precisar mais de dietas milagrosas, porque agora você tem uma estratégia desenhada para durar a vida inteira."</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="luxury-card p-12 space-y-8 border-l-4 border-l-[#D4537E]"
-          >
-            <h3 className="text-2xl font-bold text-white tracking-tight">
-              Ciência, tecnologia e o olhar humano de quem entende de mulher.
-            </h3>
-            <div className="space-y-4 text-[#B8B0C8] text-base leading-relaxed font-medium">
-              <p>"A EvoluaEla é diferente porque une a precisão da nossa Mentora IA com o acompanhamento de nutricionistas e psicólogas reais, focadas na sua evolução."</p>
-              <p>"Nós não entregamos apenas um plano; entregamos um ecossistema de apoio 24/7 para garantir que você nunca mais se sinta desamparada no caminho para o seu objetivo."</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Prova Social com Contador Animado */}
-      <section className="py-32 px-8 z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
-          <AnimatedCounter value={2847} label="Mulheres Transformadas" />
-          <AnimatedCounter value={150} label="Especialistas Ativos" />
-          <AnimatedCounter value={98} label="Satisfação Garantida %" />
-        </div>
-      </section>
-
-      {/* Linha do Tempo 3D Isométrica */}
-      <section className="py-32 px-8 z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold text-center mb-24 tracking-tighter">Como sua <span className="text-[#7F77DD]">Jornada</span> Funciona</h2>
-          
-          <div className="flex flex-col md:flex-row justify-between gap-12 perspective-1000">
+          <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tighter text-center">Como funciona</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: '01', title: 'Diagnóstico', desc: 'Análise hormonal e emocional profunda.' },
-              { step: '02', title: 'Personalização', desc: 'Seu plano único de nutrição e treino.' },
-              { step: '03', title: 'Evolução', desc: 'Acompanhamento diário com sua Coach IA.' },
-              { step: '04', title: 'Liberdade', desc: 'O novo corpo e mente que você merece.' }
+              { step: "01", title: "Assinatura", desc: "Você faz sua adesão ao plano mensal de R$ 109,90 (sem fidelidade)." },
+              { step: "02", title: "Acesso", desc: "Você entra na plataforma imediatamente pelo seu celular ou computador." },
+              { step: "03", title: "Conexão", desc: "Você é conectada aos profissionais e à nossa Inteligência Artificial." },
+              { step: "04", title: "Prática", desc: "Você começa a usar as ferramentas e receber o acompanhamento necessário." }
             ].map((item, i) => (
-              <div 
-                key={i}
-                className="flex-1 p-8 rounded-[2rem] bg-gradient-to-br from-[#D4537E] to-[#7F77DD] shadow-2xl transition-all duration-500 hover:-translate-y-4"
-                style={{ 
-                  transform: `rotateX(15deg) rotateY(-15deg) translateZ(${i * 10}px)`,
-                  opacity: 0.8 + (i * 0.05)
-                }}
-              >
-                <div className="text-5xl font-black opacity-20 mb-4">{item.step}</div>
-                <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                <p className="text-sm font-medium text-white/80">{item.desc}</p>
+              <div key={i} className="relative p-8 rounded-3xl bg-white/5 border border-white/5 space-y-4">
+                <div className="text-4xl font-black text-[#D4537E]/20">{item.step}</div>
+                <h4 className="text-xl font-bold text-white">{item.title}</h4>
+                <p className="text-sm text-[#B8B0C8] font-medium leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PROVA SOCIAL (Depoimentos) */}
+      {/* O QUE TORNA DIFERENTE & PREÇO */}
       <section className="py-32 px-8 z-10 relative bg-[#0F0A1F]/50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold text-center mb-24 tracking-tighter">Você não está <span className="text-[#D4537E]">sozinha</span> nesta jornada.</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              {
-                name: "Mariana, 39 anos",
-                role: "Mãe e Profissional",
-                text: "Como mãe e profissional, eu achei que não teria tempo para nada. No EvoluaEla, descobri que o suporte real faz o impossível se tornar rotina.",
-                img: "https://i.pravatar.cc/100?u=mariana"
-              },
-              {
-                name: "Sandra, 46 anos",
-                role: "Empresária",
-                text: "Eu tinha vergonha de tentar de novo e falhar. Mas quando vi que outras mulheres como eu estavam conseguindo, percebi que o erro não era eu, era o que eu tentava antes.",
-                img: "https://i.pravatar.cc/100?u=sandra"
-              }
-            ].map((testimonial, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="luxury-card p-12 flex flex-col md:flex-row gap-8 items-center md:items-start"
-              >
-                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#D4537E] shrink-0">
-                  <img src={testimonial.img} alt={testimonial.name} referrerPolicy="no-referrer" />
-                </div>
-                <div className="space-y-4 text-center md:text-left">
-                  <p className="text-lg text-white font-medium italic leading-relaxed">"{testimonial.text}"</p>
-                  <div>
-                    <p className="font-bold text-white">{testimonial.name}</p>
-                    <p className="text-[10px] font-bold text-[#D4537E] uppercase tracking-widest">{testimonial.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* URGÊNCIA EMOCIONAL */}
-      <section className="py-32 px-8 z-10 relative">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
-              Quanto tempo mais você vai deixar a sua melhor versão guardada na gaveta?
+        <div className="max-w-4xl mx-auto text-center space-y-16">
+          <div className="space-y-8">
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-white">
+              O que torna o EvoluaEla diferente?
             </h2>
-            <div className="space-y-6 text-[#B8B0C8] text-lg leading-relaxed font-medium">
-              <p>"Não é apenas sobre estética; é sobre ter energia para brincar com seus filhos, confiança para aceitar convites e a saúde para viver cada momento com intensidade."</p>
-              <p>"Cada dia que você adia o seu cuidado é um dia a menos vivendo com a leveza e o orgulho que você merece sentir ao se olhar no espelho."</p>
+            <p className="text-xl text-[#B8B0C8] font-medium leading-relaxed">
+              Diferente de cursos gravados ou aplicativos de dieta isolados, nós unimos especialistas humanos e Inteligência Artificial em um ecossistema completo focado exclusivamente no desenvolvimento feminino real.
+            </p>
+          </div>
+
+          <div className="luxury-card p-12 md:p-16 space-y-8 border-2 border-[#D4537E]/30">
+            <div className="space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#D4537E]">Plano Mensal</p>
+              <div className="text-6xl md:text-7xl font-bold text-white tracking-tighter">R$ 109,90</div>
+              <p className="text-[#B8B0C8] font-medium">Cancele quando quiser. Sem fidelidade.</p>
             </div>
-          </motion.div>
+            <button onClick={onStart} className="btn-3d-press w-full max-w-md py-6 bg-gradient-to-r from-[#D4537E] to-[#7F77DD] text-white font-bold text-sm uppercase tracking-[0.4em] rounded-full shadow-2xl">
+              Assinar Agora
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Footer CTA */}
-      <footer className="py-32 px-8 z-10 text-center">
-        <div className="max-w-3xl mx-auto space-y-12">
-          <h2 className="text-5xl font-bold tracking-tighter">Pronta para o seu <br /> próximo nível?</h2>
-          <button onClick={onStart} className="btn-3d-press animate-pulse-glow px-16 py-8 bg-white text-black font-bold text-lg uppercase tracking-[0.4em] rounded-full shadow-2xl hover:scale-105 transition-all">
-            Começar Agora
-          </button>
+      <footer className="py-20 px-8 z-10 text-center border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <Logo size="sm" />
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/20">© 2026 EvoluaEla. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>
