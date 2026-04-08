@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Logo } from './components/Logo';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Contexts
@@ -54,9 +54,9 @@ function AppContent() {
 
   const tabs = [
     { id: 'home', icon: Home, label: 'Início' },
-    { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
-    { id: 'nutrition', icon: Apple, label: 'Nutrição' },
-    { id: 'therapy', icon: Brain, label: 'Terapia' },
+    { id: 'workouts', icon: Dumbbell, label: 'Treinos', premium: true },
+    { id: 'nutrition', icon: Apple, label: 'Nutrição', premium: true },
+    { id: 'therapy', icon: Brain, label: 'Mente', premium: true },
     { id: 'coach', icon: Bot, label: 'Coach IA' },
     { id: 'journal', icon: Heart, label: 'Calendário' },
     { id: 'profile', icon: User, label: 'Perfil' },
@@ -177,17 +177,23 @@ function AppContent() {
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
+              const isLocked = tab.premium && !isPremium;
               return (
                 <li key={tab.id} className="shrink-0">
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex flex-col items-center gap-1.5 transition-all duration-500 ${
+                    className={`flex flex-col items-center gap-1.5 transition-all duration-500 relative ${
                       isActive ? 'text-[#D81BFF]' : 'text-white/40 hover:text-white'
                     }`}
                   >
                     <div className={`relative transition-all duration-500 ${isActive ? 'scale-110' : ''}`}>
                       <Icon size={isActive ? 22 : 20} strokeWidth={isActive ? 2.5 : 2} />
+                      {isLocked && (
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#D81BFF] rounded-full flex items-center justify-center border border-[#0F0A1F]">
+                          <Lock size={6} className="text-white" fill="currentColor" />
+                        </div>
+                      )}
                       {isActive && (
                         <motion.div 
                           layoutId="activeTabGlow"

@@ -135,12 +135,12 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-[#0F0A1F] font-sans selection:bg-[#D81BFF] selection:text-white">
+    <div className="min-h-screen w-full flex flex-col relative bg-[#0F0A1F] font-sans selection:bg-[#D81BFF] selection:text-white overflow-y-auto">
       {/* Background Gradients */}
       <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#D81BFF]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#F8C1FF]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="flex-1 flex flex-col justify-center px-6 py-16 relative z-10 mx-auto w-full max-w-xl">
+      <div className="flex-1 flex flex-col justify-start px-6 pt-32 pb-16 relative z-10 mx-auto w-full max-w-xl">
         <div className="text-center mb-12">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}

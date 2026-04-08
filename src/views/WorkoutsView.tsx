@@ -17,13 +17,15 @@ import {
   CheckCircle2, 
   X, 
   Dumbbell,
-  Crown
+  Crown,
+  ArrowRight
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { WorkoutsSkeleton } from '../components/Skeleton';
+import PremiumLock from '../components/PremiumLock';
 
 type Exercise = { id: string; name: string; reps: string; sets: number | string; };
 type Workout = { id: string; title: string; duration: string; level: string; calories: string; premium: boolean; exercises: Exercise[]; };
@@ -164,6 +166,23 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
   if (isLoading) {
     return <WorkoutsSkeleton />;
+  }
+
+  if (!isPremium) {
+    return (
+      <div className="px-6 py-10 sm:px-10 h-full flex flex-col bg-transparent text-white">
+        <div className="mb-10">
+          <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em] mb-2">Treinos Personalizados</p>
+          <h2 className="text-4xl font-sans font-bold text-white mb-3 tracking-tighter">Sua <span className="text-[#D81BFF]">Evolução Física</span></h2>
+          <p className="text-sm font-bold text-[#B8B0C8] uppercase tracking-widest">Treinos pensados exclusivamente para o seu corpo e seus objetivos.</p>
+        </div>
+        <PremiumLock 
+          title="Seu Personal Trainer Particular"
+          description="Tenha acesso a treinos 100% personalizados, vídeos explicativos e acompanhamento da sua evolução física."
+          onUpgrade={onUpgrade}
+        />
+      </div>
+    );
   }
 
   return (

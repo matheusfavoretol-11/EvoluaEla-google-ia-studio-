@@ -1,4 +1,4 @@
-import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard, Headphones } from 'lucide-react';
+import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard, Headphones, Lock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Logo } from './Logo';
 import { useUser } from '../contexts/UserContext';
@@ -33,9 +33,9 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
 
   const menuItems = [
     { id: 'home', icon: Home, label: 'Início' },
-    { id: 'workouts', icon: Dumbbell, label: 'Treinos' },
-    { id: 'nutrition', icon: Apple, label: 'Nutrição' },
-    { id: 'therapy', icon: Brain, label: 'Terapia' },
+    { id: 'workouts', icon: Dumbbell, label: 'Treinos', premium: true },
+    { id: 'nutrition', icon: Apple, label: 'Nutrição', premium: true },
+    { id: 'therapy', icon: Brain, label: 'Mente', premium: true },
     { id: 'coach', icon: Bot, label: 'Coach IA' },
     { id: 'journal', icon: Heart, label: 'Calendário' },
   ];
@@ -55,6 +55,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
+            const isLocked = item.premium && !isPremium;
             return (
               <button
                 key={item.id}
@@ -65,7 +66,14 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
                     : 'text-[#B8B0C8] hover:bg-white/5 hover:text-white border border-transparent'
                 }`}
               >
-                <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
+                <div className="relative">
+                  <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
+                  {isLocked && (
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#D81BFF] rounded-full flex items-center justify-center border border-[#0F0A1F]">
+                      <Lock size={6} className="text-white" fill="currentColor" />
+                    </div>
+                  )}
+                </div>
                 <span className="text-sm font-bold tracking-tight">{item.label}</span>
                 {isActive && (
                   <motion.div 

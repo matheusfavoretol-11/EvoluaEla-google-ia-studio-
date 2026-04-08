@@ -138,11 +138,14 @@ export default function LandingView({ onStart }: { onStart: () => void }) {
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 pt-[calc(2rem+env(safe-area-inset-top))] pb-8 bg-[#0F0A1F]/40 backdrop-blur-3xl">
+      <header className="fixed top-0 left-0 right-0 z-50 px-8 pt-[calc(1.5rem+env(safe-area-inset-top))] pb-6 bg-[#0F0A1F]/40 backdrop-blur-3xl border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Logo size="sm" />
-          <div className="flex items-center gap-8">
-            <button onClick={onStart} className="luxury-button btn-3d-press animate-pulse-glow px-10 py-4 rounded-full text-white text-[10px] font-bold uppercase tracking-[0.3em] bg-gradient-to-r from-[#D4537E] to-[#7F77DD]">
+          <div className="flex items-center gap-6">
+            <button onClick={onStart} className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B8B0C8] hover:text-white transition-colors">
+              Entrar
+            </button>
+            <button onClick={onStart} className="luxury-button btn-3d-press animate-pulse-glow px-8 py-3 rounded-full text-white text-[10px] font-bold uppercase tracking-[0.3em] bg-gradient-to-r from-[#D4537E] to-[#7F77DD]">
               Começar Agora
             </button>
           </div>
