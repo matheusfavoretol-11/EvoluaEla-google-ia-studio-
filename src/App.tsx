@@ -164,6 +164,7 @@ function AppContent() {
                 {activeTab === 'nutrition' && <NutritionView onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'therapy' && <GroupTherapyView onUpgrade={() => setShowSubscription(true)} />}
                 {activeTab === 'coach' && <AICoachView onUpgrade={() => setShowSubscription(true)} />}
+                {activeTab === 'support' && <SupportView />}
                 {activeTab === 'journal' && <JournalView />}
                 {activeTab === 'profile' && <ThemeSettingsModal onClose={() => setActiveTab('home')} isFullView={true} />}
               </motion.div>

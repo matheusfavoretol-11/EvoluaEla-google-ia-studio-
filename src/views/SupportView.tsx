@@ -52,16 +52,24 @@ export default function SupportView() {
       answer: 'Você tem 7 dias para experimentar todos os recursos premium sem pagar nada. Após esse período, a assinatura de R$109,90/mês é ativada automaticamente.'
     },
     {
+      question: 'O que está incluso no plano premium?',
+      answer: 'O plano premium inclui acesso ilimitado à nossa Coach IA, planos alimentares personalizados com nutricionistas, treinos exclusivos, sessões de terapia em grupo e ferramentas avançadas de evolução pessoal.'
+    },
+    {
+      question: 'Como falo com a nutricionista ou psicóloga?',
+      answer: 'Dentro das abas de Nutrição e Mente, você encontrará botões para iniciar chats diretos ou agendar participações em sessões de grupo com nossos especialistas.'
+    },
+    {
       question: 'Como cancelo minha assinatura?',
       answer: 'Você pode cancelar a qualquer momento pelo menu Configurações > Gerenciar Assinatura, sem multas ou taxas.'
     },
     {
       question: 'Meus dados estão seguros?',
-      answer: 'Sim. Utilizamos criptografia de ponta a ponta e nunca compartilhamos seus dados com terceiros.'
+      answer: 'Sim. Utilizamos criptografia de ponta a ponta e seguimos rigorosos padrões de segurança para garantir que sua jornada seja privada e segura.'
     },
     {
       question: 'O app substitui acompanhamento médico?',
-      answer: 'Não. O EvoluaEla é uma ferramenta complementar e não substitui consultas médicas ou atendimentos de emergência.'
+      answer: 'Não. O EvoluaEla é uma ferramenta de apoio e desenvolvimento. Sempre recomendamos consultar seu médico antes de iniciar novas rotinas de exercícios ou dietas restritivas.'
     }
   ];
 
@@ -154,7 +162,7 @@ export default function SupportView() {
               </div>
               <div>
                 <span className="block text-xs font-bold text-[#B8B0C8] uppercase tracking-widest mb-1">Instagram</span>
-                <span className="text-lg font-bold text-white group-hover:text-[#D81BFF] transition-colors">@evoluaela_</span>
+                <span className="text-lg font-bold text-white group-hover:text-[#D81BFF] transition-colors">evoluaela_</span>
               </div>
             </a>
 
