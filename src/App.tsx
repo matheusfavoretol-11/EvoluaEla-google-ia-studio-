@@ -57,8 +57,8 @@ function AppContent() {
     { id: 'workouts', icon: Dumbbell, label: 'Treinos', premium: true },
     { id: 'nutrition', icon: Apple, label: 'Nutrição', premium: true },
     { id: 'therapy', icon: Brain, label: 'Mente', premium: true },
-    { id: 'coach', icon: Bot, label: 'Coach IA' },
-    { id: 'journal', icon: Heart, label: 'Calendário' },
+    { id: 'coach', icon: Bot, label: 'Coach IA', premium: true },
+    { id: 'journal', icon: Heart, label: 'Calendário', premium: true },
     { id: 'profile', icon: User, label: 'Perfil' },
   ];
 

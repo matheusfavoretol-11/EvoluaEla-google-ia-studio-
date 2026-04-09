@@ -10,9 +10,7 @@ export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const { userName, isPremium, subscriptionStatus, coachMessagesCount, setCoachMessagesCount } = useUser();
   
   const hasUnlimitedCoach = isPremium || subscriptionStatus === 'trial';
-  const MAX_FREE_MESSAGES = 3;
-  const messagesRemaining = Math.max(0, MAX_FREE_MESSAGES - coachMessagesCount);
-  const isBlocked = !hasUnlimitedCoach && messagesRemaining === 0;
+  const isBlocked = !hasUnlimitedCoach;
 
   const [messages, setMessages] = useState<{ id: string; role: 'user' | 'model'; text: string }[]>([
     { id: 'msg-init', role: 'model', text: `Oii, ${userName}! Sou sua Coach EvoluaEla. Estou aqui para te apoiar, motivar e ajudar a manter a constância. Como posso te apoiar e deixar seu dia mais leve hoje? 💕` }
@@ -96,11 +94,9 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
               <span>Acesso Ilimitado Premium</span>
             </div>
           ) : (
-            <div className="flex items-center gap-3 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/5 border border-white/10 text-white/40">
-              <span>Mensagens:</span>
-              <span className={`px-2 py-0.5 rounded-md font-bold ${messagesRemaining === 0 ? 'bg-[#D81BFF] text-white' : 'bg-white/10 text-white'}`}>
-                {messagesRemaining} / {MAX_FREE_MESSAGES}
-              </span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/5 border border-white/10 text-white/40">
+              <Lock size={12} className="text-[#D81BFF]" />
+              <span>Conteúdo Bloqueado</span>
             </div>
           )}
           

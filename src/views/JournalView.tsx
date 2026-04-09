@@ -20,7 +20,7 @@ import { supabase } from '../lib/supabase';
 
 export default function JournalView() {
   const { theme } = useTheme();
-  const { userName, userId } = useUser();
+  const { userName, userId, isPremium } = useUser();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showJournal, setShowJournal] = useState(false);
@@ -28,6 +28,38 @@ export default function JournalView() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aiResponse, setAiResponse] = useState('');
   const [showAIResponse, setShowAIResponse] = useState(false);
+
+  if (!isPremium) {
+    return (
+      <div className="px-6 py-10 sm:px-10 h-full flex flex-col bg-transparent text-white">
+        <div className="mb-10">
+          <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em] mb-2">Sua Jornada</p>
+          <h2 className="text-4xl font-sans font-bold text-white mb-3 tracking-tighter">Calendário de <span className="text-[#D81BFF]">Evolução</span></h2>
+          <p className="text-sm font-bold text-[#B8B0C8] uppercase tracking-widest">Acompanhe seu progresso e registre suas emoções diariamente</p>
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="luxury-card p-12 text-center space-y-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#D81BFF]/5 rounded-full blur-3xl -mr-32 -mt-32" />
+            <div className="w-20 h-20 rounded-[2rem] bg-[#D81BFF]/10 flex items-center justify-center mx-auto text-[#D81BFF] border border-[#D81BFF]/20">
+              <CalendarIcon size={40} />
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-3xl font-bold text-white tracking-tight">Histórico de Evolução</h3>
+              <p className="text-[#B8B0C8] text-lg max-w-md mx-auto leading-relaxed font-medium">
+                O Calendário é uma ferramenta exclusiva para assinantes Premium acompanharem cada vitória e desabafo.
+              </p>
+            </div>
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-subscription'))}
+              className="luxury-button px-12 py-5 rounded-full text-white font-bold uppercase tracking-[0.2em] text-xs hover:scale-105 transition-all shadow-2xl"
+            >
+              Liberar Calendário Agora
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
