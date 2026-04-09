@@ -1,11 +1,32 @@
+import { useState } from 'react';
 import { Apple, MessageCircle, Camera, Calendar, CheckCircle2 } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { useTheme } from '../contexts/ThemeContext';
 import PremiumLock from '../components/PremiumLock';
 
 export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) {
-  const { isPremium } = useUser();
+  const { isPremium, selectedDiet, setSelectedDiet, lastDietChangeDate } = useUser();
   const { theme } = useTheme();
+
+  const dietOptions = [
+    'Dieta para Emagrecimento',
+    'Dieta para Ganho de Massa Muscular',
+    'Dieta Balanceada (Manutenção)',
+    'Dieta Low Carb',
+    'Dieta Vegetariana/Vegana',
+    'Dieta para Gestantes'
+  ];
+
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSelectDiet = async (diet: string) => {
+    try {
+      setError(null);
+      await setSelectedDiet(diet);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
 
   if (!isPremium) {
     return (
@@ -17,7 +38,7 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
         </div>
         <PremiumLock 
           title="Sua Nutricionista Particular"
-          description="Tenha um plano alimentar individual, ajustes semanais e chat direto com uma nutricionista para garantir seus resultados."
+          description="Desbloqueie planos de dieta personalizados feitos por nossa nutricionista profissional! Faça upgrade para Premium."
           onUpgrade={onUpgrade}
         />
       </div>
@@ -37,34 +58,75 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
         <div className="space-y-8">
-          {/* Current Plan Summary */}
-          <div className="luxury-card relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D81BFF]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="font-bold text-2xl text-white tracking-tight">Sua Dieta Atual</h3>
-              <span className="px-4 py-1.5 bg-[#D81BFF]/10 text-[#D81BFF] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[#D81BFF]/20">Ativo</span>
+          {/* Current Plan Summary or Selection */}
+          {!selectedDiet ? (
+            <div className="luxury-card p-8 space-y-8">
+              <div className="text-center space-y-2">
+                <h3 className="text-2xl font-bold text-white tracking-tight">Escolha seu Plano de Dieta</h3>
+                <p className="text-sm text-[#B8B0C8] font-medium">Elaborado por Nutricionista Profissional</p>
+              </div>
+              
+              {error && (
+                <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold text-center">
+                  {error}
+                </div>
+              )}
+              
+              <div className="space-y-3">
+                {dietOptions.map((diet) => (
+                  <button
+                    key={diet}
+                    onClick={() => handleSelectDiet(diet)}
+                    className="w-full p-5 rounded-2xl bg-white/5 border border-white/10 text-left hover:border-[#D81BFF]/50 hover:bg-white/10 transition-all flex items-center justify-between group"
+                  >
+                    <span className="font-bold text-white/80 group-hover:text-white">{diet}</span>
+                    <div className="w-6 h-6 rounded-full border-2 border-white/10 group-hover:border-[#D81BFF]" />
+                  </button>
+                ))}
+              </div>
+
+              <button className="w-full py-5 rounded-full bg-[#D81BFF] text-white font-bold uppercase tracking-widest text-xs shadow-2xl hover:scale-[1.02] transition-all">
+                Selecionar Minha Dieta
+              </button>
             </div>
-            <div className="flex items-center gap-5 mb-8">
-              <div className="w-20 h-20 rounded-3xl bg-white/5 overflow-hidden border border-white/10 shadow-2xl p-1">
-                <img src="https://images.unsplash.com/photo-1594824436951-7f12bc3ac92e?auto=format&fit=crop&q=80&w=200&h=200" alt="Nutricionista" className="w-full h-full object-cover rounded-2xl" referrerPolicy="no-referrer" />
+          ) : (
+            <div className="luxury-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#D81BFF]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="font-bold text-2xl text-white tracking-tight">Sua Dieta Atual</h3>
+                <button 
+                  onClick={() => setSelectedDiet(null)}
+                  className="px-4 py-1.5 bg-[#D81BFF]/10 text-[#D81BFF] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[#D81BFF]/20 hover:bg-[#D81BFF]/20 transition-all"
+                >
+                  Trocar Plano
+                </button>
               </div>
-              <div>
-                <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-1">Sua Nutricionista</p>
-                <p className="font-bold text-white text-xl tracking-tight">Dra. Marina Silva</p>
-                <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#D81BFF] hover:text-white transition-colors">Ver Perfil</button>
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-20 h-20 rounded-3xl bg-white/5 overflow-hidden border border-white/10 shadow-2xl p-1">
+                  <img src="https://images.unsplash.com/photo-1594824436951-7f12bc3ac92e?auto=format&fit=crop&q=80&w=200&h=200" alt="Nutricionista" className="w-full h-full object-cover rounded-2xl" referrerPolicy="no-referrer" />
+                </div>
+                <div>
+                  <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-1">Sua Nutricionista</p>
+                  <p className="font-bold text-white text-xl tracking-tight">Dra. Marina Silva</p>
+                  <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#D81BFF] hover:text-white transition-colors">Ver Perfil</button>
+                </div>
               </div>
+              <div className="grid grid-cols-2 gap-5 mb-8">
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-md">
+                  <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-2">Plano</p>
+                  <p className="font-bold text-white text-sm tracking-tight leading-tight">{selectedDiet}</p>
+                </div>
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-md">
+                  <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-2">Calorias</p>
+                  <p className="font-bold text-white text-lg tracking-tight">1.850 kcal</p>
+                </div>
+              </div>
+              
+              <button className="w-full py-5 rounded-2xl bg-white text-[#D81BFF] font-bold uppercase tracking-widest text-[10px] shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
+                Download do Plano PDF
+              </button>
             </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-2">Objetivo</p>
-                <p className="font-bold text-white text-lg tracking-tight">Emagrecimento</p>
-              </div>
-              <div className="bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-2">Calorias</p>
-                <p className="font-bold text-white text-lg tracking-tight">1.850 kcal</p>
-              </div>
-            </div>
-          </div>
+          )}
 
           {/* Quick Actions */}
           <div className="grid grid-cols-2 gap-5">

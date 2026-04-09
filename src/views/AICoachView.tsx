@@ -7,10 +7,18 @@ import { useUser } from '../contexts/UserContext';
 
 export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const { theme } = useTheme();
-  const { userName, isPremium, subscriptionStatus, coachMessagesCount, setCoachMessagesCount } = useUser();
+  const { userName, isPremium, subscriptionStatus, coachMessagesCount, setCoachMessagesCount, selectedDiet } = useUser();
   
-  const hasUnlimitedCoach = isPremium || subscriptionStatus === 'trial';
-  const isBlocked = !hasUnlimitedCoach;
+  const MAX_MESSAGES = 50;
+  const messagesRemaining = Math.max(0, MAX_MESSAGES - coachMessagesCount);
+  const isBlocked = !isPremium;
+  const limitReached = isPremium && messagesRemaining === 0;
+
+  const getNextMonthFirstDay = () => {
+    const now = new Date();
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    return nextMonth.toLocaleDateString('pt-BR');
+  };
 
   const [messages, setMessages] = useState<{ id: string; role: 'user' | 'model'; text: string }[]>([
     { id: 'msg-init', role: 'model', text: `Oii, ${userName}! Sou sua Coach EvoluaEla. Estou aqui para te apoiar, motivar e ajudar a manter a constância. Como posso te apoiar e deixar seu dia mais leve hoje? 💕` }
@@ -31,6 +39,7 @@ export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
           systemInstruction: `Você é uma Coach virtual do app EvoluaEla, uma plataforma digital por assinatura mensal voltada exclusivamente para mulheres que desejam emagrecer, melhorar sua saúde, desenvolver disciplina e evoluir de forma estruturada e consistente.
 O nome da usuária com quem você está falando é ${userName}. Use o nome dela para criar uma conexão mais pessoal e próxima, por exemplo: "Você consegue, ${userName}. Vamos continuar hoje."
 Seu tom de voz é de uma amiga acolhedora e motivadora. Você usa linguagem simples, direta e emocional. Você incentiva a disciplina sem ser agressiva, dá conselhos práticos e ajuda em momentos de desânimo.
+${selectedDiet ? `A usuária selecionou a dieta: ${selectedDiet}. Leve isso em consideração ao dar conselhos sobre alimentação e energia.` : ''}
 IMPORTANTE: Você deve sempre deixar claro que não substitui profissionais de saúde (médicos, nutricionistas, educadores físicos, psicólogos), não oferece diagnóstico médico e é apenas uma ferramenta de apoio.
 Frase base do app: 'Evoluir não é sobre motivação. É sobre constância.'
 Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
@@ -48,14 +57,14 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim() || isLoading || isBlocked) return;
+    if (!input.trim() || isLoading || isBlocked || limitReached) return;
 
     const userMsg = input.trim();
     setInput('');
     setMessages(prev => [...prev, { id: `msg-${Date.now()}-user`, role: 'user', text: userMsg }]);
     setIsLoading(true);
 
-    if (!hasUnlimitedCoach) {
+    if (isPremium) {
       setCoachMessagesCount(coachMessagesCount + 1);
     }
 
@@ -88,15 +97,15 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         
         {/* Status & Limits */}
         <div className="flex flex-wrap gap-3">
-          {hasUnlimitedCoach ? (
+          {isPremium ? (
             <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#D81BFF]/10 border border-[#D81BFF]/20 text-[#D81BFF]">
               <Crown size={12} fill="currentColor" />
-              <span>Acesso Ilimitado Premium</span>
+              <span>Você tem {messagesRemaining} mensagens restantes este mês</span>
             </div>
           ) : (
             <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/5 border border-white/10 text-white/40">
               <Lock size={12} className="text-[#D81BFF]" />
-              <span>Conteúdo Bloqueado</span>
+              <span>Acesso Bloqueado</span>
             </div>
           )}
           
@@ -144,15 +153,27 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             <div className="w-14 h-14 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center mx-auto mb-4">
               <Lock size={24} className="text-[#D81BFF]" />
             </div>
-            <h3 className="text-lg font-bold text-white mb-2 tracking-tight">Limite diário atingido 🌸</h3>
-            <p className="text-sm text-[#B8B0C8] mb-6 font-medium">Quer conversar comigo sem limites e ter apoio total? Venha para o Premium!</p>
+            <h3 className="text-lg font-bold text-white mb-2 tracking-tight">Funcionalidade Premium 🌸</h3>
+            <p className="text-sm text-[#B8B0C8] mb-6 font-medium leading-relaxed">
+              Esta funcionalidade é exclusiva para assinantes Premium. Assine agora e tenha acesso a 50 mensagens mensais com a Coach IA personalizada!
+            </p>
             <button 
               onClick={onUpgrade}
               className="luxury-button w-full py-5 rounded-full font-bold uppercase tracking-widest text-white shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 text-xs"
             >
               <Crown size={16} fill="currentColor" />
-              Quero acesso ilimitado
+              Assinar Premium
             </button>
+          </div>
+        ) : limitReached ? (
+          <div className="luxury-card p-8 text-center shadow-2xl border border-white/10">
+            <div className="w-14 h-14 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle size={24} className="text-[#D81BFF]" />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2 tracking-tight">Limite atingido 🌸</h3>
+            <p className="text-sm text-[#B8B0C8] mb-6 font-medium leading-relaxed">
+              Você utilizou suas 50 mensagens deste mês. O contador será renovado em {getNextMonthFirstDay()}.
+            </p>
           </div>
         ) : (
           <div className="flex items-center gap-3 luxury-card rounded-full p-2 pr-3 focus-within:ring-2 focus-within:ring-[#D81BFF]/50 transition-all shadow-2xl border border-white/10">

@@ -4,8 +4,18 @@ import { useTheme } from '../contexts/ThemeContext';
 import PremiumLock from '../components/PremiumLock';
 
 export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void }) {
-  const { isPremium } = useUser();
+  const { isPremium, scheduledSessions, setScheduledSessions } = useUser();
   const { theme } = useTheme();
+
+  const handleReserve = () => {
+    const newSession = {
+      id: `session-${Date.now()}`,
+      date: '15/04/2026',
+      time: '19:30',
+      topic: 'Meditação Guiada e Ansiedade'
+    };
+    setScheduledSessions([...scheduledSessions, newSession]);
+  };
 
   if (!isPremium) {
     return (
@@ -17,7 +27,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
         </div>
         <PremiumLock 
           title="Terapia e Apoio Psicológico"
-          description="Participe de sessões de terapia em grupo, tenha acesso a conteúdos de inteligência emocional e suporte direto com psicólogas."
+          description="Cuide da sua saúde mental com sessões exclusivas! Torne-se Premium."
           onUpgrade={onUpgrade}
         />
       </div>
@@ -37,13 +47,14 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
         <div className="space-y-8">
-          {/* Next Session */}
-          <div className="luxury-card relative overflow-hidden">
+          {/* Scheduling System */}
+          <div className="luxury-card p-8 space-y-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#D81BFF]/5 rounded-full blur-[60px] -mr-10 -mt-10"></div>
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="font-bold text-2xl text-white tracking-tight">Próxima Sessão</h3>
-              <span className="px-4 py-1.5 bg-[#D81BFF]/10 text-[#D81BFF] rounded-xl text-[10px] font-bold uppercase tracking-widest border border-[#D81BFF]/20">Ao Vivo</span>
+            <div className="text-center space-y-2 mb-4">
+              <h3 className="text-2xl font-bold text-white tracking-tight">Próximas Sessões de Bem-Estar</h3>
+              <p className="text-sm text-[#B8B0C8] font-medium">Agende sua participação nas sessões ao vivo</p>
             </div>
+
             <div className="flex items-center gap-5 mb-8">
               <div className="w-20 h-20 rounded-3xl bg-white/5 overflow-hidden border border-white/10 shadow-2xl p-1">
                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200" alt="Psicóloga" className="w-full h-full object-cover rounded-2xl" referrerPolicy="no-referrer" />
@@ -51,13 +62,65 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
               <div>
                 <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest mb-1">Sua Psicóloga</p>
                 <p className="font-bold text-white text-xl tracking-tight">Dra. Beatriz Costa</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#D81BFF]">Hoje às 19:30</p>
+                <button className="text-[10px] font-bold uppercase tracking-widest mt-2 text-[#D81BFF] hover:text-white transition-colors">Ver Perfil</button>
               </div>
             </div>
-            <button className="w-full py-5 rounded-3xl bg-[#D81BFF] text-white font-bold uppercase tracking-widest text-[10px] shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
-              <Users size={18} />
-              Entrar na Sala de Grupo
-            </button>
+
+            <div className="space-y-6">
+              <div className="p-6 rounded-3xl bg-white/5 border border-white/10 space-y-4">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-widest mb-1">Próxima Disponível</p>
+                    <h4 className="text-xl font-bold text-white tracking-tight">Meditação Guiada</h4>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-bold text-white">📅 15/04</p>
+                    <p className="text-sm font-bold text-white">⏰ 19:30</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <Users size={14} className="text-[#B8B0C8]" />
+                  <span className="text-xs font-bold text-[#B8B0C8]">12 vagas disponíveis</span>
+                </div>
+
+                <div className="pt-4 border-t border-white/5">
+                  <p className="text-[10px] font-bold text-[#B8B0C8] uppercase tracking-widest mb-2">Temas abordados:</p>
+                  <ul className="grid grid-cols-2 gap-2">
+                    {['Meditação guiada', 'Ansiedade', 'Autoestima', 'Equilíbrio'].map(t => (
+                      <li key={t} className="flex items-center gap-2 text-xs text-white/70">
+                        <div className="w-1 h-1 rounded-full bg-[#D81BFF]" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <button 
+                  onClick={handleReserve}
+                  className="w-full py-4 rounded-full bg-[#D81BFF] text-white font-bold uppercase tracking-widest text-[10px] shadow-2xl hover:scale-[1.02] transition-all mt-4"
+                >
+                  Reservar Minha Vaga
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="text-sm font-bold text-white px-2">Suas Reservas</h4>
+                {scheduledSessions.length === 0 ? (
+                  <p className="text-xs text-[#B8B0C8] px-2 italic text-center py-4">Nenhuma sessão agendada no momento.</p>
+                ) : (
+                  scheduledSessions.map(s => (
+                    <div key={s.id} className="p-4 rounded-2xl bg-white/5 border border-[#D81BFF]/30 flex justify-between items-center">
+                      <div>
+                        <p className="font-bold text-white text-sm">{s.topic}</p>
+                        <p className="text-[10px] text-[#B8B0C8] font-bold uppercase tracking-widest">{s.date} às {s.time}</p>
+                      </div>
+                      <CheckCircle2 size={18} className="text-[#D81BFF]" />
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Quick Actions */}

@@ -27,6 +27,12 @@ interface UserContextType {
   setTrialEndDate: (date: Date | null) => void;
   coachMessagesCount: number;
   setCoachMessagesCount: (count: number) => void;
+  selectedDiet: string | null;
+  setSelectedDiet: (diet: string | null) => void;
+  lastDietChangeDate: string | null;
+  scheduledSessions: Array<{ id: string, date: string, time: string, topic: string }>;
+  setScheduledSessions: (sessions: Array<{ id: string, date: string, time: string, topic: string }>) => void;
+  lastSessionDate: string | null;
   dailyGoal: string;
   setDailyGoal: (goal: string) => void;
   isDailyGoalCompleted: boolean;
@@ -58,6 +64,26 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [subscriptionStatus, setSubscriptionStatus] = useState<'free' | 'trial' | 'premium'>('free');
   const [trialEndDate, setTrialEndDate] = useState<Date | null>(null);
   const [coachMessagesCount, setCoachMessagesCount] = useState<number>(0);
+  const [selectedDiet, setSelectedDiet] = useState<string | null>(null);
+  const [lastDietChangeDate, setLastDietChangeDate] = useState<string | null>(null);
+
+  const canChangeDiet = () => {
+    if (!lastDietChangeDate) return true;
+    const lastChange = new Date(lastDietChangeDate);
+    const now = new Date();
+    
+    // Check if it's a different month or year
+    return now.getMonth() !== lastChange.getMonth() || now.getFullYear() !== lastChange.getFullYear();
+  };
+
+  const updateSelectedDiet = async (diet: string | null) => {
+    if (diet && !canChangeDiet()) {
+      throw new Error("Você só pode trocar de dieta uma vez por mês.");
+    }
+    setSelectedDiet(diet);
+  };
+  const [scheduledSessions, setScheduledSessions] = useState<Array<{ id: string, date: string, time: string, topic: string }>>([]);
+  const [lastSessionDate, setLastSessionDate] = useState<string | null>(null);
   const [dailyGoal, setDailyGoal] = useState<string>('');
   const [isDailyGoalCompleted, setIsDailyGoalCompleted] = useState<boolean>(false);
   
@@ -176,6 +202,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setRole(data.role || 'user');
         setSubscriptionStatus(data.subscription_status || 'free');
         setCoachMessagesCount(data.coach_messages_count || 0);
+        setSelectedDiet(data.selected_diet || null);
+        setLastDietChangeDate(data.last_diet_change_date || null);
+        setScheduledSessions(data.scheduled_sessions || []);
+        setLastSessionDate(data.last_session_date || null);
       }
     };
 
@@ -194,6 +224,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           setRole(data.role || 'user');
           setSubscriptionStatus(data.subscription_status || 'free');
           setCoachMessagesCount(data.coach_messages_count || 0);
+          setSelectedDiet(data.selected_diet || null);
+          setLastDietChangeDate(data.last_diet_change_date || null);
+          setScheduledSessions(data.scheduled_sessions || []);
+          setLastSessionDate(data.last_session_date || null);
         }
       })
       .subscribe();
@@ -258,6 +292,51 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setHasCompletedOnboarding(Object.keys(onboardingAnswers).length > 0);
   }, [onboardingAnswers]);
 
+  // Sync selectedDiet to Supabase
+  useEffect(() => {
+    if (!userId || !selectedDiet) return;
+    
+    const syncDiet = async () => {
+      await supabase
+        .from('users')
+        .update({ 
+          selected_diet: selectedDiet,
+          last_diet_change_date: new Date().toISOString()
+        })
+        .eq('id', userId);
+    };
+    
+    syncDiet();
+  }, [selectedDiet, userId]);
+
+  // Sync scheduledSessions to Supabase
+  useEffect(() => {
+    if (!userId) return;
+    
+    const syncSessions = async () => {
+      await supabase
+        .from('users')
+        .update({ scheduled_sessions: scheduledSessions })
+        .eq('id', userId);
+    };
+    
+    syncSessions();
+  }, [scheduledSessions, userId]);
+
+  // Sync coachMessagesCount to Supabase
+  useEffect(() => {
+    if (!userId) return;
+    
+    const syncMessages = async () => {
+      await supabase
+        .from('users')
+        .update({ coach_messages_count: coachMessagesCount })
+        .eq('id', userId);
+    };
+    
+    syncMessages();
+  }, [coachMessagesCount, userId]);
+
   return (
     <UserContext.Provider value={{ 
       userName, setUserName, 
@@ -265,6 +344,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       subscriptionStatus, setSubscriptionStatus,
       trialEndDate, setTrialEndDate,
       coachMessagesCount, setCoachMessagesCount,
+      selectedDiet, setSelectedDiet: updateSelectedDiet,
+      lastDietChangeDate, canChangeDiet,
+      scheduledSessions, setScheduledSessions,
+      lastSessionDate,
       dailyGoal, setDailyGoal,
       isDailyGoalCompleted, setIsDailyGoalCompleted,
       level, setLevel,

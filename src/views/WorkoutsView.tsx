@@ -77,7 +77,7 @@ const defaultSuggestions: Workout[] = [
 
 export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   const { theme } = useTheme();
-  const { isPremium, userName, userId } = useUser();
+  const { isPremium, userName, userId, selectedDiet } = useUser();
   
   const [activeTab, setActiveTab] = useState<'meus' | 'sugestoes'>('meus');
   const [myWorkouts, setMyWorkouts] = useState<Workout[]>([]);
@@ -178,7 +178,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
         </div>
         <PremiumLock 
           title="Seu Personal Trainer Particular"
-          description="Tenha acesso a treinos 100% personalizados, vídeos explicativos e acompanhamento da sua evolução física."
+          description="Desbloqueie treinos avançados e personalizados com Premium!"
           onUpgrade={onUpgrade}
         />
       </div>
@@ -200,6 +200,28 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em]">Seu Plano</p>
               <h2 className="text-4xl font-sans font-bold text-white tracking-tight">Treinos</h2>
             </header>
+
+            {/* Diet Integration Card */}
+            {selectedDiet && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="luxury-card p-6 bg-gradient-to-br from-[#D81BFF]/20 to-transparent border-[#D81BFF]/30"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#D81BFF] flex items-center justify-center text-white shadow-lg">
+                    <CheckCircle2 size={20} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white tracking-tight">Plano Sincronizado</h3>
+                    <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-widest">✓ {selectedDiet}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-[#B8B0C8] leading-relaxed font-medium">
+                  Seu treino foi ajustado baseado na sua dieta para maximizar seus resultados e equilibrar sua nutrição.
+                </p>
+              </motion.div>
+            )}
 
             {/* Tabs */}
             <div className="flex p-1.5 rounded-2xl bg-white/5 border border-white/10">
