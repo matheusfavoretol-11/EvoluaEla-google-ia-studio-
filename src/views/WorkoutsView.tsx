@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { 
   Play, 
-  Lock, 
   Star, 
   CheckSquare, 
   Square, 
@@ -170,17 +169,37 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
   if (!isPremium) {
     return (
-      <div className="px-6 py-10 sm:px-10 h-full flex flex-col bg-transparent text-white">
-        <div className="mb-10">
-          <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em] mb-2">Treinos Personalizados</p>
-          <h2 className="text-4xl font-sans font-bold text-white mb-3 tracking-tighter">Sua <span className="text-[#D81BFF]">Evolução Física</span></h2>
-          <p className="text-sm font-bold text-[#B8B0C8] uppercase tracking-widest">Treinos pensados exclusivamente para o seu corpo e seus objetivos.</p>
+      <div className="flex flex-col h-full relative bg-transparent text-white font-sans">
+        <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl bg-gradient-to-br from-[#D81BFF] to-[#F8C1FF] text-white">
+              <Dumbbell size={28} />
+            </div>
+            <div>
+              <h2 className="font-bold text-2xl text-white tracking-tighter">Sua <span className="text-[#D81BFF] italic">Evolução Física</span></h2>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8B0C8] mt-0.5">Treinos pensados para você</p>
+            </div>
+          </div>
+        </header>
+
+        <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10 space-y-6 hide-scrollbar bg-transparent">
+          <div className="luxury-card p-6 opacity-40">
+            <h3 className="text-xl font-bold mb-4">Plano de Treino Semanal</h3>
+            <div className="space-y-4">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-20 bg-white/5 rounded-2xl border border-white/10" />
+              ))}
+            </div>
+          </div>
         </div>
-        <PremiumLock 
-          title="Seu Personal Trainer Particular"
-          description="Desbloqueie treinos avançados e personalizados com Premium!"
-          onUpgrade={onUpgrade}
-        />
+
+        <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
+          <PremiumLock 
+            title="Seu Personal Trainer Particular"
+            description="Desbloqueie treinos avançados e personalizados com Premium! Tenha acesso a planos exclusivos para o seu objetivo."
+            onUpgrade={onUpgrade}
+          />
+        </div>
       </div>
     );
   }

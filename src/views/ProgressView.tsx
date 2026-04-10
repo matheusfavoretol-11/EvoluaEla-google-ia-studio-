@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Camera, Plus, TrendingDown, Image as ImageIcon, Lock, TrendingUp } from 'lucide-react';
+import { Camera, Plus, TrendingDown, Image as ImageIcon, Lock as LockIcon, TrendingUp } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'motion/react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -155,7 +155,7 @@ export default function ProgressView() {
         
         <div className="glass-morphism p-8 rounded-[2.5rem] border border-white/10 shadow-2xl">
           <div className="flex items-center justify-center gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-white/40">
-            <Lock size={14} className="text-[#C5A059]" /> Ambiente seguro e privado
+            <LockIcon size={14} className="text-[#C5A059]" /> Ambiente seguro e privado
           </div>
           
           <div className="grid grid-cols-2 gap-6">

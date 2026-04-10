@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Send, Bot, AlertTriangle, Crown, Lock } from 'lucide-react';
+import { Send, Bot, AlertTriangle, Crown, Lock as LockIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { getGeminiAI, hasGeminiKey } from '../lib/gemini';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
+import PremiumLock from '../components/PremiumLock';
 
 export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const { theme } = useTheme();
@@ -104,7 +105,7 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
             </div>
           ) : (
             <div className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/5 border border-white/10 text-white/40">
-              <Lock size={12} className="text-[#D81BFF]" />
+              <LockIcon size={12} className="text-[#D81BFF]" />
               <span>Acesso Bloqueado</span>
             </div>
           )}
@@ -149,22 +150,11 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
 
       <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
         {isBlocked ? (
-          <div className="luxury-card p-8 text-center shadow-2xl border border-white/10">
-            <div className="w-14 h-14 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center mx-auto mb-4">
-              <Lock size={24} className="text-[#D81BFF]" />
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2 tracking-tight">Funcionalidade Premium 🌸</h3>
-            <p className="text-sm text-[#B8B0C8] mb-6 font-medium leading-relaxed">
-              Esta funcionalidade é exclusiva para assinantes Premium. Assine agora e tenha acesso a 50 mensagens mensais com a Coach IA personalizada!
-            </p>
-            <button 
-              onClick={onUpgrade}
-              className="luxury-button w-full py-5 rounded-full font-bold uppercase tracking-widest text-white shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 text-xs"
-            >
-              <Crown size={16} fill="currentColor" />
-              Assinar Premium
-            </button>
-          </div>
+          <PremiumLock 
+            title="Sua Mentora IA Particular"
+            description="Esta funcionalidade é exclusiva para assinantes Premium. Assine agora e tenha acesso a 50 mensagens mensais com a Coach IA personalizada!"
+            onUpgrade={onUpgrade || (() => {})}
+          />
         ) : limitReached ? (
           <div className="luxury-card p-8 text-center shadow-2xl border border-white/10">
             <div className="w-14 h-14 rounded-2xl bg-[#D81BFF]/10 flex items-center justify-center mx-auto mb-4">

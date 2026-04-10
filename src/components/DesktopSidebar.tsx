@@ -1,4 +1,4 @@
-import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard, Headphones, Lock } from 'lucide-react';
+import { Home, Dumbbell, Apple, Brain, Bot, Crown, Settings, LogOut, User, HelpCircle, Heart, CreditCard, Headphones, Lock as LockIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Logo } from './Logo';
 import { useUser } from '../contexts/UserContext';
@@ -70,7 +70,7 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
                   <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
                   {isLocked && (
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#D81BFF] rounded-full flex items-center justify-center border border-[#0F0A1F]">
-                      <Lock size={6} className="text-white" fill="currentColor" />
+                      <LockIcon size={6} className="text-white" fill="currentColor" />
                     </div>
                   )}
                 </div>

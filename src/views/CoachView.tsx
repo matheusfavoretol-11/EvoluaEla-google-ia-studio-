@@ -1,4 +1,4 @@
-import { MessageCircle, Sparkles, Lock, ChevronRight } from 'lucide-react';
+import { MessageCircle, Sparkles, Lock as LockIcon, ChevronRight } from 'lucide-react';
 
 export default function CoachView() {
   const articles = [
@@ -36,7 +36,7 @@ export default function CoachView() {
         {/* Premium Overlay for Essential Plan */}
         <div className="absolute inset-0 bg-black/40 backdrop-blur-xl flex flex-col items-center justify-center z-20 p-8 text-center border border-white/10 rounded-[2.5rem]">
           <div className="w-20 h-20 rounded-3xl bg-[#C5A059]/90 flex items-center justify-center mb-6 border border-white/10">
-            <Lock className="text-black" size={32} />
+            <LockIcon className="text-black" size={32} />
           </div>
           <h4 className="font-bold text-3xl mb-3 tracking-tight">Acesso <span className="text-[#C5A059]">Exclusivo</span></h4>
           <p className="text-sm text-white/40 mb-8 font-bold leading-relaxed">O chat direto com o coach está disponível apenas no Plano Premium.</p>

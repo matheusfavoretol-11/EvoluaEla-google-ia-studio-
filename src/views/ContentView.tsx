@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Lock, Play, FileText, Sparkles, Headphones, X, Pause, SkipForward, SkipBack } from 'lucide-react';
+import { Lock as LockIcon, Play, FileText, Sparkles, Headphones, X, Pause, SkipForward, SkipBack } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 
@@ -136,7 +136,7 @@ export default function ContentView({ onUpgrade }: ContentViewProps) {
                     color: isLocked ? 'rgba(255, 255, 255, 0.2)' : 'white'
                   }}
                 >
-                  {isLocked ? <Lock size={24} /> : (activeCategory === 'audios' ? <Play size={24} className="ml-1" /> : <FileText size={24} />)}
+                  {isLocked ? <LockIcon size={24} /> : (activeCategory === 'audios' ? <Play size={24} className="ml-1" /> : <FileText size={24} />)}
                 </div>
                 
                 <div className="flex-1">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Logo } from './components/Logo';
-import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User, Lock } from 'lucide-react';
+import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User, Lock as LockIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Contexts
@@ -192,7 +192,7 @@ function AppContent() {
                       <Icon size={isActive ? 22 : 20} strokeWidth={isActive ? 2.5 : 2} />
                       {isLocked && (
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#D81BFF] rounded-full flex items-center justify-center border border-[#0F0A1F]">
-                          <Lock size={6} className="text-white" fill="currentColor" />
+                          <LockIcon size={6} className="text-white" fill="currentColor" />
                         </div>
                       )}
                       {isActive && (

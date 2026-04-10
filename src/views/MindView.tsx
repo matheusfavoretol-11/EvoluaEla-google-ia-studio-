@@ -9,17 +9,37 @@ export default function MindView({ onUpgrade }: { onUpgrade: () => void }) {
 
   if (!isPremium) {
     return (
-    <div className="px-6 py-10 sm:px-10 h-full flex flex-col bg-transparent text-white">
-        <div className="mb-10">
-          <p className="text-[10px] font-bold text-[#D81BFF] uppercase tracking-[0.4em] mb-2">Saúde Mental</p>
-          <h2 className="text-4xl font-sans font-bold text-white mb-3 tracking-tighter">Equilíbrio <span className="text-[#D81BFF]">Emocional</span></h2>
-          <p className="text-sm font-bold text-[#B8B0C8] uppercase tracking-widest">Trate a ansiedade, autoestima, disciplina e bloqueios emocionais com especialistas.</p>
+      <div className="flex flex-col h-full relative bg-transparent text-white font-sans">
+        <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl bg-gradient-to-br from-[#D81BFF] to-[#F8C1FF] text-white">
+              <Brain size={28} />
+            </div>
+            <div>
+              <h2 className="font-bold text-2xl text-white tracking-tighter">Equilíbrio <span className="text-[#D81BFF] italic">Emocional</span></h2>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8B0C8] mt-0.5">Sua mente em primeiro lugar</p>
+            </div>
+          </div>
+        </header>
+
+        <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10 space-y-6 hide-scrollbar bg-transparent">
+          <div className="luxury-card p-6 opacity-40">
+            <h3 className="text-xl font-bold mb-4">Sessões Guiadas</h3>
+            <div className="space-y-4">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-24 bg-white/5 rounded-2xl border border-white/10" />
+              ))}
+            </div>
+          </div>
         </div>
-        <PremiumLock 
-          title="Sua Terapeuta Particular"
-          description="Sessões guiadas, exercícios emocionais, diário e chat direto com uma terapeuta para cuidar da sua mente."
-          onUpgrade={onUpgrade}
-        />
+
+        <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
+          <PremiumLock 
+            title="Sua Terapeuta Particular"
+            description="Sessões guiadas, exercícios emocionais, diário e chat direto com uma terapeuta para cuidar da sua mente."
+            onUpgrade={onUpgrade}
+          />
+        </div>
       </div>
     );
   }

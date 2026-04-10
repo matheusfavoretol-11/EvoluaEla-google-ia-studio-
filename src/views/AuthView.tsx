@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from '../components/Logo';
-import { Mail, Lock, User, ArrowRight, AlertCircle, Check, Zap } from 'lucide-react';
+import { Mail, Lock as LockIcon, User, ArrowRight, AlertCircle, Check, Zap } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { supabase } from '../lib/supabase';
 
@@ -234,7 +234,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B8B0C8] ml-4">Senha</label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-[#D81BFF] transition-colors">
-                    <Lock size={18} />
+                    <LockIcon size={18} />
                   </div>
                   <input
                     type="password"
@@ -251,7 +251,7 @@ export default function AuthView({ onLogin, onRegister }: AuthViewProps) {
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B8B0C8] ml-4">Confirmar Senha</label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-[#D81BFF] transition-colors">
-                      <Lock size={18} />
+                      <LockIcon size={18} />
                     </div>
                     <input
                       type="password"
