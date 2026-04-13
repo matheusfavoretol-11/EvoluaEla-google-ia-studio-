@@ -24,7 +24,9 @@ interface UserContextType {
   subscriptionStatus: string;
   setSubscriptionStatus: (status: string) => void;
   valorPago: number;
+  setValorPago: (valor: number) => void;
   subscriptionEndDate: string | null;
+  setSubscriptionEndDate: (date: string | null) => void;
   trialEndDate: Date | null;
   setTrialEndDate: (date: Date | null) => void;
   coachMessagesCount: number;
@@ -437,8 +439,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       isAuthReady, userId,
       notifications, setNotifications,
       verificarAcessoPremium,
-      valorPago,
-      subscriptionEndDate,
+      valorPago, setValorPago,
+      subscriptionEndDate, setSubscriptionEndDate,
       logout
     }}>
       {children}

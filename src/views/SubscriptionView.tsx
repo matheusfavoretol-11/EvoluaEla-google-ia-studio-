@@ -6,7 +6,13 @@ import { useUser } from '../contexts/UserContext';
 
 export default function SubscriptionView({ onClose }: { onClose: () => void }) {
   const { theme } = useTheme();
-  const { setSubscriptionStatus, setTrialEndDate } = useUser();
+  const { 
+    setSubscriptionStatus, 
+    setIsPremium, 
+    setValorPago, 
+    setSubscriptionEndDate,
+    setTrialEndDate 
+  } = useUser();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -189,7 +195,8 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                     const nextMonth = new Date();
                     nextMonth.setMonth(now.getMonth() + 1);
 
-                    await supabase
+                    // Update Supabase Profile
+                    const { error: updateError } = await supabase
                       .from('users')
                       .update({ 
                         is_premium: true, 
@@ -204,21 +211,42 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                       })
                       .eq('id', user.id);
 
-                    // Create activation log
-                    await supabase.from('activation_logs').insert({
-                      user_id: user.id,
-                      transaction_id: 'simulated_' + Date.now(),
-                      type: 'ATIVACAO_PREMIUM',
-                      details: { method: 'simulation', amount: 109.90 }
-                    });
+                    if (updateError) {
+                      setError(`Erro ao atualizar perfil: ${updateError.message}`);
+                      setIsProcessing(false);
+                      return;
+                    }
+
+                    // Create activation log (Optional, don't fail if policies are missing)
+                    try {
+                      await supabase.from('activation_logs').insert({
+                        user_id: user.id,
+                        transaction_id: 'simulated_' + Date.now(),
+                        type: 'ATIVACAO_PREMIUM',
+                        details: { method: 'simulation', amount: 109.90 }
+                      });
+                    } catch (e) {
+                      console.warn('Could not create activation log:', e);
+                    }
                     
-                    // Add a welcome notification
-                    await supabase.from('notifications').insert({
-                      user_id: user.id,
-                      title: '🎉 Seu Premium foi ativado!',
-                      message: 'Bem-vinda ao Círculo Premium! Aproveite todos os recursos liberados.',
-                      type: 'success'
-                    });
+                    // Add a welcome notification (Optional)
+                    try {
+                      await supabase.from('notifications').insert({
+                        user_id: user.id,
+                        title: '🎉 Seu Premium foi ativado!',
+                        message: 'Bem-vinda ao Círculo Premium! Aproveite todos os recursos liberados.',
+                        type: 'success'
+                      });
+                    } catch (e) {
+                      console.warn('Could not create notification:', e);
+                    }
+
+                    // Update local state
+                    setIsPremium(true);
+                    setSubscriptionStatus('premium');
+                    setValorPago(109.90);
+                    setSubscriptionEndDate(nextMonth.toISOString());
+                    setTrialEndDate(null);
 
                     onClose();
                   }

@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS public.notifications (
 
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view own notifications" ON public.notifications FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert own notifications" ON public.notifications FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update own notifications" ON public.notifications FOR UPDATE USING (auth.uid() = user_id);
 
 -- 10. Tabela de Logs de Ativação
@@ -119,6 +120,7 @@ CREATE TABLE IF NOT EXISTS public.activation_logs (
 );
 
 ALTER TABLE public.activation_logs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can insert own logs" ON public.activation_logs FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Admins can view all logs" ON public.activation_logs FOR SELECT USING (
   EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND role = 'admin')
 );
