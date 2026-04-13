@@ -205,8 +205,6 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                         subscription_start_date: now.toISOString(),
                         subscription_end_date: nextMonth.toISOString(),
                         coach_messages_count: 0,
-                        coach_messages_limit: 50,
-                        last_message_reset_date: now.toISOString(),
                         valor_pago: 109.90
                       })
                       .eq('id', user.id);

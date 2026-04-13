@@ -80,8 +80,6 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
           subscription_start_date: now.toISOString(),
           subscription_end_date: nextMonth.toISOString(),
           coach_messages_count: 0,
-          coach_messages_limit: 50,
-          last_message_reset_date: now.toISOString(),
           valor_pago: 109.90
         })
         .eq('id', userId);
@@ -260,8 +258,8 @@ const middlewareBloqueio = async (req: express.Request, res: express.Response, n
 
   // Specific checks
   if (abaAcessada === 'coach-ia') {
-    const { data: user } = await supabaseAdmin.from('users').select('coach_messages_count, coach_messages_limit').eq('id', userId).single();
-    if (user && user.coach_messages_count >= (user.coach_messages_limit || 50)) {
+    const { data: user } = await supabaseAdmin.from('users').select('coach_messages_count').eq('id', userId).single();
+    if (user && user.coach_messages_count >= 50) {
       return res.status(429).json({
         limiteAtingido: true,
         mensagem: "Você usou suas 50 mensagens mensais",
@@ -356,8 +354,7 @@ cron.schedule('0 0 1 * *', async () => {
   const { error } = await supabaseAdmin
     .from('users')
     .update({ 
-      coach_messages_count: 0,
-      last_message_reset_date: new Date().toISOString()
+      coach_messages_count: 0
     })
     .eq('is_premium', true);
 
