@@ -21,8 +21,10 @@ interface UserContextType {
   setUserName: (name: string) => void;
   isPremium: boolean;
   setIsPremium: (status: boolean) => void;
-  subscriptionStatus: 'free' | 'trial' | 'premium';
-  setSubscriptionStatus: (status: 'free' | 'trial' | 'premium') => void;
+  subscriptionStatus: string;
+  setSubscriptionStatus: (status: string) => void;
+  valorPago: number;
+  subscriptionEndDate: string | null;
   trialEndDate: Date | null;
   setTrialEndDate: (date: Date | null) => void;
   coachMessagesCount: number;
@@ -53,6 +55,9 @@ interface UserContextType {
   role: 'user' | 'therapist' | 'admin';
   isAuthReady: boolean;
   userId: string | null;
+  notifications: any[];
+  setNotifications: (notifications: any[]) => void;
+  verificarAcessoPremium: () => { acesso: boolean; motivo?: string; mensagem?: string };
   logout: () => Promise<void>;
 }
 
@@ -61,7 +66,9 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [userName, setUserName] = useState<string>('');
   const [isPremium, setIsPremium] = useState<boolean>(false);
-  const [subscriptionStatus, setSubscriptionStatus] = useState<'free' | 'trial' | 'premium'>('free');
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('free');
+  const [valorPago, setValorPago] = useState<number>(0);
+  const [subscriptionEndDate, setSubscriptionEndDate] = useState<string | null>(null);
   const [trialEndDate, setTrialEndDate] = useState<Date | null>(null);
   const [coachMessagesCount, setCoachMessagesCount] = useState<number>(0);
   const [selectedDiet, setSelectedDiet] = useState<string | null>(null);
@@ -107,9 +114,44 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<any[]>([]);
 
   const toggleMission = (id: string) => {
     setDailyMissions(prev => prev.map(m => m.id === id ? { ...m, completed: !m.completed } : m));
+  };
+
+  const verificarAcessoPremium = () => {
+    // VERIFICAÇÃO 1: Pagamento foi realizado?
+    if (!isPremium && subscriptionStatus !== 'premium' && subscriptionStatus !== 'active') {
+      return {
+        acesso: false,
+        motivo: "SEM_PAGAMENTO",
+        mensagem: "Você precisa assinar o plano Premium de R$ 109,90/mês"
+      };
+    }
+
+    // VERIFICAÇÃO 2: Valor pago está correto?
+    if (valorPago !== 109.90) {
+      return {
+        acesso: false,
+        motivo: "VALOR_INCORRETO",
+        mensagem: "Pagamento não corresponde ao plano Premium"
+      };
+    }
+
+    // VERIFICAÇÃO 3: Pagamento está ativo e dentro da validade?
+    const hoje = new Date();
+    const vencimento = subscriptionEndDate ? new Date(subscriptionEndDate) : null;
+
+    if (vencimento && hoje > vencimento) {
+      return {
+        acesso: false,
+        motivo: "VENCIDO",
+        mensagem: "Sua assinatura venceu. Renove para continuar aproveitando!"
+      };
+    }
+
+    return { acesso: true };
   };
 
   const logout = async () => {
@@ -201,6 +243,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
         setRole(data.role || 'user');
         setSubscriptionStatus(data.subscription_status || 'free');
+        setValorPago(Number(data.valor_pago) || 0);
+        setSubscriptionEndDate(data.subscription_end_date || null);
         setCoachMessagesCount(data.coach_messages_count || 0);
         setSelectedDiet(data.selected_diet || null);
         setLastDietChangeDate(data.last_diet_change_date || null);
@@ -213,6 +257,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchOnboarding();
     fetchProfile();
 
+    // Fetch notifications
+    const fetchNotifications = async () => {
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+      
+      if (data && !error) {
+        setNotifications(data);
+      }
+    };
+    fetchNotifications();
+
     // Set up realtime subscriptions
     const profileSubscription = supabase
       .channel('public:users')
@@ -223,6 +281,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
           setRole(data.role || 'user');
           setSubscriptionStatus(data.subscription_status || 'free');
+          setValorPago(Number(data.valor_pago) || 0);
+          setSubscriptionEndDate(data.subscription_end_date || null);
           setCoachMessagesCount(data.coach_messages_count || 0);
           setSelectedDiet(data.selected_diet || null);
           setLastDietChangeDate(data.last_diet_change_date || null);
@@ -257,10 +317,24 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       })
       .subscribe();
 
+    const notificationsSubscription = supabase
+      .channel('public:notifications')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'notifications', filter: `user_id=eq.${userId}` }, payload => {
+        if (payload.eventType === 'INSERT') {
+          setNotifications(prev => [payload.new, ...prev]);
+        } else if (payload.eventType === 'UPDATE') {
+          setNotifications(prev => prev.map(n => n.id === payload.new.id ? payload.new : n));
+        } else if (payload.eventType === 'DELETE') {
+          setNotifications(prev => prev.filter(n => n.id !== payload.old.id));
+        }
+      })
+      .subscribe();
+
     return () => {
       supabase.removeChannel(profileSubscription);
       supabase.removeChannel(statsSubscription);
       supabase.removeChannel(onboardingSubscription);
+      supabase.removeChannel(notificationsSubscription);
     };
   }, [userId]);
 
@@ -361,6 +435,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       acessoTerapiaGrupo,
       role,
       isAuthReady, userId,
+      notifications, setNotifications,
+      verificarAcessoPremium,
+      valorPago,
+      subscriptionEndDate,
       logout
     }}>
       {children}

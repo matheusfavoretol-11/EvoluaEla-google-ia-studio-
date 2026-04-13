@@ -4,7 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import PremiumLock from '../components/PremiumLock';
 
 export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void }) {
-  const { isPremium, scheduledSessions, setScheduledSessions } = useUser();
+  const { isPremium, scheduledSessions, setScheduledSessions, verificarAcessoPremium } = useUser();
   const { theme } = useTheme();
 
   const handleReserve = () => {
@@ -17,7 +17,9 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
     setScheduledSessions([...scheduledSessions, newSession]);
   };
 
-  if (!isPremium) {
+  const verificacao = verificarAcessoPremium();
+
+  if (!verificacao.acesso) {
     return (
       <div className="flex flex-col h-full relative bg-transparent text-white font-sans">
         <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
@@ -45,9 +47,17 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
         <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
           <PremiumLock 
-            title="Terapia e Apoio Psicológico"
+            title="🔒 Terapia e Apoio Psicológico"
             description="Cuide da sua saúde mental com sessões exclusivas! Tenha acesso a encontros ao vivo com especialistas."
+            beneficios={[
+              "Sessões semanais ao vivo",
+              "Meditações guiadas",
+              "Comunidade de apoio",
+              "Conteúdo exclusivo"
+            ]}
+            botaoText="Participar das Sessões"
             onUpgrade={onUpgrade}
+            aba="mente"
           />
         </div>
       </div>

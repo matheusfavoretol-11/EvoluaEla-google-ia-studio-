@@ -11,6 +11,15 @@ CREATE TABLE IF NOT EXISTS public.users (
   stripe_customer_id TEXT,
   stripe_subscription_id TEXT,
   role TEXT DEFAULT 'user',
+  subscription_start_date TIMESTAMP WITH TIME ZONE,
+  subscription_end_date TIMESTAMP WITH TIME ZONE,
+  coach_messages_limit INTEGER DEFAULT 50,
+  last_message_reset_date TIMESTAMP WITH TIME ZONE,
+  valor_pago DECIMAL(10,2) DEFAULT 0.00,
+  selected_diet TEXT,
+  last_diet_change_date TIMESTAMP WITH TIME ZONE,
+  scheduled_sessions JSONB DEFAULT '[]'::jsonb,
+  last_session_date TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
@@ -83,6 +92,36 @@ CREATE POLICY "Users can update own missions" ON public.daily_missions FOR UPDAT
 -- Journal Entries
 CREATE POLICY "Users can view own journal" ON public.journal_entries FOR SELECT USING (auth.uid() = user_id);
 CREATE POLICY "Users can insert own journal" ON public.journal_entries FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- 9. Tabela de Notificações
+CREATE TABLE IF NOT EXISTS public.notifications (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE NOT NULL,
+  title TEXT NOT NULL,
+  message TEXT NOT NULL,
+  type TEXT DEFAULT 'info',
+  read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can view own notifications" ON public.notifications FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can update own notifications" ON public.notifications FOR UPDATE USING (auth.uid() = user_id);
+
+-- 10. Tabela de Logs de Ativação
+CREATE TABLE IF NOT EXISTS public.activation_logs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE NOT NULL,
+  transaction_id TEXT,
+  type TEXT NOT NULL,
+  details JSONB DEFAULT '{}'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+ALTER TABLE public.activation_logs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Admins can view all logs" ON public.activation_logs FOR SELECT USING (
+  EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND role = 'admin')
+);
 
 -- 8. Trigger para criar perfil de usuário automaticamente após o Sign Up
 CREATE OR REPLACE FUNCTION public.handle_new_user()

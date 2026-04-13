@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Logo } from './components/Logo';
+import NotificationCenter from './components/NotificationCenter';
 import { Home, Dumbbell, Heart, TrendingUp, Bot, Crown, Menu, Apple, Brain, Headphones, Sun, Moon, User, Lock as LockIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -131,6 +132,7 @@ function AppContent() {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
+              <NotificationCenter />
               {!isPremium ? (
                 <button 
                   onClick={() => setShowSubscription(true)}

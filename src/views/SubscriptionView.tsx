@@ -174,6 +174,65 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
               {error}
             </motion.div>
           )}
+
+          {/* Botão de Teste para Desenvolvedor */}
+          <div className="pt-8 border-t border-white/5">
+            <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-4 text-center">Área de Teste (Apenas para validação)</p>
+            <button 
+              onClick={async () => {
+                setIsProcessing(true);
+                try {
+                  const { supabase } = await import('../lib/supabase');
+                  const { data: { user } } = await supabase.auth.getUser();
+                  if (user) {
+                    const now = new Date();
+                    const nextMonth = new Date();
+                    nextMonth.setMonth(now.getMonth() + 1);
+
+                    await supabase
+                      .from('users')
+                      .update({ 
+                        is_premium: true, 
+                        subscription_status: 'premium',
+                        acesso_terapia_grupo: true,
+                        subscription_start_date: now.toISOString(),
+                        subscription_end_date: nextMonth.toISOString(),
+                        coach_messages_count: 0,
+                        coach_messages_limit: 50,
+                        last_message_reset_date: now.toISOString(),
+                        valor_pago: 109.90
+                      })
+                      .eq('id', user.id);
+
+                    // Create activation log
+                    await supabase.from('activation_logs').insert({
+                      user_id: user.id,
+                      transaction_id: 'simulated_' + Date.now(),
+                      type: 'ATIVACAO_PREMIUM',
+                      details: { method: 'simulation', amount: 109.90 }
+                    });
+                    
+                    // Add a welcome notification
+                    await supabase.from('notifications').insert({
+                      user_id: user.id,
+                      title: '🎉 Seu Premium foi ativado!',
+                      message: 'Bem-vinda ao Círculo Premium! Aproveite todos os recursos liberados.',
+                      type: 'success'
+                    });
+
+                    onClose();
+                  }
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setIsProcessing(false);
+                }
+              }}
+              className="w-full py-4 rounded-2xl border border-dashed border-[#D81BFF]/30 text-[#D81BFF]/60 hover:text-[#D81BFF] hover:border-[#D81BFF]/60 transition-all text-[10px] font-bold uppercase tracking-widest"
+            >
+              Simular Pagamento Bem-Sucedido (Teste)
+            </button>
+          </div>
         </div>
 
         <div className="mt-20 pt-12 border-t border-white/5 relative z-10 max-w-4xl mx-auto w-full">

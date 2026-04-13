@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import PremiumLock from '../components/PremiumLock';
 
 export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) {
-  const { isPremium, selectedDiet, setSelectedDiet, lastDietChangeDate } = useUser();
+  const { isPremium, selectedDiet, setSelectedDiet, lastDietChangeDate, verificarAcessoPremium } = useUser();
   const { theme } = useTheme();
 
   const dietOptions = [
@@ -28,7 +28,9 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
     }
   };
 
-  if (!isPremium) {
+  const verificacao = verificarAcessoPremium();
+
+  if (!verificacao.acesso) {
     return (
       <div className="flex flex-col h-full relative bg-transparent text-white font-sans">
         <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
@@ -56,9 +58,17 @@ export default function NutritionView({ onUpgrade }: { onUpgrade: () => void }) 
 
         <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
           <PremiumLock 
-            title="Sua Nutricionista Particular"
-            description="Desbloqueie planos de dieta personalizados feitos por nossa nutricionista profissional! Tenha acesso a cardápios exclusivos."
+            title="🔒 Planos Alimentares Premium"
+            description="Dietas elaboradas por nutricionista profissional para seus objetivos específicos."
+            beneficios={[
+              "Planos personalizados",
+              "Cardápio semanal completo",
+              "Lista de compras inclusa",
+              "6 opções de dieta disponíveis"
+            ]}
+            botaoText="Liberar Nutrição Premium"
             onUpgrade={onUpgrade}
+            aba="nutricao"
           />
         </div>
       </div>

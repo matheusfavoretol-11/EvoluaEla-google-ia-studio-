@@ -8,11 +8,12 @@ import PremiumLock from '../components/PremiumLock';
 
 export default function AICoachView({ onUpgrade }: { onUpgrade?: () => void }) {
   const { theme } = useTheme();
-  const { userName, isPremium, subscriptionStatus, coachMessagesCount, setCoachMessagesCount, selectedDiet } = useUser();
+  const { userName, isPremium, subscriptionStatus, coachMessagesCount, setCoachMessagesCount, selectedDiet, verificarAcessoPremium } = useUser();
   
   const MAX_MESSAGES = 50;
   const messagesRemaining = Math.max(0, MAX_MESSAGES - coachMessagesCount);
-  const isBlocked = !isPremium;
+  const verificacao = verificarAcessoPremium();
+  const isBlocked = !verificacao.acesso;
   const limitReached = isPremium && messagesRemaining === 0;
 
   const getNextMonthFirstDay = () => {
@@ -151,9 +152,17 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
       <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
         {isBlocked ? (
           <PremiumLock 
-            title="Sua Mentora IA Particular"
-            description="Esta funcionalidade é exclusiva para assinantes Premium. Assine agora e tenha acesso a 50 mensagens mensais com a Coach IA personalizada!"
+            title="🔒 Acesso Exclusivo Premium"
+            description="A Coach IA está disponível apenas para assinantes Premium. Tenha uma mentora particular 24h por dia!"
+            beneficios={[
+              "50 mensagens mensais com IA especializada",
+              "Consultoria 24/7 personalizada",
+              "Ajustes em tempo real no treino",
+              "Motivação e acompanhamento"
+            ]}
+            botaoText="Assinar Agora por R$ 109,90"
             onUpgrade={onUpgrade || (() => {})}
+            aba="coach"
           />
         ) : limitReached ? (
           <div className="luxury-card p-8 text-center shadow-2xl border border-white/10">

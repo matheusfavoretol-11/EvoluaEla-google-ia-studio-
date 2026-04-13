@@ -17,7 +17,8 @@ import {
   X, 
   Dumbbell,
   Crown,
-  ArrowRight
+  ArrowRight,
+  Lock
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
@@ -25,6 +26,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { WorkoutsSkeleton } from '../components/Skeleton';
 import PremiumLock from '../components/PremiumLock';
+import PremiumBanner from '../components/PremiumBanner';
 
 type Exercise = { id: string; name: string; reps: string; sets: number | string; };
 type Workout = { id: string; title: string; duration: string; level: string; calories: string; premium: boolean; exercises: Exercise[]; };
@@ -71,12 +73,25 @@ const defaultSuggestions: Workout[] = [
       { id: '3-3', name: 'Abdominal Remador', reps: '15 reps', sets: 3 },
       { id: '3-4', name: 'Burpees', reps: '10 reps', sets: 3 },
     ]
+  },
+  { 
+    id: 'sug-4', 
+    title: 'Hipertrofia Avançada', 
+    duration: '60 min', 
+    level: 'sugestao', 
+    calories: '600 kcal',
+    premium: true,
+    exercises: [
+      { id: '4-1', name: 'Supino Reto', reps: '8-10 reps', sets: 4 },
+      { id: '4-2', name: 'Crucifixo Inclinado', reps: '12 reps', sets: 3 },
+      { id: '4-3', name: 'Tríceps Corda', reps: '15 reps', sets: 3 },
+    ]
   }
 ];
 
 export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   const { theme } = useTheme();
-  const { isPremium, userName, userId, selectedDiet } = useUser();
+  const { isPremium, userName, userId, selectedDiet, verificarAcessoPremium } = useUser();
   
   const [activeTab, setActiveTab] = useState<'meus' | 'sugestoes'>('meus');
   const [myWorkouts, setMyWorkouts] = useState<Workout[]>([]);
@@ -86,6 +101,10 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
   const [showCompletion, setShowCompletion] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showPremiumPopup, setShowPremiumPopup] = useState(false);
+
+  const verificacao = verificarAcessoPremium();
+  const hasAccess = verificacao.acesso;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -122,6 +141,14 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
     });
   };
 
+  const handleWorkoutClick = (workout: Workout) => {
+    if (workout.premium && !hasAccess) {
+      setShowPremiumPopup(true);
+      return;
+    }
+    setActiveWorkoutId(workout.id);
+  };
+
   const renderWorkoutCard = (workout: Workout) => (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
@@ -129,9 +156,15 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       key={workout.id} 
-      onClick={() => setActiveWorkoutId(workout.id)}
-      className="luxury-card p-6 cursor-pointer transition-all hover:bg-white/10 group"
+      onClick={() => handleWorkoutClick(workout)}
+      className={`luxury-card p-6 cursor-pointer transition-all hover:bg-white/10 group relative ${workout.premium && !hasAccess ? 'opacity-60' : ''}`}
     >
+      {workout.premium && !hasAccess && (
+        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#D81BFF]/20 flex items-center justify-center text-[#D81BFF] border border-[#D81BFF]/30">
+          <Crown size={14} fill="currentColor" />
+        </div>
+      )}
+      
       <div className="flex justify-between items-start mb-6">
         <div>
           <h4 className="text-2xl font-bold text-white leading-tight mb-2 group-hover:text-[#D81BFF] transition-colors tracking-tight">{workout.title}</h4>
@@ -141,7 +174,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
           </div>
         </div>
         <div className="bg-white/5 text-white/40 p-3 rounded-2xl group-hover:bg-[#D81BFF] group-hover:text-white transition-all">
-          <ChevronRight size={20} />
+          {workout.premium && !hasAccess ? <Lock size={20} /> : <ChevronRight size={20} />}
         </div>
       </div>
       
@@ -167,43 +200,6 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
     return <WorkoutsSkeleton />;
   }
 
-  if (!isPremium) {
-    return (
-      <div className="flex flex-col h-full relative bg-transparent text-white font-sans">
-        <header className="px-6 sm:px-10 pt-10 pb-6 flex flex-col gap-4 shrink-0 backdrop-blur-xl border-b border-white/5 sticky top-0 z-20">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl bg-gradient-to-br from-[#D81BFF] to-[#F8C1FF] text-white">
-              <Dumbbell size={28} />
-            </div>
-            <div>
-              <h2 className="font-bold text-2xl text-white tracking-tighter">Sua <span className="text-[#D81BFF] italic">Evolução Física</span></h2>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8B0C8] mt-0.5">Treinos pensados para você</p>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10 space-y-6 hide-scrollbar bg-transparent">
-          <div className="luxury-card p-6 opacity-40">
-            <h3 className="text-xl font-bold mb-4">Plano de Treino Semanal</h3>
-            <div className="space-y-4">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="h-20 bg-white/5 rounded-2xl border border-white/10" />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="px-6 py-10 sm:px-10 shrink-0 backdrop-blur-xl border-t border-white/5">
-          <PremiumLock 
-            title="Seu Personal Trainer Particular"
-            description="Desbloqueie treinos avançados e personalizados com Premium! Tenha acesso a planos exclusivos para o seu objetivo."
-            onUpgrade={onUpgrade}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col h-full text-white font-sans">
       <AnimatePresence mode="wait">
@@ -220,8 +216,13 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               <h2 className="text-4xl font-sans font-bold text-white tracking-tight">Treinos</h2>
             </header>
 
+            {/* Premium Banner for Free Users */}
+            {!hasAccess && (
+              <PremiumBanner onUpgrade={onUpgrade} />
+            )}
+
             {/* Diet Integration Card */}
-            {selectedDiet && (
+            {hasAccess && selectedDiet && (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -446,6 +447,50 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
               >
                 Continuar
               </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Premium Lock Modal */}
+      <AnimatePresence>
+        {showPremiumPopup && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowPremiumPopup(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-lg"
+            >
+              <button 
+                onClick={() => setShowPremiumPopup(false)}
+                className="absolute -top-12 right-0 text-white/40 hover:text-white transition-colors"
+              >
+                <X size={32} />
+              </button>
+              <PremiumLock 
+                title="🔒 Treinos Avançados Premium"
+                description="Este treino utiliza técnicas avançadas de hipertrofia e progressão de carga exclusivas para assinantes."
+                beneficios={[
+                  "Treinos de Hipertrofia",
+                  "Treinos Funcionais Avançados",
+                  "Treinos Personalizados",
+                  "Integração com Dieta"
+                ]}
+                botaoText="Liberar Treinos Completos"
+                onUpgrade={() => {
+                  setShowPremiumPopup(false);
+                  onUpgrade();
+                }}
+                aba="treino"
+              />
             </motion.div>
           </div>
         )}

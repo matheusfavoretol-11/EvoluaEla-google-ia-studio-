@@ -64,6 +64,10 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
     if (userId) {
       console.log(`Payment successful for user: ${userId}`);
       
+      const now = new Date();
+      const nextMonth = addMonths(now, 1);
+      const firstDayNextMonth = startOfMonth(addMonths(now, 1));
+
       // Update user in Supabase to premium
       const { error } = await supabaseAdmin
         .from('users')
@@ -72,7 +76,13 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
           subscription_status: 'premium',
           acesso_terapia_grupo: true,
           stripe_customer_id: session.customer as string,
-          stripe_subscription_id: session.subscription as string
+          stripe_subscription_id: session.subscription as string,
+          subscription_start_date: now.toISOString(),
+          subscription_end_date: nextMonth.toISOString(),
+          coach_messages_count: 0,
+          coach_messages_limit: 50,
+          last_message_reset_date: now.toISOString(),
+          valor_pago: 109.90
         })
         .eq('id', userId);
 
@@ -80,6 +90,22 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         console.error('Error updating user status in Supabase:', error);
       } else {
         console.log('User successfully upgraded to premium in Supabase.');
+        
+        // Create activation log
+        await supabaseAdmin.from('activation_logs').insert({
+          user_id: userId,
+          transaction_id: session.id,
+          type: 'ATIVACAO_PREMIUM',
+          details: { session_id: session.id, customer: session.customer, amount: 109.90 }
+        });
+
+        // Send welcome notification
+        await supabaseAdmin.from('notifications').insert({
+          user_id: userId,
+          title: '🎉 Seu Premium foi ativado!',
+          message: 'Bem-vinda ao Círculo Premium! Você agora tem acesso ilimitado a treinos, dietas e 50 mensagens mensais com a Coach IA.',
+          type: 'success'
+        });
       }
     }
   } else if (event.type === 'customer.subscription.updated') {
@@ -95,11 +121,13 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 
     if (userData && !fetchError) {
       const isPremium = ['active', 'trialing'].includes(status);
+      const amount = isPremium ? 109.90 : 0.00;
       await supabaseAdmin
         .from('users')
         .update({ 
           is_premium: isPremium,
-          subscription_status: status
+          subscription_status: status,
+          valor_pago: amount
         })
         .eq('id', userData.id);
       console.log(`Subscription updated for user ${userData.id}: ${status}`);
@@ -120,7 +148,8 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         .update({ 
           is_premium: false,
           subscription_status: 'canceled',
-          acesso_terapia_grupo: false
+          acesso_terapia_grupo: false,
+          valor_pago: 0.00
         })
         .eq('id', userData.id);
       console.log(`Subscription deleted for user ${userData.id}`);
@@ -129,6 +158,125 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 
   res.json({ received: true });
 });
+
+// --- Access Protection Middleware ---
+
+async function verificarAcessoPremium(userId: string) {
+  const { data: user, error } = await supabaseAdmin
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error || !user) {
+    return {
+      acesso: false,
+      motivo: "USUARIO_NAO_ENCONTRADO",
+      mensagem: "Usuária não encontrada no sistema."
+    };
+  }
+
+  // VERIFICAÇÃO 1: Pagamento foi realizado?
+  if (!user.is_premium && user.subscription_status !== 'premium' && user.subscription_status !== 'active') {
+    return {
+      acesso: false,
+      motivo: "SEM_PAGAMENTO",
+      mensagem: "Você precisa assinar o plano Premium de R$ 109,90/mês"
+    };
+  }
+
+  // VERIFICAÇÃO 2: Valor pago está correto?
+  if (Number(user.valor_pago) !== 109.90) {
+    return {
+      acesso: false,
+      motivo: "VALOR_INCORRETO",
+      mensagem: "Pagamento não corresponde ao plano Premium"
+    };
+  }
+
+  // VERIFICAÇÃO 3: Pagamento está ativo e dentro da validade?
+  const hoje = new Date();
+  const vencimento = user.subscription_end_date ? new Date(user.subscription_end_date) : null;
+
+  if (vencimento && isAfter(hoje, vencimento)) {
+    return {
+      acesso: false,
+      motivo: "VENCIDO",
+      mensagem: "Sua assinatura venceu. Renove para continuar aproveitando!"
+    };
+  }
+
+  // VERIFICAÇÃO 4: Status do pagamento está ativo?
+  const activeStatuses = ['premium', 'active', 'trialing'];
+  if (!activeStatuses.includes(user.subscription_status)) {
+    return {
+      acesso: false,
+      motivo: "INATIVO",
+      mensagem: "Assinatura inativa. Verifique seu método de pagamento."
+    };
+  }
+
+  return {
+    acesso: true,
+    plano: "PREMIUM",
+    valorPago: 109.90,
+    vencimento: vencimento
+  };
+}
+
+const middlewareBloqueio = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const userId = req.headers['x-user-id'] as string;
+  const abaAcessada = req.path.split('/')[2]; // e.g., /api/coach-ia -> coach-ia
+
+  if (!userId) {
+    return res.status(401).json({ error: 'User ID is required in headers' });
+  }
+
+  const verificacao = await verificarAcessoPremium(userId);
+
+  if (!verificacao.acesso) {
+    // Log blocked attempt
+    await supabaseAdmin.from('activation_logs').insert({
+      user_id: userId,
+      type: 'TENTATIVA_ACESSO_BLOQUEADO',
+      details: { 
+        aba: abaAcessada, 
+        motivo: verificacao.motivo,
+        path: req.path
+      }
+    });
+
+    return res.status(403).json({
+      bloqueado: true,
+      motivo: verificacao.motivo,
+      mensagem: verificacao.mensagem,
+      aba: abaAcessada,
+      planoAtual: "FREE",
+      planoNecessario: "PREMIUM",
+      valorPlano: 109.90,
+      urlPagamento: "/subscription"
+    });
+  }
+
+  // Specific checks
+  if (abaAcessada === 'coach-ia') {
+    const { data: user } = await supabaseAdmin.from('users').select('coach_messages_count, coach_messages_limit').eq('id', userId).single();
+    if (user && user.coach_messages_count >= (user.coach_messages_limit || 50)) {
+      return res.status(429).json({
+        limiteAtingido: true,
+        mensagem: "Você usou suas 50 mensagens mensais",
+      });
+    }
+  }
+
+  next();
+};
+
+// Apply middleware to protected routes
+// Note: We'll need to define these routes or apply them to existing ones
+// app.use('/api/coach-ia', middlewareBloqueio);
+// app.use('/api/nutricao', middlewareBloqueio);
+// app.use('/api/mente', middlewareBloqueio);
 
 // --- Therapy Sessions Logic ---
 
@@ -169,8 +317,55 @@ async function sendTherapyNotifications() {
 }
 
 // Run every day at 01:00
-cron.schedule('0 1 * * *', () => {
+cron.schedule('0 1 * * *', async () => {
   console.log('Daily maintenance task running...');
+  
+  // 1. Check for expired subscriptions
+  const now = new Date();
+  const { data: expiredUsers, error: expiryError } = await supabaseAdmin
+    .from('users')
+    .select('id')
+    .eq('is_premium', true)
+    .lt('subscription_end_date', now.toISOString());
+
+  if (expiredUsers?.length) {
+    console.log(`Found ${expiredUsers.length} expired subscriptions. Downgrading...`);
+    for (const user of expiredUsers) {
+      await supabaseAdmin
+        .from('users')
+        .update({ 
+          is_premium: false, 
+          subscription_status: 'free',
+          acesso_terapia_grupo: false 
+        })
+        .eq('id', user.id);
+      
+      await supabaseAdmin.from('notifications').insert({
+        user_id: user.id,
+        title: '⚠️ Sua assinatura expirou',
+        message: 'Sua assinatura Premium chegou ao fim. Renove agora para continuar aproveitando todos os recursos!',
+        type: 'warning'
+      });
+    }
+  }
+});
+
+// Run on the 1st of every month at 00:00 to reset message limits
+cron.schedule('0 0 1 * *', async () => {
+  console.log('Monthly message reset task running...');
+  const { error } = await supabaseAdmin
+    .from('users')
+    .update({ 
+      coach_messages_count: 0,
+      last_message_reset_date: new Date().toISOString()
+    })
+    .eq('is_premium', true);
+
+  if (error) {
+    console.error('Error resetting message counts:', error);
+  } else {
+    console.log('Successfully reset message counts for all premium users.');
+  }
 });
 
 // Run every hour to check for notifications
