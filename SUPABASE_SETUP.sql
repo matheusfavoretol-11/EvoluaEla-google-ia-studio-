@@ -23,6 +23,20 @@ CREATE TABLE IF NOT EXISTS public.users (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
+-- Garantir que colunas existam caso a tabela já tenha sido criada anteriormente
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS role TEXT DEFAULT 'user';
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS subscription_start_date TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS subscription_end_date TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS coach_messages_limit INTEGER DEFAULT 50;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS last_message_reset_date TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS valor_pago DECIMAL(10,2) DEFAULT 0.00;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS selected_diet TEXT;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS last_diet_change_date TIMESTAMP WITH TIME ZONE;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS scheduled_sessions JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS last_session_date TIMESTAMP WITH TIME ZONE;
+
 -- 2. Tabela de Estatísticas Emocionais
 CREATE TABLE IF NOT EXISTS public.emotional_stats (
   user_id UUID REFERENCES public.users(id) ON DELETE CASCADE NOT NULL PRIMARY KEY,

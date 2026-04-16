@@ -210,7 +210,11 @@ export default function SubscriptionView({ onClose }: { onClose: () => void }) {
                       .eq('id', user.id);
 
                     if (updateError) {
-                      setError(`Erro ao atualizar perfil: ${updateError.message}`);
+                      if (updateError.message.includes('column') || updateError.message.includes('schema cache')) {
+                        setError(`⚠️ Erro de Banco de Dados: Algumas colunas estão faltando. Por favor, execute o script SQL de migração no seu painel do Supabase para liberar o acesso Premium.`);
+                      } else {
+                        setError(`Erro ao atualizar perfil: ${updateError.message}`);
+                      }
                       setIsProcessing(false);
                       return;
                     }

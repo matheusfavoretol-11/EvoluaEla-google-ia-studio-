@@ -63,7 +63,8 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
 
     const userMsg = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { id: `msg-${Date.now()}-user`, role: 'user', text: userMsg }]);
+    const userMsgId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-user`;
+    setMessages(prev => [...prev, { id: userMsgId, role: 'user', text: userMsg }]);
     setIsLoading(true);
 
     if (isPremium) {
@@ -75,10 +76,12 @@ Seja concisa nas respostas, use emojis, e foque em ação e acolhimento.`,
         throw new Error("API Key missing");
       }
       const response = await chatRef.current.sendMessage({ message: userMsg });
-      setMessages(prev => [...prev, { id: `msg-${Date.now()}-model`, role: 'model', text: response.text }]);
+      const modelMsgId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-model`;
+      setMessages(prev => [...prev, { id: modelMsgId, role: 'model', text: response.text }]);
     } catch (error) {
       console.error("Error sending message:", error);
-      setMessages(prev => [...prev, { id: `msg-${Date.now()}-error`, role: 'model', text: 'Ops, parece que meu sinal falhou um pouquinho. Vamos tentar conversar de novo? 🥺' }]);
+      const errorMsgId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-error`;
+      setMessages(prev => [...prev, { id: errorMsgId, role: 'model', text: 'Ops, parece que meu sinal falhou um pouquinho. Vamos tentar conversar de novo? 🥺' }]);
     } finally {
       setIsLoading(false);
     }

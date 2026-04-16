@@ -9,7 +9,7 @@ export default function GroupTherapyView({ onUpgrade }: { onUpgrade: () => void 
 
   const handleReserve = () => {
     const newSession = {
-      id: `session-${Date.now()}`,
+      id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       date: '15/04/2026',
       time: '19:30',
       topic: 'Meditação Guiada e Ansiedade'

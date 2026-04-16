@@ -1,20 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-
-export type UserLevel = 'Despertando' | 'Em Evolução' | 'Confiante' | 'Inabalável';
-
-export interface EmotionalStats {
-  confianca: number;
-  autoestima: number;
-  disciplina: number;
-  amorProprio: number;
-}
-
-export interface DailyMission {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+import { UserLevel, EmotionalStats, DailyMission } from '../types';
 
 interface UserContextType {
   userName: string;
@@ -250,7 +236,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setCoachMessagesCount(data.coach_messages_count || 0);
         setSelectedDiet(data.selected_diet || null);
         setLastDietChangeDate(data.last_diet_change_date || null);
-        setScheduledSessions(data.scheduled_sessions || []);
+        
+        // Ensure unique sessions
+        const sessions = data.scheduled_sessions || [];
+        const uniqueSessions = sessions.filter((s: any, index: number, self: any[]) =>
+          index === self.findIndex((t) => t.id === s.id)
+        );
+        setScheduledSessions(uniqueSessions);
+        
         setLastSessionDate(data.last_session_date || null);
       }
     };
@@ -268,7 +261,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         .order('created_at', { ascending: false });
       
       if (data && !error) {
-        setNotifications(data);
+        // Ensure unique notifications
+        const uniqueNotifications = data.filter((n: any, index: number, self: any[]) =>
+          index === self.findIndex((t) => t.id === n.id)
+        );
+        setNotifications(uniqueNotifications);
       }
     };
     fetchNotifications();
@@ -323,7 +320,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       .channel('public:notifications')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'notifications', filter: `user_id=eq.${userId}` }, payload => {
         if (payload.eventType === 'INSERT') {
-          setNotifications(prev => [payload.new, ...prev]);
+          setNotifications(prev => {
+            // Prevent duplicate IDs
+            if (prev.some(n => n.id === payload.new.id)) return prev;
+            return [payload.new, ...prev];
+          });
         } else if (payload.eventType === 'UPDATE') {
           setNotifications(prev => prev.map(n => n.id === payload.new.id ? payload.new : n));
         } else if (payload.eventType === 'DELETE') {
