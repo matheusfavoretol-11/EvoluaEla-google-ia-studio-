@@ -452,6 +452,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'subscription',
+      allow_promotion_codes: true,
       subscription_data: {
         trial_period_days: 7,
       },
