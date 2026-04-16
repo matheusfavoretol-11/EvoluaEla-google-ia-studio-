@@ -38,6 +38,21 @@ function AppContent() {
   const [showLanding, setShowLanding] = useState(true);
 
   useEffect(() => {
+    // Handle Stripe Success/Cancel
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('success')) {
+      import('canvas-confetti').then((confetti) => {
+        confetti.default({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#D81BFF', '#F8C1FF', '#ffffff']
+        });
+      });
+      // Clear query params
+      window.history.replaceState({}, document.title, "/");
+    }
+
     if (!userId && isAuthReady) {
       setShowLanding(true);
     }
