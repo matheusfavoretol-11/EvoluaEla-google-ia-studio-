@@ -5,7 +5,7 @@ import { useUser } from '../contexts/UserContext';
 
 export default function ThemeSettingsModal({ onClose, isFullView }: { onClose: () => void, isFullView?: boolean }) {
   const { theme, setTheme, setCustomColor, toggleTheme, isDark } = useTheme();
-  const { userName, setUserName, isPremium, subscriptionStatus, logout } = useUser();
+  const { userName, setUserName, isPremium, subscriptionStatus, logout, actualPlan } = useUser();
   const [customPrimary, setCustomPrimary] = useState(theme.primary);
   const [tempName, setTempName] = useState(userName);
 
@@ -48,7 +48,15 @@ export default function ThemeSettingsModal({ onClose, isFullView }: { onClose: (
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-white mb-1">{userName}</h3>
-              <p className="text-xs font-bold text-[#D81BFF] uppercase tracking-[0.3em]">Membro Luxury</p>
+              <p className={`text-[9px] font-black uppercase tracking-[0.4em] px-4 py-1.5 rounded-full inline-block ${
+                actualPlan.isLuxury 
+                  ? 'bg-gradient-to-r from-amber-400/20 to-amber-600/20 text-amber-400 border border-amber-400/30 shadow-[0_0_20px_rgba(251,191,36,0.2)]' 
+                  : actualPlan.isPremium 
+                    ? 'bg-[#D81BFF]/20 text-[#D81BFF] border border-[#D81BFF]/30' 
+                    : 'bg-white/5 text-white/40 border border-white/10'
+              }`}>
+                {actualPlan.label}
+              </p>
             </div>
           )}
 
@@ -75,10 +83,12 @@ export default function ThemeSettingsModal({ onClose, isFullView }: { onClose: (
                 <div>
                   <p className="text-[9px] font-bold text-white/20 mb-1 uppercase tracking-widest">Plano Atual</p>
                   <div className="flex items-center gap-2">
-                    {isPremium ? (
-                      <span className="text-[#D81BFF] font-bold flex items-center gap-1.5 text-base tracking-tight"><Crown size={16} fill="currentColor" /> Premium</span>
+                    {actualPlan.isLuxury ? (
+                      <span className="text-amber-400 font-bold flex items-center gap-1.5 text-base tracking-tight drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]"><Crown size={16} fill="currentColor" /> {actualPlan.label}</span>
+                    ) : actualPlan.isPremium ? (
+                      <span className="text-[#D81BFF] font-bold flex items-center gap-1.5 text-base tracking-tight"><Crown size={16} fill="currentColor" /> {actualPlan.label}</span>
                     ) : (
-                      <span className="text-white font-bold text-base tracking-tight">Gratuito</span>
+                      <span className="text-white/60 font-bold text-base tracking-tight uppercase">{actualPlan.label}</span>
                     )}
                   </div>
                 </div>

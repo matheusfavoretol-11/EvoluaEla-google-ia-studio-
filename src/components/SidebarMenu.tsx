@@ -13,7 +13,7 @@ interface SidebarMenuProps {
 
 export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHelp, onOpenSupport }: SidebarMenuProps) {
   const { theme } = useTheme();
-  const { userName, isPremium, subscriptionStatus, logout } = useUser();
+  const { userName, isPremium, subscriptionStatus, logout, actualPlan } = useUser();
 
   const handleEmailSupport = () => {
     window.location.href = 'mailto:evoluaela@gmail.com';
@@ -57,13 +57,13 @@ export default function SidebarMenu({ isOpen, onClose, onOpenSettings, onOpenHel
                 </div>
                 <div>
                   <h2 className="font-bold text-xl text-[var(--color-text)] leading-tight tracking-tighter">{userName || 'Usuária'}</h2>
-                  <div className="flex items-center gap-2 text-[9px] font-medium uppercase tracking-[0.2em] mt-1.5">
-                    {isPremium ? (
-                      <span className="text-[var(--color-primary)] flex items-center gap-1.5"><Crown size={12} fill="currentColor" /> Premium</span>
-                    ) : subscriptionStatus === 'trial' ? (
-                      <span className="text-[var(--color-accent)] flex items-center gap-1.5"><Crown size={12} fill="currentColor" /> Teste Grátis</span>
+                  <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] mt-1.5">
+                    {actualPlan.isLuxury ? (
+                      <span className="text-amber-400 flex items-center gap-1.5 drop-shadow-[0_0_5px_rgba(251,191,36,0.3)]"><Crown size={12} fill="currentColor" /> {actualPlan.label}</span>
+                    ) : actualPlan.isPremium ? (
+                      <span className={actualPlan.color + " flex items-center gap-1.5"}><Crown size={12} fill="currentColor" /> {actualPlan.label}</span>
                     ) : (
-                      <span className="text-[var(--color-text-muted)]/90">Plano Gratuito</span>
+                      <span className="text-white/40">{actualPlan.label}</span>
                     )}
                   </div>
                 </div>

@@ -11,7 +11,7 @@ interface DesktopSidebarProps {
 }
 
 export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings, onUpgrade }: DesktopSidebarProps) {
-  const { userName, isPremium, logout, userId } = useUser();
+  const { userName, isPremium, logout, userId, subscriptionStatus, actualPlan } = useUser();
 
   const handleManageSubscription = async () => {
     try {
@@ -156,8 +156,8 @@ export default function DesktopSidebar({ activeTab, setActiveTab, onOpenSettings
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-bold text-white truncate tracking-tight">{userName || 'Usuária'}</p>
-            <p className="text-[9px] font-bold text-[#B8B0C8] uppercase tracking-widest truncate">
-              {isPremium ? 'Membro Premium' : 'Plano Free'}
+            <p className={`text-[9px] font-bold uppercase tracking-widest truncate ${actualPlan.color}`}>
+              {actualPlan.label}
             </p>
           </div>
         </div>

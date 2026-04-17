@@ -90,7 +90,7 @@ const defaultSuggestions: Workout[] = [
 
 export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   const { theme } = useTheme();
-  const { isPremium, userName, userId, selectedDiet, verificarAcessoPremium } = useUser();
+  const { isPremium, userName, userId, selectedDiet, verificarAcessoPremium, completeWorkout } = useUser();
   
   const [activeTab, setActiveTab] = useState<'meus' | 'sugestoes'>('meus');
   const [myWorkouts, setMyWorkouts] = useState<Workout[]>([]);
@@ -100,6 +100,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
   const [showCompletion, setShowCompletion] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [showPremiumPopup, setShowPremiumPopup] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -367,13 +368,21 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
 
             <div className="p-8 border-t border-white/5 backdrop-blur-xl sticky bottom-0 z-20">
               <button 
-                onClick={() => {
+                onClick={async () => {
+                  setIsProcessing(true);
                   confetti({
                     particleCount: 150,
                     spread: 80,
                     origin: { y: 0.5 },
                     colors: ['#D81BFF', '#F8C1FF', '#ffffff']
                   });
+                  
+                  const durationMins = parseInt(activeWorkout?.duration.replace(/[^0-9]/g, '') || '0');
+                  if (activeWorkoutId) {
+                    await completeWorkout(activeWorkoutId, durationMins);
+                  }
+
+                  setIsProcessing(false);
                   setShowCompletion(true);
                   setTimeout(() => {
                     setShowCompletion(false);
@@ -381,7 +390,7 @@ export default function WorkoutsView({ onUpgrade }: { onUpgrade: () => void }) {
                     setCompletedExercises({});
                   }, 3000);
                 }}
-                disabled={completedCount === 0}
+                disabled={completedCount === 0 || isProcessing}
                 className="luxury-button w-full py-6 rounded-full font-bold uppercase tracking-widest text-xs text-white shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
               >
                 <CheckCircle2 size={24} /> Finalizar Treino

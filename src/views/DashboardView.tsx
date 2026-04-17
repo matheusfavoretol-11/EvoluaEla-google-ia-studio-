@@ -25,8 +25,9 @@ import { Logo } from '../components/Logo';
 export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (tab: string) => void, onUpgrade: () => void }) {
   const { theme } = useTheme();
   const { 
-    userName, isPremium, streakCount,
-    emotionalStats, dailyMissions, toggleMission
+    userName, isPremium,
+    emotionalStats, dailyMissions, toggleMission,
+    userStats, actualPlan
   } = useUser();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -42,9 +43,9 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
   }
 
   const stats = [
-    { label: 'Treinos', value: '12', icon: Dumbbell, color: '#D81BFF' },
-    { label: 'Minutos', value: '450', icon: Clock, color: '#F8C1FF' },
-    { label: 'Fogo', value: streakCount.toString(), icon: Flame, color: '#FF4D4D' },
+    { label: 'Treinos', value: userStats.totalWorkouts.toString(), icon: Dumbbell, color: '#D81BFF' },
+    { label: 'Minutos', value: userStats.totalMinutes.toString(), icon: Clock, color: '#F8C1FF' },
+    { label: 'Fogo', value: userStats.streak.toString(), icon: Flame, color: '#FF4D4D' },
   ];
 
   const containerVariants = {
@@ -163,7 +164,7 @@ export default function DashboardView({ onNavigate, onUpgrade }: { onNavigate: (
       </section>
 
       {/* Community / Upsell Card */}
-      {!isPremium && (
+      {!actualPlan.isPremium && (
         <motion.div 
           variants={itemVariants}
           className="luxury-card bg-gradient-to-br from-[#D81BFF] to-[#1F1638] border-none p-8 relative overflow-hidden"

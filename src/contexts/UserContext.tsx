@@ -9,6 +9,13 @@ interface UserContextType {
   setIsPremium: (status: boolean) => void;
   subscriptionStatus: string;
   setSubscriptionStatus: (status: string) => void;
+  actualPlan: {
+    name: string;
+    label: string;
+    color: string;
+    isPremium: boolean;
+    isLuxury: boolean;
+  };
   valorPago: number;
   setValorPago: (valor: number) => void;
   subscriptionEndDate: string | null;
@@ -45,6 +52,8 @@ interface UserContextType {
   userId: string | null;
   notifications: any[];
   setNotifications: (notifications: any[]) => void;
+  userStats: { totalWorkouts: number; totalMinutes: number; streak: number };
+  completeWorkout: (workoutId: string, duration: number) => Promise<void>;
   verificarAcessoPremium: () => { acesso: boolean; motivo?: string; mensagem?: string };
   logout: () => Promise<void>;
 }
@@ -56,6 +65,51 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isPremium, setIsPremium] = useState<boolean>(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<string>('free');
   const [valorPago, setValorPago] = useState<number>(0);
+
+  // Derived plan state
+  const actualPlan = React.useMemo(() => {
+    const isLuxury = subscriptionStatus === 'luxury';
+    const isTrial = ['trialing', 'trial'].includes(subscriptionStatus);
+    const isPaidPremium = ['premium', 'active'].includes(subscriptionStatus);
+    
+    if (isLuxury) {
+      return {
+        name: 'luxury',
+        label: 'MEMBRO LUXURY',
+        color: 'text-amber-400',
+        isPremium: true,
+        isLuxury: true
+      };
+    }
+
+    if (isTrial) {
+      return {
+        name: 'trial',
+        label: 'TESTE GRÁTIS',
+        color: 'text-[#F8C1FF]',
+        isPremium: true,
+        isLuxury: false
+      };
+    }
+    
+    if (isPaidPremium) {
+      return {
+        name: 'premium',
+        label: 'MEMBRO PREMIUM',
+        color: 'text-[#D81BFF]',
+        isPremium: true,
+        isLuxury: false
+      };
+    }
+
+    return {
+      name: 'free',
+      label: 'MEMBRO FREE',
+      color: 'text-white/40',
+      isPremium: false,
+      isLuxury: false
+    };
+  }, [subscriptionStatus]);
   const [subscriptionEndDate, setSubscriptionEndDate] = useState<string | null>(null);
   const [trialEndDate, setTrialEndDate] = useState<Date | null>(null);
   const [coachMessagesCount, setCoachMessagesCount] = useState<number>(0);
@@ -94,7 +148,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     { id: '2', title: 'Evite se criticar hoje', completed: false },
     { id: '3', title: 'Faça algo só por você', completed: false }
   ]);
-  const [streakCount, setStreakCount] = useState<number>(3);
+  const [streakCount, setStreakCount] = useState<number>(0);
   const [onboardingAnswers, setOnboardingAnswers] = useState<Record<string, string>>({});
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
   const [acessoTerapiaGrupo, setAcessoTerapiaGrupo] = useState<boolean>(false);
@@ -103,40 +157,114 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [notifications, setNotifications] = useState<any[]>([]);
+  const [userStats, setUserStats] = useState({ totalWorkouts: 0, totalMinutes: 0, streak: 0 });
+
+  const fetchUserStats = async (uid: string) => {
+    try {
+      const { data: history, error } = await supabase
+        .from('workout_history')
+        .select('completed_at, duration_minutes')
+        .eq('user_id', uid)
+        .order('completed_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (!history || history.length === 0) {
+        setUserStats({ totalWorkouts: 0, totalMinutes: 0, streak: 0 });
+        return;
+      }
+
+      const totalWorkouts = history.length;
+      const totalMinutes = history.reduce((acc, curr) => acc + (curr.duration_minutes || 0), 0);
+
+      // Simple streak calculation
+      const dates = history.map(h => new Date(h.completed_at).toDateString());
+      const uniqueDates = Array.from(new Set(dates));
+      
+      let streak = 0;
+      const today = new Date().toDateString();
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      
+      let checkDate = uniqueDates.includes(today) ? today : (uniqueDates.includes(yesterday) ? yesterday : null);
+      
+      if (checkDate) {
+        let currentIdx = uniqueDates.indexOf(checkDate);
+        streak = 1;
+        
+        while (currentIdx < uniqueDates.length - 1) {
+          const currentDate = new Date(uniqueDates[currentIdx]);
+          const prevDate = new Date(uniqueDates[currentIdx + 1]);
+          const diffDays = Math.round((currentDate.getTime() - prevDate.getTime()) / (1000 * 3600 * 24));
+          
+          if (diffDays === 1) {
+            streak++;
+            currentIdx++;
+          } else {
+            break;
+          }
+        }
+      }
+
+      setUserStats({ totalWorkouts, totalMinutes, streak });
+    } catch (err) {
+      console.error('Error fetching stats:', err);
+    }
+  };
+
+  const completeWorkout = async (workoutId: string, duration: number) => {
+    if (!userId) return;
+
+    try {
+      const { error } = await supabase
+        .from('workout_history')
+        .insert({
+          user_id: userId,
+          workout_id: workoutId,
+          duration_minutes: duration
+        });
+
+      if (error) throw error;
+      
+      // Refresh stats
+      await fetchUserStats(userId);
+      
+      // Send notification
+      await supabase.from('notifications').insert({
+        user_id: userId,
+        title: '🔥 Treino Concluído!',
+        message: `Parabéns! Você completou mais um treino e acumulou ${duration} minutos de evolução.`,
+        type: 'success'
+      });
+    } catch (err) {
+      console.error('Error completing workout:', err);
+    }
+  };
 
   const toggleMission = (id: string) => {
     setDailyMissions(prev => prev.map(m => m.id === id ? { ...m, completed: !m.completed } : m));
   };
 
   const verificarAcessoPremium = () => {
-    // VERIFICAÇÃO 1: Pagamento foi realizado?
-    if (!isPremium && subscriptionStatus !== 'premium' && subscriptionStatus !== 'active') {
+    // 1. Check if user has an active premium/luxury status based on our source of truth
+    if (!actualPlan.isPremium) {
       return {
         acesso: false,
-        motivo: "SEM_PAGAMENTO",
-        mensagem: "Você precisa assinar o plano Premium de R$ 109,90/mês"
+        motivo: "SEM_ASSINATURA",
+        mensagem: "Você precisa assinar o plano Premium para acessar este recurso."
       };
     }
 
-    // VERIFICAÇÃO 2: Valor pago está correto?
-    if (valorPago !== 109.90) {
-      return {
-        acesso: false,
-        motivo: "VALOR_INCORRETO",
-        mensagem: "Pagamento não corresponde ao plano Premium"
-      };
-    }
-
-    // VERIFICAÇÃO 3: Pagamento está ativo e dentro da validade?
-    const hoje = new Date();
-    const vencimento = subscriptionEndDate ? new Date(subscriptionEndDate) : null;
-
-    if (vencimento && hoje > vencimento) {
-      return {
-        acesso: false,
-        motivo: "VENCIDO",
-        mensagem: "Sua assinatura venceu. Renove para continuar aproveitando!"
-      };
+    // 2. Check for expiry if we have an end date
+    if (subscriptionEndDate) {
+      const hoje = new Date();
+      const vencimento = new Date(subscriptionEndDate);
+      if (hoje > vencimento) {
+        return {
+          acesso: false,
+          motivo: "VENCIDO",
+          mensagem: "Sua assinatura venceu. Renove para continuar aproveitando!"
+        };
+      }
     }
 
     return { acesso: true };
@@ -227,11 +355,25 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         .single();
         
       if (data && !error) {
-        setIsPremium(data.is_premium || false);
+        const fetchedStatus = (data.subscription_status || 'free').toLowerCase();
+        
+        // Strict mapping: If it's not a known paid/trial status, it's free.
+        // This prevents 'premium' string from a boolean column or other junk data from being treated as premium.
+        const isActuallyPremium = ['premium', 'active', 'luxury', 'trialing', 'trial'].includes(fetchedStatus);
+        
+        // Final sanity check: if the status is 'premium' but there was NO payment recorded and it's not a trial, 
+        // we might be looking at stale data from a previous session.
+        const vPago = Number(data.valor_pago) || 0;
+        let finalStatus = fetchedStatus;
+        if (fetchedStatus === 'premium' && vPago === 0) {
+           finalStatus = 'free';
+        }
+        
+        setSubscriptionStatus(finalStatus);
+        setIsPremium(['premium', 'active', 'luxury', 'trialing', 'trial'].includes(finalStatus));
         setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
         setRole(data.role || 'user');
-        setSubscriptionStatus(data.subscription_status || 'free');
-        setValorPago(Number(data.valor_pago) || 0);
+        setValorPago(vPago);
         setSubscriptionEndDate(data.subscription_end_date || null);
         setCoachMessagesCount(data.coach_messages_count || 0);
         setSelectedDiet(data.selected_diet || null);
@@ -248,11 +390,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    fetchStats();
-    fetchOnboarding();
-    fetchProfile();
-
-    // Fetch notifications
     const fetchNotifications = async () => {
       const { data, error } = await supabase
         .from('notifications')
@@ -268,7 +405,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setNotifications(uniqueNotifications);
       }
     };
+
+    fetchStats();
+    fetchOnboarding();
+    fetchProfile();
     fetchNotifications();
+    fetchUserStats(userId);
 
     // Set up realtime subscriptions
     const profileSubscription = supabase
@@ -276,11 +418,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'users', filter: `id=eq.${userId}` }, payload => {
         const data = payload.new as any;
         if (data) {
-          setIsPremium(data.is_premium || false);
+          const updatedStatus = (data.subscription_status || 'free').toLowerCase();
+          
+          const vPago = Number(data.valor_pago) || 0;
+          let finalStatus = updatedStatus;
+          if (updatedStatus === 'premium' && vPago === 0) {
+             finalStatus = 'free';
+          }
+
+          setSubscriptionStatus(finalStatus);
+          setIsPremium(['premium', 'active', 'luxury', 'trialing', 'trial'].includes(finalStatus));
           setAcessoTerapiaGrupo(data.acesso_terapia_grupo || false);
           setRole(data.role || 'user');
-          setSubscriptionStatus(data.subscription_status || 'free');
-          setValorPago(Number(data.valor_pago) || 0);
+          setValorPago(vPago);
           setSubscriptionEndDate(data.subscription_end_date || null);
           setCoachMessagesCount(data.coach_messages_count || 0);
           setSelectedDiet(data.selected_diet || null);
@@ -439,6 +589,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       role,
       isAuthReady, userId,
       notifications, setNotifications,
+      userStats, completeWorkout,
+      actualPlan,
       verificarAcessoPremium,
       valorPago, setValorPago,
       subscriptionEndDate, setSubscriptionEndDate,

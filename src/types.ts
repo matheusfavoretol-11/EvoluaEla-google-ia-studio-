@@ -29,3 +29,16 @@ export interface DailyMission {
   title: string;
   completed: boolean;
 }
+
+export interface UserStats {
+  totalWorkouts: number;
+  totalMinutes: number;
+  streak: number;
+}
+
+export interface WorkoutHistoryEntry {
+  user_id: string;
+  workout_id: string;
+  duration_minutes: number;
+  completed_at: string;
+}
