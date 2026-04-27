@@ -48,33 +48,44 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
     { id: 'flexivel', label: 'O que for possível', icon: Sparkles },
   ];
 
-  const handleNext = async () => {
-    if (step === 1 && objective) setStep(2);
-    else if (step === 2 && feeling) setStep(3);
-    else if (step === 3 && challenge) setStep(4);
-    else if (step === 4 && commitment) {
-      setIsSaving(true);
-      try {
-        const answers = { objective, feeling, challenge, commitment };
-        setOnboardingAnswers(answers);
-        
-        if (userId) {
-          await supabase
-            .from('onboarding_answers')
-            .upsert({
-              user_id: userId,
-              answers: answers,
-              updated_at: new Date().toISOString()
-            });
-        }
-        
-        onComplete();
-      } catch (error) {
-        console.error("Error saving onboarding answers:", error);
-        onComplete();
-      } finally {
-        setIsSaving(false);
+  const selectObjective = (id: string) => {
+    setObjective(id);
+    setStep(2);
+  };
+
+  const selectFeeling = (id: string) => {
+    setFeeling(id);
+    setStep(3);
+  };
+
+  const selectChallenge = (id: string) => {
+    setChallenge(id);
+    setStep(4);
+  };
+
+  const selectCommitment = async (id: string) => {
+    setCommitment(id);
+    setIsSaving(true);
+    try {
+      const finalAnswers = { objective, feeling, challenge, commitment: id };
+      setOnboardingAnswers(finalAnswers);
+      
+      if (userId) {
+        await supabase
+          .from('onboarding_answers')
+          .upsert({
+            user_id: userId,
+            answers: finalAnswers,
+            updated_at: new Date().toISOString()
+          });
       }
+      
+      onComplete();
+    } catch (error) {
+      console.error("Error saving onboarding answers:", error);
+      onComplete();
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -113,25 +124,16 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {objectives.map((obj) => {
                   const Icon = obj.icon;
-                  const isSelected = objective === obj.id;
                   return (
                     <button
                       key={obj.id}
-                      onClick={() => setObjective(obj.id)}
-                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
-                        isSelected 
-                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
-                      }`}
+                      onClick={() => selectObjective(obj.id)}
+                      className="p-6 rounded-[2rem] border border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl flex flex-col items-start gap-6 transition-all duration-500 text-left group active:scale-95"
                     >
-                      <div 
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
-                        }`}
-                      >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF] group-hover:bg-[#D81BFF]/10">
                         <Icon size={24} />
                       </div>
-                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
+                      <span className="text-base font-bold tracking-tight text-[#B8B0C8] group-hover:text-white">
                         {obj.label}
                       </span>
                     </button>
@@ -155,25 +157,16 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {feelings.map((feel) => {
                   const Icon = feel.icon;
-                  const isSelected = feeling === feel.id;
                   return (
                     <button
                       key={feel.id}
-                      onClick={() => setFeeling(feel.id)}
-                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
-                        isSelected 
-                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
-                      }`}
+                      onClick={() => selectFeeling(feel.id)}
+                      className="p-6 rounded-[2rem] border border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl flex flex-col items-start gap-6 transition-all duration-500 text-left group active:scale-95"
                     >
-                      <div 
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
-                        }`}
-                      >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF] group-hover:bg-[#D81BFF]/10">
                         <Icon size={24} />
                       </div>
-                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
+                      <span className="text-base font-bold tracking-tight text-[#B8B0C8] group-hover:text-white">
                         {feel.label}
                       </span>
                     </button>
@@ -197,25 +190,16 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {challenges.map((chal) => {
                   const Icon = chal.icon;
-                  const isSelected = challenge === chal.id;
                   return (
                     <button
                       key={chal.id}
-                      onClick={() => setChallenge(chal.id)}
-                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
-                        isSelected 
-                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
-                      }`}
+                      onClick={() => selectChallenge(chal.id)}
+                      className="p-6 rounded-[2rem] border border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl flex flex-col items-start gap-6 transition-all duration-500 text-left group active:scale-95"
                     >
-                      <div 
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
-                        }`}
-                      >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF] group-hover:bg-[#D81BFF]/10">
                         <Icon size={24} />
                       </div>
-                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
+                      <span className="text-base font-bold tracking-tight text-[#B8B0C8] group-hover:text-white">
                         {chal.label}
                       </span>
                     </button>
@@ -239,25 +223,17 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {commitments.map((com) => {
                   const Icon = com.icon;
-                  const isSelected = commitment === com.id;
                   return (
                     <button
                       key={com.id}
-                      onClick={() => setCommitment(com.id)}
-                      className={`p-6 rounded-[2rem] border flex flex-col items-start gap-6 transition-all duration-500 text-left group ${
-                        isSelected 
-                          ? 'border-[#D81BFF] bg-[#D81BFF]/10 shadow-2xl' 
-                          : 'border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl'
-                      }`}
+                      disabled={isSaving}
+                      onClick={() => selectCommitment(com.id)}
+                      className="p-6 rounded-[2rem] border border-white/5 hover:border-[#D81BFF]/30 bg-white/5 backdrop-blur-xl flex flex-col items-start gap-6 transition-all duration-500 text-left group disabled:opacity-50 active:scale-95"
                     >
-                      <div 
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                          isSelected ? 'bg-[#D81BFF] text-white' : 'bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF]'
-                        }`}
-                      >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 bg-white/5 text-[#B8B0C8] group-hover:text-[#D81BFF] group-hover:bg-[#D81BFF]/10">
                         <Icon size={24} />
                       </div>
-                      <span className={`text-base font-bold tracking-tight ${isSelected ? 'text-white' : 'text-[#B8B0C8] group-hover:text-white'}`}>
+                      <span className="text-base font-bold tracking-tight text-[#B8B0C8] group-hover:text-white">
                         {com.label}
                       </span>
                     </button>
@@ -268,25 +244,14 @@ export default function OnboardingView({ onComplete }: OnboardingViewProps) {
           )}
         </AnimatePresence>
 
-        <div className="pt-12 sm:pt-16 mt-auto">
-          <button
-            onClick={handleNext}
-            disabled={isSaving || (step === 1 && !objective) || (step === 2 && !feeling) || (step === 3 && !challenge) || (step === 4 && !commitment)}
-            className="luxury-button w-full py-6 rounded-full font-bold text-white flex items-center justify-center gap-4 disabled:opacity-50 active:scale-95 uppercase tracking-[0.3em] text-xs"
-          >
-            {isSaving ? (
-              <div className="flex items-center gap-4">
-                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                <span>Preparando sua jornada...</span>
-              </div>
-            ) : (
-              <>
-                {step === 4 ? 'Quero começar minha evolução!' : 'Continuar'}
-                <ArrowRight size={20} />
-              </>
-            )}
-          </button>
-        </div>
+        {isSaving && (
+          <div className="pt-12 sm:pt-16 mt-auto">
+            <div className="w-full py-6 rounded-full font-bold text-white flex items-center justify-center gap-4 bg-white/5 border border-white/10 backdrop-blur-xl">
+              <div className="w-5 h-5 border-2 border-[#D81BFF]/30 border-t-[#D81BFF] rounded-full animate-spin" />
+              <span className="uppercase tracking-[0.3em] text-xs">Preparando sua jornada...</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
